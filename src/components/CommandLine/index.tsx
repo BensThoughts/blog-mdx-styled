@@ -1,10 +1,52 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from '@emotion/styled';
 
+const CommandLineBorder = styled.div`
+  background-color: var(--color-app-primary);
+  border-color: var(--color-app-secondary);
+`;
+
+const Pre = styled.pre`
+  background-color: var(--color-bg-terminal);
+`;
+
+const Prompt = styled.span`
+  color: #10b981;
+`;
+
+const Command = styled.span`
+  color: 	#a78bfa;
+`;
+
+const Options = styled.span`
+  color: #d97706;
+`;
+
+const Args = styled.span`
+  color: var(--color-text-primary);
+`;
+
+const CopyButton = styled.button`
+  background-color: var(--color-app-primary);
+  border-color: var(--color-app-secondary);
+  color: var(--color-app-primary);
+  :hover {
+    background-color: var(--color-app-accent);
+    border-color: var(--color-app-secondary);
+  }
+  :active {
+    background-color: var(--color-app-primary);
+  }
+`;
+
+const FontIcon = styled(FontAwesomeIcon)`
+  color: var(--color-app-secondary);
+`;
 interface CommandLineProps {
   command: string,
   options?: string,
   args?: string
-}
+};
 
 export default function CommandLine(props: CommandLineProps) {
   const { command, options, args } = props;
@@ -12,27 +54,24 @@ export default function CommandLine(props: CommandLineProps) {
       (options ? options + ' ' : '') +
       (args ? args : '');
   return (
-    <div className="w-screen md:max-w-4xl bg-gray-600 inline-block border-solid border-opacity-20 border-gray-100 border-2 rounded-md p-2">
-      <pre className="overflow-x-auto bg-black rounded-sm px-4 py-2">
+    <CommandLineBorder className="w-screen md:max-w-4xl inline-block border-solid border-opacity-20 border-gray-100 border-2 rounded-md p-2">
+      <Pre className="overflow-x-auto rounded-sm px-4 py-2">
         <div className="flex flex-row justify-between items-center">
           <div>
-            <span className="text-green-500 select-none">$&gt;&nbsp;</span>
-            <span className="text-purple-400">{command}</span>
-            <span className="text-yellow-600">{options ? ' ' + options : ''}</span>
-            <span className="text-gray-200 mr-4">{args ? ' ' + args : ''}</span>
+            <Prompt className="select-none">$&gt;&nbsp;</Prompt>
+            <Command>{command}</Command>
+            <Options>{options ? ' ' + options : ''}</Options>
+            <Args className="mr-4">{args ? ' ' + args : ''}</Args>
           </div>
-          <button 
+          <CopyButton
             onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
             type="button"
-            className="bg-gray-600 rounded p-2 border-2 border-black hover:border-blue-500 active:bg-gray-500"
+            className="rounded p-2 border-2"
           >
-            <FontAwesomeIcon icon={['far', 'copy']} inverse size="lg" className="text-blue-500" />
-          </button>
-          {/* <Button1>
-            <FontAwesomeIcon icon={['far', 'copy']} inverse size="lg" className="text-blue-500" />
-          </Button1> */}
+            <FontIcon icon={['far', 'copy']} inverse size="lg" />
+          </CopyButton>
         </div>
-      </pre>
-    </div> 
+      </Pre>
+    </CommandLineBorder> 
   );
 }

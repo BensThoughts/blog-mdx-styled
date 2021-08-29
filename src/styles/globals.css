@@ -31,6 +31,7 @@ body[data-theme="light"] {
   --color-text-secondary: #076963;
   --color-bg-primary: #fff;
   --color-bg-toggle: #1e90ff;
+  --color-bg-terminal: #FFFAF0;
   --color-app-primary: #FBD38D;
   --color-app-secondary: #ED8936;
   --color-app-accent: #FAF089;
@@ -41,6 +42,7 @@ body[data-theme="dark"] {
   --color-text-secondary: #ff6b00;
   --color-bg-primary: #15232d;
   --color-bg-toggle: #a9a9a9;
+  --color-bg-terminal: #000000;
   --color-app-primary: #4A5568;
   --color-app-secondary: #3182CE;
   --color-app-accent: #63B3ED;

@@ -3,9 +3,13 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import {
+  Code,
+  Date,
   H1,
-  Date
+  H2,
 } from '@app/components/mdx/';
+
+import CommandLine from '@app/components/CommandLine';
 
 // import Blockquote from '@app/components/mdx/Blockquote';
 
@@ -24,8 +28,11 @@ type PostProps = {
 
 
 const components = {
+  code: Code,
+  date: Date,
   h1: H1,
-  // Date,
+  h2: H2,
+  CommandLine
 };
 
 const Post = (props: PostProps) => {
