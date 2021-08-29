@@ -40,7 +40,7 @@ const ToggleThumb = styled.span<{
   width: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   height: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   border-radius: 50%;
-  background: white;
+  background: var(--color-app-secondary);
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
     p.colorMode === "dark"
