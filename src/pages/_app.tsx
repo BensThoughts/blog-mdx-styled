@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="z-10 fixed top-0 w-screen">
         <Header />
       </div>
-      <div className="z-0">
+      <div className="z-0 mt-20">
         <Component {...pageProps} />
       </div>
     </ThemeProvider>
