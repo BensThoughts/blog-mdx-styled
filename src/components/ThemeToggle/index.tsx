@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
+import { ThemeContext } from '@app/utils/colorMode';
 
 const ToggleButton = styled.button`
   --toggle-width: 80px;
@@ -30,10 +31,10 @@ const ToggleButton = styled.button`
   }
 `;
 
-type ThemeMode = 'light' | 'dark';
+// type ColorMode = 'light' | 'dark';
 
 const ToggleThumb = styled.span<{
-  activeTheme: ThemeMode
+  colorMode: string
 }>`
   position: absolute;
   top: var(--toggle-padding);
@@ -41,39 +42,57 @@ const ToggleThumb = styled.span<{
   width: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   height: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   border-radius: 50%;
-  background: var(--color-app-secondary);
+  background: white;
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
-    p.activeTheme === "dark"
+    p.colorMode === "dark"
       ? "translate3d(calc(var(--toggle-width) - var(--toggle-height)), 0, 0)"
       : "none"};
 `;
 
 const ThemeToggle = () => {
-  const [activeTheme, setActiveTheme] = useState<ThemeMode>(document.body.dataset.theme as ThemeMode);
+  const { colorMode, setColorMode } = useContext(ThemeContext);
+  const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
+
+  // useEffect(() => {
+  //   setColorMode(inactiveTheme);
+  // }, [inactiveTheme, setColorMode])
+
+  // if (!colorMode) {
+  //   return null;
+  // }
+  // const [activeTheme, setActiveTheme] = useState<ThemeMode>(document.body.dataset.theme as ThemeMode);
   // const [activeTheme, setActiveTheme] = useState<ThemeMode>('light');
-  const inactiveTheme = activeTheme === 'light' ? 'dark' : 'light';
+
 
   // useEffect(() => {
   //   const savedTheme = window.localStorage.getItem('theme') as ThemeMode;
   //   savedTheme && setActiveTheme(savedTheme);
   // }, []);
 
-  console.log('Theme Toggle ' + activeTheme);
+  // console.log('Theme Toggle ' + activeTheme);
+  console.log('Theme Toggle colorMode ' + colorMode);
+  console.log('Theme Toggle inactiveTheme ' + inactiveColorMode);
 
-  useEffect(() => {
-    document.body.dataset.theme = activeTheme;
-    window.localStorage.setItem('theme', activeTheme);
-  }, [activeTheme])
+  // useEffect(() => {
+  //   document.body.dataset.theme = activeTheme;
+  //   window.localStorage.setItem('theme', activeTheme);
+  // }, [activeTheme])
+
+
+
 
   return (
     <ToggleButton
-      aria-label={`Change to ${inactiveTheme} mode`}
-      title={`Change to ${inactiveTheme} mode`}
+      aria-label={`Change to ${inactiveColorMode} mode`}
+      title={`Change to ${inactiveColorMode} mode`}
       type="button"
-      onClick={() => setActiveTheme(inactiveTheme)}
+      onClick={() => {
+        console.log('ToggleButton inactiveTheme: ' + inactiveColorMode);  
+        return setColorMode(inactiveColorMode);
+      }}
     >
-      <ToggleThumb activeTheme={activeTheme} />
+      <ToggleThumb colorMode={colorMode!} />
       <span aria-hidden="true">🌙</span>
       <span aria-hidden="true">☀️</span>
     </ToggleButton>

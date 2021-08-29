@@ -1,40 +1,34 @@
-import { createContext, ReactNode, useState } from 'react';
-
-function getInitialColorMode() {
-  const persistedColorPreference = window.localStorage.getItem('theme');
-  const hasPersistedPreference = typeof persistedColorPreference === 'string';
-  // If the user has explicitly chosen light or dark,
-  // let's use it. Otherwise, this value will be null.
-  if (hasPersistedPreference) {
-    return persistedColorPreference;
-  }
-  // If they haven't been explicit, let's check the media
-  // query
-  const mql = window.matchMedia('(prefers-color-scheme: dark)');
-  const hasMediaQueryPreference = typeof mql.matches === 'boolean';
-  if (hasMediaQueryPreference) {
-    return mql.matches ? 'dark' : 'light';
-  }
-  // If they are using a browser/OS that doesn't support
-  // color themes, let's default to 'light'.
-  return 'light';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+interface ThemeContextProps {
+  colorMode: string | undefined;
+  setColorMode: (value: string) => void
 };
 
-export const ThemeContext = createContext({});
+const themeContextProps: ThemeContextProps = {
+  colorMode: undefined,
+  // TODO: can remove value: string?
+  setColorMode: (value: string) => {}
+};
 
+export const ThemeContext = createContext(themeContextProps);
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
-type ColorMode = 'light' | 'dark';
-
 const ThemeProvider = (props: ThemeProviderProps) => {
-  const [colorMode, rawSetColorMode] = useState(getInitialColorMode);
-  const setColorMode = (value: ColorMode) => {
-    rawSetColorMode(value);
-    // Persist it on update
-    window.localStorage.setItem('theme', value);
+  // TODO: Scary use of ! (better way? is it guaranteed to be set?)  
+  const [colorMode, rawSetColorMode] = useState<string>(document.body.dataset.theme!);
+
+  useEffect(() => {
+    document.body.dataset.theme = colorMode;
+    window.localStorage.setItem('color-mode', colorMode);
+  }, [colorMode])
+
+  function setColorMode(newValue: string) {
+    rawSetColorMode(newValue);
+    localStorage.setItem('color-mode', newValue);
   };
+
   return (
     <ThemeContext.Provider value={{ colorMode, setColorMode }}>
       {props.children}
@@ -43,9 +37,3 @@ const ThemeProvider = (props: ThemeProviderProps) => {
 };
 
 export default ThemeProvider;
-
-// export const useColorModeValue = () => {
-//   const [colorMode, setColorMode] = useState(getInitialColorMode);
-
-//   return colorMode;
-// }

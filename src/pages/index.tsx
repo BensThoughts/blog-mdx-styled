@@ -15,16 +15,11 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-// const Header = dynamic(() => import('@app/components/Header'), {
-//   ssr: false
-// });
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 35vh;
 `;
-
 interface HomeProps {
   allPostsData: {
     date: string,
