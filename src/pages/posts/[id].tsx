@@ -4,6 +4,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import {
   Code,
+  Blockquote,
   Date,
   H1,
   H2,
@@ -29,6 +30,7 @@ type PostProps = {
 
 const components = {
   code: Code,
+  blockquote: Blockquote,
   date: Date,
   h1: H1,
   h2: H2,
