@@ -14,6 +14,7 @@ import {
   Date,
   H1,
   H2,
+  P
 } from '@app/components/mdx/';
 
 import CommandLine from '@app/components/CommandLine';
@@ -40,6 +41,7 @@ const components = {
   date: Date,
   h1: H1,
   h2: H2,
+  p: P,
   CommandLine
 };
 

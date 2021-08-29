@@ -31,8 +31,6 @@ const ToggleButton = styled.button`
   }
 `;
 
-// type ColorMode = 'light' | 'dark';
-
 const ToggleThumb = styled.span<{
   colorMode: string
 }>`
@@ -54,43 +52,12 @@ const ThemeToggle = () => {
   const { colorMode, setColorMode } = useContext(ThemeContext);
   const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
 
-  // useEffect(() => {
-  //   setColorMode(inactiveTheme);
-  // }, [inactiveTheme, setColorMode])
-
-  // if (!colorMode) {
-  //   return null;
-  // }
-  // const [activeTheme, setActiveTheme] = useState<ThemeMode>(document.body.dataset.theme as ThemeMode);
-  // const [activeTheme, setActiveTheme] = useState<ThemeMode>('light');
-
-
-  // useEffect(() => {
-  //   const savedTheme = window.localStorage.getItem('theme') as ThemeMode;
-  //   savedTheme && setActiveTheme(savedTheme);
-  // }, []);
-
-  // console.log('Theme Toggle ' + activeTheme);
-  console.log('Theme Toggle colorMode ' + colorMode);
-  console.log('Theme Toggle inactiveTheme ' + inactiveColorMode);
-
-  // useEffect(() => {
-  //   document.body.dataset.theme = activeTheme;
-  //   window.localStorage.setItem('theme', activeTheme);
-  // }, [activeTheme])
-
-
-
-
   return (
     <ToggleButton
       aria-label={`Change to ${inactiveColorMode} mode`}
       title={`Change to ${inactiveColorMode} mode`}
       type="button"
-      onClick={() => {
-        console.log('ToggleButton inactiveTheme: ' + inactiveColorMode);  
-        return setColorMode(inactiveColorMode);
-      }}
+      onClick={() => setColorMode(inactiveColorMode)}
     >
       <ToggleThumb colorMode={colorMode!} />
       <span aria-hidden="true">🌙</span>
