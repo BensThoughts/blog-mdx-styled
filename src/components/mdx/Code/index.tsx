@@ -1,6 +1,10 @@
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import dracula from 'prism-react-renderer/themes/dracula';
+import vsLight from 'prism-react-renderer/themes/vsLight';
 import styled from '@emotion/styled';
+import { useContext } from 'react';
+
+import { ThemeContext } from '@app/utils/colorMode';
 
 const Pre = styled.pre`
   text-align: left;
@@ -32,13 +36,19 @@ interface CodeElementProps {
 type ThemeMode = 'light' | 'dark';
 
 export default function CodeElement(props: CodeElementProps) {
+  const { colorMode } = useContext(ThemeContext);
   const children = props.children;
   const language = props.className.replace('language-', '') as Language;
+
+  let theme = vsLight;
+  if (colorMode === 'dark') {
+    theme = dracula;
+  }
 
   return (
     <Highlight
       {...defaultProps}
-      theme={dracula}
+      theme={theme}
       code={children}
       language={language}
     >
