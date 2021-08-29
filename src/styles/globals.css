@@ -26,6 +26,23 @@ h1 {
   color: var(--color-text-secondary);
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-scroll-track);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-scroll-thumb);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scroll-thumb-hover);
+}
+
 body[data-theme="light"] {
   --color-text-primary: #27201a;
   --color-text-secondary: #076963;
@@ -35,6 +52,10 @@ body[data-theme="light"] {
   --color-app-primary: #FBD38D;
   --color-app-secondary: #ED8936;
   --color-app-accent: #FAF089;
+
+  --color-scroll-thumb: #ED8936;
+  --color-scroll-track: #FBD38D;
+  --color-scroll-thumb-hover: #FAF089;
 }
 
 body[data-theme="dark"] {
@@ -46,6 +67,11 @@ body[data-theme="dark"] {
   --color-app-primary: #4A5568;
   --color-app-secondary: #3182CE;
   --color-app-accent: #63B3ED;
+
+  --color-scroll-thumb: #3182CE;
+  --color-scroll-track: #4A5568;
+  --color-scroll-thumb-hover: #63B3ED;
+  
 }
 
 .rehype-code-title {

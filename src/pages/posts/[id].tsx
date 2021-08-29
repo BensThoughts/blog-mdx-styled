@@ -1,12 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import dynamic from 'next/dynamic';
-
-
-// const Code = dynamic(() => import('@app/components/mdx/Code'), {
-//   ssr: false
-// });
+import Image from 'next/image';
 
 import {
   Blockquote,
@@ -14,13 +9,11 @@ import {
   Date,
   H1,
   H2,
+  HeaderImage,
   P
 } from '@app/components/mdx/';
 
 import CommandLine from '@app/components/CommandLine';
-
-// import Blockquote from '@app/components/mdx/Blockquote';
-
 
 import { getAllPostIds, getPostData } from '../../utils/posts';
 
@@ -34,7 +27,6 @@ type PostProps = {
   };
 };
 
-
 const components = {
   code: Code,
   blockquote: Blockquote,
@@ -42,7 +34,9 @@ const components = {
   h1: H1,
   h2: H2,
   p: P,
-  CommandLine
+  CommandLine,
+  HeaderImage,
+  Image
 };
 
 const Post = (props: PostProps) => {
@@ -63,8 +57,6 @@ const Post = (props: PostProps) => {
     </div>
   );
 };
-
-
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();

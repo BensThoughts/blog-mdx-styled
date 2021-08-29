@@ -11,7 +11,7 @@ const Heading = styled.h1`
 
 export default function H1(props: { children: ReactNode }) {
   return (
-    <Heading className="font-bold">
+    <Heading className="font-bold text-2xl md:text-4xl">
       {props.children}
     </Heading>
   );

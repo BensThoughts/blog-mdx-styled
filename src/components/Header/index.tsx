@@ -36,7 +36,7 @@ const Header = (props: any) => {
       </div>
 
       <div className="hidden md:block">
-        <NavLinks className="flex items-center justify-end content-between pt-0">
+        <NavLinks className="flex items-center justify-end content-between pt-0 mr-3">
           <MenuItem to="/">Home</MenuItem>
           <MenuItem to="/blog">Blog</MenuItem>
           <MenuItem to="/about">About</MenuItem>
