@@ -1,0 +1,172 @@
+---
+title: "Building the ultimate blog"
+date: "2021-08-24"
+readTime: 30
+tags:
+  - 'next-mdx-remote'
+  - 'react'
+  - 'chakra-ui'
+---
+# Largest heading
+## Large heading
+
+> This a quote
+
+> The debate: write your own components or use a library
+
+*this is italic*
+**This bold**
+
+This has been a hot topic for some time now in the community.
+
+When learning from a tutorial it is often tempting to jump ahead. I have often
+found myself jumping from one tutorial to the next, trying to fill in the pieces
+I need and leave the rest.  Sometimes this is because a tutorial is incomplete.
+Other times this is because I want to implement a feature that the tutorial
+doesn't include. By the end of the day the pristine starting point I had is
+turned into a real frankenstein of features. Inevitably one feature ends up
+conflicting with another and it can be very time consuming to track down which
+feature is conflicting with another. It is for this reason that I strongly urge
+you to follow this tutorial from start to end on a clean project.
+
+When we focus our attention on one feature at a time we are better able to
+diagnose the challenges that arise with implementing that feature.  For this
+reason I am going to break this blog entry down into sections based on the
+feature that is being implemented.
+
+...setup
+
+## Setting up next.js with Typescript
+...setup
+
+## Setting up eslint and prettier
+...setup
+
+## Setting up mdx
+...setup
+
+## Setting up next-mdx-remote
+...setup
+
+
+<CommandLine command="usermod" options="-a --init" args="/test/dir/file.tsx" />
+
+```jsx:src/components/mdx/CodeElement.tsx
+import { Box } from '@chakra-ui/react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import styled from '@emotion/styled';
+
+const Pre = styled(Box)`
+  text-align: left;
+  margin: 1em 0;
+  padding: 0.5em;
+  overflow-x: auto;
+`;
+
+const Line = styled.div`
+  display: table-row;
+`;
+
+const LineNo = styled(Box)`
+  text-align: right;
+  padding-right: 1em;
+  user-select: none;
+  opacity: 0.5;
+`;
+
+const LineContent = styled.span`
+  display: table-cell;
+`;
+
+export default function CodeElement(props: { children: string }) {
+  return (
+    <Box padding={3} overflow="auto">
+      <Highlight {...defaultProps} code={props.children.trim()} language="jsx">
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <Pre
+            as="pre"
+            w={{
+              base:'sm',
+              md: '700px'
+            }}
+            className={className}
+            style={style}
+          >
+            {tokens.map((line, i) => (
+              <Line key={i} {...getLineProps({ line, key: i })}>
+                <LineNo
+                  as="span"
+                  display={{ base: 'none', md: 'table-cell' }}
+                >{i + 1}</LineNo>
+                <LineContent>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </LineContent>
+              </Line>
+            ))}
+          </Pre>
+        )}
+      </Highlight>
+    </Box>
+  );
+};
+```
+
+```yaml:/test
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "zeroinbox-api"
+  namespace: "default"
+  labels:
+    app: "zeroinbox-api"
+    version: "1.9.2"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "zeroinbox-api"
+  template:
+    metadata:
+      labels:
+        app: "zeroinbox-api"
+    spec:
+      containers:
+      - name: "zeroinbox-api-gateway"
+        image: "gcr.io/zeroinbox-portfolio-project/zeroinbox-api-gateway@latest"
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "200m"
+          limits:
+            memory: "1000Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+            - name: health-check
+              value: "true"
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        envFrom:
+        - configMapRef:
+            name: "zeroinbox-api-config"
+        - secretRef:
+            name: "zeroinbox-secrets"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SESSION_REDIS_HOST
+          value: $(ZEROINBOX_REDIS_SERVICE_HOST)
+        - name: SESSION_REDIS_PORT
+          value: $(ZEROINBOX_REDIS_SERVICE_PORT)
+
+```
+
+> Block quote Typescript test
+
+>Test 2

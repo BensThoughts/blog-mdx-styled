@@ -1,9 +1,8 @@
-import dynamic from 'next/dynamic';
 import styled from "@emotion/styled";
 
-const Header = dynamic(() => import('@app/components/Header'), {
-  ssr: false
-});
+// const Header = dynamic(() => import('@app/components/Header'), {
+//   ssr: false
+// });
 
 const Container = styled.div`
   display: flex;
@@ -14,11 +13,8 @@ const Container = styled.div`
 export default function Home() {
   return (
     <>
-    <Header />
     <Container>
-
       <main>
-
         <h1>Next.js dark mode toggle</h1>
         <h4>Dark mode is more than just a gimmick, right?!</h4>
       </main>

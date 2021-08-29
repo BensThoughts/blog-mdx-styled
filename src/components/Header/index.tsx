@@ -15,7 +15,7 @@ const Nav = styled.nav`
   padding: 0px;
   position: sticky;
   top: 0px;
-  background: var(--color-bg-toggle);
+  background: var(--color-app-primary);
 `;
 
 const NavLinks = styled.div`
@@ -24,7 +24,7 @@ const NavLinks = styled.div`
   justify-content: end;
   align-content: space-between;
   padding-top: 0px;
-  background-color: var(--color-bg-toggle);
+  background-color: var(--color-app-primary);
 `;
 
 const Header = (props: any) => {
