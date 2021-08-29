@@ -29,9 +29,9 @@ h1 {
 body[data-theme="light"] {
   --color-text-primary: #27201a;
   --color-text-secondary: #076963;
-  --color-bg-primary: #fff;
+  --color-bg-primary: #FEEBC8;
   --color-bg-toggle: #1e90ff;
-  --color-bg-terminal: #FFFAF0;
+  --color-bg-terminal: #FEEBC8;
   --color-app-primary: #FBD38D;
   --color-app-secondary: #ED8936;
   --color-app-accent: #FAF089;
@@ -42,8 +42,26 @@ body[data-theme="dark"] {
   --color-text-secondary: #ff6b00;
   --color-bg-primary: #15232d;
   --color-bg-toggle: #a9a9a9;
-  --color-bg-terminal: #000000;
+  --color-bg-terminal: #282A36;
   --color-app-primary: #4A5568;
   --color-app-secondary: #3182CE;
   --color-app-accent: #63B3ED;
+}
+
+.rehype-code-title {
+  background-color: var(--color-app-primary);
+  border-color: var(--color-app-secondary);
+  @apply my-3 font-mono text-xs sm:text-base sm:px-3 border border-b-0 rounded-t-lg border-opacity-25 w-screen sm:max-w-4xl;
+}
+
+
+.rehype-code-title h1 {
+  color: var(--color-text-secondary);
+  @apply font-mono text-sm sm:text-base font-bold m-4;
+}
+
+.rehype-code-title + pre {
+  background: var(--color-bg-terminal);
+  color: var(--color-text-primary);
+  @apply mt-0 rounded-t-none mx-5;
 }

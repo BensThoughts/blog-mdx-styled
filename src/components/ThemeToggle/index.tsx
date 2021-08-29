@@ -59,6 +59,8 @@ const ThemeToggle = () => {
   //   savedTheme && setActiveTheme(savedTheme);
   // }, []);
 
+  console.log('Theme Toggle ' + activeTheme);
+
   useEffect(() => {
     document.body.dataset.theme = activeTheme;
     window.localStorage.setItem('theme', activeTheme);

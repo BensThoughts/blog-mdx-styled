@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 
 function getInitialColorMode() {
-  const persistedColorPreference = window.localStorage.getItem('color-mode');
+  const persistedColorPreference = window.localStorage.getItem('theme');
   const hasPersistedPreference = typeof persistedColorPreference === 'string';
   // If the user has explicitly chosen light or dark,
   // let's use it. Otherwise, this value will be null.
@@ -28,12 +28,12 @@ interface ThemeProviderProps {
 
 type ColorMode = 'light' | 'dark';
 
-export const ThemeProvider = (props: ThemeProviderProps) => {
+const ThemeProvider = (props: ThemeProviderProps) => {
   const [colorMode, rawSetColorMode] = useState(getInitialColorMode);
   const setColorMode = (value: ColorMode) => {
     rawSetColorMode(value);
     // Persist it on update
-    window.localStorage.setItem('color-mode', value);
+    window.localStorage.setItem('theme', value);
   };
   return (
     <ThemeContext.Provider value={{ colorMode, setColorMode }}>
@@ -41,3 +41,11 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
     </ThemeContext.Provider>
   );
 };
+
+export default ThemeProvider;
+
+// export const useColorModeValue = () => {
+//   const [colorMode, setColorMode] = useState(getInitialColorMode);
+
+//   return colorMode;
+// }

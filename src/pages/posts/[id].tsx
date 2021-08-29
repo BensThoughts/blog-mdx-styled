@@ -1,10 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import dynamic from 'next/dynamic';
+
+
+// const Code = dynamic(() => import('@app/components/mdx/Code'), {
+//   ssr: false
+// });
 
 import {
-  Code,
   Blockquote,
+  Code,
   Date,
   H1,
   H2,

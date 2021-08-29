@@ -1,9 +1,8 @@
-import Logo from '@app/components/Logo';
+import styled from '@emotion/styled';
 
+import Logo from '@app/components/Logo';
 import MenuItem from '@app/components/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
-
-import styled from '@emotion/styled';
 
 const Nav = styled.nav`
   display: flex;
@@ -16,6 +15,7 @@ const Nav = styled.nav`
   position: sticky;
   top: 0px;
   background: var(--color-app-primary);
+  transition: background 0.25s ease-in-out;
 `;
 
 const NavLinks = styled.div`
@@ -24,7 +24,8 @@ const NavLinks = styled.div`
   justify-content: end;
   align-content: space-between;
   padding-top: 0px;
-  background-color: var(--color-app-primary);
+  background: var(--color-app-primary);
+  transition: background 0.25s ease-in-out;
 `;
 
 const Header = (props: any) => {

@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 
 const Quote = styled.blockquote`
   border-left: 10px solid var(--color-app-secondary);
+  border-radius: 10px;
   background-color: var(--color-app-primary);
+  min-height: 6rem;
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   font-style: italic;

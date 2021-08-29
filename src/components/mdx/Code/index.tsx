@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 const Pre = styled.pre`
   text-align: left;
   overflow-x: auto;
+  background-color: var(--color-bg-terminal);
+  color: var(--color-text-primary);
 `;
 
 const Line = styled.div`
@@ -27,6 +29,8 @@ interface CodeElementProps {
   className: string
 }
 
+type ThemeMode = 'light' | 'dark';
+
 export default function CodeElement(props: CodeElementProps) {
   const children = props.children;
   const language = props.className.replace('language-', '') as Language;
@@ -39,7 +43,7 @@ export default function CodeElement(props: CodeElementProps) {
       language={language}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre style={style} className={className}>
+        <Pre className={className}>
           {tokens.map((line, i) => (
             <Line key={i} {...getLineProps({ line, key: i })}>
               <LineNo className="hidden md:table-cell">{i + 1}</LineNo>

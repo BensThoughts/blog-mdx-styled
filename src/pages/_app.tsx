@@ -7,6 +7,10 @@ const Header = dynamic(() => import('@app/components/Header'), {
   ssr: false
 });
 
+// const ThemeProvider = dynamic(() => import('@app/utils/colorMode'), {
+//   ssr: false
+// });
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 
