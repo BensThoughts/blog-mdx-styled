@@ -17,7 +17,7 @@ const ToggleButton = styled.button`
   border: 0;
   border-radius: calc(var(--toggle-width) / 2);
   cursor: pointer;
-  background: var(--color-bg-toggle);
+  background: var(--color-app-accent);
   transition: background 0.25s ease-in-out, box-shadow 0.25 ease-in-out;
   &:focus {
     outline-offset: 5px;
@@ -26,7 +26,7 @@ const ToggleButton = styled.button`
     outline: none;
   }
   &:hover {
-    box-shadow: 0 0 5px 2px var(--color-bg-toggle);
+    box-shadow: 0 0 5px 2px var(--color-app-secondary);
   }
 `;
 
@@ -41,7 +41,7 @@ const ToggleThumb = styled.span<{
   width: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   height: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   border-radius: 50%;
-  background: white;
+  background: var(--color-app-secondary);
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
     p.activeTheme === "dark"
