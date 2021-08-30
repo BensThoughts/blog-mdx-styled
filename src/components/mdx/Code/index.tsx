@@ -1,3 +1,8 @@
+/**
+ * Styles are in global.css for now because of Code Title
+ * 
+ */
+
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import dracula from 'prism-react-renderer/themes/dracula';
 import vsLight from 'prism-react-renderer/themes/vsLight';
@@ -6,7 +11,7 @@ import { useContext } from 'react';
 
 import { ThemeContext } from '@app/utils/colorMode';
 
-const Pre = styled.pre`
+const Pre = styled.div`
   text-align: left;
   overflow-x: auto;
   background-color: var(--color-bg-terminal);
@@ -32,8 +37,6 @@ interface CodeElementProps {
   children: string,
   className: string
 }
-
-type ThemeMode = 'light' | 'dark';
 
 export default function CodeElement(props: CodeElementProps) {
   const { colorMode } = useContext(ThemeContext);

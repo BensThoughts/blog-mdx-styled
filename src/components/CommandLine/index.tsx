@@ -6,7 +6,7 @@ const CommandLineBorder = styled.div`
   border-color: var(--color-app-secondary);
 `;
 
-const Pre = styled.pre`
+const Pre = styled.div`
   background-color: var(--color-bg-terminal);
 `;
 
@@ -54,7 +54,7 @@ export default function CommandLine(props: CommandLineProps) {
       (options ? options + ' ' : '') +
       (args ? args : '');
   return (
-    <CommandLineBorder className="w-screen md:max-w-4xl inline-block border-solid border-opacity-20 border-gray-100 border-2 rounded-md p-2">
+    <CommandLineBorder className="w-full md:max-w-4xl inline-block border-solid border-opacity-20 border-2 rounded-md p-2">
       <Pre className="overflow-x-auto rounded-sm px-4 py-2">
         <div className="flex flex-row justify-between items-center">
           <div>

@@ -10,7 +10,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
-  transition: background 0.25s ease-in-out;
+  transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
+  will-change: background, color, transition;
 }
 
 a {
@@ -74,10 +75,11 @@ body[data-theme="dark"] {
   
 }
 
+
 .rehype-code-title {
   background-color: var(--color-app-primary);
   border-color: var(--color-app-secondary);
-  @apply my-3 font-mono text-xs sm:text-base sm:px-3 border border-b-0 rounded-t-lg border-opacity-25 w-screen sm:max-w-4xl;
+  @apply my-3 font-mono text-xs sm:text-base border border-b-0 rounded-t-lg border-opacity-25 w-full sm:max-w-4xl;
 }
 
 

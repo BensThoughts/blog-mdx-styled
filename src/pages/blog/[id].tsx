@@ -17,6 +17,8 @@ import CommandLine from '@app/components/CommandLine';
 
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 
+import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+
 type PostProps = {
   source: MDXRemoteSerializeResult;
   metaInformation: {
@@ -53,7 +55,9 @@ const Post = (props: PostProps) => {
           </p>
         </div>
       </div>
-      <MDXRemote {...props.source} components={components} />
+      <MaxWidthWrapper>
+        <MDXRemote {...props.source} components={components} />
+      </MaxWidthWrapper>
     </div>
   );
 };

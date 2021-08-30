@@ -4,7 +4,8 @@ import Link from 'next/link';
 import styled from "@emotion/styled";
 
 import { getSortedPostsData } from '@app/utils/blogPosts';
-import { H2 } from '@app/components/mdx';
+import { H1 } from '@app/components/mdx';
+import Card from '@app/components/Card';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -14,12 +15,6 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   };
 };
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 35vh;
-`;
 interface HomeProps {
   allPostsData: {
     date: string,
@@ -29,31 +24,33 @@ interface HomeProps {
   }[]
 }
 
+const testCards: ReactNode[] = [];
+for (let i=0; i < 9; i++) {
+  testCards.push(<div key={i}><Card title="Test Card" /></div>);
+}
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 40px auto 40px;
+  grid-template-rows: 40px 40rem 40px;
+
+  /* justify-content: center;
+  padding-top: 35vh; */
+`;
+
+const Box = styled.div`
+  grid-column: 2;
+  grid-row: 2;
+`;
+
 export default function Home(props: HomeProps) {
   return (
-    <>
-    <Container>
-      <main>
-        <h1>Next.js dark mode toggle</h1>
-        <h4>Dark mode is more than just a gimmick, right?!</h4>
-        <section>
-          <H2>Blog</H2>
-            <ul>
-              {props.allPostsData.map(({ id, title, date}) => (
-              <li key={id}>
-                <Link href={`/posts/${id}`}>
-                  <a>{title}</a>
-                </Link>
-                <br />
-                <small>
-                  {date}
-                </small>
-              </li>
-              ))}
-          </ul>
-        </section>
-      </main>
-    </Container>
-    </>
+    <main>
+      <Container>
+        <Box>
+          Test
+        </Box>
+      </Container>
+    </main>
   );
 };

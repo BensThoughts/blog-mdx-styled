@@ -20,6 +20,7 @@ const ToggleButton = styled.button`
   cursor: pointer;
   background: var(--color-app-accent);
   transition: background 0.25s ease-in-out, box-shadow 0.25 ease-in-out;
+  will-change: background, box-shadow;
   &:focus {
     outline-offset: 5px;
   }

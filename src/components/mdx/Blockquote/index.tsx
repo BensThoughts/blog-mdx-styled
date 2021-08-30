@@ -4,8 +4,7 @@ const Quote = styled.blockquote`
   border-left: 10px solid var(--color-app-secondary);
   border-radius: 10px;
   background-color: var(--color-app-primary);
-  min-height: 6rem;
-  margin: 1.5em 10px;
+  min-height: 5rem;
   padding: 0.5em 10px;
   font-style: italic;
   quotes: "\\201C""\\201D""\\2018""\\2019";
@@ -25,6 +24,6 @@ const Quote = styled.blockquote`
 
 export default function BlockQuote(props: { children: string }) {
   return (
-    <Quote>{props.children}</Quote>
+    <Quote className="max-w-4xl my-5">{props.children}</Quote>
   );
 }

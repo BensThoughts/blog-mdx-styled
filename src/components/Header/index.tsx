@@ -16,6 +16,7 @@ const Nav = styled.nav`
   top: 0px;
   background: var(--color-app-primary);
   transition: background 0.25s ease-in-out;
+  will-change: background;
 `;
 
 const NavLinks = styled.div`
@@ -26,6 +27,7 @@ const NavLinks = styled.div`
   padding-top: 0px;
   background: var(--color-app-primary);
   transition: background 0.25s ease-in-out;
+  will-change: background;
 `;
 
 const Header = (props: any) => {
