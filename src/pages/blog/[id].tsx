@@ -15,7 +15,7 @@ import {
 
 import CommandLine from '@app/components/CommandLine';
 
-import { getAllPostIds, getPostData } from '../../utils/posts';
+import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 
 type PostProps = {
   source: MDXRemoteSerializeResult;

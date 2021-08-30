@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styled from "@emotion/styled";
 
 import { getSortedPostsData } from '@app/utils/blogPosts';
-import { H2 } from '@app/components/mdx';
+import { H1 } from '@app/components/mdx';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -34,14 +34,12 @@ export default function Home(props: HomeProps) {
     <>
     <Container>
       <main>
-        <h1>Next.js dark mode toggle</h1>
-        <h4>Dark mode is more than just a gimmick, right?!</h4>
         <section>
-          <H2>Blog</H2>
+          <H1>Blog</H1>
             <ul>
               {props.allPostsData.map(({ id, title, date}) => (
               <li key={id}>
-                <Link href={`/posts/${id}`}>
+                <Link href={`/blog/${id}`}>
                   <a>{title}</a>
                 </Link>
                 <br />
