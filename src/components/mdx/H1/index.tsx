@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactChild, ReactElement, ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 // const Test = styled(Heading)`
@@ -9,10 +9,14 @@ const Heading = styled.h1`
   color: var(--color-text-secondary);
 `;
 
-export default function H1(props: { children: ReactNode }) {
+type H1Props = {
+  children: string;
+} & React.HTMLAttributes<HTMLHeadingElement>;
+
+export default function H1({ children, className }: H1Props) {
   return (
-    <Heading className="font-bold text-2xl md:text-4xl">
-      {props.children}
+    <Heading className={`font-bold text-2xl md:text-4xl ${className}`}>
+      {children}
     </Heading>
   );
 };

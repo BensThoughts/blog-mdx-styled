@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import { getSortedPostsData } from '@app/utils/blogPosts';
 import { H1 } from '@app/components/mdx';
 import Card from '@app/components/Card';
+import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -25,15 +26,27 @@ interface HomeProps {
 }
 
 const testCards: ReactNode[] = [];
-for (let i=0; i < 9; i++) {
-  testCards.push(<div key={i}><Card title="Test Card" /></div>);
+for (let i=0; i < 13; i++) {
+  const cardNum = i + 1;
+  const title = 'Test Card ' + cardNum;
+  testCards.push(
+    <div key={i}>
+      <Card title={title} subTitle="2021-03-04" className="max-w-sm md">
+        Some lengthy blog content goes here, just some generic content.
+        Some lengthy blog content goes here, just some generic content.
+      </Card>
+    </div>
+  );
 }
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 40px auto 40px;
-  grid-template-rows: 40px 40rem 40px;
-
+  gap: 16px;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 32px;
+  }
   /* justify-content: center;
   padding-top: 35vh; */
 `;
@@ -43,14 +56,28 @@ const Box = styled.div`
   grid-row: 2;
 `;
 
+const StartBox = styled.div`
+  grid-column: 1 / 2;
+  grid-row: 1;
+`;
+
+const EndBox = styled.div`
+  grid-column: auto;
+  grid-row: auto;
+`;
+
+const ContentPreviewGrid = styled.div`
+
+`;
+
 export default function Home(props: HomeProps) {
   return (
-    <main>
-      <Container>
-        <Box>
-          Test
-        </Box>
-      </Container>
-    </main>
+    <MaxWidthWrapper>
+      <ContentPreviewGrid>
+        <Container>
+        {testCards}
+        </Container>
+      </ContentPreviewGrid>
+    </MaxWidthWrapper>
   );
 };

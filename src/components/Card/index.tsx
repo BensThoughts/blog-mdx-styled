@@ -1,37 +1,39 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  border-radius: 10px;
   background-color: var(--color-app-primary);
-  width: 35rem;
-  height: 15rem;
 `;
 
-interface CardProps {
-  title?: string;
-  subTitle?: string;
-  content?: string;
-  footer?: string;
-}
+type CardProps = {
+  header?: React.ReactChild
+  footer?: React.ReactChild
+  subTitle?: string
+  title?: string
+  description?: string
+} & React.HTMLAttributes<HTMLDivElement>
 
-export default function Card(props: CardProps) {
-  const { title, subTitle, content, footer } = props;
-  let Title = <></>
-  if (title) {
-    Title = <span>{title}</span>
-  }
-  let SubTitle = <></>
-  if (subTitle) {
-    SubTitle = <span>{subTitle}</span>
-  }
-  
+export default function Card({
+  header = undefined,
+  footer = undefined,
+  title = '',
+  subTitle = '',
+  description = '',
+  children,
+  className,
+}: CardProps) {
   return (
-    <Container className="max-w-sm rounded-2xl md:max-w-full">
-      <div className="pl-5 pt-5">
-        <h1 className="text-xl">{title}</h1>
-        <span className="italic text-sm">{subTitle}</span>
+    <Container className={`relative ${className}`}>
+      {header && <>{header}</>}
 
+      <div className="px-2 py-4 sm:p-8">
+        {title && <div className="text-2xl text-high-emphesis">{title}</div>}
+        {subTitle && <div className="mb-4 italic">{subTitle}</div>}
+        {description && <div className="text-base text-secondary">{description}</div>}
+        {children}
       </div>
 
+      {footer && <>{footer}</>}
     </Container>
-  );
+  )
 }

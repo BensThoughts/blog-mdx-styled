@@ -31,6 +31,9 @@ const CopyButton = styled.button`
   border-color: var(--color-app-secondary);
   color: var(--color-app-primary);
   :hover {
+    /* svg {
+      color: var(--color-app-accent);
+    } */
     background-color: var(--color-app-accent);
     border-color: var(--color-app-secondary);
   }

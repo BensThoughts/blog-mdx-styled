@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import {
   Blockquote,
+  Hr,
   Code,
   Date,
   H1,
@@ -32,6 +33,7 @@ type PostProps = {
 const components = {
   code: Code,
   blockquote: Blockquote,
+  hr: Hr,
   date: Date,
   h1: H1,
   h2: H2,
@@ -48,16 +50,19 @@ const Post = (props: PostProps) => {
         <H1>
           {props.metaInformation.title}
         </H1>
-        <div className="flex-row justify-between">
+        <div className="flex flex-row justify-between">
           <Date dateString={props.metaInformation.date} />
           <p className="italic">
             Read time: {props.metaInformation.readTime} min.
           </p>
         </div>
       </div>
-      <MaxWidthWrapper>
-        <MDXRemote {...props.source} components={components} />
-      </MaxWidthWrapper>
+      <div className="flex flex-col">
+        <MaxWidthWrapper>
+          <MDXRemote {...props.source} components={components} />
+        </MaxWidthWrapper>
+      </div>
+
     </div>
   );
 };
