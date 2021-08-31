@@ -46,7 +46,7 @@ export default function BlogArticleList(props: BlogArticleListProps) {
               {props.allPostsData.map(({ id, title, date, description}) => (
               <div key={id}>
                 <Link href={`/blog/${id}`}>
-                  <a><Card title={title} subTitle={date}>{description}</Card></a>
+                  <a><Card title={title} subTitle={date} className="sm:h-64"><article>{description}</article></Card></a>
                 </Link>
               </div>
               ))}
