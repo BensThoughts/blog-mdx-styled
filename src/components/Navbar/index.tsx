@@ -7,6 +7,7 @@ import Breadcrumbs from '../Breadcrumbs';
 
 const Nav = styled.nav`
   display: flex;
+  z-index: 999;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -31,7 +32,7 @@ const NavLinks = styled.div`
   will-change: background;
 `;
 
-const Header = (props: any) => {
+const Navbar: React.FC<{}> = (props) => {
   return (
     <Nav {...props}>
       <div className="ml-3 items-center">
@@ -51,4 +52,4 @@ const Header = (props: any) => {
   );
 };
 
-export default Header;
+export default Navbar;

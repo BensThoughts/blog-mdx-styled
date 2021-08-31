@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 
-import Header from '@app/components/Header';
+import Navbar from '@app/components/Navbar';
 
 const ThemeProvider = dynamic(() => import('@app/utils/colorMode'), {
   ssr: false
@@ -10,18 +10,17 @@ const ThemeProvider = dynamic(() => import('@app/utils/colorMode'), {
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
+import Footer from '@app/components/Footer';
+import Layout from '@app/components/Layout';
 
 library.add(faCopy);  
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
-      <div className="z-10 fixed top-0 w-screen">
-        <Header />
-      </div>
-      <div className="z-0 mt-20">
+      <Layout>
         <Component {...pageProps} />
-      </div>
+      </Layout>
     </ThemeProvider>
   );
 }
