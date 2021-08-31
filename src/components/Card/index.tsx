@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 const Container = styled.div`
   border-radius: 10px;
   background-color: var(--color-app-primary);
+  transition: background-color 0.25s ease-in-out;
 `;
 
 type CardProps = {

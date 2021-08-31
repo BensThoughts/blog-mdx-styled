@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Logo from '@app/components/Logo';
 import MenuItem from '@app/components/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
+import Breadcrumbs from '../Breadcrumbs';
 
 const Nav = styled.nav`
   display: flex;
@@ -34,7 +35,7 @@ const Header = (props: any) => {
   return (
     <Nav {...props}>
       <div className="ml-3 items-center">
-        <Logo></Logo>
+          <Breadcrumbs />
       </div>
 
       <div className="hidden md:block">
