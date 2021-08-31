@@ -1,3 +1,7 @@
+/**
+ * This component should only be used as a wrapper around an entire Next.js page
+ */
+
 import { ReactNode } from 'react';
 
 interface MaxWidthWrapperProps {

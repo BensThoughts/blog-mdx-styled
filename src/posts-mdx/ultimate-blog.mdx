@@ -39,8 +39,6 @@ Seperation
 
 [Google](https://google.com)
 
-![image](../assets/logo/logo.png)
-
 This has been a hot topic for some time now in the community.
 
 When learning from a tutorial it is often tempting to jump ahead. I have often
@@ -136,61 +134,6 @@ export default function CodeElement(props: { children: string }) {
   );
 };
 ```
-
-```yaml:/test
-apiVersion: "apps/v1"
-kind: "Deployment"
-metadata:
-  name: "zeroinbox-api"
-  namespace: "default"
-  labels:
-    app: "zeroinbox-api"
-    version: "1.9.2"
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: "zeroinbox-api"
-  template:
-    metadata:
-      labels:
-        app: "zeroinbox-api"
-    spec:
-      containers:
-      - name: "zeroinbox-api-gateway"
-        image: "gcr.io/zeroinbox-portfolio-project/zeroinbox-api-gateway@latest"
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            memory: "500Mi"
-            cpu: "200m"
-          limits:
-            memory: "1000Mi"
-            cpu: "400m"
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-            httpHeaders:
-            - name: health-check
-              value: "true"
-          initialDelaySeconds: 10
-          periodSeconds: 5
-        envFrom:
-        - configMapRef:
-            name: "zeroinbox-api-config"
-        - secretRef:
-            name: "zeroinbox-secrets"
-        ports:
-        - containerPort: 8080
-        env:
-        - name: SESSION_REDIS_HOST
-          value: $(ZEROINBOX_REDIS_SERVICE_HOST)
-        - name: SESSION_REDIS_PORT
-          value: $(ZEROINBOX_REDIS_SERVICE_PORT)
-
-```
-
 > Block quote Typescript test
 
 >Test 2

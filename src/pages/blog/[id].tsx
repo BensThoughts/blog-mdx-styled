@@ -45,6 +45,8 @@ const components = {
 
 const Post = (props: PostProps) => {
   return (
+    <MaxWidthWrapper>
+
     <div className="flex flex-col items-center">
       <div>
         <H1>
@@ -58,12 +60,14 @@ const Post = (props: PostProps) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <MaxWidthWrapper>
-          <MDXRemote {...props.source} components={components} />
-        </MaxWidthWrapper>
+          <div className="flex flex-col items-center">
+            <MDXRemote {...props.source} components={components} />
+          </div>
       </div>
 
     </div>
+    </MaxWidthWrapper>
+
   );
 };
 
