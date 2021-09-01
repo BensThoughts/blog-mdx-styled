@@ -10,10 +10,13 @@ const ThemeProvider = dynamic(() => import('@app/utils/colorMode'), {
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import Footer from '@app/components/Layout/Footer';
 import Layout from '@app/components/Layout';
 
-library.add(faCopy);  
+library.add(faCopy);
+library.add(faBars);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
