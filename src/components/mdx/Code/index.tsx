@@ -11,9 +11,7 @@ import { useContext } from 'react';
 
 import { ThemeContext } from '@app/utils/colorMode';
 
-const Pre = styled.div`
-  text-align: left;
-  overflow-x: auto;
+const Pre = styled.pre`
   background-color: var(--color-bg-terminal);
   color: var(--color-text-primary);
 `;
@@ -56,7 +54,7 @@ export default function CodeElement(props: CodeElementProps) {
       language={language}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={className}>
+        <Pre className={`overflow-x-auto text-left ${className}`}>
           {tokens.map((line, i) => (
             <Line key={i} {...getLineProps({ line, key: i })}>
               <LineNo className="hidden md:table-cell">{i + 1}</LineNo>

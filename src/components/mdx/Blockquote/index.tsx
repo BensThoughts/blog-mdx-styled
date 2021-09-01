@@ -24,6 +24,6 @@ const Quote = styled.blockquote`
 
 export default function BlockQuote(props: { children: string }) {
   return (
-    <Quote className="max-w-4xl my-5">{props.children}</Quote>
+    <Quote className="max-w-4xl my-5 mx-auto">{props.children}</Quote>
   );
 }

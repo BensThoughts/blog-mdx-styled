@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
+import styled from '@emotion/styled';
 
 import {
   Blockquote,
@@ -19,6 +20,14 @@ import CommandLine from '@app/components/CommandLine';
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+
+const GridContainer = styled.div`
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  max-width: 100%;
+`;
 
 type PostProps = {
   source: MDXRemoteSerializeResult;
@@ -47,7 +56,7 @@ const Post = (props: PostProps) => {
   return (
     <MaxWidthWrapper>
 
-    <div className="flex flex-col items-center">
+    <GridContainer>
       <div>
         <H1>
           {props.metaInformation.title}
@@ -59,13 +68,10 @@ const Post = (props: PostProps) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col">
-          <div className="flex flex-col items-center">
-            <MDXRemote {...props.source} components={components} />
-          </div>
-      </div>
 
-    </div>
+            <MDXRemote {...props.source} components={components} />
+
+    </GridContainer>
     </MaxWidthWrapper>
 
   );

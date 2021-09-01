@@ -28,6 +28,7 @@ const Args = styled.span`
 `;
 
 const CopyButton = styled.button`
+  padding-right: 10px;
   background-color: var(--color-app-primary);
   border-color: var(--color-app-secondary);
   color: var(--color-app-primary);
@@ -58,7 +59,7 @@ export default function CommandLine(props: CommandLineProps) {
       (options ? options + ' ' : '') +
       (args ? args : '');
   return (
-    <CommandLineBorder className="w-screen md:max-w-4xl inline-block sm:border-solid sm:border-opacity-20 sm:border-2 rounded-md p-2">
+    <CommandLineBorder className="m-auto align-middle sm:border-solid sm:border-opacity-20 sm:border-2 rounded-md p-1 sm:p-2">
       <Pre className="overflow-x-auto rounded-sm px-4 py-2">
         <div className="flex flex-row justify-between items-center">
           <div>
@@ -76,6 +77,8 @@ export default function CommandLine(props: CommandLineProps) {
           </CopyButton>
         </div>
       </Pre>
-    </CommandLineBorder> 
+    </CommandLineBorder>   
+
+   
   );
 }
