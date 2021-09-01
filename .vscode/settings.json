@@ -4,6 +4,7 @@
     "fortawesome",
     "preemptible",
     "rehype",
-    "tailwindcss"
+    "tailwindcss",
+    "unmount"
   ]
 }

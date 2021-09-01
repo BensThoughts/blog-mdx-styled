@@ -7,6 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive']
+      },
+      backgroundColor: {
+        'primary': 'var(--color-app-primary)',
+        'secondary': 'var(--color-app-secondary)',
+        'accent': 'var(--color-app-accent)'
       }
     }
   },
