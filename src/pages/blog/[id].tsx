@@ -52,7 +52,7 @@ const components = {
   Image
 };
 
-const Post = (props: PostProps) => {
+export default function PostsPage(props: PostProps) {
   return (
     <MaxWidthWrapper>
 
@@ -100,5 +100,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   };
 };
-
-export default Post;

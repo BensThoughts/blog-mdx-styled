@@ -36,7 +36,7 @@ interface BlogArticleListProps {
   }[]
 }
 
-export default function BlogArticleList(props: BlogArticleListProps) {
+export default function BlogArticleListPage(props: BlogArticleListProps) {
   return (
     <MaxWidthWrapper>
       <main>
