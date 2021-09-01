@@ -5,7 +5,7 @@ import MenuItem from '@app/components/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
 import { useState } from 'react';
-import MyDialog from '@app/components/MyDialog';
+import Drawer from '@app/components/Drawer';
 
 const Nav = styled.nav`
   display: flex;
@@ -39,29 +39,29 @@ const Navbar: React.FC<{}> = (props) => {
 
   return (
     <>
-    <MyDialog isOpen={isOpen} setIsOpen={setIsOpen} />
-    <Nav {...props}>
-      <div className="ml-3 items-center">
-          <Breadcrumbs />
-      </div>
-
-      <button 
-        className="w-64 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        Open Modal
-      </button>
-
-      <div className="hidden md:block">
-        <NavLinks className="flex items-center justify-end content-between pt-0 mr-6">
-          <MenuItem to="/">Home</MenuItem>
-          <MenuItem to="/blog">Blog</MenuItem>
-          <MenuItem to="/about">About</MenuItem>
-          <MenuItem to="/projects">Projects</MenuItem>
-          <ThemeToggle />
-        </NavLinks>
-      </div>
-    </Nav>
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Nav {...props}>
+        <div className="ml-3 items-center">
+            <Breadcrumbs />
+        </div>
+  
+        <button 
+          className="md:hidden w-48 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Open Modal
+        </button>
+  
+        <div className="hidden md:block">
+          <NavLinks className="flex items-center justify-end content-between pt-0 mr-6">
+            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/blog">Blog</MenuItem>
+            <MenuItem to="/about">About</MenuItem>
+            <MenuItem to="/projects">Projects</MenuItem>
+            <ThemeToggle />
+          </NavLinks>
+        </div>
+      </Nav>
     </>
   );
 };

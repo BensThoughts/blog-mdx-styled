@@ -1,12 +1,12 @@
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import MyDialog from '@app/components/MyDialog';
+import Drawer from '@app/components/Drawer';
 import { useState } from 'react';
 
 export default function AboutPage() {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
-    <MyDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+    <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
 
     <MaxWidthWrapper>
       <button 
