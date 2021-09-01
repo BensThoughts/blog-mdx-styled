@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { H1 } from '@app/components/mdx';
 
 type MyDrawerProps = {
   title?: string,
@@ -49,7 +50,7 @@ export default function Drawer({
             leaveTo="-translate-x-full"
           >
             <div className="bg-primary z-40 inline-block w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
-              <Dialog.Title>{title}</Dialog.Title>
+              <Dialog.Title className="font-bold text-2xl md:text-4xl text-secondary">{title}</Dialog.Title>
               <Dialog.Description>{description}</Dialog.Description>
               {children}
             </div>
