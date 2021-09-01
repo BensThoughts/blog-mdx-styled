@@ -12,6 +12,13 @@ module.exports = {
         'primary': 'var(--color-app-primary)',
         'secondary': 'var(--color-app-secondary)',
         'accent': 'var(--color-app-accent)'
+      },
+      textColor: {
+        'primary': 'var(--color-text-primary)',
+        'secondary': 'var(--color-text-secondary)',
+        'icon-primary': 'var(--color-app-primary)',
+        'icon-secondary': 'var(--color-app-secondary)',
+        'icon-accent': 'var(--color-app-accent)'
       }
     }
   },
