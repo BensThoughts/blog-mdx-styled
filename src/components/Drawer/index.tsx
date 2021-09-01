@@ -1,12 +1,21 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-type MyDialogProps = {
+type MyDrawerProps = {
+  title?: string,
+  description?: string,
+  children: React.ReactChild,
 	isOpen: boolean
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Drawer({ isOpen, setIsOpen}: MyDialogProps) {
+export default function Drawer({
+  title = '',
+  description = '',
+  children,
+  isOpen,
+  setIsOpen
+}: MyDrawerProps) {
   // let [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -39,18 +48,10 @@ export default function Drawer({ isOpen, setIsOpen}: MyDialogProps) {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="z-40 inline-block w-full max-w-sm p-6 overflow-hidden text-left align-middle bg-white shadow-xl rounded-r-2xl">
-              <Dialog.Title>Test</Dialog.Title>
-              <Dialog.Description>
-                This is a test of the dialog modal.
-              </Dialog.Description>
-              
-              <p>
-                Are you sure you want to deactivate your account? All of your data will
-                be permanently removed. This action cannot be undone.
-              </p>
-              
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
+            <div className="bg-primary z-40 inline-block w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
+              <Dialog.Title>{title}</Dialog.Title>
+              <Dialog.Description>{description}</Dialog.Description>
+              {children}
             </div>
           </Transition.Child>
         </div>
