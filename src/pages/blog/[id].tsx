@@ -56,22 +56,20 @@ const Post = (props: PostProps) => {
   return (
     <MaxWidthWrapper>
 
-    <GridContainer>
-      <div>
-        <H1>
-          {props.metaInformation.title}
-        </H1>
-        <div className="flex flex-row justify-between">
-          <Date dateString={props.metaInformation.date} />
-          <p className="italic">
-            Read time: {props.metaInformation.readTime} min.
-          </p>
+      <GridContainer>
+        <div className="w-full max-w-4xl m-auto">
+          <H1>
+            {props.metaInformation.title}
+          </H1>
+          <div className="flex flex-row justify-between">
+            <Date dateString={props.metaInformation.date} />
+            <p className="italic">
+              Read time: {props.metaInformation.readTime} min.
+            </p>
+          </div>
         </div>
-      </div>
-
-            <MDXRemote {...props.source} components={components} />
-
-    </GridContainer>
+        <MDXRemote {...props.source} components={components} />
+      </GridContainer>
     </MaxWidthWrapper>
 
   );

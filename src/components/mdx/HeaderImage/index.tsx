@@ -9,7 +9,7 @@ interface HeaderImageProps {
 
 export default function HeaderImage(props: HeaderImageProps) {
   return (
-    <div className="max-w-sm md:max-w-4xl">
+    <div className="max-w-sm mx-auto md:max-w-4xl">
       <Image src={props.src} alt={props.alt} width={props.width} height={props.height} />
     </div>
   )
