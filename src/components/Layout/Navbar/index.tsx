@@ -39,10 +39,26 @@ const Navbar: React.FC<{}> = (props) => {
 
   return (
     <>
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu">
+          <NavLinks className="flex flex-col items-center justify-end content-between pt-0 mr-6">
+            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/blog">Blog</MenuItem>
+            <MenuItem to="/about">About</MenuItem>
+            <MenuItem to="/projects">Projects</MenuItem>
+            <ThemeToggle />
+          </NavLinks>
+      </Drawer>
       <Nav {...props}>
-        <div className="ml-3 items-center">
-            <Breadcrumbs />
+
+        <div className="ml-3">
+          <div className="flex items-center">
+            <div className="mr-3">
+              <Logo />
+            </div>
+            <div>
+              <Breadcrumbs />
+            </div>
+          </div>
         </div>
   
         <button 

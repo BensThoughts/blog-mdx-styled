@@ -31,11 +31,8 @@ export default function Breadcrumbs(){
   }
 
   return (
-    <div aria-label="breadcrumbs" className="flex items-center">
-      <div>
-        <Logo className="mr-3" />
-      </div>
-      <div className="hidden sm:flex">
+
+      <div aria-label="breadcrumbs" className="hidden sm:flex">
         <div className="font-mono">
           $&gt;&nbsp;
           <Link href="/">
@@ -56,6 +53,6 @@ export default function Breadcrumbs(){
           );
         })}
         </div>
-      </div>
+
   );
 }
