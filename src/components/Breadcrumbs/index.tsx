@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Logo from '../Logo';
 
 const convertBreadcrumb = (crumb: string) => {
   return crumb.replace(/-/g, ' ').toUpperCase();
@@ -31,28 +30,26 @@ export default function Breadcrumbs(){
   }
 
   return (
-
-      <div aria-label="breadcrumbs" className="hidden sm:flex">
-        <div className="font-mono">
-          $&gt;&nbsp;
-          <Link href="/">
-            <a className="hover:underline">HOME</a>
-          </Link>
-          &nbsp;/&nbsp;
-        </div>
-        {breadcrumbs.map((breadcrumb, i) => {
-          return (
-            <div key={breadcrumb.href} className="font-mono">
-              <Link href={breadcrumb.href}>
-                <a className="hover:underline">
-                  {convertBreadcrumb(breadcrumb.breadcrumb)}
-                </a>
-              </Link>
-              &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
-            </div>
-          );
-        })}
-        </div>
-
+    <div aria-label="breadcrumbs" className="flex">
+      <div className="font-mono">
+        $&gt;&nbsp;
+        <Link href="/">
+          <a className="hover:underline">HOME</a>
+        </Link>
+        &nbsp;/&nbsp;
+      </div>
+      {breadcrumbs.map((breadcrumb, i) => {
+        return (
+          <div key={breadcrumb.href} className="font-mono">
+            <Link href={breadcrumb.href}>
+              <a className="hover:underline">
+                {convertBreadcrumb(breadcrumb.breadcrumb)}
+              </a>
+            </Link>
+            &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
+          </div>
+        );
+      })}
+    </div>
   );
 }
