@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
+import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import {
@@ -29,16 +30,6 @@ const GridContainer = styled.div`
   max-width: 100%;
 `;
 
-type PostProps = {
-  source: MDXRemoteSerializeResult;
-  metaInformation: {
-    title: string,
-    date: string,
-    readTime: number,
-    tags: string[]
-  };
-};
-
 const components = {
   code: Code,
   blockquote: Blockquote,
@@ -52,26 +43,72 @@ const components = {
   Image
 };
 
-export default function PostsPage(props: PostProps) {
+type PostProps = {
+  source: MDXRemoteSerializeResult;
+  metaInformation: {
+    title: string,
+    date: string,
+    readTime: number,
+    tags: string[],
+    ogTitle: string,
+    ogDescription: string,
+    ogImage: string,
+    twitterTitle: string,
+    twitterDescription: string,
+    twitterImage: string
+  };
+};
+
+export default function PostsPage({
+  source,
+  metaInformation
+}: PostProps) {
+  const { 
+    title,
+    date,
+    readTime,
+    tags,
+    ogTitle,
+    ogDescription,
+    ogImage,
+    twitterTitle,
+    twitterDescription,
+    twitterImage
+  } = metaInformation;
   return (
-    <MaxWidthWrapper>
+    <>
+      <Head>
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:description" content={ogDescription} />
 
-      <GridContainer>
-        <div className="w-full max-w-4xl m-auto">
-          <H1>
-            {props.metaInformation.title}
-          </H1>
-          <div className="flex flex-row justify-between">
-            <Date dateString={props.metaInformation.date} />
-            <p className="italic">
-              Read time: {props.metaInformation.readTime} min.
-            </p>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@bensthoughts" />
+        <meta name="twitter:creator" content="@bensthoughts" />
+        <meta name="twitter:title" content={twitterTitle} />
+        <meta name="twitter:description" content={twitterDescription} />
+        <meta name="twitter:image" content={twitterImage} />
+      </Head>
+      <MaxWidthWrapper>
+  
+        <GridContainer>
+          <div className="w-full max-w-4xl m-auto">
+            <H1>
+              {title}
+            </H1>
+            <div className="flex flex-row justify-between">
+              <Date dateString={date} />
+              <p className="italic">
+                Read time: {readTime} min.
+              </p>
+            </div>
           </div>
-        </div>
-        <MDXRemote {...props.source} components={components} />
-      </GridContainer>
-    </MaxWidthWrapper>
-
+          <MDXRemote {...source} components={components} />
+        </GridContainer>
+      </MaxWidthWrapper>
+    </>
   );
 };
 

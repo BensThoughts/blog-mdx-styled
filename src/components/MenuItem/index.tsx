@@ -2,20 +2,26 @@ import { MouseEventHandler, ReactNode } from 'react';
 import Link from 'next/link';
 
 interface MenuItemsProps {
-  children: ReactNode,
   to: string,
+  className?: string,
   onClick?: MouseEventHandler<HTMLParagraphElement>
+  children: ReactNode,
 }
 
-const MenuItem = (props: MenuItemsProps) => {
-  const {children, to = '/', onClick, ...rest } = props;
+const MenuItem = ({
+  to = '/',
+  className = '',
+  onClick,
+  children,
+  ...rest
+}: MenuItemsProps) => {
   return (
-    <p className="mx-0 md:mx-4 block"
+    <h4 className={`mx-0 md:mx-4 block ${className}`}
       onClick={onClick}
       {...rest}
     >
       <Link href={to}>{children}</Link>
-    </p>
+    </h4>
   );
 };
 

@@ -43,7 +43,7 @@ const Navbar: React.FC<{}> = (props) => {
     <>
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu">
           <NavLinks className="flex flex-col items-center justify-end content-between pt-0 mr-6">
-            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/" className="hover:bg-accent">Home</MenuItem>
             <MenuItem to="/blog">Blog</MenuItem>
             <MenuItem to="/about">About</MenuItem>
             <MenuItem to="/projects">Projects</MenuItem>
