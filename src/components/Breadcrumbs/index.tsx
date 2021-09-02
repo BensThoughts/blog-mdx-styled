@@ -10,7 +10,7 @@ type BreadcrumbsType = { breadcrumb: string, href: string }[];
 
 export default function Breadcrumbs(){
   const router = useRouter();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType | null>(null);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'home', href: '/'}]);
 
   useEffect(() => {
     if (router) {
@@ -25,9 +25,9 @@ export default function Breadcrumbs(){
     }
   }, [router]);
 
-  if (!breadcrumbs) {
-    return null;
-  }
+  // if (!breadcrumbs) {
+  //   return null;
+  // }
 
   return (
     <div aria-label="breadcrumbs" className="flex">
