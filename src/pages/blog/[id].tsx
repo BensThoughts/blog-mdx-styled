@@ -4,6 +4,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 // import Image from 'next/image';
 import Head from 'next/head';
 import styled from '@emotion/styled';
+import { NextSeo } from 'next-seo';
 
 import {
   Blockquote,
@@ -77,20 +78,36 @@ export default function PostsPage({
   } = metaInformation;
   return (
     <>
-      <Head>
-        <meta property="og:title" content={ogTitle} />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={ogTitle} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:description" content={ogDescription} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@bensthoughts" />
-        <meta name="twitter:creator" content="@bensthoughts" />
-        <meta name="twitter:title" content={twitterTitle} />
-        <meta name="twitter:description" content={twitterDescription} />
-        <meta name="twitter:image" content={twitterImage} />
-      </Head>
+      <NextSeo 
+        title={ogTitle}
+        description={ogDescription}
+        openGraph={{
+          title: ogTitle,
+          description: ogDescription,
+          url: 'https://bensthoughts.netlify.app/blog/google-gke-cleanup',
+          type: 'article',
+          article: {
+            publishedTime: '2017-06-21T23:04:13Z',
+            modifiedTime: '2018-01-21T18:04:43Z',
+            expirationTime: '2022-12-21T22:04:11Z',
+            section: 'Web Development',
+            authors: ['https://twitter.com/bensthoughts'],
+            tags: tags,
+          },
+          images: [{
+            url: ogImage,
+            width: 810,
+            height: 456,
+            alt: 'Terminal Image'
+          }],
+          site_name: 'BensThoughts Blog'
+        }}
+        twitter={{
+          handle: '@bensthoughts',
+          site: '@bensthoughts',
+          cardType: 'summary_large_image'
+        }}
+      />
       <MaxWidthWrapper>
   
         <GridContainer>

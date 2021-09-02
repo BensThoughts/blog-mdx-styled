@@ -16,29 +16,6 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 export default function Home() {
   return (
     <>
-      <NextSeo
-        title="BensThoughts Blog"
-        description="My personal dev blog."
-        openGraph={{
-          url: 'https://bensthoughts.netlify.app',
-          title: 'BensThoughts Blog',
-          description: 'My (Benjamin Blumenfeld-Jones) personal dev blog.',
-          images: [
-            {
-              url: 'https://res.cloudinary.com/bensthoughts/image/upload/v1630537753/blog/articles-headers/google-gke-cleanup_ihphxz.jpg',
-              width: 810,
-              height: 456,
-              alt: 'Computer Terminal'
-            }
-          ],
-          site_name: 'BensThoughts Blog'
-        }}
-        twitter={{
-          handle: '@bensthoughts',
-          site: '@bensthoughts',
-          cardType: 'summary_large_image'
-        }}
-      />
       <MaxWidthWrapper>
         Placeholder
       </MaxWidthWrapper>

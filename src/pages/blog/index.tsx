@@ -7,6 +7,7 @@ import { getSortedPostsData } from '@app/utils/blogPosts';
 import { H1, H2 } from '@app/components/mdx';
 import Card from '@app/components/Card';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import Head from 'next/head';
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -38,7 +39,8 @@ interface BlogArticleListProps {
 
 export default function BlogArticleListPage(props: BlogArticleListProps) {
   return (
-    <MaxWidthWrapper>
+    <>
+      <MaxWidthWrapper>
       <main>
         <section>
           <H1 className="mb-3 md:mb-6">Blog</H1>
@@ -53,6 +55,7 @@ export default function BlogArticleListPage(props: BlogArticleListProps) {
           </GridContainer>
         </section>
       </main>
-    </MaxWidthWrapper>
+      </MaxWidthWrapper>
+    </>
   );
 };

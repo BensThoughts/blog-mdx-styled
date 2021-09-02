@@ -1,5 +1,5 @@
 export default function ProjectsPage() {
   return (
-    <div></div>
+    <div>Placeholder</div>
   );
 }
