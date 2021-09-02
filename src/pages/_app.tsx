@@ -18,15 +18,20 @@ import seoConfig from '@app/utils/seo.config';
 library.add(faCopy);
 library.add(faBars);
 
+import Navbar from '@app/components/Layout/Navbar';
+import Footer from '@app/components/Layout/Footer';
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...seoConfig} />
       <ThemeProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Navbar />
       </ThemeProvider>
+      <main className="z-0 my-8">
+        <Component {...pageProps} />
+      </main>
+      <Footer />    
     </>
   );
 }
