@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import type { GetStaticProps } from 'next';
 import Link from 'next/link';
 import styled from "@emotion/styled";
+import { NextSeo } from 'next-seo';
 
 import { getSortedPostsData } from '@app/utils/blogPosts';
 import { H1 } from '@app/components/mdx';
@@ -72,12 +73,37 @@ const ContentPreviewGrid = styled.div`
 
 export default function Home(props: HomeProps) {
   return (
-    <MaxWidthWrapper>
-      <ContentPreviewGrid>
-        <Container>
-        {testCards}
-        </Container>
-      </ContentPreviewGrid>
-    </MaxWidthWrapper>
+    <>
+      <NextSeo
+        title="BensThoughts Blog"
+        description="My personal dev blog."
+        openGraph={{
+          url: 'https://bensthoughts.netlify.app',
+          title: 'BensThoughts Blog',
+          description: 'My (Benjamin Blumenfeld-Jones) personal dev blog.',
+          images: [
+            {
+              url: 'https://res.cloudinary.com/bensthoughts/image/upload/v1630537753/blog/articles-headers/google-gke-cleanup_ihphxz.jpg',
+              width: 810,
+              height: 456,
+              alt: 'Computer Terminal'
+            }
+          ],
+          site_name: 'BensThoughts Blog'
+        }}
+        twitter={{
+          handle: '@bensthoughts',
+          site: '@bensthoughts',
+          cardType: 'summary_large_image'
+        }}
+      />
+      <MaxWidthWrapper>
+        <ContentPreviewGrid>
+          <Container>
+          {testCards}
+          </Container>
+        </ContentPreviewGrid>
+      </MaxWidthWrapper>
+    </>
   );
 };

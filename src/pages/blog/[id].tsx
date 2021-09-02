@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 
@@ -40,7 +40,7 @@ const components = {
   p: P,
   CommandLine,
   HeaderImage,
-  Image
+  // Image
 };
 
 type PostProps = {

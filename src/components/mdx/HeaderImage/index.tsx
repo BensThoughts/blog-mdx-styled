@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 
 interface HeaderImageProps {
   src: string,
@@ -10,7 +10,7 @@ interface HeaderImageProps {
 export default function HeaderImage(props: HeaderImageProps) {
   return (
     <div className="max-w-sm mx-auto md:max-w-4xl">
-      <Image src={props.src} alt={props.alt} width={props.width} height={props.height} />
+      <img src={props.src} alt={props.alt} width={props.width} height={props.height} className="object-contain" />
     </div>
   )
 }
