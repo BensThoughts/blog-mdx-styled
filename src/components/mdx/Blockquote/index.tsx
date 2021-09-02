@@ -3,27 +3,35 @@ import styled from '@emotion/styled';
 const Quote = styled.blockquote`
   border-left: 10px solid var(--color-app-secondary);
   border-radius: 10px;
+  width: min(65ch, 100%);
   background-color: var(--color-app-primary);
-  min-height: 5rem;
   padding: 0.5em 10px;
   font-style: italic;
   quotes: "\\201C""\\201D""\\2018""\\2019";
   ::before {
-    content: open-quote;
+    /* content: open-quote; */
     font-size: 4em;
     line-height: 0.1em;
     margin-right: 0.25em;
-    vertical-align: -0.4em;
+    /* vertical-align: -0.4em; */
+  }
+  div {
+
   }
   p {
     display: inline;
     font-family: monospace;
     font-size: 1rem;
+    width: min(65ch, 100%);
   }
 `;
 
 export default function BlockQuote(props: { children: string }) {
   return (
-    <Quote className="max-w-4xl my-5 mx-auto">{props.children}</Quote>
+    <Quote className="my-6 mx-auto">
+      <div className="flex h-full w-full items-center justify-center">
+        <p>{props.children}</p>
+      </div>
+    </Quote>
   );
 }
