@@ -2,14 +2,10 @@
  * Styles are in global.css for now because of Code Title
  * 
  */
-
-import Highlight, { defaultProps, Language } from 'prism-react-renderer';
-import dracula from 'prism-react-renderer/themes/dracula';
-import vsLight from 'prism-react-renderer/themes/vsLight';
+import Highlight, { defaultProps, Language, PrismTheme } from 'prism-react-renderer';
 import styled from '@emotion/styled';
-import { useContext } from 'react';
 
-import { ThemeContext } from '@app/utils/colorMode';
+import MyTheme from './theme/index';
 
 const Pre = styled.pre`
   background-color: var(--color-bg-terminal);
@@ -28,6 +24,7 @@ const LineNo = styled.span`
 `;
 
 const LineContent = styled.span`
+  color: var(--color-text-primary);
   display: table-cell;
 `;
 
@@ -36,20 +33,16 @@ interface CodeElementProps {
   className: string
 }
 
-export default function CodeElement(props: CodeElementProps) {
-  const { colorMode } = useContext(ThemeContext);
-  const children = props.children;
-  const language = props.className.replace('language-', '') as Language;
-
-  let theme = vsLight;
-  if (colorMode === 'dark') {
-    theme = dracula;
-  }
+export default function CodeElement({
+  children,
+  className
+}: CodeElementProps) {
+  const language = className.replace('language-', '') as Language;
 
   return (
     <Highlight
       {...defaultProps}
-      theme={theme}
+      theme={MyTheme as PrismTheme}
       code={children}
       language={language}
     >
