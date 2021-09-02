@@ -46,7 +46,8 @@ export async function getPostData(id: string) {
   const rawFileSource = fs.readFileSync(fullPath);
   const { content, data } = matter(rawFileSource);
   return {
-    content,
-    data
+    content: content,
+    metaData: data,
+    url: `https://bensthoughts.netlify.app/blog/${id}`
   };
 }

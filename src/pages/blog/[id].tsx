@@ -22,14 +22,15 @@ import CommandLine from '@app/components/CommandLine';
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import ArticleWrapper from '@app/components/ArticleWrapper';
 
-const GridContainer = styled.div`
-  display: grid;
-  gap: 16px;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  max-width: 100%;
-`;
+// const GridContainer = styled.div`
+//   display: grid;
+//   gap: 16px;
+//   grid-template-columns: minmax(0, 1fr);
+//   align-items: center;
+//   max-width: 100%;
+// `;
 
 const components = {
   code: Code,
@@ -45,37 +46,41 @@ const components = {
 };
 
 type PostProps = {
-  source: MDXRemoteSerializeResult;
-  metaInformation: {
+  content: MDXRemoteSerializeResult;
+  url: string;
+  metaData: {
     title: string,
     date: string,
+    modifiedDate: string,
     readTime: number,
     tags: string[],
     ogTitle: string,
     ogDescription: string,
-    ogImage: string,
-    twitterTitle: string,
-    twitterDescription: string,
-    twitterImage: string
+    ogImageUrl: string,
+    ogImageWidth: number,
+    ogImageHeight: number,
+    ogImageAlt: string,
   };
 };
 
 export default function PostsPage({
-  source,
-  metaInformation
+  content,
+  url,
+  metaData
 }: PostProps) {
   const { 
     title,
     date,
+    modifiedDate,
     readTime,
     tags,
     ogTitle,
     ogDescription,
-    ogImage,
-    twitterTitle,
-    twitterDescription,
-    twitterImage
-  } = metaInformation;
+    ogImageUrl,
+    ogImageWidth,
+    ogImageHeight,
+    ogImageAlt,
+  } = metaData;
   return (
     <>
       <NextSeo 
@@ -84,23 +89,22 @@ export default function PostsPage({
         openGraph={{
           title: ogTitle,
           description: ogDescription,
-          url: 'https://bensthoughts.netlify.app/blog/google-gke-cleanup',
+          url: url,
           type: 'article',
           article: {
-            publishedTime: '2017-06-21T23:04:13Z',
-            modifiedTime: '2018-01-21T18:04:43Z',
-            expirationTime: '2022-12-21T22:04:11Z',
+            publishedTime: date,
+            modifiedTime: modifiedDate,
             section: 'Web Development',
             authors: ['https://twitter.com/bensthoughts'],
             tags: tags,
           },
           images: [{
-            url: ogImage,
-            width: 810,
-            height: 456,
-            alt: 'Terminal Image'
+            url: ogImageUrl,
+            width: ogImageWidth,
+            height: ogImageHeight,
+            alt: ogImageAlt
           }],
-          site_name: 'BensThoughts Blog'
+          site_name: 'BensThoughts Developer Blog'
         }}
         twitter={{
           handle: '@bensthoughts',
@@ -110,20 +114,20 @@ export default function PostsPage({
       />
       <MaxWidthWrapper>
   
-        <GridContainer>
+        <ArticleWrapper>
           <div className="w-full max-w-4xl m-auto">
-            <H1>
+            <H1 className="mb-3">
               {title}
             </H1>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between md:flex-col">
               <Date dateString={date} />
-              <p className="italic">
+              <p className="italic font-light">
                 Read time: {readTime} min.
               </p>
             </div>
           </div>
-          <MDXRemote {...source} components={components} />
-        </GridContainer>
+          <MDXRemote {...content} components={components} />
+        </ArticleWrapper>
       </MaxWidthWrapper>
     </>
   );
@@ -138,7 +142,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { content, data } = await getPostData(params!.id as string);
+  const { content, url, metaData } = await getPostData(params!.id as string);
   const mdxSource = await serialize(content,{
     mdxOptions: {
       rehypePlugins: [
@@ -149,8 +153,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      source: mdxSource,
-      metaInformation: data
+      content: mdxSource,
+      url: url,
+      metaData: metaData,
     }
   };
 };

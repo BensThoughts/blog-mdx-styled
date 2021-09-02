@@ -1,5 +1,9 @@
+import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+
 export default function ProjectsPage() {
   return (
-    <div>Placeholder</div>
+    <MaxWidthWrapper>
+      <div>Placeholder</div>
+    </MaxWidthWrapper>
   );
 }
