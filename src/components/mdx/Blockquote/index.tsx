@@ -16,21 +16,24 @@ const Quote = styled.blockquote`
     /* vertical-align: -0.4em; */
   }
   div {
-
-  }
-  p {
     display: inline;
     font-family: monospace;
     font-size: 1rem;
     width: min(65ch, 100%);
   }
+  /* p {
+    display: inline;
+    font-family: monospace;
+    font-size: 1rem;
+    width: min(65ch, 100%);
+  } */
 `;
 
 export default function BlockQuote(props: { children: string }) {
   return (
     <Quote className="my-6 mx-auto">
       <div className="flex h-full w-full items-center justify-center">
-        <p>{props.children}</p>
+        {props.children}
       </div>
     </Quote>
   );

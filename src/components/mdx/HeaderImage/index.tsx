@@ -11,10 +11,15 @@ interface HeaderImageProps {
   height: string
 }
 
-export default function HeaderImage(props: HeaderImageProps) {
+export default function HeaderImage({
+  src,
+  alt,
+  width,
+  height
+}: HeaderImageProps) {
   return (
     <ImageContainer className="max-w-sm md:max-w-full mx-auto">
-      <img src={props.src} alt={props.alt} width={props.width} height={props.height} className="object-contain" />
+      <img src={src} alt={alt} width={width} height={height} className="object-contain" />
     </ImageContainer>
   )
 }

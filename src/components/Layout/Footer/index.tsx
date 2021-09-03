@@ -6,8 +6,12 @@ const Container = styled.footer`
   will-change: background-color;
 `;
 
-export default function Footer() {
+type FooterProps = {
+  className?: string;
+}
+
+export default function Footer({ className }: FooterProps) {
   return (
-    <Container className="w-full h-16"></Container>
+    <Container className={`w-full flex flex-row justify-center items-center ${className}`}>Footer</Container>
   );
 }

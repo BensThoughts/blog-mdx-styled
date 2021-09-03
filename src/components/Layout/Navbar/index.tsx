@@ -15,7 +15,6 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 3.5rem;
   margin-bottom: 2rem;
   padding: 0px;
   position: sticky;
@@ -36,7 +35,11 @@ const NavLinks = styled.div`
   will-change: background;
 `;
 
-const Navbar: React.FC<{}> = (props) => {
+type NavBarProps = {
+  className?: string;
+}
+
+export default function Navbar({ className, ...rest }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -50,7 +53,7 @@ const Navbar: React.FC<{}> = (props) => {
           </NavLinks>
       </Drawer>
 
-      <Nav {...props}>
+      <Nav {...rest} className={`${className}`}>
         {/* Small- Screens */}  
         <div className="flex md:hidden w-full justify-between items-center mx-3">
           <ThemeToggle />
@@ -83,5 +86,3 @@ const Navbar: React.FC<{}> = (props) => {
     </>
   );
 };
-
-export default Navbar;

@@ -1,3 +1,4 @@
+export {default as A} from '@app/components/mdx/A';
 export {default as Code} from '@app/components/mdx/Code';
 export {default as Blockquote} from '@app/components/mdx/Blockquote';
 export {default as Hr} from '@app/components/mdx/Hr';

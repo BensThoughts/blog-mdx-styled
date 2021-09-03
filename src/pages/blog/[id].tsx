@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { NextSeo } from 'next-seo';
 
 import {
+  A,
   Blockquote,
   Hr,
   Code,
@@ -33,6 +34,7 @@ import ArticleWrapper from '@app/components/ArticleWrapper';
 // `;
 
 const components = {
+  a: A,
   code: Code,
   blockquote: Blockquote,
   hr: Hr,

@@ -6,6 +6,7 @@ const CommandLineBorder = styled.div`
   border-color: var(--color-app-secondary);
   max-width: max-content;
   grid-column: 1 / 4;
+
 `;
 
 const Pre = styled.pre`
