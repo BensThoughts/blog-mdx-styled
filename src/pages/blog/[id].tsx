@@ -116,10 +116,10 @@ export default function PostsPage({
   
         <ArticleWrapper>
           <div className="w-full max-w-4xl m-auto">
-            <H1 className="mb-3">
+            <H1 className=" md:my-3">
               {title}
             </H1>
-            <div className="flex flex-row justify-between md:flex-col">
+            <div className="my-3 flex flex-row justify-between md:flex-col">
               <Date dateString={date} />
               <p className="italic font-light">
                 Read time: {readTime} min.
