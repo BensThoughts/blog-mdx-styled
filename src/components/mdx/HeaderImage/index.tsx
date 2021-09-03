@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 
 const ImageContainer =styled.div`
-  grid-column: 1 / 4;
+  grid-column: 1 / -1;
 `;
 interface HeaderImageProps {
   src: string,
@@ -18,7 +18,7 @@ export default function HeaderImage({
   height
 }: HeaderImageProps) {
   return (
-    <ImageContainer className="max-w-sm md:max-w-full mx-auto">
+    <ImageContainer className="md:w-full mx-auto">
       <img src={src} alt={alt} width={width} height={height} className="object-contain" />
     </ImageContainer>
   )
