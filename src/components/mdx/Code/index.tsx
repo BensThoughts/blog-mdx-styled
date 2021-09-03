@@ -38,9 +38,7 @@ export default function CodeElement({
   className
 }: CodeElementProps) {
   const language = className.replace('language-', '') as Language;
-
-  console.log(children);
-
+  
   return (
     <div className="max-w-xs md:max-w-full">
       <Highlight
