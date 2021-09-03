@@ -39,27 +39,32 @@ export default function CodeElement({
 }: CodeElementProps) {
   const language = className.replace('language-', '') as Language;
 
+  console.log(children);
+
   return (
-    <Highlight
-      {...defaultProps}
-      theme={MyTheme as PrismTheme}
-      code={children}
-      language={language}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={`overflow-x-auto text-left ${className}`}>
-          {tokens.map((line, i) => (
-            <Line key={i} {...getLineProps({ line, key: i })}>
-              <LineNo className="hidden md:table-cell text-primary">{i + 1}</LineNo>
-              <LineContent>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </LineContent>
-            </Line>
-          ))}
-        </Pre>
-      )}
-    </Highlight>
+    <div className="max-w-xs md:max-w-full">
+      <Highlight
+        {...defaultProps}
+        theme={MyTheme as PrismTheme}
+        code={children}
+        language={language}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <Pre className={`overflow-x-auto text-left mt-0 ${className}`}>
+            {tokens.map((line, i) => (
+              <Line key={i} {...getLineProps({ line, key: i })}>
+                <LineNo className="hidden md:table-cell text-primary">{i + 1}</LineNo>
+                <LineContent>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </LineContent>
+              </Line>
+            ))}
+          </Pre>
+        )}
+      </Highlight>
+    </div>
+   
   );
 };
