@@ -102,7 +102,7 @@ body[data-theme="dark"] {
 .rehype-code-title {
   background-color: var(--color-app-primary);
   border-color: var(--color-app-secondary);
-  @apply max-w-full w-full my-3 mx-auto font-mono text-xs sm:text-base border-2 border-solid rounded-t-lg border-opacity-25 rounded-b-lg;
+  @apply max-w-xs sm:max-w-full w-full my-3 mx-auto font-mono text-sm sm:text-base border-2 border-solid rounded-t-lg border-opacity-25 rounded-b-lg;
 }
 
 

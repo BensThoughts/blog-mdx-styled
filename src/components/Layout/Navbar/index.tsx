@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import Logo from '@app/components/Logo';
-import MenuItem from '@app/components/MenuItem';
+import MenuItem from '@app/components/Layout/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
 import { useState } from 'react';
@@ -44,12 +44,12 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
 
   return (
     <>
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu">
-          <NavLinks className="flex flex-col items-center justify-end content-between pt-0 mr-6">
-            <MenuItem to="/" className="hover:bg-accent">Home</MenuItem>
-            <MenuItem to="/blog">Blog</MenuItem>
-            <MenuItem to="/about">About</MenuItem>
-            <MenuItem to="/projects">Projects</MenuItem>
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="My description">
+          <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
+            <MenuItem to="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
+            <MenuItem to="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
+            <MenuItem to="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
+            <MenuItem to="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
           </NavLinks>
       </Drawer>
 
@@ -75,10 +75,10 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
             </div>
           </div>
           <NavLinks className="flex items-center justify-end content-between">
-            <MenuItem to="/">Home</MenuItem>
-            <MenuItem to="/blog">Blog</MenuItem>
-            <MenuItem to="/about">About</MenuItem>
-            <MenuItem to="/projects">Projects</MenuItem>
+            <MenuItem to="/" className="mx-4">Home</MenuItem>
+            <MenuItem to="/blog" className="mx-4">Blog</MenuItem>
+            <MenuItem to="/about" className="mx-4">About</MenuItem>
+            <MenuItem to="/projects" className="mx-4">Projects</MenuItem>
             <ThemeToggle />
           </NavLinks>
         </div>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 interface MenuItemsProps {
   to: string,
   className?: string,
-  onClick?: MouseEventHandler<HTMLParagraphElement>
+  onClick?: MouseEventHandler<HTMLAnchorElement>
   children: ReactNode,
 }
 
@@ -16,12 +16,11 @@ const MenuItem = ({
   ...rest
 }: MenuItemsProps) => {
   return (
-    <h4 className={`mx-0 md:mx-4 block ${className}`}
-      onClick={onClick}
-      {...rest}
-    >
-      <Link href={to}>{children}</Link>
-    </h4>
+    <Link href={to} {...rest}>
+      <a onClick={onClick} className={className}>
+        {children}
+      </a>
+    </Link>
   );
 };
 

@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { H1 } from '@app/components/mdx';
+import Button from '../Button';
 
 type MyDrawerProps = {
   title?: string,
@@ -24,7 +25,7 @@ export default function Drawer({
       <Dialog
         unmount={false}
         onClose={() => setIsOpen(false)}
-        className="fixed z-30 inset-0 overflow-y-auto"
+        className="fixed z-30 inset-0 overflow-y-auto h-screen"
       >
         <div className="flex min-h-screen w-3/4">
           <Transition.Child
@@ -37,7 +38,7 @@ export default function Drawer({
             leaveFrom="opacity-30"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="z-30 fixed inset-0 bg-black" />
+            <Dialog.Overlay className="z-40 fixed inset-0 bg-black" />
           </Transition.Child>
 
           <Transition.Child
@@ -49,10 +50,15 @@ export default function Drawer({
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="bg-primary z-40 inline-block w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
-              <Dialog.Title className="font-bold text-2xl md:text-4xl text-secondary">{title}</Dialog.Title>
-              <Dialog.Description>{description}</Dialog.Description>
-              {children}
+            <div className="flex flex-col justify-between bg-primary z-50 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
+                <div>
+                <Dialog.Title className="font-bold text-2xl md:text-4xl text-secondary">{title}</Dialog.Title>
+                <Dialog.Description>{description}</Dialog.Description>
+                {children}
+                </div>
+                <div className="self-end">
+                  <Button onClick={() => setIsOpen(!isOpen)}>Close</Button>
+                </div>
             </div>
           </Transition.Child>
         </div>

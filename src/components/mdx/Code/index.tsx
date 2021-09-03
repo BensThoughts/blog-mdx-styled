@@ -50,7 +50,7 @@ export default function CodeElement({
         <Pre className={`overflow-x-auto text-left ${className}`}>
           {tokens.map((line, i) => (
             <Line key={i} {...getLineProps({ line, key: i })}>
-              <LineNo className="hidden md:table-cell">{i + 1}</LineNo>
+              <LineNo className="hidden md:table-cell text-primary">{i + 1}</LineNo>
               <LineContent>
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({ token, key })} />
