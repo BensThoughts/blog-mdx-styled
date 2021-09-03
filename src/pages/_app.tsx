@@ -10,12 +10,16 @@ const ThemeProvider = dynamic(() => import('@app/utils/colorMode'), {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faDesktop } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCopy);
+library.add(faBars);
+library.add(faDesktop);
 
 import { DefaultSeo } from 'next-seo';
 import seoConfig from '@app/utils/seo.config';
 
-library.add(faCopy);
-library.add(faBars);
+
 
 import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
