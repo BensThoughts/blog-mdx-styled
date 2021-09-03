@@ -44,7 +44,7 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
 
   return (
     <>
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="My description">
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Try something new!">
           <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
             <MenuItem to="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
             <MenuItem to="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>

@@ -25,9 +25,9 @@ export default function Drawer({
       <Dialog
         unmount={false}
         onClose={() => setIsOpen(false)}
-        className="fixed z-30 inset-0 overflow-y-auto h-screen"
+        className="fixed z-30 inset-0 overflow-y-auto"
       >
-        <div className="flex min-h-screen w-3/4">
+        <div className="flex w-3/4">
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-in duration-300"
@@ -56,7 +56,7 @@ export default function Drawer({
                 <Dialog.Description>{description}</Dialog.Description>
                 {children}
                 </div>
-                <div className="self-end">
+                <div className="self-center mt-10">
                   <Button onClick={() => setIsOpen(!isOpen)}>Close</Button>
                 </div>
             </div>
