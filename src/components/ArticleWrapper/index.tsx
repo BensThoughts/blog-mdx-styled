@@ -14,13 +14,17 @@ const Wrapper = styled.div`
 `;
 
 interface MaxWidthWrapperProps {
+  className?: string,
   children: ReactNode;
 }
 
-export default function ArticleWrapper(props: MaxWidthWrapperProps) {
+export default function ArticleWrapper({
+  className,
+  children
+}: MaxWidthWrapperProps) {
   return (
-    <Wrapper>
-      {props.children}
+    <Wrapper className={className}>
+      {children}
     </Wrapper>
   )
 }

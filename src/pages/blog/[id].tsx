@@ -115,7 +115,6 @@ export default function PostsPage({
         }}
       />
       <MaxWidthWrapper>
-  
         <ArticleWrapper>
           <div className="w-full max-w-4xl m-auto">
             <H1 className=" md:my-3">
