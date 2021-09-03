@@ -20,7 +20,7 @@ const LineNo = styled.span`
   text-align: right;
   padding-right: 1em;
   user-select: none;
-  opacity: 0.5;
+  opacity: 0.6;
 `;
 
 const LineContent = styled.span`
