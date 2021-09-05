@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 
 import useProgressiveImg from '@app/utils/hooks/useProgressiveImg';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const ImageContainer =styled.div`
   grid-column: 1 / -1;
@@ -26,8 +26,6 @@ export default function HeaderImage({
   const largeImage = srcBaseUrl + 'q_auto' + srcVersionUrl;
   const [src, blur] = useProgressiveImg(tinyImage, largeImage);
 
-  console.log('blur: ' + blur);
-  
   return (
     <ImageContainer className="md:w-full mx-auto overflow-hidden">
       <img 

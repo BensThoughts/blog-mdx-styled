@@ -4,13 +4,13 @@ interface ThemeContextProps {
   setColorMode: (value: string) => void
 };
 
-const themeContextProps: ThemeContextProps = {
+const themeContext: ThemeContextProps = {
   colorMode: undefined,
   // TODO: can remove value: string?
   setColorMode: (value: string) => {}
 };
 
-export const ThemeContext = createContext(themeContextProps);
+export const ThemeContext = createContext(themeContext);
 interface ThemeProviderProps {
   children: ReactNode;
 }

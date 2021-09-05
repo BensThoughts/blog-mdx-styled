@@ -10,7 +10,7 @@
  import styled from '@emotion/styled';
  import { useContext } from 'react';
  
- import { ThemeContext } from '@app/utils/colorMode';
+ import { ThemeContext } from '@app/utils/context/colorMode';
  
  const Pre = styled.pre`
    background-color: var(--color-bg-terminal);

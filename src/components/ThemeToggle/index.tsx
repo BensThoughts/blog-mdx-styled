@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
-import { ThemeContext } from '@app/utils/colorMode';
+import { ThemeContext } from '@app/utils/context/colorMode';
 
 const ToggleButton = styled.button`
   --toggle-width: 80px;
