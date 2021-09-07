@@ -12,7 +12,8 @@ interface HeaderImageProps {
   imgPathLarge: string,
   alt: string,
   width: number,
-  height: number
+  height: number,
+  className?: string,
 }
 
 const srcBaseUrl = 'https://res.cloudinary.com/bensthoughts/image/upload/';
@@ -22,14 +23,15 @@ export default function HeaderImage({
   imgPathLarge,
   alt,
   width,
-  height
+  height,
+  className = '',
 }: HeaderImageProps) {
   // const tinyImage = srcBaseUrl + 'q_10' + imgPath;
   // const largeImage = srcBaseUrl + 'q_auto' + imgPath;
   const [src, blur] = useProgressiveImg(imgPathTiny, imgPathLarge);
 
   return (
-    <ImageContainer className="md:w-full mx-auto overflow-hidden">
+    <ImageContainer className={`md:w-full mx-auto overflow-hidden ${className}`}>
       <img 
         src={src}
         alt={alt}

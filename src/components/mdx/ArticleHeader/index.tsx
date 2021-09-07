@@ -5,15 +5,17 @@ type ArticleHeaderProps = {
   title: string;
   date: string;
   readTime: number;
+  className?: string;
 }
 
 export default function ArticleHeader({
   title,
   date,
-  readTime
+  readTime,
+  className = '',
 }: ArticleHeaderProps) {
   return (
-    <div className="w-full max-w-4xl m-auto flex justify-center">
+    <div className={`w-full max-w-4xl m-auto flex justify-center ${className}`}>
       <div>
         <H1 className=" md:my-3">
           {title}
