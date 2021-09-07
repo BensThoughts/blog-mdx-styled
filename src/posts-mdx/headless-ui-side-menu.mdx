@@ -10,7 +10,7 @@ imgPathLarge: "/assets/blog/headless-is-not-decoupled.jpg"
 imgWidth: 1200
 imgHeight: 627
 imgAlt: "Computer Terminal"
-ogTitle: "Build a Drawer Component Using a Headless-UI Modal"
+ogTitle: "Build a Drawer Component Using a Modal"
 ogDescription: "A simple drawer component built using the headless-ui modal"
 ogImageUrl: "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1630628982/blog/articles-headers/google-gke-cleanup_mi7p9s.jpg"
 ogImageWidth: 1200
@@ -30,12 +30,14 @@ In this tutorial I am going to show you exactly how to build a drawer component 
 [headless-ui](https://headlessui.dev/). &nbsp;We will utilize the modal component to
 build the drawer.
 
-## Installing headless-ui/tailwindcss
+---
+
+## Installing Dependencies
 
 You will need to have headless-ui and tailwindcss installed to build the component.
 &nbsp;I have listed the commands below. &nbsp;For further instructions check out the
-official install pages linked to here &nbsp;[headless-ui
-modal](https://headlessui.dev/react/dialog) &nbsp;[tailwindcss](https://tailwindcss.com/docs/installation)
+official install pages &nbsp;[headless-ui
+modal](https://headlessui.dev/react/dialog), &nbsp;[tailwindcss](https://tailwindcss.com/docs/installation).
 
 <CommandLine
   title="install headless-ui"
@@ -50,3 +52,237 @@ modal](https://headlessui.dev/react/dialog) &nbsp;[tailwindcss](https://tailwind
   options="install -D"
   args="tailwindcss@latest postcss@latest autoprefixer@latest"
 />
+
+---
+
+## Setting Up The Modal Component
+
+We start by importing Dialog from @headlessui/react and creating a simple modal that
+will appear in the upper left corner of the screen.
+
+```jsx:/Components/Drawer/index.tsx
+import { Dialog } from '@headlessui/react';
+import Button from '@app/components/Button';
+
+type MyDrawerProps = {
+  title?: string,
+  description?: string,
+  children: React.ReactChild,
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function Drawer({
+  title = '',
+  description = '',
+  children,
+  isOpen,
+  setIsOpen
+}: MyDrawerProps) {
+  return (
+      <Dialog
+        unmount={false}
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="fixed z-30 inset-0 overflow-y-auto"
+      >
+        <div className="flex w-3/4 h-screen">
+          <Dialog.Overlay className="z-40 fixed inset-0 bg-black bg-opacity-30" />
+            <div className="z-50 flex flex-col justify-between bg-gray-500 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl">
+                <div>
+                  <Dialog.Title className="font-bold text-2xl md:text-4xl text-blue-400">{title}</Dialog.Title>
+                  <Dialog.Description>{description}</Dialog.Description>
+                  {children}
+                </div>
+                <div className="self-center mt-10">
+                  <Button onClick={() => setIsOpen(!isOpen)}>Close</Button>
+                </div>
+            </div>
+        </div>
+      </Dialog> 
+  );
+}
+```
+
+Let's go over the code line by line. &nbsp <Dialog\> is the main container for the
+model. We set `unmount={false}` for performance reasons. &nbsp;Our modal slides
+on/off screen and we do not want to mount/unmount it every time it needs to slide
+in/out. &nbsp;The state of our drawer (open/closed) is going to be handled in the
+parent component, so we pass isOpen and the function setIsOpen in to the Drawer
+component. &nbsp;Last we give it a fixed position at inset-0, a z-30 to make sure it
+always renders above our main content, and overflow-y-auto to make sure that it
+renders scrollbars if the children take up to much space.
+
+Within the Dialog we have a <div\> to keep the width of our drawer to 3/4 of the
+screen and the height to the entire screen. &nbsp;The <Dialog.Overlay\> is the piece
+which greys out the main content and is at z-40 to place it just above the main
+Dialog container. &nbsp;It is just a black background with opacity 40.
+
+The content of the drawer is composed of a flexbox in column order with the
+Dialog.Title and Dialog.Description placed to the left and all other items centered.
+There is a button at the bottom that can activate the parents setIsOpen function to
+close the dialog as well.
+
+---
+
+## Setting Up The Parent Component
+
+This is an outline of what setting up the parent component to the drawer looks like.
+&nbsp;The drawer can be open/closed with the button element of the parent component. &nbsp;With this implementation the drawer is closed whenever a link is clicked as well.
+
+```jsx:/components/Button/index.tsx
+import { useState } from 'react';
+import Drawer from '@app/components/Drawer';
+import Button from '@app/components/Button';
+
+export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Try something new!">
+        <a href="/" onClick={() => setIsOpen(false)}>
+          Home
+        </a>
+        <a href="/blog" onClick={() => setIsOpen(false)}>
+          Blog
+        </a>
+        <a href="/projects" onClick={() => setIsOpen(false)}>
+          Projects
+        </a>
+        <a href="/contact" onClick={() => setIsOpen(false)}>
+          Contact
+        </a>
+      </Drawer>
+      <Button onClick={() => setIsOpen(!isOpen)}>
+        Menu
+      </Button>
+    </>
+  );
+}
+
+```
+
+I have not included all of the nice to haves in this example, it shows you a basic
+outline for how to connect the logic for triggering the drawer from a parent
+button/page/navbar etc. &nbsp;In the component that you want to trigger the modal
+from you will include the <Drawer\>.  &nbsp;State is maintained with a react useState
+hook. &nbsp;The drawer is placed into the top of the component and whatever you want
+to display in it (usually links to other pages) are placed as children within it.
+&nbsp;The state isOpen and the function that controls it are passed into the Drawer.
+&nbsp;The button when clicked changed the isOpen state that has been passed into the
+drawer component.
+
+```jsx:/components/Button/index.tsx
+type ButtonProps = {
+  children: string;
+  onClick: any;
+  className?: string;
+}
+
+export default function Button({ className, children, onClick }: ButtonProps) {
+  return (
+    <button onClick={onClick} className={`bg-secondary font-bold py-2 px-4 rounded inline-flex items-center ${className}`}>
+      {children}
+    </button>
+  )
+}
+```
+
+This is the button component which is used as the trigger to open/close the drawer.
+&nbsp;It is simple, customizable, and reusable. &nbsp;I also use it within the Drawer
+component as another way to close the drawer.
+
+---
+
+## Creating the transition
+
+The final step is to wrap our drawer in a Transition so that our drawer smoothly
+fly's in and out of the screen.
+
+```jsx:/components/Drawer/index.tsx
+import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import Button from '@components/Button/index.tsx';
+
+type MyDrawerProps = {
+  title?: string,
+  description?: string,
+  children: React.ReactChild,
+	isOpen: boolean
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function Drawer({
+  title = '',
+  description = '',
+  children,
+  isOpen,
+  setIsOpen
+}: MyDrawerProps) {
+  return (
+    <Transition show={isOpen} as={Fragment}>
+      <Dialog
+        unmount={false}
+        onClose={() => setIsOpen(false)}
+        className="fixed z-30 inset-0 overflow-y-auto"
+      >
+        <div className="flex w-3/4 h-screen">
+          <Transition.Child
+            as={Fragment}
+            enter="transition-opacity ease-in duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-30"
+            entered="opacity-30"
+            leave="transition-opacity ease-out duration-300"
+            leaveFrom="opacity-30"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="z-40 fixed inset-0 bg-black" />
+          </Transition.Child>
+
+          <Transition.Child
+            as={Fragment}
+            enter="transition ease-in-out duration-300 transform"
+            enterFrom="-translate-x-full"
+            enterTo="translate-x-0"
+            leave="transition ease-in-out duration-300 transform"
+            leaveFrom="translate-x-0"
+            leaveTo="-translate-x-full"
+          >
+            <div className="flex flex-col justify-between bg-gray-500 z-50 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
+                <div>
+                  <Dialog.Title className="font-bold text-2xl md:text-4xl text-blue-500">{title}</Dialog.Title>
+                  <Dialog.Description>{description}</Dialog.Description>
+                  {children}
+                </div>
+                <div className="self-center mt-10">
+                  <Button onClick={() => setIsOpen(!isOpen)}>Close</Button>
+                </div>
+            </div>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition>    
+  );
+}
+```
+
+Most of this is explained fairly well in [headless-ui Transition
+documentation](https://headlessui.dev/react/transition). &nbsp;However there is one
+part which is not explained well. &nbsp;You need to use the ***"Entered"*** prop on the
+Transition.Child for the Overlay or else the entire overlay will loose its opacity
+setting right after the transition and cover the main content in pitch black.
+
+To break this down, we are wrapping our Dialog component in a Transition element.
+&nbsp;That element is now the one responsible for showing/hiding the Drawer
+(Dialog/Modal) so we hoise the isOpen prop to Transition. All transition does is
+add/remove className strings from the className of the main child component that it
+is wrapped in. &nbsp;In our case there are 2 separate transitions so we use
+Tranition.Child to define each transition separately. &nbsp;We create the Transition
+and its children as a React *Fragment* because it isn't an element we want to
+display, it is just an element used to alter the children that are within it.
+
+The first transition fades the opacity of the Overlay in from 0 to 30 and then back
+out again depending on the value of isOpen. &nbsp;The second transition slides the
+drawer component in from the left of the screen to its final resting position
+(inset-0) and then back out again (also based on the value of isOpen).
