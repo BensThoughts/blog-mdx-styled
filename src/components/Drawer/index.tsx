@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { H1 } from '@app/components/mdx';
 import Button from '../Button';
 
 type Direction = 'left' | 'right' | 'top' | 'bottom';
