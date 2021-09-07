@@ -1,17 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from '@emotion/styled';
 
-const CommandLineBorder = styled.div`
-  /* background-color: var(--color-app-primary);
-  border-color: var(--color-app-secondary); */
-  max-width: max-content;
+type CommandLineSize = 'large' | 'small';
+
+const CommandLineContainer = styled.div<{
+  size?: CommandLineSize 
+}>`
   grid-column: 1 / 4;
-
-`;
-
-const Pre = styled.pre`
-  /* background-color: var(--color-bg-terminal); */
-  overflow-x: auto;
+  @media (min-width: 640px) {
+    grid-column: ${({ size = 'small' }) => size === 'small' ? '2 / 3' : '1/4'};
+  }
 `;
 
 const Prompt = styled.span`
@@ -29,60 +27,58 @@ const Options = styled.span`
 const Args = styled.span`
   /* color: var(--color-text-primary); */
 `;
-
-const CopyButton = styled.button`
-  padding-right: 10px;
-  /* background-color: var(--color-app-primary);
-  border-color: var(--color-app-secondary);
-  color: var(--color-app-primary); */
-  :hover {
-    /* svg {
-      color: var(--color-app-accent);
-    } */
-    /* background-color: var(--color-app-accent);
-    border-color: var(--color-app-secondary); */
-  }
-  /* :active {
-    background-color: var(--color-app-primary);
-  } */
-`;
-
-const FontIcon = styled(FontAwesomeIcon)`
-  color: var(--color-app-secondary);
-`;
 interface CommandLineProps {
+  title?: string,
   command: string,
   options?: string,
-  args?: string
+  args?: string,
+  size?: CommandLineSize,
+  className?: string,
 };
 
-export default function CommandLine(props: CommandLineProps) {
-  const { command, options, args } = props;
+export default function CommandLine({
+  title,
+  command,
+  options,
+  args,
+  size,
+  className = ''
+}: CommandLineProps) {
   const clipBoard = command + ' ' +
       (options ? options + ' ' : '') +
       (args ? args : '');
-  return (
-    <CommandLineBorder className="bg-primary border-secondary m-auto w-full align-middle sm:border-solid sm:border-opacity-20 sm:border-2 rounded-md p-1 sm:p-2">
-      <Pre className="overflow-x-auto bg-terminal rounded-sm px-4 py-2">
-        <div className="flex flex-row justify-between items-center">
-          <div>
-            <Prompt className="select-none">$&gt;&nbsp;</Prompt>
-            <Command>{command}</Command>
-            <Options>{options ? ' ' + options : ''}</Options>
-            <Args className="mr-4 text-primary">{args ? ' ' + args : ''}</Args>
-          </div>
-          <CopyButton
-            onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
-            type="button"
-            aria-label="Copy Button"
-            className="rounded p-2 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
-          >
-            <FontIcon icon={['far', 'copy']} inverse size="lg" />
-          </CopyButton>
-        </div>
-      </Pre>
-    </CommandLineBorder>   
 
-   
+  const topLeftRounded = title ? '' : 'rounded-l-md';
+
+  return (
+    <CommandLineContainer size={size} aria-label="Command Line Element" className={`my-3 mx-auto w-full ${className}`}>
+      {title && <div
+        className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-primary border-opacity-90 rounded-t-md max-w-max px-2 select-none"
+        aria-label="Command Line Title"
+      >
+        {title}
+      </div>
+      }
+      <div className={`w-full bg-primary w-full border-secondary align-middle border-solid border-opacity-20 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
+        <pre className="overflow-x-auto bg-terminal rounded-sm px-4 py-2">
+          <div className="flex flex-row justify-between items-center">
+            <div>
+              <Prompt className="select-none">$&gt;&nbsp;</Prompt>
+              <Command>{command}</Command>
+              <Options>{options ? ' ' + options : ''}</Options>
+              <span className="mr-4 text-primary">{args ? ' ' + args : ''}</span>
+            </div>
+            <button
+              onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
+              type="button"
+              aria-label="Copy Button"
+              className="rounded py-2 px-3 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
+            >
+              <FontAwesomeIcon icon={['far', 'copy']} inverse size="lg" className="text-icon-secondary"/>
+            </button>
+          </div>
+        </pre>
+      </div>   
+    </CommandLineContainer>
   );
 }

@@ -11,7 +11,7 @@ export default function useProgressiveImg(lowQualitySrc: string, highQualitySrc:
   let src;
   let blur;
 
-  if (imgSrc) {
+  if (imgSrc || !lowQualitySrc) {
     src = highQualitySrc;
     blur = false;
   } else {

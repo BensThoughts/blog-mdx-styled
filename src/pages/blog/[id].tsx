@@ -57,7 +57,8 @@ type PostProps = {
     modifiedDate: string,
     readTime: number,
     tags: string[],
-    imgPath: string,
+    imgPathTiny: string,
+    imgPathLarge: string,
     imgWidth: number,
     imgHeight: number,
     imgAlt: string,
@@ -81,7 +82,8 @@ export default function PostsPage({
     modifiedDate,
     readTime,
     tags,
-    imgPath,
+    imgPathTiny,
+    imgPathLarge,
     imgWidth,
     imgHeight,
     imgAlt,
@@ -127,9 +129,15 @@ export default function PostsPage({
         <ArticleWrapper>
         <ArticleHeader title={ogTitle} date={date} readTime={readTime} />
         
-        {imgPath && imgWidth && imgHeight && imgAlt ?
+        {imgPathLarge && imgWidth && imgHeight && imgAlt ?
           (
-            <HeaderImage imgPath={imgPath} alt={ogImageAlt} width={imgWidth} height={imgHeight} />
+            <HeaderImage
+              imgPathTiny={imgPathTiny}
+              imgPathLarge={imgPathLarge}
+              alt={ogImageAlt}
+              width={imgWidth}
+              height={imgHeight}
+            />
           ) : 
           (
             <></>

@@ -6,7 +6,8 @@ will clean them all up in one go."
 date: "2021-08-27"
 modifiedDate: "2021-08-27"
 readTime: 2
-imgPath: "/v1630628982/blog/articles-headers/google-gke-cleanup_mi7p9s.jpg"
+imgPathTiny: "https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1630628982/blog/articles-headers/google-gke-cleanup_mi7p9s.jpg"
+imgPathLarge: "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1630628982/blog/articles-headers/google-gke-cleanup_mi7p9s.jpg"
 imgWidth: 1200
 imgHeight: 627
 imgAlt: "Computer Terminal"
@@ -41,4 +42,5 @@ We often don't need these pods at all and should be cleaning them up by deleting
   command="kubectl get pods"
   options=""
   args="| grep Shutdown | awk '{print $1}' | xargs kubectl delete pod"
+  size="large"
 />

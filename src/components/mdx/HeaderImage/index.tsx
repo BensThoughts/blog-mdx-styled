@@ -8,7 +8,8 @@ const ImageContainer =styled.div`
   grid-column: 1 / -1;
 `;
 interface HeaderImageProps {
-  imgPath: string,
+  imgPathTiny: string,
+  imgPathLarge: string,
   alt: string,
   width: number,
   height: number
@@ -17,14 +18,15 @@ interface HeaderImageProps {
 const srcBaseUrl = 'https://res.cloudinary.com/bensthoughts/image/upload/';
 
 export default function HeaderImage({
-  imgPath,
+  imgPathTiny,
+  imgPathLarge,
   alt,
   width,
   height
 }: HeaderImageProps) {
-  const tinyImage = srcBaseUrl + 'q_10' + imgPath;
-  const largeImage = srcBaseUrl + 'q_auto' + imgPath;
-  const [src, blur] = useProgressiveImg(tinyImage, largeImage);
+  // const tinyImage = srcBaseUrl + 'q_10' + imgPath;
+  // const largeImage = srcBaseUrl + 'q_auto' + imgPath;
+  const [src, blur] = useProgressiveImg(imgPathTiny, imgPathLarge);
 
   return (
     <ImageContainer className="md:w-full mx-auto overflow-hidden">
