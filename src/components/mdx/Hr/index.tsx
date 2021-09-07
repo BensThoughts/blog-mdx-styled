@@ -1,13 +1,9 @@
 import styled from '@emotion/styled';
 
 const Break = styled.hr`
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-style: inset;
-  border-width: 1px;
-  border-color: var(--color-text-primary);
+    border-width: 1px;
 `;
 
 export default function Hr() {
-  return <Break  />
+  return <Break className="border-secondary my-3 mx-auto w-full border-solid border-opacity-50"  />
 };
