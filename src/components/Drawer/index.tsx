@@ -21,7 +21,6 @@ export default function Drawer({
   isOpen,
   setIsOpen
 }: MyDrawerProps) {
-  // let [isOpen, setIsOpen] = useState(true);
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
