@@ -9,6 +9,7 @@ const CommandLineContainer = styled.div<{
   grid-column: 1 / 4;
   @media (min-width: 768px) {
     grid-column: ${({ size = 'small' }) => size === 'small' ? '2 / 3' : '1/4'};
+    max-width: ${({ size = 'small' }) => size === 'small' ? '100%' : 'max-content'};
   }
 `;
 
