@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 
 import MyTheme from './theme/index';
 
-const Pre = styled.div`
+const Pre = styled.pre`
   background-color: rgb(var(--color-bg-terminal));
   /* color: rgb(var(--color-text-primary)); */
 `;
