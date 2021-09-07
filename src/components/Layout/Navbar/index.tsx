@@ -15,7 +15,7 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   padding: 0px;
   position: sticky;
   top: 0px;

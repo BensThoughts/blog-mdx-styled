@@ -39,7 +39,7 @@ import Footer from '@app/components/Layout/Footer';
 
 const PageWrapper = styled.div`
   display: grid;
-  grid-template-rows: 3.5rem 1fr 3.5rem;
+  grid-template-rows: 1fr 3.5rem;
 `;
 
 const NavWrap = styled.div`
@@ -47,11 +47,11 @@ const NavWrap = styled.div`
 `;
 
 const ContentWrap = styled.div`
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
 `;
 
 const FooterWrap = styled.div`
-  grid-row: 3 / 4;
+  grid-row: 2 / 3;
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
