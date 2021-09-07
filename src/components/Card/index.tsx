@@ -26,7 +26,7 @@ export default function Card({
     <Container className={`relative bg-primary ${className}`}>
       {header && <>{header}</>}
 
-      <div className="px-2 py-4 sm:p-8">
+      <div className="px-2 py-4 md:p-8">
         {title && <div className="text-2xl text-high-emphesis">{title}</div>}
         {subTitle && <div className="mb-4 italic">{subTitle}</div>}
         {description && <div className="text-base text-secondary">{description}</div>}

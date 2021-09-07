@@ -7,7 +7,7 @@ const CommandLineContainer = styled.div<{
   size?: CommandLineSize 
 }>`
   grid-column: 1 / 4;
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     grid-column: ${({ size = 'small' }) => size === 'small' ? '2 / 3' : '1/4'};
   }
 `;
