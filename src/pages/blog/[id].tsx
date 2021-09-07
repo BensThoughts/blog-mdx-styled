@@ -8,6 +8,8 @@ import { NextSeo } from 'next-seo';
 
 import {
   A,
+  ArticleHeader,
+  CommandLine,
   Blockquote,
   Hr,
   Code,
@@ -17,8 +19,6 @@ import {
   HeaderImage,
   P
 } from '@app/components/mdx/';
-
-import CommandLine from '@app/components/CommandLine';
 
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 
@@ -42,6 +42,7 @@ const components = {
   h1: H1,
   h2: H2,
   p: P,
+  ArticleHeader,
   CommandLine,
   HeaderImage,
   // Image
@@ -86,7 +87,7 @@ export default function PostsPage({
   return (
     <>
       <NextSeo 
-        title={ogTitle}
+        title={title}
         description={ogDescription}
         openGraph={{
           title: ogTitle,
@@ -116,7 +117,7 @@ export default function PostsPage({
       />
       <MaxWidthWrapper>
         <ArticleWrapper>
-          <div className="w-full max-w-4xl m-auto">
+          {/* <div className="w-full max-w-4xl m-auto">
             <H1 className=" md:my-3">
               {title}
             </H1>
@@ -126,7 +127,7 @@ export default function PostsPage({
                 Read time: {readTime} min.
               </p>
             </div>
-          </div>
+          </div> */}
           <MDXRemote {...content} components={components} />
         </ArticleWrapper>
       </MaxWidthWrapper>

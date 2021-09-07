@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
 const Quote = styled.blockquote`
-  border-left: 10px solid var(--color-app-secondary);
-  border-radius: 10px;
+  /* border-left: 10px solid rgb(var(--color-app-secondary)); */
+  /* border-radius: 10px; */
   width: min(65ch, 100%);
-  background-color: var(--color-app-primary);
+  /* background-color: var(--color-app-primary); */
   padding: 0.5em 10px;
   font-style: italic;
   quotes: "\\201C""\\201D""\\2018""\\2019";
@@ -31,7 +31,7 @@ const Quote = styled.blockquote`
 
 export default function BlockQuote(props: { children: string }) {
   return (
-    <Quote className="my-6 mx-auto">
+    <Quote className="my-6 mx-auto bg-primary border-l-8 border-secondary border-solid rounded-lg">
       <div className="flex h-full w-full items-center justify-center">
         {props.children}
       </div>
