@@ -18,7 +18,8 @@ module.exports = {
       backgroundColor: {
         'primary': generateColorClass('color-app-primary'),
         'secondary': generateColorClass('color-app-secondary'),
-        'accent': generateColorClass('color-app-accent')
+        'accent': generateColorClass('color-app-accent'),
+        'terminal': generateColorClass('color-bg-terminal'),
       },
       textColor: {
         'primary': generateColorClass('color-text-primary'),

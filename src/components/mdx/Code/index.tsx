@@ -8,8 +8,8 @@ import styled from '@emotion/styled';
 import MyTheme from './theme/index';
 
 const Pre = styled.pre`
-  background-color: var(--color-bg-terminal);
-  color: var(--color-text-primary);
+  /* background-color: var(--color-bg-terminal); */
+  /* color: rgb(var(--color-text-primary)); */
 `;
 
 const Line = styled.div`
@@ -24,7 +24,7 @@ const LineNo = styled.span`
 `;
 
 const LineContent = styled.span`
-  color: var(--color-text-primary);
+  /* color: var(--color-text-primary); */
   display: table-cell;
 `;
 
@@ -48,11 +48,11 @@ export default function CodeElement({
         language={language}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Pre className={`overflow-x-auto text-left mt-0 ${className}`}>
+          <Pre className={`overflow-x-auto text-left mt-0 bg-terminal text-primary ${className}`}>
             {tokens.map((line, i) => (
               <Line key={i} {...getLineProps({ line, key: i })}>
                 <LineNo className="hidden md:table-cell text-primary">{i + 1}</LineNo>
-                <LineContent>
+                <LineContent className="text-primary">
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}

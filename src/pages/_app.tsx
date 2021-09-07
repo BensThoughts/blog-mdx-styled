@@ -59,12 +59,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo {...seoConfig} />
       <Provider store={store}>
-        <PageWrapper>
-            <NavWrap>
+
               <ThemeProvider>
                 <Navbar className="h-14" />
               </ThemeProvider>
-            </NavWrap>
+
+        <PageWrapper>
+
             <ContentWrap>
             <main className="z-0 my-8">
               <Component {...pageProps} />

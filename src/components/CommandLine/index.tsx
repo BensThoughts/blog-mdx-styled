@@ -2,15 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from '@emotion/styled';
 
 const CommandLineBorder = styled.div`
-  background-color: var(--color-app-primary);
-  border-color: var(--color-app-secondary);
+  /* background-color: var(--color-app-primary);
+  border-color: var(--color-app-secondary); */
   max-width: max-content;
   grid-column: 1 / 4;
 
 `;
 
 const Pre = styled.pre`
-  background-color: var(--color-bg-terminal);
+  /* background-color: var(--color-bg-terminal); */
   overflow-x: auto;
 `;
 
@@ -27,24 +27,24 @@ const Options = styled.span`
 `;
 
 const Args = styled.span`
-  color: var(--color-text-primary);
+  /* color: var(--color-text-primary); */
 `;
 
 const CopyButton = styled.button`
   padding-right: 10px;
-  background-color: var(--color-app-primary);
+  /* background-color: var(--color-app-primary);
   border-color: var(--color-app-secondary);
-  color: var(--color-app-primary);
+  color: var(--color-app-primary); */
   :hover {
     /* svg {
       color: var(--color-app-accent);
     } */
-    background-color: var(--color-app-accent);
-    border-color: var(--color-app-secondary);
+    /* background-color: var(--color-app-accent);
+    border-color: var(--color-app-secondary); */
   }
-  :active {
+  /* :active {
     background-color: var(--color-app-primary);
-  }
+  } */
 `;
 
 const FontIcon = styled(FontAwesomeIcon)`
@@ -62,19 +62,19 @@ export default function CommandLine(props: CommandLineProps) {
       (options ? options + ' ' : '') +
       (args ? args : '');
   return (
-    <CommandLineBorder className="m-auto w-full align-middle sm:border-solid sm:border-opacity-20 sm:border-2 rounded-md p-1 sm:p-2">
-      <Pre className="overflow-x-auto rounded-sm px-4 py-2">
+    <CommandLineBorder className="bg-primary border-secondary m-auto w-full align-middle sm:border-solid sm:border-opacity-20 sm:border-2 rounded-md p-1 sm:p-2">
+      <Pre className="overflow-x-auto bg-terminal rounded-sm px-4 py-2">
         <div className="flex flex-row justify-between items-center">
           <div>
             <Prompt className="select-none">$&gt;&nbsp;</Prompt>
             <Command>{command}</Command>
             <Options>{options ? ' ' + options : ''}</Options>
-            <Args className="mr-4">{args ? ' ' + args : ''}</Args>
+            <Args className="mr-4 text-primary">{args ? ' ' + args : ''}</Args>
           </div>
           <CopyButton
             onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
             type="button"
-            className="rounded p-2 border-2"
+            className="rounded p-2 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
           >
             <FontIcon icon={['far', 'copy']} inverse size="lg" />
           </CopyButton>

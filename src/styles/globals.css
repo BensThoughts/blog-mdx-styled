@@ -111,14 +111,14 @@ body[data-theme="dark"] {
 
 
 .rehype-code-title {
-  background-color: var(--color-app-primary);
-  border-color: var(--color-app-secondary);
+  background-color: rgba(var(--color-app-primary), var(--app-bg-opacity));
+  border-color: rgba(var(--color-app-secondary), var(--app-border-opacity));
   @apply sm:max-w-full w-full my-3 mx-auto font-mono text-sm sm:text-base border-2 border-solid rounded-t-lg border-opacity-25 rounded-b-lg;
 }
 
 
 .rehype-code-title h1 {
-  color: var(--color-text-secondary);
+  color: rgba(var(--color-text-secondary), var(--app-text-opacity));
   @apply font-mono text-sm sm:text-base font-bold m-4;
 }
 

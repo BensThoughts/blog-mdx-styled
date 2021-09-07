@@ -60,7 +60,7 @@ var theme = {
   }, {
     types: ["class-name"],
     style: {
-      color: "var(--color-text-primary)"
+      color: "rgba(var(--color-text-primary), 1)"
     }
   }, {
     types: ["tag"],
