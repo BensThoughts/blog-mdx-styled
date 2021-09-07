@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 import MyTheme from './theme/index';
 
 const Pre = styled.pre`
-  background-color: rgb(var(--color-bg-terminal));
+  /* background-color: rgb(var(--color-bg-terminal)); */
   /* color: rgb(var(--color-text-primary)); */
 `;
 
@@ -49,7 +49,7 @@ export default function CodeElement({
         language={language}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Pre className={`overflow-x-auto text-left mt-0 bg-terminal text-primary ${className}`}>
+          <Pre className={`overflow-x-auto text-left mt-0 text-primary border-t-2 border-secondary border-solid pt-2 ${className}`}>
             {tokens.map((line, i) => (
               <Line key={i} {...getLineProps({ line, key: i })} className="md:table">
                 <LineNo className="hidden md:table-cell text-primary">{i + 1}</LineNo>

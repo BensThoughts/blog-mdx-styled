@@ -59,8 +59,8 @@ export default function CommandLine({
         {title}
       </div>
       }
-      <div className={`w-full bg-primary w-full border-secondary align-middle border-solid border-opacity-20 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
-        <pre className="overflow-x-auto bg-terminal rounded-sm px-4 py-2">
+      <div className={`w-full bg-terminal bg-opacity-50 border-secondary align-middle border-solid border-opacity-20 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
+        <pre className="overflow-x-auto bg-opacity-50 rounded-sm px-4 py-2">
           <div className="flex flex-row justify-between items-center">
             <div>
               <Prompt className="select-none">$&gt;&nbsp;</Prompt>

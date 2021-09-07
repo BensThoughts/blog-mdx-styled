@@ -76,12 +76,15 @@ h1 {
 body[data-theme="light"] {
   --color-text-primary: 39, 32, 26;
   --color-text-secondary: 7, 105, 99;
+  
   --color-bg-primary: 254, 235, 200;
   --color-bg-toggle: 30, 144, 255;
-  --color-bg-terminal: 254, 235, 200;
+  --color-bg-terminal: 251, 211, 141;
+
   --color-app-primary: 251, 211, 141;
   --color-app-secondary: 237, 137, 54;
   --color-app-accent: 250, 240, 137;
+  
   --color-icon-border-primary: 237, 137, 54;
 
   --color-scroll-thumb: #ED8936;
@@ -90,32 +93,34 @@ body[data-theme="light"] {
 }
 
 body[data-theme="dark"] {
-
-
   --color-text-primary: 227, 227, 227;
   --color-text-secondary: 255, 107, 0;
+  
   --color-bg-primary: 21, 35, 45;
   --color-bg-toggle: 169, 169, 169;
   --color-bg-terminal: 40, 42, 54;
+  
   --color-app-primary: 74, 85, 104;
   --color-app-secondary: 49, 130, 206;
   --color-app-accent: 99, 179, 237;
+  
   --color-icon-border-primary: 99, 179, 237;
 
   --color-scroll-thumb: #3182CE;
   --color-scroll-track: #4A5568;
   --color-scroll-thumb-hover: #63B3ED;
-  
-
 }
 
 
 .rehype-code-title {
-  background-color: rgba(var(--color-app-primary), var(--app-bg-opacity));
+  /* background-color: rgba(var(--color-app-primary), var(--app-bg-opacity)); */
   border-color: rgba(var(--color-app-secondary), var(--app-border-opacity));
-  @apply md:max-w-full my-3 mx-auto font-mono text-sm md:text-base border-2 border-solid border-opacity-25 rounded-lg;
+  @apply bg-terminal bg-opacity-70 md:max-w-full my-3 mx-auto font-mono text-sm md:text-base border-2 border-solid border-opacity-25 rounded-lg;
 }
 
+/* .rehype-code-title + pre {
+  @apply bg-opacity-25
+} */
 
 .rehype-code-title h1 {
   color: rgba(var(--color-text-secondary), var(--app-text-opacity));
