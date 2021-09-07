@@ -47,8 +47,8 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
           <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
             <MenuItem to="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
             <MenuItem to="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
-            <MenuItem to="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
             <MenuItem to="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
+            <MenuItem to="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
           </NavLinks>
       </Drawer>
 
@@ -76,8 +76,8 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
           <NavLinks className="flex items-center justify-end content-between">
             <MenuItem to="/" className="mx-4">Home</MenuItem>
             <MenuItem to="/blog" className="mx-4">Blog</MenuItem>
-            <MenuItem to="/about" className="mx-4">About</MenuItem>
             <MenuItem to="/projects" className="mx-4">Projects</MenuItem>
+            <MenuItem to="/contact" className="mx-4">Contact</MenuItem>
             <ThemeToggle />
           </NavLinks>
         </div>
