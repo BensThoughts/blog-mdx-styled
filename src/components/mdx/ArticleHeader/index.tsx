@@ -4,7 +4,7 @@ import H1 from '@app/components/mdx/H1';
 type ArticleHeaderProps = {
   title: string;
   date: string;
-  readTime: string;
+  readTime: number;
 }
 
 export default function ArticleHeader({

@@ -44,9 +44,9 @@ const PageWrapper = styled.div`
   grid-template-rows: 1fr 3.5rem;
 `;
 
-const NavWrap = styled.div`
-  grid-row: 1 / 2;
-`;
+// const NavWrap = styled.div`
+//   grid-row: 1 / 2;
+// `;
 
 const ContentWrap = styled.div`
   grid-row: 1 / 2;

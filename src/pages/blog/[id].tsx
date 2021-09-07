@@ -57,6 +57,10 @@ type PostProps = {
     modifiedDate: string,
     readTime: number,
     tags: string[],
+    imgPath: string,
+    imgWidth: number,
+    imgHeight: number,
+    imgAlt: string,
     ogTitle: string,
     ogDescription: string,
     ogImageUrl: string,
@@ -77,6 +81,10 @@ export default function PostsPage({
     modifiedDate,
     readTime,
     tags,
+    imgPath,
+    imgWidth,
+    imgHeight,
+    imgAlt,
     ogTitle,
     ogDescription,
     ogImageUrl,
@@ -117,17 +125,17 @@ export default function PostsPage({
       />
       <MaxWidthWrapper>
         <ArticleWrapper>
-          {/* <div className="w-full max-w-4xl m-auto">
-            <H1 className=" md:my-3">
-              {title}
-            </H1>
-            <div className="mt-3 mb-4 flex flex-row justify-between md:flex-col">
-              <Date dateString={date} />
-              <p className="italic font-light">
-                Read time: {readTime} min.
-              </p>
-            </div>
-          </div> */}
+        <ArticleHeader title={ogTitle} date={date} readTime={readTime} />
+        
+        {imgPath && imgWidth && imgHeight && imgAlt ?
+          (
+            <HeaderImage imgPath={imgPath} alt={ogImageAlt} width={imgWidth} height={imgHeight} />
+          ) : 
+          (
+            <></>
+          )
+        }
+
           <MDXRemote {...content} components={components} />
         </ArticleWrapper>
       </MaxWidthWrapper>

@@ -8,22 +8,22 @@ const ImageContainer =styled.div`
   grid-column: 1 / -1;
 `;
 interface HeaderImageProps {
-  srcBaseUrl: string,
-  srcVersionUrl: string,
+  imgPath: string,
   alt: string,
-  width: string,
-  height: string
+  width: number,
+  height: number
 }
 
+const srcBaseUrl = 'https://res.cloudinary.com/bensthoughts/image/upload/';
+
 export default function HeaderImage({
-  srcBaseUrl,
-  srcVersionUrl,
+  imgPath,
   alt,
   width,
   height
 }: HeaderImageProps) {
-  const tinyImage = srcBaseUrl + 'q_10' + srcVersionUrl;
-  const largeImage = srcBaseUrl + 'q_auto' + srcVersionUrl;
+  const tinyImage = srcBaseUrl + 'q_10' + imgPath;
+  const largeImage = srcBaseUrl + 'q_auto' + imgPath;
   const [src, blur] = useProgressiveImg(tinyImage, largeImage);
 
   return (
