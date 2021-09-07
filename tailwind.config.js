@@ -1,3 +1,10 @@
+const generateColorClass = (variable) => {
+  return ({ opacityValue }) =>
+    opacityValue
+      ? `rgba(var(--${variable}), ${opacityValue})`
+      : `rgb(var(--${variable}))`
+}
+
 module.exports = {
   purge: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -9,17 +16,24 @@ module.exports = {
         'press-start': ['"Press Start 2P"', 'cursive']
       },
       backgroundColor: {
-        'primary': 'var(--color-app-primary)',
-        'secondary': 'var(--color-app-secondary)',
-        'accent': 'var(--color-app-accent)'
+        'primary': generateColorClass('color-app-primary'),
+        'secondary': generateColorClass('color-app-secondary'),
+        'accent': generateColorClass('color-app-accent')
       },
       textColor: {
-        'primary': 'var(--color-text-primary)',
-        'secondary': 'var(--color-text-secondary)',
-        'icon-primary': 'var(--color-app-primary)',
-        'icon-secondary': 'var(--color-app-secondary)',
-        'icon-accent': 'var(--color-app-accent)'
-      }
+        'primary': generateColorClass('color-text-primary'),
+        'secondary': generateColorClass('color-text-secondary'),
+        'icon-primary': generateColorClass('color-app-primary'),
+        'icon-secondary': generateColorClass('color-app-secondary'),
+        'icon-accent': generateColorClass('color-app-accent')
+      },
+      borderColor: {
+        'primary': generateColorClass('color-app-primary'),
+        'secondary': generateColorClass('color-app-secondary'),
+        'accent': generateColorClass('color-app-accent'),
+        'icon-primary': generateColorClass('color-icon-border-primary')
+
+      },
     }
   },
   variants: {

@@ -18,7 +18,7 @@ const ToggleButton = styled.button`
   border: 0;
   border-radius: calc(var(--toggle-width) / 2);
   cursor: pointer;
-  background: var(--color-app-accent);
+  background-color: rgba(var(--color-app-accent), var(--app-bg-opacity));
   transition: background 0.25s ease-in-out, box-shadow 0.25 ease-in-out;
   will-change: background, box-shadow;
   &:focus {
@@ -41,7 +41,7 @@ const ToggleThumb = styled.span<{
   width: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   height: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
   border-radius: 50%;
-  background: var(--color-app-secondary);
+  background: rgba(var(--color-app-secondary), var(--app-bg-opacity));
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
     p.colorMode === "dark"

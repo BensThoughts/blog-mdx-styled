@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@app/utils/hooks/store';
-import { setImgLoaded, selectImgById } from '@app/store/imgCacheSlice';
+import { setImgLoaded, selectImgBySrc } from '@app/store/imgCacheSlice';
+
+const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL;
 
 export default function useProgressiveImg(lowQualitySrc: string, highQualitySrc: string) {
-  const imgSrc = useAppSelector(state => selectImgById(state, highQualitySrc));
+  const imgSrc = useAppSelector(state => selectImgBySrc(state, highQualitySrc));
   const dispatch = useAppDispatch();
 
   let src;
@@ -18,14 +20,16 @@ export default function useProgressiveImg(lowQualitySrc: string, highQualitySrc:
   }
 
   useEffect(() => {
-    const img = new Image();
-    img.src = highQualitySrc;
-  
-    img.onload  = () => {
-      // setSrc(highQualitySrc);
-      dispatch(setImgLoaded({id: highQualitySrc, lowQualitySrc: lowQualitySrc, highQualitySrc: highQualitySrc}));
-    };
-  }, [dispatch, lowQualitySrc, highQualitySrc])
+    if (!imgSrc) {
+      const img = new Image();
+      img.src = highQualitySrc;
+    
+      img.onload  = () => {
+        // setSrc(highQualitySrc);
+        dispatch(setImgLoaded({imgSrc: highQualitySrc}));
+      };
+    }
+  }, [dispatch, lowQualitySrc, highQualitySrc, imgSrc])
 
   return [src, blur] as const;
 }

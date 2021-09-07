@@ -23,8 +23,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  background: rgba(var(--color-bg-primary), var(--app-bg-opacity));
+  color: rgba(var(--color-text-primary), var(--app-text-opacity));
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
   will-change: background, color, transition;
 }
@@ -47,7 +47,7 @@ a {
 }
 
 h1 {
-  color: var(--color-text-secondary);
+  color: rgba(var(--color-text-secondary), var(--app-bg-opacity));
 }
 
 ::-webkit-scrollbar {
@@ -67,15 +67,22 @@ h1 {
   background: var(--color-scroll-thumb-hover);
 }
 
+:root {
+  --app-bg-opacity: 1;
+  --app-text-opacity: 1;
+  --app-border-opacity: 1;
+}
+
 body[data-theme="light"] {
-  --color-text-primary: #27201a;
-  --color-text-secondary: #076963;
-  --color-bg-primary: #FEEBC8;
-  --color-bg-toggle: #1e90ff;
-  --color-bg-terminal: #FEEBC8;
-  --color-app-primary: #FBD38D;
-  --color-app-secondary: #ED8936;
-  --color-app-accent: #FAF089;
+  --color-text-primary: 39, 32, 26;
+  --color-text-secondary: 7, 105, 99;
+  --color-bg-primary: 254, 235, 200;
+  --color-bg-toggle: 30, 144, 255;
+  --color-bg-terminal: 254, 235, 200;
+  --color-app-primary: 251, 211, 141;
+  --color-app-secondary: 237, 137, 54;
+  --color-app-accent: 250, 240, 137;
+  --color-icon-border-primary: 237, 137, 54;
 
   --color-scroll-thumb: #ED8936;
   --color-scroll-track: #FBD38D;
@@ -83,19 +90,23 @@ body[data-theme="light"] {
 }
 
 body[data-theme="dark"] {
-  --color-text-primary: #e3e3e3;
-  --color-text-secondary: #ff6b00;
-  --color-bg-primary: #15232d;
-  --color-bg-toggle: #a9a9a9;
-  --color-bg-terminal: #282A36;
-  --color-app-primary: #4A5568;
-  --color-app-secondary: #3182CE;
-  --color-app-accent: #63B3ED;
+
+
+  --color-text-primary: 227, 227, 227;
+  --color-text-secondary: 255, 107, 0;
+  --color-bg-primary: 21, 35, 45;
+  --color-bg-toggle: 169, 169, 169;
+  --color-bg-terminal: 40, 42, 54;
+  --color-app-primary: 74, 85, 104;
+  --color-app-secondary: 49, 130, 206;
+  --color-app-accent: 99, 179, 237;
+  --color-icon-border-primary: 99, 179, 237;
 
   --color-scroll-thumb: #3182CE;
   --color-scroll-track: #4A5568;
   --color-scroll-thumb-hover: #63B3ED;
   
+
 }
 
 

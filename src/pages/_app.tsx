@@ -9,12 +9,25 @@ const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { faDesktop } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faDesktop
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faTwitter,
+  faFacebook,
+  faLinkedin,
+  faGithub
+} from '@fortawesome/free-brands-svg-icons';
 
 library.add(faCopy);
 library.add(faBars);
 library.add(faDesktop);
+library.add(faTwitter);
+library.add(faFacebook);
+library.add(faLinkedin);
+library.add(faGithub);
+
 
 import { Provider } from 'react-redux';
 import { DefaultSeo } from 'next-seo';
@@ -58,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </main>
             </ContentWrap>
             <FooterWrap>
-              <Footer className="h-14" />   
+              <Footer className="h-16" />   
             </FooterWrap>
         </PageWrapper>
       </Provider>

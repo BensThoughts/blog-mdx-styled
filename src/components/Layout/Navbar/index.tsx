@@ -19,7 +19,6 @@ const Nav = styled.nav`
   padding: 0px;
   position: sticky;
   top: 0px;
-  background: var(--color-app-primary);
   transition: background 0.25s ease-in-out;
   will-change: background;
 `;
@@ -53,7 +52,7 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
           </NavLinks>
       </Drawer>
 
-      <Nav {...rest} className={`${className}`}>
+      <Nav {...rest} className={`bg-primary ${className}`}>
         {/* Small- Screens */}  
         <div className="flex md:hidden w-full justify-between items-center mx-3">
           <ThemeToggle />

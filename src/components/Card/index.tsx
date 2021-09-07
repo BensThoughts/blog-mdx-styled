@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   border-radius: 10px;
-  background-color: var(--color-app-primary);
   transition: background-color 0.25s ease-in-out;
 `;
 
@@ -24,7 +23,7 @@ export default function Card({
   className,
 }: CardProps) {
   return (
-    <Container className={`relative ${className}`}>
+    <Container className={`relative bg-primary ${className}`}>
       {header && <>{header}</>}
 
       <div className="px-2 py-4 sm:p-8">
