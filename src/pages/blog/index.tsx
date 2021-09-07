@@ -29,7 +29,7 @@ const GridContainer = styled.div`
 `;
 interface BlogArticleListProps {
   allPostsData: {
-    title: string,
+    ogTitle: string,
     date: string,
     description: string,
     id: string,
@@ -37,7 +37,7 @@ interface BlogArticleListProps {
   }[]
 }
 
-export default function BlogArticleListPage(props: BlogArticleListProps) {
+export default function BlogArticleListPage({ allPostsData }: BlogArticleListProps) {
   return (
     <>
       <MaxWidthWrapper>
@@ -45,10 +45,10 @@ export default function BlogArticleListPage(props: BlogArticleListProps) {
         <section>
           <H1 className="mb-3 md:mb-6">Blog</H1>
           <GridContainer>
-              {props.allPostsData.map(({ id, title, date, description}) => (
+              {allPostsData.map(({ id, ogTitle, date, description}) => (
               <div key={id}>
                 <Link href={`/blog/${id}`}>
-                  <a><Card title={title} subTitle={date} className="md:h-64"><article>{description}</article></Card></a>
+                  <a><Card title={ogTitle} subTitle={date} className="md:h-64"><article>{description}</article></Card></a>
                 </Link>
               </div>
               ))}
