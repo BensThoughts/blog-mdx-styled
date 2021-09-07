@@ -74,6 +74,7 @@ export default function CommandLine(props: CommandLineProps) {
           <CopyButton
             onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
             type="button"
+            aria-label="Copy Button"
             className="rounded p-2 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
           >
             <FontIcon icon={['far', 'copy']} inverse size="lg" />
