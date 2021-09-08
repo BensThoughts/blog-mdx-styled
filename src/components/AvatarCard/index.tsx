@@ -1,13 +1,7 @@
-import { useState } from 'react';
-import { useTimeoutFn } from 'react-use';
 import H1 from '@app/components/mdx/H1';
-import Button from '../Button';
 
 export default function AvatarCard() {
   const bustImgSrc = "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg";
-  const [isShowing, setIsShowing] = useState(true);
-  const [, , resetIsShowing] = useTimeoutFn(() => setIsShowing(true), 500);
-
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="z-20 w-48 h-48 md:w-96 md:h-96 rounded-full p-2 bg-app-bg shadow-sm">
@@ -20,10 +14,6 @@ export default function AvatarCard() {
             <H1 className="italic">&nbsp;Blumenfeld-Jones</H1>
           </div>
           <h2 className="italic self-start my-2 mx-3 text-center md:text-left text-lg">Self taught software developer with a passion for learning.</h2>
-          <Button onClick={() => {
-            setIsShowing(false)
-            resetIsShowing()
-          }}>Spin</Button>
         </div>
       </div>
     </div>
