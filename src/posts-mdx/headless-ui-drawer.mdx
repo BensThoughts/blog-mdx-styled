@@ -64,7 +64,7 @@ will appear in the upper left corner of the screen.
 import { Dialog } from '@headlessui/react';
 import Button from '@app/components/Button';
 
-type MyDrawerProps = {
+type DrawerProps = {
   title?: string,
   description?: string,
   children: React.ReactChild,
@@ -78,7 +78,7 @@ export default function Drawer({
   children,
   isOpen,
   setIsOpen
-}: MyDrawerProps) {
+}: DrawerProps) {
   return (
       <Dialog
         unmount={false}
@@ -204,7 +204,7 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Button from '@components/Button/index.tsx';
 
-type MyDrawerProps = {
+type DrawerProps = {
   title?: string,
   description?: string,
   children: React.ReactChild,
@@ -218,7 +218,7 @@ export default function Drawer({
   children,
   isOpen,
   setIsOpen
-}: MyDrawerProps) {
+}: DrawerProps) {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog

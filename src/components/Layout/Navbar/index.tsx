@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Nav = styled.nav`
   display: flex;
-  z-index: 5;
+  z-index: 49;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -53,7 +53,7 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
           </NavLinks>
       </Drawer>
 
-      <Nav {...rest} className={`bg-primary ${className}`}>
+      <Nav {...rest} className={`bg-primary shadow-lg ${className}`}>
         {/* Small- Screens */}  
         <div className="flex md:hidden w-full justify-between items-center mx-3">
           <ThemeToggle />

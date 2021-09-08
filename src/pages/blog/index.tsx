@@ -46,9 +46,9 @@ export default function BlogArticleListPage({ allPostsData }: BlogArticleListPro
           <H1 className="mb-3 md:mb-6">Blog</H1>
           <GridContainer>
               {allPostsData.map(({ id, ogTitle, date, description}) => (
-              <div key={id}>
+              <div key={id} className="">
                 <Link href={`/blog/${id}`}>
-                  <a><Card title={ogTitle} subTitle={date} className="md:h-64"><article>{description}</article></Card></a>
+                  <a><Card title={ogTitle} subTitle={date} className="md:h-64 shadow-md"><article>{description}</article></Card></a>
                 </Link>
               </div>
               ))}

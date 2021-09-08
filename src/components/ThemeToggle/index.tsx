@@ -7,6 +7,7 @@ const ToggleButton = styled.button`
   --toggle-width: 78px;
   --toggle-height: 38px;
   --toggle-padding: 3px;
+  --app-bg-opacity: 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -36,6 +37,7 @@ const ToggleButton = styled.button`
 const ToggleThumb = styled.span<{
   colorMode: string
 }>`
+  --app-bg-opacity: 1;
   position: absolute;
   top: var(--toggle-padding);
   left: var(--toggle-padding);
@@ -62,8 +64,8 @@ const ThemeToggle = () => {
       onClick={() => setColorMode(inactiveColorMode)}
     >
       <ToggleThumb colorMode={colorMode!} />
-      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "cloud-moon"]} /></span>
-      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "sun"]} /></span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "cloud-moon"]} className="text-icon-secondary text-opacity-95" /></span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "sun"]} className="text-icon-secondary text-opacity-95" /></span>
     </ToggleButton>
   );
 };

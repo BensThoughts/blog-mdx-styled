@@ -4,7 +4,7 @@ import Button from '../Button';
 
 type Direction = 'left' | 'right' | 'top' | 'bottom';
 
-type MyDrawerProps = {
+type DrawerProps = {
   title?: string,
   description?: string,
   direction?: Direction,
@@ -20,13 +20,13 @@ export default function Drawer({
   children,
   isOpen,
   setIsOpen
-}: MyDrawerProps) {
+}: DrawerProps) {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
         unmount={false}
         onClose={() => setIsOpen(false)}
-        className="fixed z-30 inset-0 overflow-y-auto"
+        className="fixed z-50 inset-0 overflow-y-auto"
       >
         <div className="flex w-3/4">
           <Transition.Child

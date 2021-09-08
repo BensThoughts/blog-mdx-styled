@@ -1,9 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-// import Image from 'next/image';
-import Head from 'next/head';
-import styled from '@emotion/styled';
 import { NextSeo } from 'next-seo';
 
 import {
@@ -19,19 +16,9 @@ import {
   HeaderImage,
   P
 } from '@app/components/mdx/';
-
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
-
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import ArticleWrapper from '@app/components/ArticleWrapper';
-
-// const GridContainer = styled.div`
-//   display: grid;
-//   gap: 16px;
-//   grid-template-columns: minmax(0, 1fr);
-//   align-items: center;
-//   max-width: 100%;
-// `;
+import GridWrapper from '@app/components/GridWrapper';
 
 const components = {
   a: A,
@@ -45,7 +32,6 @@ const components = {
   ArticleHeader,
   CommandLine,
   HeaderImage,
-  // Image
 };
 
 type PostProps = {
@@ -126,27 +112,25 @@ export default function PostsPage({
         }}
       />
       <MaxWidthWrapper>
-        <ArticleWrapper>
-        <ArticleHeader title={ogTitle} date={date} readTime={readTime} />
-        
-        {imgPathLarge && imgWidth && imgHeight && imgAlt ?
-          (
-            <HeaderImage
-              imgPathTiny={imgPathTiny}
-              imgPathLarge={imgPathLarge}
-              alt={ogImageAlt}
-              width={imgWidth}
-              height={imgHeight}
-              className="mb-3 md:mb-6"
-            />
-          ) : 
-          (
-            <></>
-          )
-        }
-
+        <GridWrapper>
+          <ArticleHeader title={ogTitle} date={date} readTime={readTime} />
+          {imgPathLarge && imgWidth && imgHeight && imgAlt ?
+            (
+              <HeaderImage
+                imgPathTiny={imgPathTiny}
+                imgPathLarge={imgPathLarge}
+                alt={ogImageAlt}
+                width={imgWidth}
+                height={imgHeight}
+                className="mb-3 md:mb-6"
+              />
+            ) : 
+            (
+              <></>
+            )
+          }
           <MDXRemote {...content} components={components} />
-        </ArticleWrapper>
+        </GridWrapper>
       </MaxWidthWrapper>
     </>
   );

@@ -1,0 +1,31 @@
+import { ReactNode } from 'react';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div<{
+  charWidth?: number
+}>`
+  display: grid;
+  align-items: center;
+  grid-template-columns: ${({ charWidth = 90 }) => `1fr min(${charWidth}ch, 100%) 1fr`};
+  * {
+    grid-column: 2;
+  }
+`;
+
+interface GridWrapperProps {
+  charWidth?: number
+  className?: string,
+  children: ReactNode;
+}
+
+export default function GridWrapper({
+  charWidth = 90,
+  className,
+  children
+}: GridWrapperProps) {
+  return (
+    <Wrapper charWidth={charWidth} className={className}>
+      {children}
+    </Wrapper>
+  )
+}

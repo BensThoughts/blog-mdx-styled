@@ -16,6 +16,7 @@ module.exports = {
         'press-start': ['"Press Start 2P"', 'cursive']
       },
       backgroundColor: {
+        'app-bg': generateColorClass('color-bg-primary'),
         'primary': generateColorClass('color-app-primary'),
         'secondary': generateColorClass('color-app-secondary'),
         'accent': generateColorClass('color-app-accent'),

@@ -1,24 +1,22 @@
-import { NextSeo } from 'next-seo';
-import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import styled from '@emotion/styled';
 
-// const Container = styled.div`
-//   display: grid;
-//   gap: 16px;
-//   grid-template-columns: 1fr;
-//   @media (min-width: 768px) {
-//     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-//     gap: 32px;
-//   }
-//   /* justify-content: center;
-//   padding-top: 35vh; */
-// `;
+import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import GridWrapper from '@app/components/GridWrapper';
+import AvatarCard from '@app/components/AvatarCard';
+
 
 export default function Home() {
   return (
     <>
       <MaxWidthWrapper>
-        Placeholder
+        <GridWrapper charWidth={100}>
+          <div className="flex flex-col items-center justify-center">
+            <AvatarCard />
+            <div className="h-56 w-full bg-primary mt-24 md:mt-40"></div>
+          </div>
+        </GridWrapper>
       </MaxWidthWrapper>
+
     </>
   );
 };
