@@ -14,7 +14,8 @@ import {
   H1,
   H2,
   HeaderImage,
-  P
+  P,
+  Pre
 } from '@app/components/mdx/';
 import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
@@ -29,6 +30,7 @@ const components = {
   h1: H1,
   h2: H2,
   p: P,
+  pre: Pre,
   ArticleHeader,
   CommandLine,
   HeaderImage,
@@ -148,9 +150,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content, url, metaData } = await getPostData(params!.id as string);
   const mdxSource = await serialize(content,{
     mdxOptions: {
-      rehypePlugins: [
-        require('rehype-code-title')
-      ]
+      // rehypePlugins: [
+      //   // require('rehype-code-title')
+      // ]
     }
   });
 
