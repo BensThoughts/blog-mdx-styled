@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import { ThemeContext } from '@app/utils/context/colorMode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ToggleButton = styled.button`
-  --toggle-width: 80px;
+  --toggle-width: 78px;
   --toggle-height: 38px;
-  --toggle-padding: 4px;
+  --toggle-padding: 3px;
   position: relative;
   display: flex;
   align-items: center;
@@ -61,8 +62,8 @@ const ThemeToggle = () => {
       onClick={() => setColorMode(inactiveColorMode)}
     >
       <ToggleThumb colorMode={colorMode!} />
-      <span aria-hidden="true">🌙</span>
-      <span aria-hidden="true">☀️</span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "cloud-moon"]} /></span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "sun"]} /></span>
     </ToggleButton>
   );
 };

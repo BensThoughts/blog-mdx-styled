@@ -11,7 +11,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import {
   faBars,
-  faDesktop
+  faDesktop,
+  faCloudMoon,
+  faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faTwitter,
@@ -23,6 +25,8 @@ import {
 library.add(faCopy);
 library.add(faBars);
 library.add(faDesktop);
+library.add(faCloudMoon);
+library.add(faSun);
 library.add(faTwitter);
 library.add(faFacebook);
 library.add(faLinkedin);
