@@ -12,7 +12,7 @@ export default function Home() {
         <GridWrapper charWidth={100}>
           <div className="flex flex-col items-center justify-center">
             <AvatarCard />
-            <div className="h-56 w-full bg-primary mt-24 md:mt-40"></div>
+            <div className="h-56 w-full bg-primary mt-24 md:mt-40 rounded-lg"></div>
           </div>
         </GridWrapper>
       </MaxWidthWrapper>
