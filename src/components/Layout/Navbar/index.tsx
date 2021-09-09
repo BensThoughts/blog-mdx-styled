@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useWindowScroll } from 'react-use';
 
 import Logo from '@app/components/Logo';
 import MenuItem from '@app/components/Layout/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
-import { useState } from 'react';
 import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Nav = styled.nav`
   display: flex;
@@ -17,9 +18,9 @@ const Nav = styled.nav`
   width: 100%;
   /* margin-bottom: 2rem; */
   padding: 0px;
-  position: sticky;
-  top: 0px;
-  transition: background 0.25s ease-in-out;
+  /* position: fixed; */
+  /* top: 0px; */
+  transition: background 0.25s ease-in-out, top 0.3s;
   will-change: background;
 `;
 
@@ -39,7 +40,7 @@ type NavBarProps = {
 }
 
 export default function Navbar({ className, ...rest }: NavBarProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>

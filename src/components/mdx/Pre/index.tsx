@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ReactChildren } from 'react';
+import { ReactChild } from 'react';
 
 const PreWrapper = styled.pre`
   grid-column: 1 / -1;
@@ -9,7 +9,7 @@ const PreWrapper = styled.pre`
 `;
 
 type PreProps = {
-  children: ReactChildren;
+  children: ReactChild;
 }
 
 export default function Pre({ children }: PreProps) {
