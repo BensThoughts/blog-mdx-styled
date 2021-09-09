@@ -6,18 +6,19 @@ import { Transition } from '@headlessui/react';
 
 import useScrollDirection from '@app/utils/hooks/useScrollDirection';
 
-const HiddenWrapper = styled.div`
+const NavHiderWrapper = styled.div`
   z-index: 49;
 `;
 
 type NavHiderProps = {
+  className?: string;
   children: React.ReactNode;
 }
 
-export default function NavHider({ children }: NavHiderProps) {
+export default function NavHider({ className, children }: NavHiderProps) {
   const {scrollDirection, y} = useScrollDirection();
   return (
-    <HiddenWrapper className="fixed inset-0 h-14 max-h-14">
+    <NavHiderWrapper className={`fixed inset-0 h-14 max-h-14 ${className}`}>
       <Transition
         as={Fragment}
         show={scrollDirection === 'down' && y > 350 ? false : true}
@@ -32,7 +33,7 @@ export default function NavHider({ children }: NavHiderProps) {
           {children}
         </div>
       </Transition>
-    </HiddenWrapper>
+    </NavHiderWrapper>
 
   );
 }
