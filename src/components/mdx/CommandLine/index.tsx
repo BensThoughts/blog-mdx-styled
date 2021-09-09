@@ -54,13 +54,13 @@ export default function CommandLine({
   return (
     <CommandLineContainer size={size} aria-label="Command Line Element" className={`my-3 mx-auto w-full ${className}`}>
       {title && <div
-        className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-primary border-opacity-90 rounded-t-md max-w-max px-2 select-none"
+        className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-primary border-opacity-70 rounded-t-md max-w-max px-2 select-none"
         aria-label="Command Line Title"
       >
         {title}
       </div>
       }
-      <div className={`w-full bg-terminal bg-opacity-50 border-secondary align-middle border-solid border-opacity-20 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
+      <div className={`w-full bg-terminal bg-opacity-50 border-secondary align-middle border-solid border-opacity-30 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
         <pre className="overflow-x-auto bg-opacity-50 rounded-sm px-4 py-2">
           <div className="flex flex-row justify-between items-center">
             <div>

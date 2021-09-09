@@ -148,13 +148,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content, url, metaData } = await getPostData(params!.id as string);
-  const mdxSource = await serialize(content,{
-    mdxOptions: {
-      // rehypePlugins: [
-      //   // require('rehype-code-title')
-      // ]
-    }
-  });
+  const mdxSource = await serialize(content);
 
   return {
     props: {
