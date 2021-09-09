@@ -2,12 +2,15 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   border-radius: 10px;
-  transition: background-color 0.25s ease-in-out;
+  transition-property: background, color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  will-change: background, color;
 `;
 
 type CardProps = {
-  header?: React.ReactChild
-  footer?: React.ReactChild
+  header?: React.ReactNode
+  footer?: React.ReactNode
   subTitle?: string
   title?: string
   description?: string

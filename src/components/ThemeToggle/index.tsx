@@ -21,8 +21,8 @@ const ToggleButton = styled.button`
   border-radius: calc(var(--toggle-width) / 2);
   cursor: pointer;
   background-color: rgba(var(--color-app-accent), var(--app-bg-opacity));
-  transition: background 0.25s ease-in-out, box-shadow 0.25 ease-in-out;
-  will-change: background, box-shadow;
+  /* transition: background 0.25s ease-in-out, box-shadow 0.25 ease-in-out;
+  will-change: background, box-shadow; */
   &:focus {
     outline-offset: 5px;
   }

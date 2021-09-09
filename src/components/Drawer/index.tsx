@@ -8,7 +8,7 @@ type DrawerProps = {
   title?: string,
   description?: string,
   direction?: Direction,
-  children: React.ReactChild,
+  children: React.ReactNode,
 	isOpen: boolean
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }

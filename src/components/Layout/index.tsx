@@ -2,7 +2,7 @@ import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
 
 type LayoutProps = {
-  children: React.ReactChild;
+  children: React.ReactNode;
 };
 
 export default function Layout({

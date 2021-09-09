@@ -10,6 +10,7 @@ import Breadcrumbs from '@app/components/Breadcrumbs';
 import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
+import TransitionColor from '@app/components/Transitions/TransitionColor';
 
 const Nav = styled.nav`
   display: flex;
@@ -21,8 +22,10 @@ const Nav = styled.nav`
   padding: 0px;
   /* position: fixed; */
   /* top: 0px; */
-  transition: background 0.25s ease-in-out, top 0.3s;
-  will-change: background;
+  transition-property: background, color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  will-change: background, color;
 `;
 
 const NavLinks = styled.div`
@@ -32,8 +35,8 @@ const NavLinks = styled.div`
   align-content: space-between;
   padding-top: 0px;
   background: var(--color-app-primary);
-  transition: background 0.25s ease-in-out;
-  will-change: background;
+  /* transition: background 0.25s ease-in-out;
+  will-change: background; */
 `;
 
 type NavBarProps = {
@@ -85,7 +88,7 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
               <ThemeToggle />
             </NavLinks>
           </div>
-        </Nav>
+        </Nav>        
       </NavHider>
      
     </>

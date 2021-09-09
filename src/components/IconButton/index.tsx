@@ -1,5 +1,5 @@
 type IconButtonProps = {
-  children: React.ReactChild;
+  children: React.ReactNode;
   onClick: any;
   className: string;
 }

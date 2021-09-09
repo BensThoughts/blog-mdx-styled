@@ -11,7 +11,7 @@ const HiddenWrapper = styled.div`
 `;
 
 type NavHiderProps = {
-  children: React.ReactChild;
+  children: React.ReactNode;
 }
 
 export default function NavHider({ children }: NavHiderProps) {
