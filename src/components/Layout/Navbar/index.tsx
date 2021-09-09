@@ -9,6 +9,7 @@ import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
 import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
+import NavHider from './NavHider';
 
 const Nav = styled.nav`
   display: flex;
@@ -53,38 +54,40 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
             <MenuItem to="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
           </NavLinks>
       </Drawer>
-
-      <Nav {...rest} className={`bg-primary shadow-lg ${className}`}>
-        {/* Small- Screens */}  
-        <div className="flex md:hidden w-full justify-between items-center mx-3">
-          <ThemeToggle />
-          <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
-            <FontAwesomeIcon icon={['fas', 'bars']} inverse size="lg" className="text-icon-primary" />
-          </IconButton>
-        </div>
-
-        {/* Medium+ Screens */}  
-        <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mr-3">
-          <div className="ml-3">
-            <div className="flex items-center">
-              <div className="mr-3">
-                <Logo />
-              </div>
-              <div>
-                <Breadcrumbs />
+      <NavHider>
+        <Nav {...rest} className={`bg-primary shadow-lg ${className}`}>
+          {/* Small- Screens */}  
+          <div className="flex md:hidden w-full justify-between items-center mx-3">
+            <ThemeToggle />
+            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
+              <FontAwesomeIcon icon={['fas', 'bars']} inverse size="lg" className="text-icon-primary" />
+            </IconButton>
+          </div>
+  
+          {/* Medium+ Screens */}  
+          <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mr-3">
+            <div className="ml-3">
+              <div className="flex items-center">
+                <div className="mr-3">
+                  <Logo />
+                </div>
+                <div>
+                  <Breadcrumbs />
+                </div>
               </div>
             </div>
+            <NavLinks className="flex items-center justify-end content-between">
+              <MenuItem to="/" className="mx-4">Home</MenuItem>
+              <MenuItem to="/blog" className="mx-4">Blog</MenuItem>
+              <MenuItem to="/projects" className="mx-4">Projects</MenuItem>
+              <MenuItem to="/about" className="mx-4">About</MenuItem>
+              <MenuItem to="/contact" className="mx-4">Contact</MenuItem>
+              <ThemeToggle />
+            </NavLinks>
           </div>
-          <NavLinks className="flex items-center justify-end content-between">
-            <MenuItem to="/" className="mx-4">Home</MenuItem>
-            <MenuItem to="/blog" className="mx-4">Blog</MenuItem>
-            <MenuItem to="/projects" className="mx-4">Projects</MenuItem>
-            <MenuItem to="/about" className="mx-4">About</MenuItem>
-            <MenuItem to="/contact" className="mx-4">Contact</MenuItem>
-            <ThemeToggle />
-          </NavLinks>
-        </div>
-      </Nav>
+        </Nav>
+      </NavHider>
+     
     </>
   );
 };

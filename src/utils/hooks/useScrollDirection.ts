@@ -20,5 +20,5 @@ export default function useScrollDirection() {
     }    
   });
 
-  return { scrollDirection };
+  return { scrollDirection, y };
 }

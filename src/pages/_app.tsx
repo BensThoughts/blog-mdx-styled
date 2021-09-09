@@ -40,7 +40,6 @@ import seoConfig from '@app/utils/seo.config';
 import { store } from '@app/store/store';
 import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
-import NavHider from '@app/components/Transitions/NavHider';
 
 const PageWrapper = styled.div`
   padding-top: 3.5rem;
@@ -67,25 +66,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo {...seoConfig} />
       <Provider store={store}>
-
-      <ThemeProvider>
-                <NavHider>
-                <Navbar className="h-14" />
-
-                </NavHider>
-              </ThemeProvider>
+        <ThemeProvider>
+          <Navbar className="h-14" />
+        </ThemeProvider>
 
         <PageWrapper>
-
-            <ContentWrap>
-              <main className="z-0 my-8 max-h-full">
-                <Component {...pageProps} />
-              </main>
-            </ContentWrap>
-            <FooterWrap>
-              <Footer className="h-16" />   
-            </FooterWrap>
+          <ContentWrap>
+            <main className="z-0 my-8 max-h-full">
+              <Component {...pageProps} />
+            </main>
+          </ContentWrap>
+          <FooterWrap>
+            <Footer className="h-16" />   
+          </FooterWrap>
         </PageWrapper>
+
       </Provider>
     </>
   );

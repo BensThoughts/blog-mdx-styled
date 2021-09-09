@@ -15,13 +15,12 @@ type NavHiderProps = {
 }
 
 export default function NavHider({ children }: NavHiderProps) {
-  const {scrollDirection} = useScrollDirection();
-
+  const {scrollDirection, y} = useScrollDirection();
   return (
     <HiddenWrapper className="fixed inset-0 h-14 max-h-14">
       <Transition
         as={Fragment}
-        show={scrollDirection === 'up' ? true : false}
+        show={scrollDirection === 'down' && y > 350 ? false : true}
         enter="transform transition duration-200 ease-out"
         enterFrom="-translate-y-full"
         enterTo="translate-y-0"
