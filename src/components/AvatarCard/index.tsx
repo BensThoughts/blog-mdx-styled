@@ -13,7 +13,7 @@ export default function AvatarCard() {
   const bustImgSrc = "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg";
   return (
       <TransitionColor className="flex flex-col items-center justify-center w-full">
-        <div className="z-20 w-48 h-48 md:w-96 md:h-96 rounded-full p-1 bg-app-bg shadow-sm">
+        <div className="z-20 w-48 h-48 md:w-96 md:h-96 rounded-full p-1 bg-app-bg">
           <img src={bustImgSrc} alt="Bust Image" className="rounded-full"/>
         </div>
         <div className="bg-primary w-full max-w-2xl h-60 -my-20 py-20 md:-my-36 md:py-40 z-10 rounded-lg shadow-md">
