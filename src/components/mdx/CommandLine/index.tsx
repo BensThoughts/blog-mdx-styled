@@ -54,7 +54,7 @@ export default function CommandLine({
   return (
     <CommandLineContainer size={size} aria-label="Command Line Element" className={`my-3 mx-auto w-full ${className}`}>
       {title && <div
-        className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-primary border-opacity-70 rounded-t-md max-w-max px-2 select-none"
+        className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-secondary border-opacity-40 rounded-t-md max-w-max px-2 select-none"
         aria-label="Command Line Title"
       >
         {title}

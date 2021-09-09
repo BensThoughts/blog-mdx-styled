@@ -39,13 +39,13 @@ export default function CodeElement({
   return (
     <div className="flex flex-col w-full">
     {codeTitle && <div
-      className="self-end italic text-secondary text-sm md:text-base border-l-2 border-r-2 border-t-2 border-solid border-primary border-opacity-70 rounded-t-md max-w-max px-2 py-1 select-none"
+      className="self-end italic text-secondary text-sm md:text-base border-l-2 border-r-2 border-t-2 border-solid border-secondary border-opacity-40 rounded-t-md max-w-max px-2 py-1 select-none"
       aria-label="Command Line Title"
     >
       {codeTitle}
     </div>
     }
-    <div className={`md:max-w-full border-secondary bg-terminal bg-opacity-60 font-mono text-sm md:text-base border-2 border-solid border-opacity-25 rounded-lg ${codeTitle ? 'rounded-t-none rounded-l-lg' : ''}`}>
+    <div className={`md:max-w-full border-secondary bg-terminal bg-opacity-60 font-mono text-sm md:text-base border-2 border-solid border-opacity-30 rounded-lg ${codeTitle ? 'rounded-t-none rounded-l-lg' : ''}`}>
       <Highlight
         {...defaultProps}
         theme={MyTheme as PrismTheme}
