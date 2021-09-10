@@ -9,10 +9,10 @@ const TransitionColor = styled.div`
 
 import H1 from '@app/components/mdx/H1';
 
-export default function AvatarCard() {
+export default function AvatarCard({...rest}) {
   const bustImgSrc = "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg";
   return (
-      <TransitionColor className="flex flex-col items-center justify-center w-full">
+      <TransitionColor {...rest} className="flex flex-col items-center justify-center w-full">
         <div className="z-20 w-48 h-48 md:w-96 md:h-96 rounded-full p-1 bg-app-bg">
           <img src={bustImgSrc} alt="Bust Image" className="rounded-full"/>
         </div>

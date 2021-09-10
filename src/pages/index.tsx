@@ -11,8 +11,8 @@ export default function Home() {
       <MaxWidthWrapper>
         <GridWrapper charWidth={100}>
           <div className="flex flex-col items-center justify-center">
-            <AvatarCard />
-            <div className="h-56 w-full bg-primary mt-24 md:mt-40 rounded-lg shadow-md"></div>
+            <AvatarCard style={{ animation: `fadeIn 1s` }} />
+            <div style={{ animation: `fadeIn 2s` }} className="h-56 w-full bg-primary mt-24 md:mt-40 rounded-lg shadow-md"></div>
           </div>
         </GridWrapper>
       </MaxWidthWrapper>

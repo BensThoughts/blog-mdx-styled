@@ -131,3 +131,21 @@ body[data-theme="dark"] {
   --color-scroll-track: #4A5568;
   --color-scroll-thumb-hover: #63B3ED;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flyIn {
+  0% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(0%)
+  }
+}
