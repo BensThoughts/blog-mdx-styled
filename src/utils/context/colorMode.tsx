@@ -15,9 +15,11 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const ThemeProvider = (props: ThemeProviderProps) => {
+const ThemeProvider = ({ children }: ThemeProviderProps) => {
   // TODO: Scary use of ! (better way? is it guaranteed to be set?)  
+  // const [colorMode, rawSetColorMode] = useState<string>(document.body.dataset.theme!);
   const [colorMode, rawSetColorMode] = useState<string>(document.body.dataset.theme!);
+
 
   useEffect(() => {
     document.body.dataset.theme = colorMode;
@@ -31,7 +33,7 @@ const ThemeProvider = (props: ThemeProviderProps) => {
 
   return (
     <ThemeContext.Provider value={{ colorMode, setColorMode }}>
-      {props.children}
+      {children}
     </ThemeContext.Provider>
   );
 };

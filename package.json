@@ -20,6 +20,7 @@
     "@headlessui/react": "^1.4.1",
     "@reduxjs/toolkit": "^1.6.1",
     "date-fns": "^2.23.0",
+    "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
     "next": "11.1.0",
     "next-mdx-remote": "^3.0.4",
