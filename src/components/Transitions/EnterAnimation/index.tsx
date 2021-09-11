@@ -9,7 +9,7 @@ const variants = {
     opacity: 1,
     transition: {
       y: { type: 'spring', stiffness: 100 },
-      default: { duration: 0.5 }
+      default: { duration: 0.5, ease: 'easeIn' }
     }
   },
   hidden: {
@@ -19,11 +19,11 @@ const variants = {
 }
 
 type EnterAnimationProps = {
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }
 
-export default function EnterAnimation({ className, children }: EnterAnimationProps) {
+export default function EnterAnimation({ className = '', children }: EnterAnimationProps) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.3

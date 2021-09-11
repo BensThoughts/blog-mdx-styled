@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import AvatarImg from './AvatarImg';
-import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 
-
-const TransitionColor = styled(EnterAnimation)`
+const TransitionColor = styled.div`
   transition-property: background, color;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
@@ -35,7 +33,7 @@ const AboutPlacer = styled.div`
 `;
 
 import H1 from '@app/components/mdx/H1';
-import TitleHeader from './TitleHeader';
+import TitleHeader from '../TitleHeader';
 import AboutBox from './AboutBox';
 
 export default function AvatarCard({...rest}) {

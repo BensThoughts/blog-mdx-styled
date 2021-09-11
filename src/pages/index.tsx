@@ -1,21 +1,20 @@
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
-import AvatarCard from '@app/components/AvatarCard';
-import MainContent from '@app/components/Layout/MainContent';
+import AvatarCard from '@app/components/Home/AvatarCard';
+import ProjectsCard from '@app/components/Home/ProjectsCard';
+import EnterAnimation from '@app/components/Transitions/EnterAnimation';
+
 
 
 export default function Home() {
   return (
       <MaxWidthWrapper>
         <GridWrapper charWidth={100}>
-          <div className="flex flex-col items-center justify-center">
+          <EnterAnimation>
             <AvatarCard />
-            <AvatarCard />
-            <AvatarCard />
-            <AvatarCard />
-
-            <div className="h-56 w-full bg-primary mt-24 md:mt-40 rounded-lg shadow-md"></div>
-          </div>
+          </EnterAnimation>
+            {/* <ProjectsCard /> */}
+        
         </GridWrapper>
       </MaxWidthWrapper>
   );
