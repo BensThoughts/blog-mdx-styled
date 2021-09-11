@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { motion, AnimatePresence } from 'framer-motion';
+import AvatarImg from './AvatarImg';
 
 const TransitionColor = styled.div`
   transition-property: background, color;
@@ -8,32 +8,52 @@ const TransitionColor = styled.div`
   will-change: background, color;
 `;
 
+const ContentWrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  row-gap: 2rem;
+  @media (min-width: 768px) {
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+  }
+`;
+
+const ImagePlacer = styled.div`
+  grid-column: 1;
+  @media (min-width: 768px) {
+    grid-column: 2;
+  }
+`;
+
+const AboutPlacer = styled.div`
+  grid-column: 1;
+`;
+
 import H1 from '@app/components/mdx/H1';
+import TitleHeader from './TitleHeader';
+import AboutBox from './AboutBox';
 
 export default function AvatarCard({...rest}) {
   const bustImgSrc = "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg";
   return (
-      <TransitionColor {...rest} className="flex flex-col items-center justify-center w-full">
-        <AnimatePresence>
-          <motion.div
-            initial={{ rotate: 70 }}
-            animate={{ rotate: 0 }}
-            exit={{ rotate: 70 }}
-            className="z-20 w-48 h-48 md:w-96 md:h-96 rounded-full p-1 bg-app-bg"
-          >
-            <img src={bustImgSrc} alt="Bust Image" className="rounded-full"/>
-          </motion.div>
-        </AnimatePresence>
+      <TransitionColor {...rest} className="w-full">
 
-        <div className="bg-primary w-full max-w-2xl h-60 -my-20 py-20 md:-my-36 md:py-40 z-10 rounded-lg shadow-md">
-          <div className="flex flex-col items-center justify-center w-full max-w-max mx-auto">
-            <div className="flex flex-col items-center justify-center content-center md:flex-row mx-3">
-              <H1 className="italic">Benjamin</H1>
-              <H1 className="italic">&nbsp;Blumenfeld-Jones</H1>
-            </div>
-            <h2 className="italic self-start my-2 mx-3 text-center md:text-left text-lg">Self taught software developer with a passion for learning.</h2>
-          </div>
-        </div>
+
+
+        <TitleHeader text="About Me" />
+        <ContentWrap className="md">
+            <AboutPlacer>
+              <AboutBox />
+            </AboutPlacer>
+            <ImagePlacer>
+              <AvatarImg imgSrc={bustImgSrc} />
+            </ImagePlacer>
+        </ContentWrap>
+
+
       </TransitionColor>
   );
 }

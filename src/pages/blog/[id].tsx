@@ -124,7 +124,7 @@ export default function PostsPage({
                 alt={ogImageAlt}
                 width={imgWidth}
                 height={imgHeight}
-                className="mb-3 md:mb-6"
+                
               />
             ) : 
             (

@@ -52,7 +52,7 @@ export default function CommandLine({
   const topLeftRounded = title ? '' : 'rounded-l-md';
 
   return (
-    <CommandLineContainer size={size} aria-label="Command Line Element" className={`my-3 mx-auto w-full ${className}`}>
+    <CommandLineContainer size={size} aria-label="Command Line Element" className={`mx-auto w-full ${className}`}>
       {title && <div
         className="italic text-secondary border-l-2 border-r-2 border-t-2 border-solid border-secondary border-opacity-40 rounded-t-md max-w-max px-2 select-none"
         aria-label="Command Line Title"

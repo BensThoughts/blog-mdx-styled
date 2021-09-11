@@ -37,7 +37,7 @@ export default function HeaderImage({
         style={{
           filter: blur ? 'blur(20px)' : 'none',
           transition: blur ? 'none' : 'filter 0.2s ease-out',
-          margin: '-5px -10px -10px -5px'
+          //margin: '-5px -10px -10px -5px'
         }}
         className="object-contain"
       />

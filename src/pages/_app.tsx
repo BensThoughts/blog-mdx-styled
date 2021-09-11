@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
   ssr: false
@@ -14,6 +13,7 @@ import {
   faBars,
   faDesktop,
   faCloudMoon,
+  faHandSparkles,
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -27,6 +27,7 @@ library.add(faCopy);
 library.add(faBars);
 library.add(faDesktop);
 library.add(faCloudMoon);
+library.add(faHandSparkles);
 library.add(faSun);
 library.add(faTwitter);
 library.add(faFacebook);
@@ -41,7 +42,6 @@ import seoConfig from '@app/utils/seo.config';
 import { store } from '@app/store/store';
 import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
-import MainContent from '@app/components/Layout/MainContent';
 
 const PageWrapper = styled.div`
   padding-top: 3.5rem;
@@ -75,16 +75,12 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <PageWrapper>
           <ContentWrap>
 
-            <AnimatePresence
-              exitBeforeEnter
-              initial={false}
-              onExitComplete={() => window.scrollTo(0, 0)}
-            >
-              <MainContent key={router.route} className="z-0 my-8 max-h-full overflow-hidden">
-                <Component {...pageProps} key={router.route} />
-              </MainContent>
 
-            </AnimatePresence>
+              <main className="z-0 my-8 max-h-full overflow-hidden">
+                <Component {...pageProps} key={router.route} />
+              </main>
+
+         
 
           </ContentWrap>
           <FooterWrap>

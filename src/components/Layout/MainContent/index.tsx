@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 type MainProps = {
   children: React.ReactNode;
@@ -7,22 +7,23 @@ type MainProps = {
 }
 
 const variants = {
-  hidden: { opacity: 0, x: -200, y: 0 },
+  hidden: { opacity: 1, x: 0, y: 0 },
   enter: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: 0, y: -100 }
+  exit: { opacity: 0, x: 0, y: '-120%' }
 }
 
 export default function MainContent({ className, children, key }: MainProps) {
   return (
-    <motion.main
+    <m.main
       initial="hidden"
       animate="enter"
       exit="exit"
       variants={variants}
+      transition={{ }}
       className={className}
       key={key}
     >
       {children}
-    </motion.main>
+    </m.main>
   );
 }

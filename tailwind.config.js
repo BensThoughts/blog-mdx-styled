@@ -36,6 +36,9 @@ module.exports = {
         'icon-primary': generateColorClass('color-icon-border-primary')
 
       },
+      borderWidth: {
+        1: '1px'
+      }
     }
   },
   variants: {
