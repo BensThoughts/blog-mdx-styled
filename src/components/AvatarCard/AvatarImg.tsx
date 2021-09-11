@@ -8,8 +8,8 @@ const TransitionColor = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  width: 12rem;
-  height: 12rem;
+  width: 15rem;
+  height: 15rem;
   position: relative;
   /* border: 2px solid rgba(var(--color-app-accent), var(--tw-border-opacity)); */
   /* outline-offset: 20px; */
@@ -40,13 +40,13 @@ type AvatarImgProps = {
 
 export default function AvatarImg({ imgSrc, className }: AvatarImgProps) {
   return (
-    <div className={`z-20 w-48 h-48 md:w-56 md:h-56 bg-transparent ${className}`}>
+    <TransitionColor className={`z-20 bg-transparent ${className}`}>
       <ImageWrapper>
         <picture>
           <source srcSet={imgSrc} />
           <img src={imgSrc} alt="Bust Image" className="relative"/>
         </picture>
       </ImageWrapper>
-    </div>
+    </TransitionColor>
   );
 }

@@ -6,6 +6,7 @@ type AboutBoxProps = {
 }
 
 export default function AboutBox({ className }: AboutBoxProps) {
+
   return (
     <div className={`bg-transparent w-full max-w-2xl z-10 rounded-lg border-1 border-solid border-primary shadow-md ${className}`}>
       <div className="m-4">
