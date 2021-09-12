@@ -1,3 +1,5 @@
+import AnimatedLink from '@app/components/AnimatedLink';
+
 type AProps = {
   children: string;
   href: string;
@@ -5,6 +7,6 @@ type AProps = {
 
 export default function A({ href, children }: AProps) {
   return (
-    <a href={href} className="underline text-secondary" target="_blank" rel="noreferrer">{children}</a>
+    <AnimatedLink href={href} className="underline text-secondary" target="_blank" rel="noreferrer noopener">{children}</AnimatedLink>
   );
 }

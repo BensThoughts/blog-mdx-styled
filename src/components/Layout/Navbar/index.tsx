@@ -10,6 +10,7 @@ import Breadcrumbs from '@app/components/Breadcrumbs';
 import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
+import AnimatedLink from '@app/components/AnimatedLink';
 import TransitionColor from '@app/components/Transitions/TransitionColor';
 
 const Nav = styled.nav`
@@ -80,11 +81,11 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
               </div>
             </div>
             <NavLinks className="flex items-center justify-end content-between">
-              <MenuItem to="/" className="mx-4">Home</MenuItem>
-              <MenuItem to="/blog" className="mx-4">Blog</MenuItem>
-              <MenuItem to="/projects" className="mx-4">Projects</MenuItem>
-              <MenuItem to="/about" className="mx-4">About</MenuItem>
-              <MenuItem to="/contact" className="mx-4">Contact</MenuItem>
+              <MenuItem animatedLink to="/" className="mx-4">Home</MenuItem>
+              <MenuItem animatedLink to="/blog" className="mx-4">Blog</MenuItem>
+              <MenuItem animatedLink to="/projects" className="mx-4">Projects</MenuItem>
+              <MenuItem animatedLink to="/about" className="mx-4">About</MenuItem>
+              <MenuItem animatedLink to="/contact" className="mx-4">Contact</MenuItem>
               <ThemeToggle />
             </NavLinks>
           </div>

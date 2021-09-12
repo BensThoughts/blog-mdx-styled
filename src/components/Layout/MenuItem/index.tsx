@@ -1,8 +1,10 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import Link from 'next/link';
+import AnimatedLink from '@app/components/AnimatedLink';
 
-interface MenuItemsProps {
+type MenuItemsProps = {
   to: string,
+  animatedLink?: boolean,
   className?: string,
   onClick?: MouseEventHandler<HTMLAnchorElement>
   children: ReactNode,
@@ -10,16 +12,22 @@ interface MenuItemsProps {
 
 const MenuItem = ({
   to = '/',
+  animatedLink = false,
   className = '',
   onClick,
   children,
   ...rest
 }: MenuItemsProps) => {
   return (
-    <Link href={to} {...rest} scroll={false}>
-      <a onClick={onClick} className={className}>
-        {children}
-      </a>
+    <Link href={to} {...rest} scroll={false} passHref>
+      {animatedLink
+        ? <AnimatedLink href={to} className={className}>
+            {children}
+          </AnimatedLink>
+        : <a onClick={onClick} className={`text-primary ${className}`} href={to}>
+            {children}
+          </a>
+      }
     </Link>
   );
 };
