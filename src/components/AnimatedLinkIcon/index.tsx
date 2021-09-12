@@ -1,0 +1,47 @@
+import styled from '@emotion/styled';
+
+const AnimatedBorder = styled.div`
+  position: relative;
+  padding: 10px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: rgba(var(--color-app-secondary), 0.5);
+    transform: scale(1);
+    transition: transform 300ms;
+  }
+
+  &:hover:after {
+    transform: scale(1.2);
+  }
+`;
+
+type AnimatedLinkIconProps = {
+  children: React.ReactNode,
+  href: string,
+  target?: string,
+  rel?: string,
+}
+
+export default function AnimatedLinkIcon({
+  children,
+  href,
+  target = '_blank',
+  rel = 'noreferrer noopener'
+}: AnimatedLinkIconProps) {
+  return (
+    <a href={href} target={target} rel={rel}>
+      <AnimatedBorder>
+        {children}
+      </AnimatedBorder>
+    </a>
+  );
+}

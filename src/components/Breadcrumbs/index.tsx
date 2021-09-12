@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+import AnimatedLink from '@app/components/AnimatedLink';
+
 const convertBreadcrumb = (crumb: string) => {
   return crumb.replace(/-/g, ' ').toUpperCase();
 };
@@ -32,19 +34,19 @@ export default function Breadcrumbs(){
   return (
     <div aria-label="breadcrumbs" className="flex">
       <div className="font-mono">
-        $&gt;&nbsp;
-        <Link href="/" scroll={false}>
-          <a className="hover:underline">HOME</a>
+        <span className="text-secondary">$&gt;&nbsp;</span>
+        <Link href="/" scroll={false} passHref>
+          <AnimatedLink href="/">HOME</AnimatedLink>
         </Link>
         &nbsp;/&nbsp;
       </div>
       {breadcrumbs.map((breadcrumb, i) => {
         return (
           <div key={breadcrumb.href} className="font-mono">
-            <Link href={breadcrumb.href} scroll={false}>
-              <a className="hover:underline">
+            <Link href={breadcrumb.href} scroll={false} passHref>
+              <AnimatedLink href={breadcrumb.href}>
                 {convertBreadcrumb(breadcrumb.breadcrumb)}
-              </a>
+              </AnimatedLink>
             </Link>
             &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
           </div>
