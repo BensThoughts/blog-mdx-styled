@@ -51,11 +51,11 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
     <>
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Try something new!">
           <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
-            <MenuItem to="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
-            <MenuItem to="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
-            <MenuItem to="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
-            <MenuItem to="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
-            <MenuItem to="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
+            <MenuItem href="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
+            <MenuItem href="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
+            <MenuItem href="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
+            <MenuItem href="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
+            <MenuItem href="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
           </NavLinks>
       </Drawer>
       <NavHider>
@@ -81,11 +81,11 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
               </div>
             </div>
             <NavLinks className="flex items-center justify-end content-between">
-              <MenuItem animatedLink to="/" className="mx-4">Home</MenuItem>
-              <MenuItem animatedLink to="/blog" className="mx-4">Blog</MenuItem>
-              <MenuItem animatedLink to="/projects" className="mx-4">Projects</MenuItem>
-              <MenuItem animatedLink to="/about" className="mx-4">About</MenuItem>
-              <MenuItem animatedLink to="/contact" className="mx-4">Contact</MenuItem>
+              <MenuItem animatedLink href="/" className="mx-4">Home</MenuItem>
+              <MenuItem animatedLink href="/blog" className="mx-4">Blog</MenuItem>
+              <MenuItem animatedLink href="/projects" className="mx-4">Projects</MenuItem>
+              <MenuItem animatedLink href="/about" className="mx-4">About</MenuItem>
+              <MenuItem animatedLink href="/contact" className="mx-4">Contact</MenuItem>
               <ThemeToggle />
             </NavLinks>
           </div>

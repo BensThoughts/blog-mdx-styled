@@ -17,12 +17,12 @@ import {
   faHandSparkles,
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  faTwitter,
-  faFacebook,
-  faLinkedin,
-  faGithub
-} from '@fortawesome/free-brands-svg-icons';
+// import {
+//   faTwitter,
+//   faFacebook,
+//   faLinkedin,
+//   faGithub
+// } from '@fortawesome/free-brands-svg-icons';
 
 library.add(faCopy);
 library.add(faBars);
@@ -30,10 +30,10 @@ library.add(faDesktop);
 library.add(faCloudMoon);
 library.add(faHandSparkles);
 library.add(faSun);
-library.add(faTwitter);
-library.add(faFacebook);
-library.add(faLinkedin);
-library.add(faGithub);
+// library.add(faTwitter);
+// library.add(faFacebook);
+// library.add(faLinkedin);
+// library.add(faGithub);
 
 
 import { Provider } from 'react-redux';

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AnimatedLink from '@app/components/AnimatedLink';
 
 type MenuItemsProps = {
-  to: string,
+  href: string,
   animatedLink?: boolean,
   className?: string,
   onClick?: MouseEventHandler<HTMLAnchorElement>
@@ -11,7 +11,7 @@ type MenuItemsProps = {
 }
 
 const MenuItem = ({
-  to = '/',
+  href = '/',
   animatedLink = false,
   className = '',
   onClick,
@@ -19,12 +19,13 @@ const MenuItem = ({
   ...rest
 }: MenuItemsProps) => {
   return (
-    <Link href={to} {...rest} scroll={false} passHref>
+    <Link passHref href={href} {...rest} scroll={false}>
       {animatedLink
-        ? <AnimatedLink href={to} className={className}>
-            {children}
-          </AnimatedLink>
-        : <a onClick={onClick} className={`text-primary ${className}`} href={to}>
+        ?   <AnimatedLink href={href} className={className}>
+              {children}
+            </AnimatedLink>
+
+        : <a href={href} onClick={onClick} className={`text-primary ${className}`}>
             {children}
           </a>
       }

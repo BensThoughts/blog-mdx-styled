@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 const AnimatedBorder = styled.div`
+  --app-border-opacity: 0.8;
   position: relative;
   padding: 10px;
 
@@ -14,7 +15,7 @@ const AnimatedBorder = styled.div`
     left: 0;
     border: 2px solid;
     border-radius: 10px;
-    border-color: rgba(var(--color-app-secondary), 0.5);
+    border-color: rgba(var(--color-app-secondary), var(--app-border-opacity));
     transform: scale(1);
     transition: transform 300ms;
   }
