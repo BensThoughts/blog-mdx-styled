@@ -2,6 +2,7 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 import AvatarCard from '@app/components/Home/AvatarCard';
 import ProjectsCard from '@app/components/Home/ProjectsCard';
+import TechCard from '@app/components/Home/TechCard';
 import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 
 
@@ -13,8 +14,11 @@ export default function Home() {
           <EnterAnimation>
             <AvatarCard />
           </EnterAnimation>
-            {/* <ProjectsCard /> */}
-        
+          <EnterAnimation>
+            <TechCard className="" />  
+          </EnterAnimation>
+          <ProjectsCard />
+      
         </GridWrapper>
       </MaxWidthWrapper>
   );

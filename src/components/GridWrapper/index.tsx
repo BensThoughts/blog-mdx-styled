@@ -9,7 +9,12 @@ const Wrapper = styled.div<{
   row-gap: 3rem;
   grid-template-columns: ${({ charWidth = 90 }) => `1fr min(${charWidth}ch, 100%) 1fr`};
   * {
-    grid-column: 2;
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 768px) {
+    * {
+      grid-column: 2;
+    }
   }
 `;
 

@@ -6,7 +6,7 @@ type CommandLineSize = 'large' | 'small';
 const CommandLineContainer = styled.div<{
   size?: CommandLineSize 
 }>`
-  grid-column: 1 / -1;
+  /* grid-column: 1 / -1; */
   @media (min-width: 768px) {
     grid-column: ${({ size = 'small' }) => size === 'small' ? '2 / 3' : '1 / -1'};
     max-width: ${({ size = 'small' }) => size === 'small' ? '100%' : 'max-content'};
