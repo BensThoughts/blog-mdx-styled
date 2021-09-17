@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import styled from "@emotion/styled";
-import { ThemeContext } from '@app/utils/context/colorMode';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {useContext} from 'react';
+import styled from '@emotion/styled';
+import {ThemeContext} from '@app/utils/context/colorMode';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const ToggleButton = styled.button`
   --toggle-width: 78px;
@@ -49,13 +49,13 @@ const ToggleThumb = styled.span<{
   background: rgba(var(--color-app-secondary), var(--app-bg-opacity));
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
-    p.colorMode === "dark"
-      ? "translate3d(calc(var(--toggle-width) - var(--toggle-height)), 0, 0)"
-      : "none"};
+    p.colorMode === 'dark' ?
+      'translate3d(calc(var(--toggle-width) - var(--toggle-height)), 0, 0)' :
+      'none'};
 `;
 
 const ThemeToggle = () => {
-  const { colorMode, setColorMode } = useContext(ThemeContext);
+  const {colorMode, setColorMode} = useContext(ThemeContext);
   const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
 
   return (
@@ -66,8 +66,8 @@ const ThemeToggle = () => {
       onClick={() => setColorMode(inactiveColorMode)}
     >
       <ToggleThumb colorMode={colorMode!} />
-      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "cloud-moon"]} className="text-icon-secondary text-opacity-95" /></span>
-      <span aria-hidden="true"><FontAwesomeIcon icon={["fas", "sun"]} className="text-icon-secondary text-opacity-95" /></span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={['fas', 'cloud-moon']} className="text-icon-secondary text-opacity-95" /></span>
+      <span aria-hidden="true"><FontAwesomeIcon icon={['fas', 'sun']} className="text-icon-secondary text-opacity-95" /></span>
     </ToggleButton>
   );
 };

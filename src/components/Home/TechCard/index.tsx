@@ -81,17 +81,17 @@ type TechCardProps = {
   className: string,
 }
 
-export default function TechCard({ className }: TechCardProps) {
+export default function TechCard({className}: TechCardProps) {
   return (
     <TransitionColor className={className}>
       <TitleHeader inverse text="Technology Stack" />
       <div className="flex items-center justify-center">
-      <DoubleCard className="shadow-lg flex items-center justify-center">
-        <div>
-        <IconPill />
+        <DoubleCard className="shadow-lg flex items-center justify-center">
+          <div>
+            <IconPill />
 
-        </div>
-      </DoubleCard>
+          </div>
+        </DoubleCard>
       </div>
 
     </TransitionColor>

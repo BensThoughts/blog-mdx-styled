@@ -38,7 +38,7 @@ type AvatarImgProps = {
   className?: string;
 }
 
-export default function AvatarImg({ imgSrc, className }: AvatarImgProps) {
+export default function AvatarImg({imgSrc, className}: AvatarImgProps) {
   return (
     <TransitionColor className={`z-20 bg-transparent ${className}`}>
       <ImageWrapper>

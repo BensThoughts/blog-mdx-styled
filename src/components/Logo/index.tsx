@@ -1,10 +1,10 @@
 
-import { Monitor } from 'react-feather';
+import {Monitor} from 'react-feather';
 
 type LogoProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export default function Logo({
-  className
+  className,
 }: LogoProps) {
   return (
     <span className={className}>

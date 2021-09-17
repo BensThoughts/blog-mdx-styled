@@ -12,7 +12,7 @@ type TransitionColorProps = {
   className?: string;
   children: React.ReactNode;
 }
-export default function TransitionColor({ children, className = '', ...rest }: TransitionColorProps) {
+export default function TransitionColor({children, className = '', ...rest}: TransitionColorProps) {
   return (
     <TransitionWrap {...rest} className={className}>
       {children}

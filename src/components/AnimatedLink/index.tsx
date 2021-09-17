@@ -1,4 +1,4 @@
-import { forwardRef, MouseEventHandler } from 'react';
+import {forwardRef, MouseEventHandler} from 'react';
 import styled from '@emotion/styled';
 
 const A = styled.a`

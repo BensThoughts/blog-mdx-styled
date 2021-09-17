@@ -1,5 +1,6 @@
-import { createContext } from 'react';
+import {createContext} from 'react';
 
 export const FeatureToggleContext = createContext({
-  enabledFeatures: [] as string[]
+  enabledFeatures: [] as string[],
 })
+;

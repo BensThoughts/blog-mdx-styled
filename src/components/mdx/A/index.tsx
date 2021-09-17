@@ -5,7 +5,7 @@ type AProps = {
   href: string;
 }
 
-export default function A({ href, children }: AProps) {
+export default function A({href, children}: AProps) {
   return (
     <AnimatedLink href={href} className="underline text-secondary" target="_blank" rel="noreferrer noopener">{children}</AnimatedLink>
   );

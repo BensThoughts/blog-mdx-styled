@@ -11,7 +11,7 @@ type PreProps = {
   children: React.ReactNode;
 }
 
-export default function Pre({ children }: PreProps) {
+export default function Pre({children}: PreProps) {
   return (
     <PreWrapper>
       {children}

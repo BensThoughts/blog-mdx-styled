@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import {useState, useEffect} from 'react';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 import AnimatedLink from '@app/components/AnimatedLink';
@@ -10,7 +10,7 @@ const convertBreadcrumb = (crumb: string) => {
 
 type BreadcrumbsType = { breadcrumb: string, href: string }[];
 
-export default function Breadcrumbs(){
+export default function Breadcrumbs() {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'home', href: '/'}]);
 
@@ -20,7 +20,7 @@ export default function Breadcrumbs(){
       linkPath.shift();
 
       const pathArray = linkPath.map((path, i) => {
-        return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') };
+        return {breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/')};
       });
 
       setBreadcrumbs(pathArray);

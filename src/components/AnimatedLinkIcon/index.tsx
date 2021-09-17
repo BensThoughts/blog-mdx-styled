@@ -36,7 +36,7 @@ export default function AnimatedLinkIcon({
   children,
   href,
   target = '_blank',
-  rel = 'noreferrer noopener'
+  rel = 'noreferrer noopener',
 }: AnimatedLinkIconProps) {
   return (
     <a href={href} target={target} rel={rel}>

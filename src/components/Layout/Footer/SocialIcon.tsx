@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-common-types';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {IconName} from '@fortawesome/fontawesome-common-types';
 
 import TransitionColor from '@app/components/Transitions/TransitionColor';
 
@@ -17,7 +17,7 @@ type SocialIconProps = {
   className?: string;
 }
 
-export default function SocialIcon({ iconName, url, className = '' }: SocialIconProps) {
+export default function SocialIcon({iconName, url, className = ''}: SocialIconProps) {
   return (
     <a href={url} target="_blank" rel="noreferrer">
       <TransitionColor className="rounded-xl shadow-xl border-2 border-icon-primary border-opacity-50 border-solid bg-primary bg-opacity-50">

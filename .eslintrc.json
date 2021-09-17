@@ -6,6 +6,7 @@
   ],
   "rules": {
     "@next/next/no-img-element": "off",
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "max-len": "off"
   }
 }

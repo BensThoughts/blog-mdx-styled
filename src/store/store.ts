@@ -1,10 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import imgCacheSlice from './imgCacheSlice';
 
 export const store = configureStore({
   reducer: {
-    imgCache: imgCacheSlice
-  }
+    imgCache: imgCacheSlice,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

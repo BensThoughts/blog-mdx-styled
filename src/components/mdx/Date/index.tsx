@@ -1,4 +1,4 @@
-import { parseISO, format } from 'date-fns';
+import {parseISO, format} from 'date-fns';
 import styled from '@emotion/styled';
 
 interface DateProps {

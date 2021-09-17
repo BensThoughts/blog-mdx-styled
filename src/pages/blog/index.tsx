@@ -1,22 +1,20 @@
-import { ReactNode } from 'react';
-import type { GetStaticProps } from 'next';
+import {ReactNode} from 'react';
+import type {GetStaticProps} from 'next';
 import Link from 'next/link';
-import styled from "@emotion/styled";
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import styled from '@emotion/styled';
 
-import { getSortedPostsData } from '@app/utils/blogPosts';
-import { H1, H2 } from '@app/components/mdx';
+import {getSortedPostsData} from '@app/utils/blogPosts';
+import {H1} from '@app/components/mdx';
 import Card from '@app/components/Card';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import MainContent from '@app/components/Layout/MainContent';
 
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData
-    }
+      allPostsData,
+    },
   };
 };
 
@@ -39,23 +37,22 @@ interface BlogArticleListProps {
   }[]
 }
 
-export default function BlogArticleListPage({ allPostsData }: BlogArticleListProps) {
-
+export default function BlogArticleListPage({allPostsData}: BlogArticleListProps) {
   return (
-      <MaxWidthWrapper>
-        <section>
-          <H1 className="mb-3 md:mb-6">Blog</H1>
-          <GridContainer>
-              {allPostsData.map(({ id, ogTitle, date, description}, idx) => {
-                return (
-                    <Link href={`/blog/${id}`} scroll={false} key={id}>
-                      <a><Card title={ogTitle} subTitle={date} className="md:h-64 shadow-md"><article>{description}</article></Card></a>
-                    </Link>
-                )
-              })}
-          </GridContainer>
-        </section>
-      </MaxWidthWrapper>
+    <MaxWidthWrapper>
+      <section>
+        <H1 className="mb-3 md:mb-6">Blog</H1>
+        <GridContainer>
+          {allPostsData.map(({id, ogTitle, date, description}, idx) => {
+            return (
+              <Link href={`/blog/${id}`} scroll={false} key={id}>
+                <a><Card title={ogTitle} subTitle={date} className="md:h-64 shadow-md"><article>{description}</article></Card></a>
+              </Link>
+            );
+          })}
+        </GridContainer>
+      </section>
+    </MaxWidthWrapper>
   );
 };
 

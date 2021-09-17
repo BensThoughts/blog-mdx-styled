@@ -1,16 +1,16 @@
-import { FeatureToggleContext } from '@app/utils/context/FeatureToggleContext';
+import {FeatureToggleContext} from '@app/utils/context/FeatureToggleContext';
 
 type FeatureToggleProps = {
   children: React.ReactNode,
   enabledFeatures: string[]
 }
 
-export default function FeatureToggle ({
+export default function FeatureToggle({
   children,
-  enabledFeatures
+  enabledFeatures,
 }: FeatureToggleProps) {
   return (
-    <FeatureToggleContext.Provider value={{ enabledFeatures }}>
+    <FeatureToggleContext.Provider value={{enabledFeatures}}>
       {children}
     </FeatureToggleContext.Provider>
   );

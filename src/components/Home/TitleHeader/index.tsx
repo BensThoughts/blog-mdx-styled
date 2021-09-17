@@ -84,12 +84,12 @@ type TitleHeaderProps = {
   inverse?: boolean;
 }
 
-export default function TitleHeader({ text, inverse = false }: TitleHeaderProps) {
+export default function TitleHeader({text, inverse = false}: TitleHeaderProps) {
   return (
     <>
-      {inverse
-        ? <InverseHeader>{text}</InverseHeader>
-        : <Header>{text}</Header>
+      {inverse ?
+        <InverseHeader>{text}</InverseHeader> :
+        <Header>{text}</Header>
       }
     </>
   );

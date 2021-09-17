@@ -7,22 +7,21 @@ import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 import useFeatureToggle from '@app/utils/hooks/useFeatureToggle';
 
 
-
 export default function Home() {
   const [isEnabled] = useFeatureToggle();
   return (
-      <MaxWidthWrapper>
-        <GridWrapper charWidth={100}>
+    <MaxWidthWrapper>
+      <GridWrapper charWidth={100}>
+        <EnterAnimation>
+          <AvatarCard />
+        </EnterAnimation>
+        {isEnabled('tech-card') && (
           <EnterAnimation>
-            <AvatarCard />
+            <TechCard className="" />
           </EnterAnimation>
-          {isEnabled('tech-card') && (
-            <EnterAnimation>
-              <TechCard className="" />  
-            </EnterAnimation>
-          )}
-          <ProjectsCard />
-        </GridWrapper>
-      </MaxWidthWrapper>
+        )}
+        <ProjectsCard />
+      </GridWrapper>
+    </MaxWidthWrapper>
   );
 };

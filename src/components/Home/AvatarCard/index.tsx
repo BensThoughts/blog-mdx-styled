@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import AvatarImg from './AvatarImg';
+import TitleHeader from '../TitleHeader';
+import AboutBox from './AboutBox';
 
 const TransitionColor = styled.div`
   transition-property: background, color;
@@ -32,23 +34,20 @@ const AboutPlacer = styled.div`
   grid-column: 1;
 `;
 
-import H1 from '@app/components/mdx/H1';
-import TitleHeader from '../TitleHeader';
-import AboutBox from './AboutBox';
 
 export default function AvatarCard({...rest}) {
-  const bustImgSrc = "https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg";
+  const bustImgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg';
   return (
-      <TransitionColor {...rest} className="w-full">
-        <TitleHeader text="About Me" />
-        <ContentWrap className="md">
-          <AboutPlacer>
-            <AboutBox />
-          </AboutPlacer>
-          <ImagePlacer>
-            <AvatarImg imgSrc={bustImgSrc} />
-          </ImagePlacer>
-        </ContentWrap>
-      </TransitionColor>
+    <TransitionColor {...rest} className="w-full">
+      <TitleHeader text="About Me" />
+      <ContentWrap className="md">
+        <AboutPlacer>
+          <AboutBox />
+        </AboutPlacer>
+        <ImagePlacer>
+          <AvatarImg imgSrc={bustImgSrc} />
+        </ImagePlacer>
+      </ContentWrap>
+    </TransitionColor>
   );
 }

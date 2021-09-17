@@ -1,7 +1,7 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { NextSeo } from 'next-seo';
+import {GetStaticPaths, GetStaticProps} from 'next';
+import {serialize} from 'next-mdx-remote/serialize';
+import {MDXRemote, MDXRemoteSerializeResult} from 'next-mdx-remote';
+import {NextSeo} from 'next-seo';
 
 import {
   A,
@@ -15,9 +15,9 @@ import {
   H2,
   HeaderImage,
   P,
-  Pre
+  Pre,
 } from '@app/components/mdx/';
-import { getAllPostIds, getPostData } from '@app/utils/blogPosts';
+import {getAllPostIds, getPostData} from '@app/utils/blogPosts';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 
@@ -62,9 +62,9 @@ type PostProps = {
 export default function PostsPage({
   content,
   url,
-  metaData
+  metaData,
 }: PostProps) {
-  const { 
+  const {
     title,
     date,
     modifiedDate,
@@ -84,7 +84,7 @@ export default function PostsPage({
   } = metaData;
   return (
     <>
-      <NextSeo 
+      <NextSeo
         title={title}
         description={ogDescription}
         openGraph={{
@@ -103,14 +103,14 @@ export default function PostsPage({
             url: ogImageUrl,
             width: ogImageWidth,
             height: ogImageHeight,
-            alt: ogImageAlt
+            alt: ogImageAlt,
           }],
-          site_name: 'BensThoughts Developer Blog'
+          site_name: 'BensThoughts Developer Blog',
         }}
         twitter={{
           handle: '@bensthoughts',
           site: '@bensthoughts',
-          cardType: 'summary_large_image'
+          cardType: 'summary_large_image',
         }}
       />
       <MaxWidthWrapper>
@@ -124,9 +124,8 @@ export default function PostsPage({
                 alt={ogImageAlt}
                 width={imgWidth}
                 height={imgHeight}
-                
               />
-            ) : 
+            ) :
             (
               <></>
             )
@@ -142,12 +141,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { content, url, metaData } = await getPostData(params!.id as string);
+export const getStaticProps: GetStaticProps = async ({params}) => {
+  const {content, url, metaData} = await getPostData(params!.id as string);
   const mdxSource = await serialize(content);
 
   return {
@@ -155,6 +154,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       content: mdxSource,
       url: url,
       metaData: metaData,
-    }
+    },
   };
 };

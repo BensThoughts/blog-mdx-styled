@@ -1,9 +1,9 @@
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import NextDocument, {Html, Head, Main, NextScript, DocumentContext} from 'next/document';
 export default class Document extends NextDocument {
-  // static async getInitialProps(ctx: DocumentContext) {
-  //   const initialProps = await NextDocument.getInitialProps(ctx);
-  //   return { ...initialProps };
-  // }
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await NextDocument.getInitialProps(ctx);
+    return {...initialProps};
+  }
 
   render() {
     const setInitialTheme = `
@@ -39,7 +39,7 @@ export default class Document extends NextDocument {
           />
         </Head>
         <body>
-          <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
+          <script dangerouslySetInnerHTML={{__html: setInitialTheme}} />
           <Main />
           <NextScript />
         </body>

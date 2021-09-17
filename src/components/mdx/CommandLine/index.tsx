@@ -1,33 +1,30 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from '@emotion/styled';
 
 type CommandLineSize = 'large' | 'small';
 
 const CommandLineContainer = styled.div<{
-  size?: CommandLineSize 
+  size?: CommandLineSize
 }>`
   /* grid-column: 1 / -1; */
   @media (min-width: 768px) {
-    grid-column: ${({ size = 'small' }) => size === 'small' ? '2 / 3' : '1 / -1'};
-    max-width: ${({ size = 'small' }) => size === 'small' ? '100%' : 'max-content'};
+    grid-column: ${({size = 'small'}) => size === 'small' ? '2 / 3' : '1 / -1'};
+    max-width: ${({size = 'small'}) => size === 'small' ? '100%' : 'max-content'};
   }
 `;
 
 const Prompt = styled.span`
-  color: rgb(153, 76, 195);;
+  color:rgb(153, 76, 195);;
 `;
 
 const Command = styled.span`
-  color: 	rgb(72, 118, 214);;
+  color: rgb(72, 118, 214);;
 `;
 
 const Options = styled.span`
   color: rgb(12, 150, 155);;
 `;
 
-const Args = styled.span`
-  /* color: var(--color-text-primary); */
-`;
 interface CommandLineProps {
   title?: string,
   command: string,
@@ -43,7 +40,7 @@ export default function CommandLine({
   options,
   args,
   size,
-  className = ''
+  className = '',
 }: CommandLineProps) {
   const clipBoard = command + ' ' +
       (options ? options + ' ' : '') +
@@ -70,7 +67,9 @@ export default function CommandLine({
               <span className="mr-4 text-primary">{args ? ' ' + args : ''}</span>
             </div>
             <button
-              onClick={() => {void navigator.clipboard.writeText(clipBoard);}}
+              onClick={() => {
+                void navigator.clipboard.writeText(clipBoard);
+              }}
               type="button"
               aria-label="Copy Button"
               className="rounded py-2 px-3 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
@@ -79,7 +78,7 @@ export default function CommandLine({
             </button>
           </div>
         </pre>
-      </div>   
+      </div>
     </CommandLineContainer>
   );
 }

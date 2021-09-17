@@ -1,22 +1,20 @@
-import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Twitter,
   Facebook,
   Linkedin,
-  GitHub
+  GitHub,
 } from 'react-feather';
 
 import TransitionColor from '@app/components/Transitions/TransitionColor';
 // import SocialIcon from './SocialIcon';
 import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
 
-const Container = styled.footer`
-  transition-property: background, color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  will-change: background, color;
-`;
+// const Container = styled.footer`
+//   transition-property: background, color;
+//   transition-duration: 300ms;
+//   transition-timing-function: ease-in-out;
+//   will-change: background, color;
+// `;
 
 // const IconContainer = styled(FontAwesomeIcon)`
 //   transition-property: background, color;
@@ -29,7 +27,7 @@ type FooterProps = {
   className?: string;
 }
 
-export default function Footer({ className }: FooterProps) {
+export default function Footer({className}: FooterProps) {
   return (
     <TransitionColor className={`bg-primary w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">

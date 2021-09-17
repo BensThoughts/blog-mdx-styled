@@ -29,7 +29,7 @@ export default function HeaderImage({
 
   return (
     <ImageContainer className={`md:w-full mx-auto overflow-hidden ${className}`}>
-      <img 
+      <img
         src={src}
         alt={alt}
         width={width}
@@ -37,10 +37,10 @@ export default function HeaderImage({
         style={{
           filter: blur ? 'blur(20px)' : 'none',
           transition: blur ? 'none' : 'filter 0.2s ease-out',
-          //margin: '-5px -10px -10px -5px'
+          // margin: '-5px -10px -10px -5px'
         }}
         className="object-contain"
       />
     </ImageContainer>
-  )
+  );
 }

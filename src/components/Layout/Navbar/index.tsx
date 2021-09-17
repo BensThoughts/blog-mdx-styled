@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useWindowScroll } from 'react-use';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import Logo from '@app/components/Logo';
 import MenuItem from '@app/components/Layout/MenuItem';
@@ -10,8 +9,6 @@ import Breadcrumbs from '@app/components/Breadcrumbs';
 import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
-import AnimatedLink from '@app/components/AnimatedLink';
-import TransitionColor from '@app/components/Transitions/TransitionColor';
 
 const Nav = styled.nav`
   display: flex;
@@ -44,31 +41,31 @@ type NavBarProps = {
   className?: string;
 }
 
-export default function Navbar({ className, ...rest }: NavBarProps) {
+export default function Navbar({className, ...rest}: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Try something new!">
-          <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
-            <MenuItem href="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
-            <MenuItem href="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
-            <MenuItem href="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
-            <MenuItem href="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
-            <MenuItem href="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
-          </NavLinks>
+        <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
+          <MenuItem href="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
+          <MenuItem href="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
+          <MenuItem href="/projects" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Projects</MenuItem>
+          <MenuItem href="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
+          <MenuItem href="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem>
+        </NavLinks>
       </Drawer>
       <NavHider>
         <Nav {...rest} className={`bg-primary shadow-lg ${className}`}>
-          {/* Small- Screens */}  
+          {/* Small- Screens */}
           <div className="flex md:hidden w-full justify-between items-center mx-3">
             <ThemeToggle />
             <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
               <FontAwesomeIcon icon={['fas', 'bars']} inverse size="lg" className="text-icon-primary" />
             </IconButton>
           </div>
-  
-          {/* Medium+ Screens */}  
+
+          {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mr-3">
             <div className="ml-3">
               <div className="flex items-center">
@@ -89,9 +86,9 @@ export default function Navbar({ className, ...rest }: NavBarProps) {
               <ThemeToggle />
             </NavLinks>
           </div>
-        </Nav>        
+        </Nav>
       </NavHider>
-     
+
     </>
   );
 };
