@@ -7,6 +7,7 @@ import { LazyMotion, domAnimation } from 'framer-motion';
 const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
   ssr: false
 });
+import FeatureToggle from '@app/components/FeatureToggle/FeatureToggle';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
@@ -65,9 +66,11 @@ const FooterWrap = styled.div`
 `;
 
 function MyApp({ Component, pageProps, router }: AppProps) {
+  const enabledFeatures = ['home', 'blog'];
   return (
     <>
       <DefaultSeo {...seoConfig} />
+      <FeatureToggle enabledFeatures={enabledFeatures}>
       <Provider store={store}>
         <ThemeProvider>
           <Navbar className="h-14" />
@@ -87,6 +90,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         </PageWrapper>
 
       </Provider>
+      </FeatureToggle>
     </>
   );
 }

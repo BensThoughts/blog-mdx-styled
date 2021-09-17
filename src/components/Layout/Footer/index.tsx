@@ -8,7 +8,7 @@ import {
 } from 'react-feather';
 
 import TransitionColor from '@app/components/Transitions/TransitionColor';
-import SocialIcon from './SocialIcon';
+// import SocialIcon from './SocialIcon';
 import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
 
 const Container = styled.footer`
@@ -18,12 +18,12 @@ const Container = styled.footer`
   will-change: background, color;
 `;
 
-const IconContainer = styled(FontAwesomeIcon)`
-  transition-property: background, color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  will-change: background, color;
-`;
+// const IconContainer = styled(FontAwesomeIcon)`
+//   transition-property: background, color;
+//   transition-duration: 300ms;
+//   transition-timing-function: ease-in-out;
+//   will-change: background, color;
+// `;
 
 type FooterProps = {
   className?: string;
