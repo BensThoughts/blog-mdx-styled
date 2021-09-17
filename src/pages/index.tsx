@@ -20,7 +20,11 @@ export default function Home() {
             <TechCard className="" />
           </EnterAnimation>
         )}
-        <ProjectsCard />
+        {isEnabled('projects') && (
+          <EnterAnimation>
+            <ProjectsCard />
+          </EnterAnimation>
+        )}
       </GridWrapper>
     </MaxWidthWrapper>
   );
