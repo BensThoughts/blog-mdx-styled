@@ -36,7 +36,8 @@ const AboutPlacer = styled.div`
 
 
 export default function AvatarCard({...rest}) {
-  const bustImgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg';
+  // const bustImgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1631126786/blog/home/bust_clean_xugkq8.jpg';
+  const bustImgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1632153114/blog/home/bust_blue_llboi6.jpg';
   return (
     <TransitionColor {...rest} className="w-full">
       <TitleHeader text="About Me" />
