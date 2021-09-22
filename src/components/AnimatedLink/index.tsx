@@ -7,7 +7,7 @@ const A = styled.a`
   overflow: hidden;
   text-decoration: none;
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -21,7 +21,7 @@ const A = styled.a`
     transition: opacity 300ms, transform 300ms;
   }
 
-  &:hover:after {
+  &:hover::after {
     opacity: 1;
     transform: scale(1);
   }
@@ -30,30 +30,25 @@ const A = styled.a`
 
 type AProps = {
   children: React.ReactNode;
-  href?: string;
-  target?: string;
-  rel?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>
-}
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 const AnimatedLink = forwardRef<HTMLAnchorElement, AProps>(({
-  href = '',
-  target = '',
-  rel = '',
   children,
   className = '',
   onClick,
+  ...rest
 }, ref) => {
   return (
     <A
-      href={href}
-      className={`${className}`}
-      target={target}
-      rel={rel}
       ref={ref}
       onClick={onClick}
-    >{children}</A>
+      className={className}
+      {...rest}
+    >
+      {children}
+    </A>
   );
 });
 
