@@ -16,6 +16,7 @@ import {
   HeaderImage,
   P,
   Pre,
+  Strong,
 } from '@app/components/mdx/';
 import {getAllPostIds, getPostData} from '@app/utils/blogPosts';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
@@ -31,6 +32,7 @@ const components = {
   h2: H2,
   p: P,
   pre: Pre,
+  strong: Strong,
   ArticleHeader,
   CommandLine,
   HeaderImage,

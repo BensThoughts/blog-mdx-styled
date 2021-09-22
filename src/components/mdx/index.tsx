@@ -10,3 +10,4 @@ export {default as H2} from '@app/components/mdx/H2';
 export {default as HeaderImage} from '@app/components/mdx/HeaderImage';
 export {default as P} from '@app/components/mdx/P';
 export {default as Pre} from '@app/components/mdx/Pre';
+export {default as Strong} from '@app/components/mdx/Strong';
