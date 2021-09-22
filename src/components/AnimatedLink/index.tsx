@@ -25,7 +25,6 @@ const A = styled.a`
     opacity: 1;
     transform: scale(1);
   }
-
 `;
 
 type AProps = {
