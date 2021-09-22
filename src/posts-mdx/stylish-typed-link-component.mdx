@@ -27,6 +27,7 @@ Photo by [Fahrul Azmi](https://unsplash.com/@fahrulazmi?utm_source=unsplash&utm_
 on
 [unsplash](https://unsplash.com/s/photos/link?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
+---
 
 ## What We Are Building
 
@@ -39,15 +40,16 @@ it will work for their situation. Need a link that opens a new tab/window to an
 external site? no problem. Need a link that gets wrapped by another component like
 Next.js **<Link\>** ? Again, no problem. This component is flexible and adaptable.
 
-## Setup
+---
+
+## Initial Setup
 
 For this component I have used *@emotion/styled* but we could have just as easily
 used a css module with a className. The important bits of css as well as how and why
 the link works with the Next.js **<Link\>** element will be discussed. The article
 assumes you already have a Next.js application up and running. Details on how to
-start a Next.JS project can be found here [next.js](https://nextjs.org/docs)
-
-Install [@emotion/styled](https://emotion.sh/docs/install)
+start a Next.JS project can be found here [next.js](https://nextjs.org/docs). Details
+on installing @emotion/styled can be found here [@emotion/styled](https://emotion.sh/docs/install)
 
 <CommandLine
   title="install @emotion/styled"
@@ -55,6 +57,8 @@ Install [@emotion/styled](https://emotion.sh/docs/install)
   options="install"
   args="@emotion/styled"
 />
+
+---
 
 ## The Component a First Attempt
 
@@ -131,10 +135,13 @@ I have joined the base typings of the component with React.AnchorHTMLAttributes<
 &). This is what allows any user of the component to pass any valid anchor props to
 the component. I use {..rest} to spread those props out within the styled anchor
 element itself. In total this makes the component highly reusable because any user of
-the component can attach any valid anchor element props (such as style={{}}, rel="",
-or the all important href="") to the component for a given use case.
+the component can pass any valid anchor element props to it. Such as style={style},
+rel={rel}, or the all important href={href}.
+
+---
 
 ## This Works, But Does It?
+
 
 The component outlined above does work as a standard anchor element with a stylish
 css effect, but will it work with Next.js and the **<Link\>** component? Not quite!
@@ -172,6 +179,8 @@ export default function({ href, name }) {
 ```
 The passHref prop will tell the **<Link\>** component to properly pass the href prop
 down to our stylish AnimatedLink component. But there is still one more step!
+
+---
 
 ## The Final Steps
 
@@ -247,3 +256,5 @@ export default AnimatedLink;
 This is the final version of our fully reusable, fully typed and very stylish
 AnimatedLink component. Feel free to tweak the css properties to see what other sorts
 of animations you can come up with. Hopefully you found this article useful.
+
+---
