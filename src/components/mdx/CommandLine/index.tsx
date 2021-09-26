@@ -1,5 +1,5 @@
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from '@emotion/styled';
+import {Copy} from 'react-feather';
 
 type CommandLineSize = 'large' | 'small';
 
@@ -74,7 +74,7 @@ export default function CommandLine({
               aria-label="Copy Button"
               className="rounded py-2 px-3 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
             >
-              <FontAwesomeIcon icon={['far', 'copy']} inverse size="lg" className="text-icon-secondary"/>
+              <Copy className="text-icon-secondary"/>
             </button>
           </div>
         </pre>

@@ -1,9 +1,9 @@
 const generateColorClass = (variable) => {
-  return ({ opacityValue }) =>
-    opacityValue
-      ? `rgba(var(--${variable}), ${opacityValue})`
-      : `rgb(var(--${variable}))`
-}
+  return ({opacityValue}) =>
+    opacityValue ?
+      `rgba(var(--${variable}), ${opacityValue})` :
+      `rgb(var(--${variable}))`;
+};
 
 module.exports = {
   purge: [
@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'press-start': ['"Press Start 2P"', 'cursive']
+        'press-start': ['"Press Start 2P"', 'cursive'],
       },
       backgroundColor: {
         'app-bg': generateColorClass('color-bg-primary'),
@@ -27,24 +27,24 @@ module.exports = {
         'secondary': generateColorClass('color-text-secondary'),
         'icon-primary': generateColorClass('color-app-primary'),
         'icon-secondary': generateColorClass('color-app-secondary'),
-        'icon-accent': generateColorClass('color-app-accent')
+        'icon-accent': generateColorClass('color-app-accent'),
       },
       borderColor: {
         'primary': generateColorClass('color-app-primary'),
         'secondary': generateColorClass('color-app-secondary'),
         'accent': generateColorClass('color-app-accent'),
-        'icon-primary': generateColorClass('color-icon-border-primary')
+        'icon-primary': generateColorClass('color-icon-border-primary'),
 
       },
       borderWidth: {
-        1: '1px'
-      }
-    }
+        1: '1px',
+      },
+    },
   },
   variants: {
     extend: {
       backgroundColor: ['active'],
-      borderOpacity: ['active']
+      borderOpacity: ['active'],
     },
   },
   plugins: [],

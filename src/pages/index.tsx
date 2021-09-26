@@ -12,9 +12,9 @@ export default function Home() {
   return (
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
-        <EnterAnimation>
-          <AvatarCard />
-        </EnterAnimation>
+        {/* <EnterAnimation> */}
+        <AvatarCard />
+        {/* </EnterAnimation> */}
         {isEnabled('tech-card') && (
           <EnterAnimation>
             <TechCard className="" />

@@ -111,6 +111,9 @@ body[data-theme="light"] {
   --color-scroll-thumb: #ED8936;
   --color-scroll-track: #FBD38D;
   --color-scroll-thumb-hover: #FAF089;
+
+  --color-gradient-primary: 7, 105, 99;
+  --color-gradient-secondary: 7, 105, 99;
 }
 
 body[data-theme="dark"] {
@@ -130,6 +133,11 @@ body[data-theme="dark"] {
   --color-scroll-thumb: #3182CE;
   --color-scroll-track: #4A5568;
   --color-scroll-thumb-hover: #63B3ED;
+
+  /* --color-gradient-primary: 247, 114, 212;
+  --color-gradient-secondary: 173, 108, 246; */
+  --color-gradient-primary: 255, 107, 0;
+  --color-gradient-secondary: 255, 107, 0;
 }
 
 @keyframes fadeIn {

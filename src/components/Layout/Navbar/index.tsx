@@ -1,8 +1,6 @@
 import {useState} from 'react';
 import styled from '@emotion/styled';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import Logo from '@app/components/Logo';
 import MenuItem from '@app/components/Layout/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
@@ -10,7 +8,14 @@ import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
 
+import Monitor from '@app/components/Icons/Monitor';
+import Bars from '@app/components/Icons/Bars';
+
 const Nav = styled.nav`
+  /* background-color: rgba(0, 0, 0, 0); */
+  /* background-image: radial-gradient(rgba(0,0,0,0) 1px,rgba(var(--color-bg-primary), 0.5) 1px );
+  background-size: 4px 4px;
+  backdrop-filter: brightness(100%) blur(2px); */
   display: flex;
   z-index: 49;
   align-items: center;
@@ -37,6 +42,8 @@ const NavLinks = styled.div`
   will-change: background; */
 `;
 
+// bg-app-bg shadow-lg backdrop-filter bg-opacity-70 backdrop-blur-sm
+
 type NavBarProps = {
   className?: string;
 }
@@ -56,12 +63,12 @@ export default function Navbar({className, ...rest}: NavBarProps) {
         </NavLinks>
       </Drawer>
       <NavHider>
-        <Nav {...rest} className={`bg-primary shadow-lg ${className}`}>
+        <Nav {...rest} className={`bg-app-bg shadow-lg backdrop-filter bg-opacity-70 backdrop-blur-sm ${className}`}>
           {/* Small- Screens */}
           <div className="flex md:hidden w-full justify-between items-center mx-3">
             <ThemeToggle />
             <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
-              <FontAwesomeIcon icon={['fas', 'bars']} inverse size="lg" className="text-icon-primary" />
+              <Bars color="black" />
             </IconButton>
           </div>
 
@@ -70,7 +77,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             <div className="ml-3">
               <div className="flex items-center">
                 <div className="mr-3">
-                  <Logo />
+                  <Monitor />
                 </div>
                 <div>
                   <Breadcrumbs />

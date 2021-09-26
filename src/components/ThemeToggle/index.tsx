@@ -1,7 +1,9 @@
 import {useContext} from 'react';
 import styled from '@emotion/styled';
 import {ThemeContext} from '@app/utils/context/colorMode';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+// import Sun from '@app/components/Icons/Sun';
+import {Moon, Sun} from 'react-feather';
 
 const ToggleButton = styled.button`
   --toggle-width: 78px;
@@ -37,7 +39,7 @@ const ToggleButton = styled.button`
 `;
 
 const ToggleThumb = styled.span<{
-  colorMode: string
+  colorMode?: string
 }>`
   --app-bg-opacity: 1;
   position: absolute;
@@ -54,7 +56,7 @@ const ToggleThumb = styled.span<{
       'none'};
 `;
 
-const ThemeToggle = () => {
+export default function ThemeToggle() {
   const {colorMode, setColorMode} = useContext(ThemeContext);
   const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
 
@@ -65,11 +67,10 @@ const ThemeToggle = () => {
       type="button"
       onClick={() => setColorMode(inactiveColorMode)}
     >
-      <ToggleThumb colorMode={colorMode!} />
-      <span aria-hidden="true"><FontAwesomeIcon icon={['fas', 'cloud-moon']} className="text-icon-secondary text-opacity-95" /></span>
-      <span aria-hidden="true"><FontAwesomeIcon icon={['fas', 'sun']} className="text-icon-secondary text-opacity-95" /></span>
+      <ToggleThumb colorMode={colorMode} />
+
+      <span aria-hidden="true"><Moon className="text-icon-secondary" /></span>
+      <span aria-hidden="true"><Sun className="text-icon-secondary" /></span>
     </ToggleButton>
   );
 };
-
-export default ThemeToggle;

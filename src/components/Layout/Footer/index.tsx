@@ -1,9 +1,7 @@
-import {
-  Twitter,
-  Facebook,
-  Linkedin,
-  GitHub,
-} from 'react-feather';
+import Twitter from '@app/components/Icons/Twitter';
+import Facebook from '@app/components/Icons/Facebook';
+import LinkedIn from '@app/components/Icons/LinkedIn';
+import Github from '@app/components/Icons/Github';
 
 import TransitionColor from '@app/components/Transitions/TransitionColor';
 // import SocialIcon from './SocialIcon';
@@ -29,10 +27,10 @@ type FooterProps = {
 
 export default function Footer({className}: FooterProps) {
   return (
-    <TransitionColor className={`bg-primary w-full flex flex-row justify-center items-center ${className}`}>
+    <TransitionColor className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://github.com/bensthoughts">
-          <GitHub className="text-secondary" />
+          <Github className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
@@ -43,7 +41,7 @@ export default function Footer({className}: FooterProps) {
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://www.linkedin.com/in/benjaminblumenfeldjones">
-          <Linkedin className="text-secondary" />
+          <LinkedIn className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
