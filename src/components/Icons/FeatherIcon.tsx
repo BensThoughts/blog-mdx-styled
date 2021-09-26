@@ -1,6 +1,6 @@
 import {forwardRef} from 'react';
 import styled from '@emotion/styled';
-import {v4 as uuidV4} from 'uuid';
+import {useUID} from 'react-uid';
 
 const Stop1 = styled.stop`
   stop-color: rgb(var(--color-gradient-primary));
@@ -23,7 +23,7 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
   children,
   ...rest
 }: IconProps, ref) => {
-  const UUID = uuidV4();
+  const UUID = useUID();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
