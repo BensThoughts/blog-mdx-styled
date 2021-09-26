@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {Copy} from 'react-feather';
+import {Copy} from '@app/components/Icons';
 
 type CommandLineSize = 'large' | 'small';
 
@@ -74,7 +74,7 @@ export default function CommandLine({
               aria-label="Copy Button"
               className="rounded py-2 px-3 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
             >
-              <Copy className="text-icon-secondary"/>
+              <Copy color="currentColor" className="text-icon-secondary"/>
             </button>
           </div>
         </pre>

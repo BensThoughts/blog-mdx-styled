@@ -1,4 +1,4 @@
-import {Mail} from 'react-feather';
+import {Mail} from '@app/components/Icons';
 
 export default function IconPill() {
   return (

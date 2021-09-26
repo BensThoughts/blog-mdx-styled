@@ -8,8 +8,10 @@ import Drawer from '@app/components/Drawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
 
-import Monitor from '@app/components/Icons/Monitor';
-import Bars from '@app/components/Icons/Bars';
+import {
+  Bars,
+  Monitor,
+} from '@app/components/Icons';
 
 const Nav = styled.nav`
   /* background-color: rgba(0, 0, 0, 0); */
@@ -71,7 +73,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             <div className="ml-3">
               <div className="flex items-center">
                 <div className="mr-3">
-                  <Monitor />
+                  <Monitor size={26} color="currentColor" className="text-icon-secondary" />
                 </div>
                 <div>
                   <Breadcrumbs />
@@ -93,7 +95,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
 
             <ThemeToggle />
             <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
-              <Bars color="black" />
+              <Bars size={24} color="currentColor" className="text-icon-primary" />
             </IconButton>
 
           </div>

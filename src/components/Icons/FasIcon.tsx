@@ -12,7 +12,6 @@ const Stop2 = styled.stop`
 
 type IconProps = {
   size?: number,
-  stroke?: string
 } & React.SVGAttributes<SVGElement>
 
 const FasIcon = forwardRef<SVGSVGElement, IconProps>(({

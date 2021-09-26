@@ -42,7 +42,6 @@ export default function CodeElement({
   className = '',
 }: CodeElementProps) {
   const {colorMode} = useContext(ThemeContext);
-  console.log('Code colorMode: ' + colorMode);
 
   if (children === null) {
     return null;

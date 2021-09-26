@@ -2,10 +2,10 @@ import {useContext} from 'react';
 import styled from '@emotion/styled';
 import {ThemeContext} from '@app/utils/context/colorMode';
 
-// import Sun from '@app/components/Icons/Sun';
-import CloudMoon from '../Icons/CloudMoon';
-import Sun from '../Icons/Sun';
-// import {Moon, Sun} from 'react-feather';
+import {
+  CloudMoon,
+  Sun,
+} from '@app/components/Icons';
 
 const ToggleButton = styled.button`
   --toggle-width: 78px;
