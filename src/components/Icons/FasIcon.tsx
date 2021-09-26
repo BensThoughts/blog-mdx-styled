@@ -15,11 +15,10 @@ type IconProps = {
   stroke?: string
 } & React.SVGAttributes<SVGElement>
 
-const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
+const FasIcon = forwardRef<SVGSVGElement, IconProps>(({
   size = 24,
-  stroke,
   fill,
-  viewBox = '0 0 24 24',
+  viewBox = '0 0 512 512',
   children,
   ...rest
 }: IconProps, ref) => {
@@ -30,10 +29,6 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
       width={size}
       height={size}
       fill={fill ? fill : `url(#${UUID})`}
-      stroke={stroke ? stroke : `url(#${UUID})` }
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMid meet"
       ref={ref}
@@ -50,6 +45,6 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
   );
 });
 
-FeatherIcon.displayName = 'FeatherIcon';
+FasIcon.displayName = 'FasIcon';
 
-export default FeatherIcon;
+export default FasIcon;

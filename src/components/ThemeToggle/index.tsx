@@ -3,7 +3,9 @@ import styled from '@emotion/styled';
 import {ThemeContext} from '@app/utils/context/colorMode';
 
 // import Sun from '@app/components/Icons/Sun';
-import {Moon, Sun} from 'react-feather';
+import CloudMoon from '../Icons/CloudMoon';
+import Sun from '../Icons/Sun';
+// import {Moon, Sun} from 'react-feather';
 
 const ToggleButton = styled.button`
   --toggle-width: 78px;
@@ -61,16 +63,21 @@ export default function ThemeToggle() {
   const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
 
   return (
-    <ToggleButton
-      aria-label={`Change to ${inactiveColorMode} mode`}
-      title={`Change to ${inactiveColorMode} mode`}
-      type="button"
-      onClick={() => setColorMode(inactiveColorMode)}
-    >
-      <ToggleThumb colorMode={colorMode} />
+    <>
+      <ToggleButton
+        aria-label={`Change to ${inactiveColorMode} mode`}
+        title={`Change to ${inactiveColorMode} mode`}
+        type="button"
+        onClick={() => setColorMode(inactiveColorMode)}
+      >
+        <ToggleThumb colorMode={colorMode} />
 
-      <span aria-hidden="true"><Moon className="text-icon-secondary" /></span>
-      <span aria-hidden="true"><Sun className="text-icon-secondary" /></span>
-    </ToggleButton>
+        <span aria-hidden="true"><CloudMoon fill="currentColor" className="text-icon-secondary" /></span>
+        <span aria-hidden="true"><Sun color="currentColor" className="text-icon-secondary" /></span>
+      </ToggleButton>
+    </>
   );
 };
+
+// <span aria-hidden="true"><CloudMoon className="text-icon-secondary" /></span>
+// <span aria-hidden="true"><Sun className="text-icon-secondary" /></span>

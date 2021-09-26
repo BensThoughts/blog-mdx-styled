@@ -64,13 +64,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
       </Drawer>
       <NavHider>
         <Nav {...rest} className={`bg-app-bg shadow-lg backdrop-filter bg-opacity-70 backdrop-blur-sm ${className}`}>
-          {/* Small- Screens */}
-          <div className="flex md:hidden w-full justify-between items-center mx-3">
-            <ThemeToggle />
-            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
-              <Bars color="black" />
-            </IconButton>
-          </div>
+
 
           {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mr-3">
@@ -92,6 +86,16 @@ export default function Navbar({className, ...rest}: NavBarProps) {
               <MenuItem animatedLink href="/contact" className="mx-4">Contact</MenuItem> */}
               <ThemeToggle />
             </NavLinks>
+          </div>
+
+          {/* Small- Screens */}
+          <div className="flex md:hidden w-full justify-between items-center mx-3">
+
+            <ThemeToggle />
+            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
+              <Bars color="black" />
+            </IconButton>
+
           </div>
         </Nav>
       </NavHider>
