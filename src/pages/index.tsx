@@ -6,7 +6,6 @@ import TechCard from '@app/components/Home/TechCard';
 import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 import useFeatureToggle from '@app/utils/hooks/useFeatureToggle';
 
-
 export default function Home() {
   const [isEnabled] = useFeatureToggle();
   return (

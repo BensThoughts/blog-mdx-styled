@@ -71,7 +71,6 @@ export default function ThemeToggle() {
         onClick={() => setColorMode(inactiveColorMode)}
       >
         <ToggleThumb colorMode={colorMode} />
-
         <span aria-hidden="true"><CloudMoon color="currentColor" className="text-icon-secondary" /></span>
         <span aria-hidden="true"><Sun color="currentColor" className="text-icon-secondary" /></span>
       </ToggleButton>

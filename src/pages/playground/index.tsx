@@ -12,6 +12,7 @@ import {
   Twitter,
 } from '@app/components/Icons';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
 
 const Icon = styled.div`
   stroke: url('#linear');
@@ -52,6 +53,9 @@ export default function PlaygroundPage() {
       <CloudMoon />
       <Sun />
       <Copy color="currentColor" className="text-icon-secondary" />
+      <AnimatedLinkIcon href="https://google.com">
+        <Facebook />
+      </AnimatedLinkIcon>
     </MaxWidthWrapper>
   );
 }
