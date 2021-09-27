@@ -31,6 +31,7 @@ const Nav = styled.nav`
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
   will-change: background, color;
+  backdrop-filter: var(--app-backdrop-filter);
 `;
 
 const NavLinks = styled.div`
@@ -65,7 +66,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
         </NavLinks>
       </Drawer>
       <NavHider>
-        <Nav {...rest} className={`bg-app-bg shadow-lg backdrop-filter bg-opacity-70 backdrop-blur-sm ${className}`}>
+        <Nav {...rest} className={`bg-app-bg shadow-lg bg-opacity-70 ${className}`}>
 
 
           {/* Medium+ Screens */}

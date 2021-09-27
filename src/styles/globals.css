@@ -75,26 +75,11 @@ h1 {
   --app-bg-opacity: 1;
   --app-text-opacity: 1;
   --app-border-opacity: 1;
+  --app-backdrop-filter: blur(4px);
 }
 
 body[data-theme="light"] {
-  /* --color-text-primary: 39, 32, 26;
-  --color-text-secondary: 7, 105, 99;
-  
-  --color-bg-primary: 254, 235, 200;
-  --color-bg-toggle: 30, 144, 255;
-  --color-bg-terminal: 251, 211, 141;
-
-  --color-app-primary: 251, 211, 141;
-  --color-app-secondary: 237, 137, 54;
-  --color-app-accent: 250, 240, 137;
-  
-  --color-icon-border-primary: 237, 137, 54;
-
-  --color-scroll-thumb: #ED8936;
-  --color-scroll-track: #FBD38D;
-  --color-scroll-thumb-hover: #FAF089; */
-
+  /* Old Light Orange Theme */
   --color-text-primary: 39, 32, 26;
   --color-text-secondary: 7, 105, 99;
   
@@ -110,10 +95,36 @@ body[data-theme="light"] {
 
   --color-scroll-thumb: #ED8936;
   --color-scroll-track: #FBD38D;
-  --color-scroll-thumb-hover: #FAF089;
-
+  --color-scroll-thumb-hover: #FAF089; 
   --color-gradient-primary: 7, 105, 99;
   --color-gradient-secondary: 7, 105, 99;
+ 
+
+/*  New Dark Theme
+  --color-text-primary: 227, 227, 227;
+  --color-text-secondary: 120, 12, 61;
+  
+  --color-bg-primary: 18, 18, 18;
+  --color-bg-toggle: 30, 144, 255;
+  --color-bg-terminal: 251, 211, 141;
+
+  --color-app-primary: 120, 12, 61;
+  --color-app-secondary: 83, 11, 87;
+  --color-app-accent: 52, 56, 189;
+  
+  --color-icon-border-primary: 237, 137, 54;
+
+  --color-scroll-thumb: #ED8936;
+  --color-scroll-track: #FBD38D;
+  --color-scroll-thumb-hover: #FAF089;
+
+
+  --color-gradient-primary: 83, 11, 87;
+  --color-gradient-secondary: 120, 12, 61; */
+
+  /* Neon Purple/Pink
+  --color-gradient-primary: 247, 114, 212;
+  --color-gradient-secondary: 173, 108, 246; */
 }
 
 body[data-theme="dark"] {
@@ -134,8 +145,6 @@ body[data-theme="dark"] {
   --color-scroll-track: #4A5568;
   --color-scroll-thumb-hover: #63B3ED;
 
-  /* --color-gradient-primary: 247, 114, 212;
-  --color-gradient-secondary: 173, 108, 246; */
   --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 255, 107, 0;
 }

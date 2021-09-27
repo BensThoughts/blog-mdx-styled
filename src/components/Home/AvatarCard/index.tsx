@@ -11,6 +11,8 @@ const TransitionColor = styled.div`
 `;
 
 const ContentWrap = styled.div`
+  padding-bottom: 40px;
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
@@ -20,6 +22,30 @@ const ContentWrap = styled.div`
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 1fr;
     justify-items: center;
+  }
+
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url(svg/space/astronaut-helmet.svg);
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform-origin: center;
+    transform: rotate(0) translateX(0) translateY(-200px);
+    display: none;
+    backdrop-filter: var(--app-backdrop-filter);
+
+    @media (min-width: 768px) { 
+      transform: scale(1) rotate(40deg) translateX(250px) translateY(-100px);
+      display: block;
+    }
   }
 `;
 
