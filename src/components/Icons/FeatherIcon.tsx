@@ -40,7 +40,7 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
       {...rest}
     >
       <defs>
-        <linearGradient id={UUID} x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(45)">
+        <linearGradient id={UUID} x1="0" y1="0" x2="1" y2="0">
           <Stop1 offset="0" />
           <Stop2 offset="1" />
         </linearGradient>
