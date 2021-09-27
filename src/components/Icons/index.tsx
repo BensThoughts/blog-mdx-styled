@@ -1,3 +1,4 @@
+export {default as AstronautHelmet} from './AstronautHelmet';
 export {default as Bars} from './Bars';
 export {default as CloudMoon} from './CloudMoon';
 export {default as Copy} from './Copy';

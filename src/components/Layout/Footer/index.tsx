@@ -1,7 +1,9 @@
-import Twitter from '@app/components/Icons/Twitter';
-import Facebook from '@app/components/Icons/Facebook';
-import LinkedIn from '@app/components/Icons/LinkedIn';
-import Github from '@app/components/Icons/Github';
+import {
+  Twitter,
+  LinkedIn,
+  Github,
+  Facebook,
+} from '@app/components/Icons';
 
 // import TransitionColor from '@app/components/Transitions/TransitionColor';
 // import SocialIcon from './SocialIcon';
@@ -30,23 +32,23 @@ export default function Footer({className}: FooterProps) {
     <div className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://github.com/bensthoughts">
-          <Github color="currentColor" className="text-secondary" />
+          <Github className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://twitter.com/bensthoughts">
-          <Twitter color="currentColor" className="text-secondary" />
+          <Twitter className="text-secondary" />
         </AnimatedLinkIcon>
         {/* <SocialIcon iconName="twitter" url="https://twitter.com/bensthoughts" /> */}
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://www.linkedin.com/in/benjaminblumenfeldjones">
-          <LinkedIn color="currentColor" className="text-secondary" />
+          <LinkedIn className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://www.facebook.com/benjamin.blumenfeldjones.9">
-          <Facebook color="currentColor" className="text-secondary" />
+          <Facebook className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
     </div>

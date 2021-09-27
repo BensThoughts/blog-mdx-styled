@@ -74,7 +74,7 @@ export default function CommandLine({
               aria-label="Copy Button"
               className="rounded py-2 px-3 border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
             >
-              <Copy color="currentColor" className="text-icon-secondary"/>
+              <Copy className="text-icon-secondary"/>
             </button>
           </div>
         </pre>

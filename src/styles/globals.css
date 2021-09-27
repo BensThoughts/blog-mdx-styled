@@ -146,7 +146,9 @@ body[data-theme="dark"] {
   --color-scroll-thumb-hover: #63B3ED;
 
   --color-gradient-primary: 255, 107, 0;
-  --color-gradient-secondary: 255, 107, 0;
+  --color-gradient-secondary: 253, 200, 48;
+  /* --color-gradient-primary: 255, 107, 0;
+  --color-gradient-secondary: 255, 107, 0; */
 }
 
 @keyframes fadeIn {

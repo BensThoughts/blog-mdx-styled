@@ -12,11 +12,14 @@ const Stop2 = styled.stop`
 
 type IconProps = {
   size?: number,
-  stroke?: string
+  // stroke?: string,
+  // fill?: string,
+  gradient?: boolean,
 } & React.SVGAttributes<SVGElement>
 
 const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
   size = 24,
+  gradient = false,
   stroke,
   fill,
   viewBox = '0 0 24 24',
@@ -24,6 +27,15 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
   ...rest
 }: IconProps, ref) => {
   const UUID = useUID();
+
+  if (!gradient && !stroke) {
+    stroke = 'currentColor';
+  }
+
+  if (!gradient && !fill) {
+    fill = 'currentColor';
+  }
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -39,12 +51,14 @@ const FeatherIcon = forwardRef<SVGSVGElement, IconProps>(({
       ref={ref}
       {...rest}
     >
-      <defs>
-        <linearGradient id={UUID} x1="0" y1="0" x2="1" y2="0">
-          <Stop1 offset="0" />
-          <Stop2 offset="1" />
-        </linearGradient>
-      </defs>
+      {gradient &&
+        <defs>
+          <linearGradient id={UUID} x1="0" y1="0" x2="1" y2="0">
+            <Stop1 offset="0.1" />
+            <Stop2 offset="1" />
+          </linearGradient>
+        </defs>
+      }
       {children}
     </svg>
   );

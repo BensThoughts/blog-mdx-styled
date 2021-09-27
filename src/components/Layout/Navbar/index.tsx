@@ -74,7 +74,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             <div className="ml-3">
               <div className="flex items-center">
                 <div className="mr-3">
-                  <Monitor size={26} color="currentColor" className="text-icon-secondary" />
+                  <Monitor size={26} className="text-icon-secondary" />
                 </div>
                 <div>
                   <Breadcrumbs />
@@ -96,7 +96,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
 
             <ThemeToggle />
             <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
-              <Bars size={24} color="currentColor" className="text-icon-primary" />
+              <Bars size={24} className="text-icon-primary" />
             </IconButton>
 
           </div>

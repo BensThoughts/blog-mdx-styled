@@ -10,6 +10,7 @@ import {
   Monitor,
   Sun,
   Twitter,
+  AstronautHelmet,
 } from '@app/components/Icons';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
@@ -42,20 +43,24 @@ export default function PlaygroundPage() {
       <Icon className="w-6 h-6">
         <Twitter />
       </Icon>
-      <Facebook size={50} />
+      <Facebook size={50} gradient />
       <Github />
       <LinkedIn />
       <Twitter />
       <Mail />
       <Monitor size={60} color="currentColor" className="text-icon-secondary" />
       <CloudMoon size={50} color="red" />
-      <CloudMoon size={50} />
+      <CloudMoon size={50} gradient/>
+      <CloudMoon className="text-icon-secondary" />
       <CloudMoon />
       <Sun />
-      <Copy color="currentColor" className="text-icon-secondary" />
+      <Copy className="text-icon-secondary" />
+      <Copy gradient />
+      <Copy />
       <AnimatedLinkIcon href="https://google.com">
         <Facebook />
       </AnimatedLinkIcon>
+      <AstronautHelmet size={50} gradient />
     </MaxWidthWrapper>
   );
 }

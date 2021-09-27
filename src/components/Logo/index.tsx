@@ -7,7 +7,7 @@ export default function Logo({
 }: LogoProps) {
   return (
     <span className={className}>
-      <Monitor color="currentColor" className="text-icon-secondary" />
+      <Monitor className="text-icon-secondary" />
     </span>
   );
 }
