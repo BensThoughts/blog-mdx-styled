@@ -13,11 +13,11 @@ const AnimatedBorder = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    border: 1px solid;
+    border: 2px solid;
     border-radius: 10px;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(to right, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary)));
-    /* border-color: rgba(var(--color-app-secondary), var(--app-border-opacity)); */
+    /* border-image-slice: 1;
+    border-image-source: linear-gradient(to right, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary))); */
+    border-color: rgba(var(--color-app-secondary), var(--app-border-opacity));
     transform: scale(1);
     transition: transform 300ms;
   }
