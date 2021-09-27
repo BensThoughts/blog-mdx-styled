@@ -1,7 +1,7 @@
 // import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import useProgressiveImg from '@app/utils/hooks/useProgressiveImg';
+import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
 const ImageContainer =styled.div`
   grid-column: 1 / -1;
@@ -25,7 +25,7 @@ export default function HeaderImage({
 }: HeaderImageProps) {
   // const tinyImage = srcBaseUrl + 'q_10' + imgPath;
   // const largeImage = srcBaseUrl + 'q_auto' + imgPath;
-  const [src, blur] = useProgressiveImg(imgPathTiny, imgPathLarge);
+  const [src, blur] = useProgressiveImage(imgPathTiny, imgPathLarge);
 
   return (
     <ImageContainer className={`md:w-full mx-auto overflow-hidden ${className}`}>

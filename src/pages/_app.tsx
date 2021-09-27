@@ -11,13 +11,14 @@ const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
 import FeatureToggle from '@app/components/FeatureToggle/FeatureToggle';
 
 
-import {Provider} from 'react-redux';
+// import {Provider} from 'react-redux';
 import {DefaultSeo} from 'next-seo';
 import seoConfig from '@app/utils/seo.config';
 
-import {store} from '@app/store/store';
+// import {store} from '@app/store/store';
 import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
+import {ImageCacheProvider} from '@app/utils/hooks/useProgressiveImg';
 
 const PageWrapper = styled.div`
   padding-top: 3.5rem;
@@ -40,12 +41,13 @@ const FooterWrap = styled.div`
 `;
 
 function MyApp({Component, pageProps, router}: AppProps) {
-  const enabledFeatures = ['home', 'blog'];
+  const enabledFeatures = ['home', 'blog', 'projects'];
   return (
     <>
       <DefaultSeo {...seoConfig} />
       <FeatureToggle enabledFeatures={enabledFeatures}>
-        <Provider store={store}>
+        {/* <Provider store={store}> */}
+        <ImageCacheProvider>
           <ThemeProvider>
             <Navbar className="h-14" />
           </ThemeProvider>
@@ -62,8 +64,8 @@ function MyApp({Component, pageProps, router}: AppProps) {
               <Footer className="h-16" />
             </FooterWrap>
           </PageWrapper>
-
-        </Provider>
+        </ImageCacheProvider>
+        {/* </Provider> */}
       </FeatureToggle>
     </>
   );
