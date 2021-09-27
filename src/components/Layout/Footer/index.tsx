@@ -30,23 +30,23 @@ export default function Footer({className}: FooterProps) {
     <div className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://github.com/bensthoughts">
-          <Github className="text-secondary" />
+          <Github color="currentColor" className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://twitter.com/bensthoughts">
-          <Twitter className="text-secondary" />
+          <Twitter color="currentColor" className="text-secondary" />
         </AnimatedLinkIcon>
         {/* <SocialIcon iconName="twitter" url="https://twitter.com/bensthoughts" /> */}
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://www.linkedin.com/in/benjaminblumenfeldjones">
-          <LinkedIn className="text-secondary" />
+          <LinkedIn color="currentColor" className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://www.facebook.com/benjamin.blumenfeldjones.9">
-          <Facebook className="text-secondary" />
+          <Facebook color="currentColor" className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
     </div>
