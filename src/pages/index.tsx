@@ -20,9 +20,9 @@ export default function Home() {
           </EnterAnimation>
         )}
         {isEnabled('projects') && (
-          <EnterAnimation>
-            <ProjectsCard />
-          </EnterAnimation>
+          // <EnterAnimation>
+          <ProjectsCard />
+          // </EnterAnimation>
         )}
       </GridWrapper>
     </MaxWidthWrapper>
