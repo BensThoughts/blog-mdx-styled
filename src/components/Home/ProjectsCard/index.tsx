@@ -1,10 +1,12 @@
 import TitleHeader from '@app/components/Home/TitleHeader';
 import styled from '@emotion/styled';
+import StatusBar from './StatusBar';
 
 const Card = styled.div`
-  border-left: 8px;
+  /* border-left: 8px;
   border-color: rgba(var(--color-app-secondary), 1);
-  border-style: solid;
+  border-style: solid; */
+  
 `;
 
 const A = styled.a`
@@ -19,6 +21,11 @@ const Image = styled.img`
   mix-blend-mode: multiply;
   filter: grayscale(100%) contrast(1) brightness(90%);
   width: 576px;
+  transition: filter mix-blend-mode 1s;
+  &:hover {
+    mix-blend-mode: normal;
+    filter: grayscale(0%) brightness(100%);
+  }
 `;
 
 export default function ProjectsCard() {
@@ -26,12 +33,13 @@ export default function ProjectsCard() {
     <>
       <TitleHeader inverse text="Projects"/>
       <A>
-        <Card className="">
+        <Card className="rounded-md border-transparent border-solid">
           <Image
             alt="Zero Inbox Home Page"
-            src="https://res.cloudinary.com/bensthoughts/image/upload/v1632722985/blog/projects/zero-inbox/zero-inbox-home-scaled_fxxnde.png"
+            src="https://res.cloudinary.com/bensthoughts/image/upload/v1632793370/blog/projects/zero-inbox/zero-inbox-home-scaled_gxres2.png"
             className="object-contain"
           />
+          <StatusBar />
         </Card>
 
       </A>
