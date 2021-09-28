@@ -13,23 +13,44 @@ const ImageWrapper = styled.div`
   position: relative;
   /* border: 2px solid rgba(var(--color-app-accent), var(--tw-border-opacity)); */
   /* outline-offset: 20px; */
-  &:before {
+  &::before {
     top: 0px;
     left: 0px;
     background-color: rgb(var(--color-bg-primary));
     mix-blend-mode: screen;
   }
-  &:after {
+  &::after {
     content: "";
     display: block;
     position: absolute;
+    top: 10px;
+    left: 10px;
     width: 100%;
     height: 100%;
     border: 2px solid rgba(var(--color-app-secondary), var(--tw-border-opacity));
+    transform: rotate(-20deg);
+    transition: transform 350ms;
+
+    /* animation-play-state: paused; */
     /* border-radius: 9999px; */
-    top: 20px;
-    left: 20px;
+
     z-index: -1;
+  }
+  &:hover::after {
+    transform: rotate(0deg);
+    /* animation-play-state: running; */
+    animation: spinBorder 700ms;
+  }
+
+  @keyframes spinBorder {
+    0% {
+      transform: rotate(-20deg);
+    }
+
+    50% {
+      transform: rotate(45deg);
+    }
+
   }
 `;
 

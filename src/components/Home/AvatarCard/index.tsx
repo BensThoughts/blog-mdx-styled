@@ -37,13 +37,13 @@ const ContentWrap = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    transform-origin: center;
-    transform: rotate(0) translateX(0) translateY(-200px);
+    /* transform-origin: center; */
+    /* transform:  translateX(0) translateY(-300px) rotate(-45deg); */
     display: none;
     backdrop-filter: var(--app-backdrop-filter);
 
     @media (min-width: 768px) { 
-      transform: scale(1) rotate(40deg) translateX(250px) translateY(-100px);
+      transform: scale(1) translateX(220px) translateY(75px) rotate(45deg) ;
       display: block;
     }
   }
