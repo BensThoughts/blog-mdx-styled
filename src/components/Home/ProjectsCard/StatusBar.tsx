@@ -53,6 +53,7 @@ const Status = styled.div`
 const File = styled.div`
   --statusBarAccentColor: #8095ff;
   color: var(--statusBarAccentColor);
+  padding-top: 2px;
   margin: 0 0 0 10px;
 `;
 
@@ -97,11 +98,16 @@ const CurrentColumn = styled.div`
   padding: 0 var(--statusBarPaddingLarge) 0 0 ;
 `;
 
-export default function StatusBar() {
+export default function StatusBar({file = 'zeroinbox.app'}) {
   return (
     <StatusBarContainer className="font-mono text-base select-none">
       <StatusBarLeft>
-        <Status className="text-center h-full">NORMAL</Status><File><span>zeroinbox.app</span></File>
+        <Status className="text-center h-full">
+          NORMAL
+        </Status>
+        <File>
+          <span>{file}</span>
+        </File>
       </StatusBarLeft>
       <StatusBarRight>
         <DownProgress>100%</DownProgress>

@@ -1,6 +1,7 @@
 import TitleHeader from '@app/components/Home/TitleHeader';
 import styled from '@emotion/styled';
 import StatusBar from './StatusBar';
+import Typewriter from './Typewriter';
 
 const Card = styled.div`
   /* border-left: 8px;
@@ -28,7 +29,10 @@ const Image = styled.img`
   }
 `;
 
-export default function ProjectsCard() {
+export default function ProjectsCard({
+  imgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/v1632793370/blog/projects/zero-inbox/zero-inbox-home-scaled_gxres2.png',
+  title = 'zeroinbox.app',
+}) {
   return (
     <>
       <TitleHeader inverse text="Projects"/>
@@ -36,15 +40,15 @@ export default function ProjectsCard() {
         <Card className="rounded-md border-transparent border-solid">
           <Image
             alt="Zero Inbox Home Page"
-            src="https://res.cloudinary.com/bensthoughts/image/upload/v1632793370/blog/projects/zero-inbox/zero-inbox-home-scaled_gxres2.png"
+            src={imgSrc}
             className="object-contain"
           />
-          <StatusBar />
+          <StatusBar file={title} />
         </Card>
 
       </A>
 
-
+      <Typewriter />
     </>
   );
 }
