@@ -3,6 +3,7 @@ import {
   LinkedIn,
   Github,
   Facebook,
+  Mail,
 } from '@app/components/Icons';
 
 // import TransitionColor from '@app/components/Transitions/TransitionColor';
@@ -30,6 +31,11 @@ type FooterProps = {
 export default function Footer({className}: FooterProps) {
   return (
     <div className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
+      <div className="mx-3">
+        <AnimatedLinkIcon href="mailto:bensthoughts@gmail.com">
+          <Mail className="text-secondary" />
+        </AnimatedLinkIcon>
+      </div>
       <div className="mx-3">
         <AnimatedLinkIcon href="https://github.com/bensthoughts">
           <Github className="text-secondary" />
