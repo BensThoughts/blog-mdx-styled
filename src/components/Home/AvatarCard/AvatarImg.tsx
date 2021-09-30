@@ -29,7 +29,7 @@ const ImageWrapper = styled.div`
     height: 100%;
     border: 2px solid rgba(var(--color-app-secondary), var(--tw-border-opacity));
     transform: rotate(-20deg);
-    transition: transform 350ms;
+    transition: transform 250ms;
 
     /* animation-play-state: paused; */
     /* border-radius: 9999px; */
@@ -39,7 +39,7 @@ const ImageWrapper = styled.div`
   &:hover::after {
     transform: rotate(0deg);
     /* animation-play-state: running; */
-    animation: spinBorder 700ms;
+    animation: spinBorder 500ms;
   }
 
   @keyframes spinBorder {
