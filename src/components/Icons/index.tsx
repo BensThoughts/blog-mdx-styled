@@ -2,10 +2,7 @@ export {default as AstronautHelmet} from './AstronautHelmet';
 export {default as Bars} from './Bars';
 export {default as CloudMoon} from './CloudMoon';
 export {default as Copy} from './Copy';
-export {default as Facebook} from './Facebook';
-export {default as Github} from './Github';
-export {default as LinkedIn} from './LinkedIn';
 export {default as Mail} from './Mail';
 export {default as Monitor} from './Monitor';
 export {default as Sun} from './Sun';
-export {default as Twitter} from './Twitter';
+

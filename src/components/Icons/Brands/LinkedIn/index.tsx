@@ -1,6 +1,6 @@
 // #f772d4
 // #ad6cf6
-import FeatherIcon from '../FeatherIcon';
+import FeatherIcon from '../../FeatherIcon';
 
 type IconProps = {
   size?: number,

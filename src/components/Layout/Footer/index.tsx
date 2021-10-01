@@ -1,10 +1,13 @@
 import {
+  Mail,
+} from '@app/components/Icons';
+
+import {
   Twitter,
   LinkedIn,
   Github,
   Facebook,
-  Mail,
-} from '@app/components/Icons';
+} from '@app/components/Icons/Brands';
 
 // import TransitionColor from '@app/components/Transitions/TransitionColor';
 // import SocialIcon from './SocialIcon';
