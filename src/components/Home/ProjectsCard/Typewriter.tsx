@@ -20,8 +20,19 @@ import {Code} from '@app/components/mdx';
 //   }
 // `;
 
-export default function Typewriter({words = 'I am a developer'}) {
-  const wordsArr = words.split('');
+
+const words2 =
+`import test from 'testPackage'
+
+export default function Nothing() {
+  return (
+    <div></div>
+  );
+}
+`;
+
+export default function Typewriter({words = `I am a developer`}) {
+  const wordsArr = words2.split('');
   const [index, setIndex] = useState(0);
   // const [blink, setBlink] = useState(true);
   // console.log(blink);
@@ -51,7 +62,7 @@ export default function Typewriter({words = 'I am a developer'}) {
   console.log(wordsArr.slice(0, index).join(''));
   return (
     <div className="flex flex-row items-center justify-center">
-      <Code className="">
+      <Code className="jsx:ZeroInbox">
         {`${wordsArr.slice(0, index).join('')}`}
       </Code>
       {/* <Cursor blinking={blink} /> */}

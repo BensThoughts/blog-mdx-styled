@@ -41,7 +41,7 @@ const FooterWrap = styled.div`
 `;
 
 function MyApp({Component, pageProps, router}: AppProps) {
-  const enabledFeatures = ['home', 'blog'];
+  const enabledFeatures = ['home', 'blog', 'projects'];
   return (
     <>
       <DefaultSeo {...seoConfig} />
