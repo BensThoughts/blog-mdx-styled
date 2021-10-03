@@ -4,7 +4,7 @@ import TechnologiesTerminal from './TechnologiesTerminal';
 import ProjectLinks from './ProjectLinks';
 import ProjectHeader from './ProjectHeader';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useWindowSize} from 'react-use';
 
 const Card = styled.div`
@@ -28,7 +28,7 @@ const HeaderWrap = styled.div<{
 `;
 
 const AboutWrap = styled.div<{
-  hovered: boolean,
+  expanded: boolean,
   reversed: boolean,
 }>`
   grid-area: ${({reversed}) => reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
@@ -38,8 +38,8 @@ const AboutWrap = styled.div<{
   border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
   border-style: solid;
   border-color: rgb(var(--color-text-secondary));
-  transform: ${({hovered, reversed}) => {
-    if (!hovered) {
+  transform: ${({expanded, reversed}) => {
+    if (!expanded) {
       return 'translateX(0)';
     }
     if (reversed) {
@@ -52,13 +52,13 @@ const AboutWrap = styled.div<{
 `;
 
 const ImageWrap = styled.div<{
-  hovered: boolean,
+  expanded: boolean,
   reversed: boolean,
 }>`
   grid-area: ${({reversed}) => reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
   z-index: 1;
-  transform: ${({hovered, reversed}) => {
-    if (!hovered) {
+  transform: ${({expanded, reversed}) => {
+    if (!expanded) {
       return 'translateX(0)';
     }
     if (reversed) {
@@ -71,7 +71,7 @@ const ImageWrap = styled.div<{
 `;
 
 const TechWrap = styled.div<{
-  hovered: boolean,
+  expanded: boolean,
   reversed: boolean,
 }>`
   grid-area: ${({reversed}) => reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
@@ -79,8 +79,8 @@ const TechWrap = styled.div<{
   height: 100%;
   z-index: 3;
   opacity: 1;
-  transform: ${({hovered, reversed}) => {
-    if (!hovered) {
+  transform: ${({expanded, reversed}) => {
+    if (!expanded) {
       return 'translate(0px)';
     }
     if (reversed) {
@@ -118,12 +118,31 @@ export default function ProjectsCard({
   reversed = false,
 }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const {width} = useWindowSize();
+
+
+  useEffect(() => {
+    if (width < 1080) {
+      setExpanded(false);
+    } else if (focused) {
+      setExpanded(true);
+    } else if (hovered) {
+      setExpanded(true);
+    } else {
+      setExpanded(false);
+    }
+  }, [width, hovered, focused]);
+
+
   return (
     <>
       <Card
-        onMouseEnter={() => width > 1080 ? setHovered(true) : setHovered(false)}
+        onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       >
         <HeaderWrap
           reversed={reversed}
@@ -133,7 +152,7 @@ export default function ProjectsCard({
 
         <ImageWrap
           reversed={reversed}
-          hovered={hovered}
+          expanded={expanded}
         >
           <ProjectImage
             imgSrc={imgSrc}
@@ -144,7 +163,7 @@ export default function ProjectsCard({
 
         <AboutWrap
           reversed={reversed}
-          hovered={hovered}
+          expanded={expanded}
         >
           <div className={`p-4 flex flex-col justify-between h-full ${reversed ? 'items-end text-right' : 'items-start text-left'}`}>
             <p className="text-primary text-opacity-100 font-mono">
@@ -158,7 +177,7 @@ export default function ProjectsCard({
 
         <TechWrap
           reversed={reversed}
-          hovered={hovered}
+          expanded={expanded}
           className="bg-terminal shadow-xl"
         >
           <TechnologiesTerminal technologies={technologies} />
