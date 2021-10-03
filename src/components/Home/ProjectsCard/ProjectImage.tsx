@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const ImageWrap = styled.div`
-  background-color: rgba(var(--color-app-secondary), 0.7);
+  background-color: rgba(var(--color-image-overlay), 0.7);
   /* width: 500px;
   height: 350px; */
   /* width: 576px;  */

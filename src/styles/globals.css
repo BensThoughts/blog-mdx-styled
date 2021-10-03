@@ -95,10 +95,19 @@ body[data-theme="light"] {
 
   --color-scroll-thumb: #ED8936;
   --color-scroll-track: #FBD38D;
-  --color-scroll-thumb-hover: #FAF089; 
+  --color-scroll-thumb-hover: #FAF089;
+
   --color-gradient-primary: 7, 105, 99;
   --color-gradient-secondary: 7, 105, 99;
  
+  --color-image-overlay: 251, 211, 141;
+  
+  --statusBarAccentColor: #ED8936;
+  /* --statusBarTextColor: #55718d; */
+  --statusBarBackgroundColor: rgba(7, 105, 99, 0.8);
+  --statusBarTextColorAccent: #27201A;
+  --statusBarTextColor: black;
+
 
 /*  New Dark Theme
   --color-text-primary: 227, 227, 227;
@@ -147,6 +156,14 @@ body[data-theme="dark"] {
 
   --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 253, 200, 48;
+
+  --color-image-overlay: 49, 130, 206;
+
+  --statusBarAccentColor: #8095ff;
+  --statusBarTextColor: #55718d;
+  --statusBarBackgroundColor: #0a2540;
+  --statusBarTextColorAccent: #06182c;
+  --statusBarTextColor: #55718d;
   /* --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 255, 107, 0; */
 }
