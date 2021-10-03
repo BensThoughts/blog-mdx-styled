@@ -3,15 +3,17 @@ import styled from '@emotion/styled';
 import {
   CloudMoon,
   Copy,
-  Facebook,
-  Github,
-  LinkedIn,
   Mail,
   Monitor,
   Sun,
-  Twitter,
   AstronautHelmet,
 } from '@app/components/Icons';
+import {
+  Facebook,
+  Github,
+  LinkedIn,
+  Twitter,
+} from '@app/components/Icons/Brands';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
 
