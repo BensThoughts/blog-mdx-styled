@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  border-radius: 10px;
+  border-radius: 5px;
   transition-property: background, color;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
