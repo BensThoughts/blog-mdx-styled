@@ -1,10 +1,12 @@
 import {Auth} from '@app/components/Icons';
 import {
   Angular,
-  Bash,
+  // Bash,
   Docker,
+  EsLint,
   FontAwesome,
   Git,
+  Github,
   GoogleAnalytics,
   GoogleCloud,
   Kubernetes,
@@ -13,10 +15,64 @@ import {
   NPM,
   Prettier,
   RabbitMQ,
+  ReactIcon,
   Redis,
+  Redux,
+  RXJS,
   TailwindCSS,
   Typescript,
 } from '@app/components/Icons/Brands';
+import Netlify from '@app/components/Icons/Brands/Netlify';
+
+export const Spacetagram = {
+  title: 'Spacetagram',
+  liveLink: 'https://shopify-nasa-challenge.netlify.app/',
+  githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
+  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633242436/blog/projects/spacetagram/spacetagram-home-scaled_fbal11.png',
+  imgAlt: 'Spacetagram Home Page',
+  description: `
+    Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that used the NASA APOD API to display the image of the day.
+    This is a react project that utilized redux to download the images from the API to an infinite virtual scroll component. Images can be liked and viewed
+    in a gallery. There is also a calendar component that can be used to jump to a specific date. There is a focus on accessibility and responsive design.
+  `,
+  technologies: [
+    {
+      name: 'React',
+      icon: <ReactIcon />,
+      href: 'https://reactjs.org/',
+    },
+    {
+      name: 'Redux',
+      icon: <Redux />,
+      href: 'https://react-redux.js.org/',
+    },
+    {
+      name: 'Typescript',
+      icon: <Typescript size={20} />,
+      href: 'https://www.typescriptlang.org/',
+    },
+    {
+      name: 'TailwindCSS',
+      icon: <TailwindCSS />,
+      href: 'https://tailwindcss.com/',
+    },
+    {
+      name: 'Netlify',
+      icon: <Netlify />,
+      href: 'https://www.netlify.com/',
+    },
+    {
+      name: 'Github',
+      icon: <Github />,
+      href: 'https://github.com',
+    },
+    {
+      name: 'ESLint',
+      icon: <EsLint />,
+      href: 'https://eslint.org/',
+    },
+  ],
+};
 
 export const ZeroInboxBackend = {
   title: 'Zero Inbox Backend',
@@ -103,9 +159,9 @@ export const ZeroInbox = {
       href: 'https://git-scm.com/',
     },
     {
-      name: 'Bash',
-      icon: <Bash />,
-      href: 'https://www.gnu.org/software/bash/',
+      name: 'RXJS',
+      icon: <RXJS />,
+      href: 'https://rxjs.dev/',
     },
     {
       name: 'FontAwesome',

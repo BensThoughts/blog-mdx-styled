@@ -10,6 +10,7 @@ import TitleHeader from '@app/components/Home/TitleHeader';
 import {
   ZeroInbox,
   ZeroInboxBackend,
+  Spacetagram,
 } from '@app/components/Home/ProjectsCard/projects';
 
 export default function Home() {
@@ -49,6 +50,16 @@ export default function Home() {
               imgAlt={ZeroInboxBackend.imgAlt}
               technologies={ZeroInboxBackend.technologies}
               reversed={true}
+            />
+            <ProjectsCard
+              title={Spacetagram.title}
+              description={Spacetagram.description}
+              githubLink={Spacetagram.githubLink}
+              liveLink={Spacetagram.liveLink}
+              imgSrc={Spacetagram.imgSrc}
+              imgAlt={Spacetagram.imgAlt}
+              technologies={Spacetagram.technologies}
+              reversed={false}
             />
           </>
           // </EnterAnimation>
