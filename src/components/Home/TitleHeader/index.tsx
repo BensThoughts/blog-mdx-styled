@@ -90,13 +90,13 @@ backdrop-filter: var(--app-backdrop-filter);
 
 type TitleHeaderProps = {
   text: string;
-  inverse?: boolean;
+  reversed?: boolean;
 }
 
-export default function TitleHeader({text, inverse = false}: TitleHeaderProps) {
+export default function TitleHeader({text, reversed = false}: TitleHeaderProps) {
   return (
     <>
-      {inverse ?
+      {reversed ?
         <InverseHeader>{text}</InverseHeader> :
         <Header>{text}</Header>
       }

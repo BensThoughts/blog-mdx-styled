@@ -1,13 +1,11 @@
-import TitleHeader from '@app/components/Home/TitleHeader';
 import styled from '@emotion/styled';
 import ProjectImage from './ProjectImage';
 import TechnologiesTerminal from './TechnologiesTerminal';
 import ProjectLinks from './ProjectLinks';
-import Header from './Header';
+import ProjectHeader from './ProjectHeader';
 
-import {ZeroInbox} from './projects';
 import {useState} from 'react';
-
+import {useWindowSize} from 'react-use';
 
 // row / col / row / col
 
@@ -27,40 +25,54 @@ const Card = styled.div`
 `;
 
 const ImageWrap = styled.div<{
-  hovered: boolean
+  hovered: boolean,
+  reversed: boolean,
 }>`
-  grid-area: 1 / 7 / 7 / -1;
+  /* grid-area: 1 / 7 / 7 / -1;  forward*/
+  /* grid-area: 1 / 1 / 7 / 7; */
+  grid-area: ${(props) => props.reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
+
   z-index: 1;
   transform: ${(props) => props.hovered ? 'translateX(50px)' : 'translateX(0px)'};
   transition: transform 250ms;
 `;
 
 const AboutWrap = styled.div<{
-  hovered: boolean
+  hovered: boolean,
+  reversed: boolean,
 }>`
-  grid-area: 2 / 1 / 9 / 8;
+  /* grid-area: 2 / 1 / 9 / 8; */
+  /* grid-area: 2 / 6 / 9 / -1; */
+  grid-area: ${(props) => props.reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
   background-color: rgba(var(--color-bg-terminal), 0.6);
   height: 100%;
   z-index: 2;
-  border-left-width: 3px;
-  border-left-style: solid;
-  border-left-color: rgb(var(--color-text-secondary));
+  /* border-left-width: 3px; */
+  border-width: ${(props) => props.reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
+  border-style: solid;
+  border-color: rgb(var(--color-text-secondary));
   transform: ${(props) => props.hovered ? 'translateX(-50px)' : 'translateX(0px)'};
   transition: transform 250ms;
 
 `;
 
-const HeaderWrap = styled.div`
-  grid-area: 1 / 1 / 2 / 6;
+const HeaderWrap = styled.div<{
+  reversed: boolean
+}>`
+  /* grid-area: 1 / 1 / 2 / 6;  forward*/
+  /* grid-area: 1 / 8 / 2 / -1; */
+  grid-area: ${(props) => props.reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
   height: 25px;
 `;
 
 // row / col / row / col
 
 const TechWrap = styled.div<{
-  hovered: boolean
+  hovered: boolean,
+  reversed: boolean,
 }>`
-  grid-area: 7 / 6 / -2 / -2;
+  /* grid-area: 7 / 6 / -2 / -2; forward */
+  grid-area: ${(props) => props.reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
   background-color: rgba(var(--color-bg-terminal), 0.5);
   height: 100%;
   z-index: 3;
@@ -69,37 +81,78 @@ const TechWrap = styled.div<{
   transition: transform 250ms;
 `;
 
-export default function ProjectsCard({
+type ProjectCardProps = {
+  title: string,
+  description: string,
+  imgSrc: string,
+  imgAlt: string,
+  liveLink: string,
+  githubLink: string,
+  technologies: {
+    name: string,
+    icon: React.ReactElement,
+    href: string,
+  }[],
+  reversed?: boolean
+}
 
-}) {
+export default function ProjectsCard({
+  title,
+  description,
+  imgSrc,
+  imgAlt,
+  liveLink,
+  githubLink,
+  technologies,
+  reversed = false,
+}: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
+  const {width} = useWindowSize();
   return (
     <>
-      <TitleHeader inverse text="Projects"/>
-      <Card className="" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-        <HeaderWrap>
-          <Header />
+      <Card
+        onMouseEnter={() => width > 1080 ? setHovered(true) : setHovered(false)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <HeaderWrap
+          reversed={reversed}
+        >
+          <ProjectHeader title={title} reversed={reversed} />
         </HeaderWrap>
-        <ImageWrap hovered={hovered}>
+
+        <ImageWrap
+          reversed={reversed}
+          hovered={hovered}
+        >
           <ProjectImage
-            imgSrc={ZeroInbox.imgSrc}
-            imgAlt={ZeroInbox.imgAlt}
-            href={ZeroInbox.liveLink}
+            imgSrc={imgSrc}
+            imgAlt={imgAlt}
+            href={liveLink}
           />
         </ImageWrap>
-        <AboutWrap hovered={hovered}>
-          <div className="p-4 flex flex-col justify-between h-full">
+
+        <AboutWrap
+          reversed={reversed}
+          hovered={hovered}
+        >
+          <div className={`p-4 flex flex-col justify-between h-full ${reversed ? 'items-end text-right' : 'items-start text-left'}`}>
             <p className="text-primary text-opacity-100 font-mono">
-              {ZeroInbox.description}
+              {description}
             </p>
             <div>
-              <ProjectLinks liveLink={ZeroInbox.liveLink} githubLink={ZeroInbox.githubLink} />
+              <ProjectLinks liveLink={liveLink} githubLink={githubLink} />
             </div>
           </div>
         </AboutWrap>
-        <TechWrap hovered={hovered} className="bg-terminal shadow-xl">
-          <TechnologiesTerminal technologies={ZeroInbox.technologies} />
+
+        <TechWrap
+          reversed={reversed}
+          hovered={hovered}
+          className="bg-terminal shadow-xl"
+        >
+          <TechnologiesTerminal technologies={technologies} />
         </TechWrap>
+
       </Card>
     </>
   );

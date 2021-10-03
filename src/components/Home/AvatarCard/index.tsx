@@ -32,7 +32,7 @@ const ContentWrap = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: url(svg/space/astronaut-helmet.svg);
+    background-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633233841/blog/home/astronaut-helmet_nglf3c.svg);
     opacity: 0.2;
     background-repeat: no-repeat;
     background-size: contain;

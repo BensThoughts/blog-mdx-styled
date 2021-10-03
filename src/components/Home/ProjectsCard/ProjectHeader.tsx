@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-const Status = styled.div`
+const Title = styled.div<{
+  reversed: boolean
+}>`
 display: flex;
 align-items: center;
 z-index: -1;
@@ -14,7 +16,7 @@ color: rgb(var(--color-text-secondary));
 
   &::after {
   content: "";
-  display: block;
+  display: ${(props) => props.reversed ? 'none' : 'block'};
   position: relative;
   top: 0px;
   width: 100%;
@@ -25,9 +27,9 @@ color: rgb(var(--color-text-secondary));
   backdrop-filter: var(--app-backdrop-filter);
   }
 
-  /* &::before {
+  &::before {
   content: "";
-  display: block;
+  display: ${(props) => props.reversed ? 'block' : 'none'};
   position: relative;
   top: 0px;
   width: 100%;
@@ -36,11 +38,16 @@ color: rgb(var(--color-text-secondary));
   background-color: rgb(var(--color-app-secondary));
   z-index: -1;
   backdrop-filter: var(--app-backdrop-filter);
-  } */
+  }
 `;
 
-export default function Header() {
+type ProjectHeaderProps = {
+  title: string,
+  reversed: boolean,
+}
+
+export default function ProjectHeader({title, reversed}: ProjectHeaderProps) {
   return (
-    <Status>Zero Inbox</Status>
+    <Title reversed={reversed}>{title}</Title>
   );
 }
