@@ -40,7 +40,7 @@ export const ZeroInboxBackend = {
     },
     {
       name: 'NPM',
-      icon: <NPM />,
+      icon: <NPM size={20} />,
       href: 'https://www.npmjs.com/',
     },
     {
@@ -65,7 +65,7 @@ export const ZeroInboxBackend = {
     },
     {
       name: 'RabbitMQ',
-      icon: <RabbitMQ />,
+      icon: <RabbitMQ size={20} />,
       href: 'https://www.rabbitmq.com/',
     },
     {

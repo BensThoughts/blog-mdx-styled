@@ -7,10 +7,6 @@ import ProjectHeader from './ProjectHeader';
 import {useState} from 'react';
 import {useWindowSize} from 'react-use';
 
-// row / col / row / col
-
-
-// row / col / row / col
 const Card = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -24,60 +20,75 @@ const Card = styled.div`
   border-style: solid; */
 `;
 
-const ImageWrap = styled.div<{
-  hovered: boolean,
-  reversed: boolean,
+const HeaderWrap = styled.div<{
+  reversed: boolean
 }>`
-  /* grid-area: 1 / 7 / 7 / -1;  forward*/
-  /* grid-area: 1 / 1 / 7 / 7; */
-  grid-area: ${(props) => props.reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
-
-  z-index: 1;
-  transform: ${(props) => props.hovered ? 'translateX(50px)' : 'translateX(0px)'};
-  transition: transform 250ms;
+  grid-area: ${({reversed}) => reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
+  height: 25px;
 `;
 
 const AboutWrap = styled.div<{
   hovered: boolean,
   reversed: boolean,
 }>`
-  /* grid-area: 2 / 1 / 9 / 8; */
-  /* grid-area: 2 / 6 / 9 / -1; */
-  grid-area: ${(props) => props.reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
+  grid-area: ${({reversed}) => reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
   background-color: rgba(var(--color-bg-terminal), 0.6);
   height: 100%;
   z-index: 2;
-  /* border-left-width: 3px; */
-  border-width: ${(props) => props.reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
+  border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
   border-style: solid;
   border-color: rgb(var(--color-text-secondary));
-  transform: ${(props) => props.hovered ? 'translateX(-50px)' : 'translateX(0px)'};
+  transform: ${({hovered, reversed}) => {
+    if (!hovered) {
+      return 'translateX(0)';
+    }
+    if (reversed) {
+      return 'translateX(50px)';
+    }
+    return 'translateX(-50px)';
+  }};
   transition: transform 250ms;
 
 `;
 
-const HeaderWrap = styled.div<{
-  reversed: boolean
+const ImageWrap = styled.div<{
+  hovered: boolean,
+  reversed: boolean,
 }>`
-  /* grid-area: 1 / 1 / 2 / 6;  forward*/
-  /* grid-area: 1 / 8 / 2 / -1; */
-  grid-area: ${(props) => props.reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
-  height: 25px;
-`;
+  grid-area: ${({reversed}) => reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
+  z-index: 1;
+  transform: ${({hovered, reversed}) => {
+    if (!hovered) {
+      return 'translateX(0)';
+    }
+    if (reversed) {
+      return 'translateX(-50px)';
+    }
+    return 'translateX(50px)';
+  }};
 
-// row / col / row / col
+  transition: transform 250ms;
+`;
 
 const TechWrap = styled.div<{
   hovered: boolean,
   reversed: boolean,
 }>`
-  /* grid-area: 7 / 6 / -2 / -2; forward */
-  grid-area: ${(props) => props.reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
+  grid-area: ${({reversed}) => reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
   background-color: rgba(var(--color-bg-terminal), 0.5);
   height: 100%;
   z-index: 3;
   opacity: 1;
-  transform: ${(props) => props.hovered ? 'translate(128px, 50px)' : 'translateX(0px)'};
+  transform: ${({hovered, reversed}) => {
+    if (!hovered) {
+      return 'translate(0px)';
+    }
+    if (reversed) {
+      return 'translate(-128px, 50px)';
+    }
+    return 'translate(128px, 50px)';
+  }};
+
   transition: transform 250ms;
 `;
 
