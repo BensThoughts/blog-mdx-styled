@@ -7,8 +7,8 @@ const StatusBarContainer = styled.div`
   height: var(--statusBarHeight);
   justify-content: space-between;
   align-items: center;
-  background-color: #0a2540;
-  color: #55718d;
+  background-color: var(--statusBarBackgroundColor);
+  color: var(--statusBarTextColor);
   margin-top: auto;
   width: 100%;
 `;
@@ -20,14 +20,14 @@ const StatusBarLeft = styled.div`
 
 const Status = styled.div`
   --editingModeArrowWidth: 9px;
-  --statusBarAccentColor: #8095ff;
+  /* --statusBarAccentColor: #8095ff;
   --statusBarTextColor: #55718d;
-  --statusBarBackgroundColor: #0a2540;
+  --statusBarBackgroundColor: #0a2540; */
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
   --statusBarHeight: 25px;
-  background-color: #8095ff;
-  color: #06182c;
+  background-color: var(--statusBarAccentColor);
+  color: var(--statusBarTextColorAccent);
   text-transform: uppercase;
   text-align: center;
   padding: 2px 5px 0 var(--editingModeArrowWidth);
@@ -51,27 +51,40 @@ const Status = styled.div`
 `;
 
 const File = styled.div`
-  --statusBarAccentColor: #8095ff;
+  /* --statusBarAccentColor: #8095ff; */
   color: var(--statusBarAccentColor);
   padding-top: 2px;
-  margin: 0 0 0 10px;
+  padding-right: 5px;
+  margin: 0 0 0 5px;
+  @media (min-width: 1024px) {
+    margin: 0 0 0 10px;
+  }
+
 `;
 
 const StatusBarRight = styled.div`
   display: flex;
   align-items: stretch;
+  padding-top: 2px;
 `;
 
 const DownProgress = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
-  padding: 0 var(--statusBarPaddingSmall) 0 0;
+  padding: 0 5px 0 0 ;
+  @media (min-width: 1024px) {
+    padding: 0 var(--statusBarPaddingSmall) 0 0;
+  }
 `;
 
 const LineIcon = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
-  padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  padding: 0 5px 0 0;
+  @media (min-width: 1024px) {
+    padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  }
+
 `;
 
 const LineProgress = styled.div`
@@ -83,19 +96,28 @@ const LineProgress = styled.div`
 const Line = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
-  padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  padding: 0 0 0 0 ;
+  @media (min-width: 1024px) {
+    padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  }
 `;
 
 const LineColon = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
-  padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  padding: 0 0 0 0 ;
+  @media (min-width: 1024px) {
+    padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  }
 `;
 
 const CurrentColumn = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
-  padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  padding: 0 5px 0 0 ;
+  @media (min-width: 1024px) {
+    padding: 0 var(--statusBarPaddingLarge) 0 0 ;
+  }
 `;
 
 export default function StatusBar({file = 'zeroinbox.app'}) {
