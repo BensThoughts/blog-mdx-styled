@@ -8,36 +8,49 @@ import {useEffect, useState} from 'react';
 import {useWindowSize} from 'react-use';
 
 const Card = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
-  gap: 0px;
-  /* height: 600px; */
-  /* align-items: center; */
-  /* height: 350px; */
-  /* border-left: 8px;
-  border-color: rgba(var(--color-app-secondary), 1);
-  border-style: solid; */
+display: flex;
+flex-direction: column;
+gap: 20px;
+@media (min-width: 768px) {
+display: grid;
+grid-template-columns: repeat(12, 1fr);
+grid-template-rows: repeat(12, 1fr);
+gap: 0px;
+}
+
+
+/* height: 600px; */
+/* align-items: center; */
+/* height: 350px; */
+/* border-left: 8px;
+border-color: rgba(var(--color-app-secondary), 1);
+border-style: solid; */
 `;
 
 const HeaderWrap = styled.div<{
   reversed: boolean
 }>`
-  grid-area: ${({reversed}) => reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
+
+height: 50px;
+@media (min-width: 768px) {
   height: 25px;
+  grid-area: ${({reversed}) => reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
+}
 `;
 
 const AboutWrap = styled.div<{
   expanded: boolean,
   reversed: boolean,
 }>`
+background-color: rgba(var(--color-bg-terminal), 0.6);
+height: 100%;
+z-index: 2;
+border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
+border-style: solid;
+border-color: rgb(var(--color-text-secondary));
+grid-area: 5 / 1 / 9 / -1;
+@media (min-width: 768px) {  
   grid-area: ${({reversed}) => reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
-  background-color: rgba(var(--color-bg-terminal), 0.6);
-  height: 100%;
-  z-index: 2;
-  border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
-  border-style: solid;
-  border-color: rgb(var(--color-text-secondary));
   transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translateX(0)';
@@ -48,15 +61,19 @@ const AboutWrap = styled.div<{
     return 'translateX(-50px)';
   }};
   transition: transform 250ms;
-
+}
 `;
 
 const ImageWrap = styled.div<{
   expanded: boolean,
   reversed: boolean,
 }>`
+z-index: 1;
+grid-area: 2 / 1 / 5 / -1;
+display: none;
+@media (min-width: 768px) {
+  display: block;  
   grid-area: ${({reversed}) => reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
-  z-index: 1;
   transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translateX(0)';
@@ -66,19 +83,23 @@ const ImageWrap = styled.div<{
     }
     return 'translateX(50px)';
   }};
-
   transition: transform 250ms;
+}
+
+
 `;
 
 const TechWrap = styled.div<{
   expanded: boolean,
   reversed: boolean,
 }>`
+background-color: rgba(var(--color-bg-terminal), 0.5);
+/* height: 100%; */
+z-index: 3;
+opacity: 1;
+grid-area: 9 / 1 / -2 / -1;
+@media (min-width: 768px) {  
   grid-area: ${({reversed}) => reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
-  background-color: rgba(var(--color-bg-terminal), 0.5);
-  height: 100%;
-  z-index: 3;
-  opacity: 1;
   transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translate(0px)';
@@ -88,8 +109,8 @@ const TechWrap = styled.div<{
     }
     return 'translate(128px, 50px)';
   }};
-
   transition: transform 250ms;
+}
 `;
 
 type ProjectCardProps = {
