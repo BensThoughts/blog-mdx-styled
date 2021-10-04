@@ -178,7 +178,7 @@ export const TechStack = [
   },
   {
     name: 'Styled Components',
-    icon: <StyledComponents size={size} />,
+    icon: <StyledComponents />,
     href: 'https://www.styled-components.com/',
   },
   {
