@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import AvatarImg from './AvatarImg';
-import TitleHeader from '../TitleHeader';
 import AboutBox from './AboutBox';
 
 const TransitionColor = styled.div`
@@ -66,7 +65,6 @@ export default function AvatarCard({...rest}) {
   const bustImgSrc = 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1632153114/blog/home/bust_blue_llboi6.jpg';
   return (
     <TransitionColor {...rest} className="w-full">
-      <TitleHeader text="About Me" />
       <ContentWrap className="md">
         <AboutPlacer>
           <AboutBox />

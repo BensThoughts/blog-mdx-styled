@@ -119,7 +119,7 @@ export default function PostsPage({
       />
       <MaxWidthWrapper>
         <GridWrapper>
-          <ArticleHeader title={ogTitle} date={date} readTime={readTime} />
+          <ArticleHeader title={ogTitle} date={date} readTime={readTime} className="mt-10" />
           {imgPathLarge && imgWidth && imgHeight && imgAlt ?
             (
               <HeaderImage

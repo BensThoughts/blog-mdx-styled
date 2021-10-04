@@ -41,7 +41,7 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
   return (
     <MaxWidthWrapper>
       <section>
-        <H1 className="mb-3 md:mb-6">Blog</H1>
+        <H1 className="mb-3 mt-10 md:mb-6">Blog</H1>
         <GridContainer>
           {allPostsData.map(({id, ogTitle, date, description}, idx) => {
             return (

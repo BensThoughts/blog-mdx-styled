@@ -35,6 +35,8 @@ import {
   ZeroInboxBackend,
   Spacetagram,
 } from '@app/components/Home/ProjectsCard/projects';
+import Technologies from '@app/components/Home/Technologies';
+import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
 
 export default function Home() {
   const [isEnabled] = useFeatureToggle();
@@ -42,13 +44,24 @@ export default function Home() {
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
         {/* <EnterAnimation> */}
+
+        <TitleHeader>
+          <span className="text-icon-secondary">[</span>
+                &nbsp;01. About Me&nbsp;
+          <span className="text-icon-secondary">]</span>
+        </TitleHeader>
         <AvatarCard />
+
         {/* </EnterAnimation> */}
         {isEnabled('projects') && (
           // <EnterAnimation>
           <>
+            <TitleHeader>
+              <span className="text-icon-secondary">[</span>
+                &nbsp;02. Projects&nbsp;
+              <span className="text-icon-secondary">]</span>
+            </TitleHeader>
             <Background>
-              <TitleHeader reversed text="projects" />
 
 
               {/* <EnterAnimation> */}
@@ -94,6 +107,17 @@ export default function Home() {
           </>
           // </EnterAnimation>
         )}
+        <TitleHeader>
+          <span className="text-icon-secondary">[</span>
+                &nbsp;03. Technologies&nbsp;
+          <span className="text-icon-secondary">]</span>
+        </TitleHeader>
+        <div className="flex items-center justify-center">
+          <TechnologiesBox />
+        </div>
+        <div className="flex items-center justify-center">
+          <Technologies />
+        </div>
       </GridWrapper>
     </MaxWidthWrapper>
   );
