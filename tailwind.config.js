@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive'],
-        'roboto-slab': ['"Roboto Slab", serif'],
+        'roboto-slab': ['"Roboto Slab"', 'serif'],
       },
       backgroundColor: {
         'app-bg': generateColorClass('color-bg-primary'),
