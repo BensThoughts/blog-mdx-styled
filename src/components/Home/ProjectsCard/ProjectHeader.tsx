@@ -11,7 +11,7 @@ margin: 10px 0px 40px;
 width: 100%;
 white-space: nowrap;
 font-size: 1.5rem;
-backdrop-filter: var(--app-backdrop-filter);
+/* backdrop-filter: var(--app-backdrop-filter); */
 color: rgb(var(--color-text-secondary));
 
   &::after {
@@ -24,7 +24,7 @@ color: rgb(var(--color-text-secondary));
   margin-left: 20px;
   background-color: rgb(var(--color-app-secondary));
   z-index: -1;
-  backdrop-filter: var(--app-backdrop-filter);
+  /* backdrop-filter: var(--app-backdrop-filter); */
   }
 
   &::before {
@@ -37,7 +37,7 @@ color: rgb(var(--color-text-secondary));
   margin-right: 20px;
   background-color: rgb(var(--color-app-secondary));
   z-index: -1;
-  backdrop-filter: var(--app-backdrop-filter);
+  /* backdrop-filter: var(--app-backdrop-filter); */
   }
 `;
 

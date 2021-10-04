@@ -1,11 +1,9 @@
 import {Auth} from '@app/components/Icons';
 import {
   Angular,
-  // Bash,
   Docker,
   EsLint,
   FontAwesome,
-  Git,
   Github,
   GoogleAnalytics,
   GoogleCloud,
@@ -154,9 +152,9 @@ export const ZeroInbox = {
       href: 'https://angular.io',
     },
     {
-      name: 'Git',
-      icon: <Git />,
-      href: 'https://git-scm.com/',
+      name: 'Redux',
+      icon: <Redux />,
+      href: 'https://react-redux.js.org/',
     },
     {
       name: 'RXJS',

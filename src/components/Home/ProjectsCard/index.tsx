@@ -174,6 +174,7 @@ export default function ProjectsCard({
         <ImageWrap
           reversed={reversed}
           expanded={expanded}
+          className="shadow-lg"
         >
           <ProjectImage
             imgSrc={imgSrc}
@@ -186,7 +187,7 @@ export default function ProjectsCard({
           reversed={reversed}
           expanded={expanded}
         >
-          <div className={`p-4 flex flex-col justify-between h-full ${reversed ? 'items-end text-right' : 'items-start text-left'}`}>
+          <div className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}>
             <p className="text-primary text-opacity-100 font-mono">
               {description}
             </p>
@@ -199,7 +200,7 @@ export default function ProjectsCard({
         <TechWrap
           reversed={reversed}
           expanded={expanded}
-          className="bg-terminal shadow-xl"
+          className="bg-terminal shadow-lg"
         >
           <TechnologiesTerminal technologies={technologies} />
         </TechWrap>

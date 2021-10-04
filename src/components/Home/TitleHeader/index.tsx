@@ -77,7 +77,7 @@ backdrop-filter: var(--app-backdrop-filter);
   position: relative;
   top: 0px;
   width: 100%;
-  height: 1px;
+  height: 2px;
   margin-right: 20px;
   background-color: rgb(var(--color-app-secondary));
   backdrop-filter: var(--app-backdrop-filter);

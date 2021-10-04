@@ -11,7 +11,7 @@ type AboutBoxProps = {
 
 export default function AboutBox({className}: AboutBoxProps) {
   return (
-    <Background className={`bg-app-bg w-full max-w-2xl z-10 rounded-lg border-2 border-solid border-opacity-30 border-secondary shadow-md ${className}`}>
+    <Background className={`bg-app-bg w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 border-secondary shadow-md ${className}`}>
       <div className="m-4">
         <p>Hi,<br /></p>
         <p className="my-2">
