@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type {AppProps} from 'next/app';
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
-// import {LazyMotion, domAnimation} from 'framer-motion';
+import {LazyMotion, domAnimation} from 'framer-motion';
 
 const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
   ssr: false,
@@ -54,11 +54,11 @@ function MyApp({Component, pageProps, router}: AppProps) {
 
           <PageWrapper>
             <ContentWrap>
-              {/* <LazyMotion features={domAnimation}> */}
-              <main className="z-0 mb-16 max-h-full overflow-hidden">
-                <Component {...pageProps} key={router.route} />
-              </main>
-              {/* </LazyMotion> */}
+              <LazyMotion features={domAnimation}>
+                <main className="z-0 mb-16 max-h-full overflow-hidden">
+                  <Component {...pageProps} key={router.route} />
+                </main>
+              </LazyMotion>
             </ContentWrap>
             <FooterWrap>
               <Footer className="h-16" />

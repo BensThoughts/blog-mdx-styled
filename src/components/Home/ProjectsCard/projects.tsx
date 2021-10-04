@@ -76,7 +76,7 @@ export const ZeroInboxBackend = {
   title: 'Zero Inbox Backend',
   liveLink: 'https://zeroinbox.app/story',
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
-  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633239917/blog/projects/zero-inbox/services_tt655g.png',
+  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633369017/blog/projects/zero-inbox/zeroinbox-services-scaled_fwi4dl.png',
   imgAlt: 'Zero Inbox Backend',
   description: `
     The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes

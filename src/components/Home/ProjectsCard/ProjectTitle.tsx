@@ -41,12 +41,12 @@ color: rgb(var(--color-text-secondary));
   }
 `;
 
-type ProjectHeaderProps = {
+type ProjectTitleProps = {
   title: string,
   reversed: boolean,
 }
 
-export default function ProjectHeader({title, reversed}: ProjectHeaderProps) {
+export default function ProjectTitle({title, reversed}: ProjectTitleProps) {
   return (
     <Title reversed={reversed}>{title}</Title>
   );

@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 import ProjectImage from './ProjectImage';
 import TechnologiesTerminal from './TechnologiesTerminal';
 import ProjectLinks from './ProjectLinks';
-import ProjectHeader from './ProjectHeader';
+import ProjectTitle from './ProjectTitle';
 
 import {useEffect, useState} from 'react';
 import {useWindowSize} from 'react-use';
+import {m, useAnimation} from 'framer-motion';
+import {useInView} from 'react-intersection-observer';
 
 const Card = styled.div`
 display: flex;
@@ -27,7 +29,7 @@ border-color: rgba(var(--color-app-secondary), 1);
 border-style: solid; */
 `;
 
-const HeaderWrap = styled.div<{
+const TitleWrap = styled.div<{
   reversed: boolean
 }>`
 
@@ -38,20 +40,29 @@ height: 50px;
 }
 `;
 
-const AboutWrap = styled.div<{
-  expanded: boolean,
+const AboutWrap = styled(m.div)<{
   reversed: boolean,
 }>`
-background-color: rgba(var(--color-bg-terminal), 0.6);
 height: 100%;
 z-index: 2;
-border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
-border-style: solid;
-border-color: rgb(var(--color-text-secondary));
+
 grid-area: 5 / 1 / 9 / -1;
 @media (min-width: 768px) {  
   grid-area: ${({reversed}) => reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
-  transform: ${({expanded, reversed}) => {
+}
+`;
+
+const AboutAnimation = styled.div<{
+  expanded: boolean,
+  reversed: boolean,
+}>`
+height: 100%;
+background-color: rgba(var(--color-bg-terminal), 0.6);
+border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
+border-style: solid;
+border-color: rgb(var(--color-text-secondary));
+@media (min-width: 768px) {  
+transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translateX(0)';
     }
@@ -60,12 +71,11 @@ grid-area: 5 / 1 / 9 / -1;
     }
     return 'translateX(-50px)';
   }};
-  transition: transform 250ms;
+transition: transform 250ms;
 }
 `;
 
-const ImageWrap = styled.div<{
-  expanded: boolean,
+const ImageWrap = styled(m.div)<{
   reversed: boolean,
 }>`
 z-index: 1;
@@ -74,6 +84,15 @@ display: none;
 @media (min-width: 768px) {
   display: block;  
   grid-area: ${({reversed}) => reversed ? '1 / 1 / 7 / 7' : '1 / 7 / 7 / -1'};
+}
+`;
+
+const ImageAnimation = styled.div<{
+  expanded: boolean,
+  reversed: boolean,
+}>`
+@media (min-width: 768px) {
+  display: block;  
   transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translateX(0)';
@@ -85,21 +104,25 @@ display: none;
   }};
   transition: transform 250ms;
 }
-
-
 `;
 
-const TechWrap = styled.div<{
-  expanded: boolean,
+const TechWrap = styled(m.div)<{
   reversed: boolean,
 }>`
-background-color: rgba(var(--color-bg-terminal), 0.5);
 /* height: 100%; */
 z-index: 3;
 opacity: 1;
 grid-area: 9 / 1 / -2 / -1;
 @media (min-width: 768px) {  
   grid-area: ${({reversed}) => reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
+}
+`;
+
+const TechAnimation = styled.div<{
+  expanded: boolean,
+  reversed: boolean,
+}>`
+@media (min-width: 768px) {  
   transform: ${({expanded, reversed}) => {
     if (!expanded) {
       return 'translate(0px)';
@@ -138,11 +161,12 @@ export default function ProjectsCard({
   technologies,
   reversed = false,
 }: ProjectCardProps) {
+  const {ref, inView} = useInView();
+  const controls = useAnimation();
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const {width} = useWindowSize();
-
 
   useEffect(() => {
     if (width < 1080) {
@@ -156,6 +180,74 @@ export default function ProjectsCard({
     }
   }, [width, hovered, focused]);
 
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+    // if (!inView) {
+    //   controls.start('hidden');
+    // }
+  }, [controls, inView]);
+
+  const neg = reversed ? -1 : 1;
+
+  const titleVariants = {
+    hidden: {
+      opacity: 0,
+      // y: -150,
+    },
+    visible: {
+      opacity: 1,
+      // y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const aboutVariants = {
+    hidden: {
+      opacity: 0,
+      x: neg * -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hidden: {
+      opacity: 0,
+      x: neg * 50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const techVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+      x: neg * 128,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
 
   return (
     <>
@@ -164,45 +256,74 @@ export default function ProjectsCard({
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        ref={ref}
       >
-        <HeaderWrap
+        <TitleWrap
           reversed={reversed}
         >
-          <ProjectHeader title={title} reversed={reversed} />
-        </HeaderWrap>
+          <m.div
+            initial="hidden"
+            animate={controls}
+            variants={titleVariants}
+          >
+            <ProjectTitle title={title} reversed={reversed} />
+          </m.div>
+        </TitleWrap>
+
 
         <ImageWrap
           reversed={reversed}
-          expanded={expanded}
-          className="shadow-lg"
+          initial="hidden"
+          animate={controls}
+          variants={imageVariants}
         >
-          <ProjectImage
-            imgSrc={imgSrc}
-            imgAlt={imgAlt}
-            href={liveLink}
-          />
+          <ImageAnimation
+            reversed={reversed}
+            expanded={expanded}
+            className="shadow-lg"
+          >
+            <ProjectImage
+              imgSrc={imgSrc}
+              imgAlt={imgAlt}
+              href={liveLink}
+            />
+          </ImageAnimation>
         </ImageWrap>
+
 
         <AboutWrap
           reversed={reversed}
-          expanded={expanded}
+          initial="hidden"
+          animate={controls}
+          variants={aboutVariants}
         >
-          <div className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}>
+          <AboutAnimation
+            reversed={reversed}
+            expanded={expanded}
+            className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}
+          >
             <p className="text-primary text-opacity-100 font-mono">
               {description}
             </p>
             <div>
               <ProjectLinks liveLink={liveLink} githubLink={githubLink} />
             </div>
-          </div>
+          </AboutAnimation>
         </AboutWrap>
 
         <TechWrap
           reversed={reversed}
-          expanded={expanded}
-          className="bg-terminal shadow-lg"
+          initial="hidden"
+          animate={controls}
+          variants={techVariants}
         >
-          <TechnologiesTerminal technologies={technologies} />
+          <TechAnimation
+            reversed={reversed}
+            expanded={expanded}
+            className="shadow-lg"
+          >
+            <TechnologiesTerminal technologies={technologies} />
+          </TechAnimation>
         </TechWrap>
 
       </Card>

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import StatusBar from './StatusBar';
 
 const Pre = styled.pre`
+  background-color: rgba(var(--color-bg-terminal), 0.5);
   text-align: left;
   display: flex;
   flex-direction: column;
