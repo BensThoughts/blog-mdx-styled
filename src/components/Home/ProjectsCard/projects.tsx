@@ -137,7 +137,7 @@ export const ZeroInboxBackend = {
 };
 
 export const ZeroInbox = {
-  title: 'Zero Inbox',
+  title: 'Zero Inbox Frontend',
   liveLink: 'https://zeroinbox.app',
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
   imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1632793370/blog/projects/zero-inbox/zero-inbox-home-scaled_gxres2.png',

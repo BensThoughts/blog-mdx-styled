@@ -43,6 +43,9 @@ const ToggleButton = styled.button`
 const ToggleThumb = styled.span<{
   colorMode?: string
 }>`
+  --toggle-width: 78px;
+  --toggle-height: 38px;
+  --toggle-padding: 3px;
   --app-bg-opacity: 1;
   position: absolute;
   top: var(--toggle-padding);

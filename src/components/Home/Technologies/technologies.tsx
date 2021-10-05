@@ -33,7 +33,7 @@ import {
   Ubuntu,
   VSCode} from '@app/components/Icons/Brands';
 
-const size = 20;
+const size = 24;
 
 export const TechStack = [
   {
@@ -178,7 +178,7 @@ export const TechStack = [
   },
   {
     name: 'Styled Components',
-    icon: <StyledComponents />,
+    icon: <StyledComponents size={size} />,
     href: 'https://www.styled-components.com/',
   },
   {

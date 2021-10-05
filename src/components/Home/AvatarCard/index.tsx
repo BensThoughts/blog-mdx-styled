@@ -31,18 +31,26 @@ const ContentWrap = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633233841/blog/home/astronaut-helmet_nglf3c.svg);
-    opacity: 0.2;
-    background-repeat: no-repeat;
+    /* background-color: rgba(var(--color-text-primary), 0.2); */
+    /* -webkit-mask-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633233841/blog/home/astronaut-helmet_nglf3c.svg);
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat; */
+    /* mask-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633233841/blog/home/astronaut-helmet_nglf3c.svg);
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat; */
+    /* background-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633233841/blog/home/astronaut-helmet_nglf3c.svg); */
+    /* background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
+    background-position: center; */
     /* transform-origin: center; */
     /* transform:  translateX(0) translateY(-300px) rotate(-45deg); */
     display: none;
-    backdrop-filter: var(--app-backdrop-filter);
+    /* backdrop-filter: var(--app-backdrop-filter); */
 
     @media (min-width: 768px) { 
-      transform: scale(1) translateX(220px) translateY(75px) rotate(45deg) ;
+      transform: scale(0.5) translateX(170px) translateY(200px) rotate(0deg) ;
       display: block;
     }
   }
@@ -50,6 +58,7 @@ const ContentWrap = styled.div`
 
 const ImagePlacer = styled.div`
   grid-column: 1;
+
   @media (min-width: 768px) {
     grid-column: 2;
   }
@@ -57,6 +66,7 @@ const ImagePlacer = styled.div`
 
 const AboutPlacer = styled.div`
   grid-column: 1;
+
 `;
 
 

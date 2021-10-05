@@ -4,9 +4,9 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 
 import {getSortedPostsData} from '@app/utils/blogPosts';
-import {H1} from '@app/components/mdx';
 import Card from '@app/components/Card';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+import TitleHeader from '@app/components/Home/TitleHeader';
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -41,7 +41,11 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
   return (
     <MaxWidthWrapper>
       <section>
-        <H1 className="mb-3 mt-10 md:mb-6">Blog</H1>
+        <TitleHeader>
+          <span className="text-icon-secondary">[&nbsp;</span>
+          Blog
+          <span className="text-icon-secondary">&nbsp;]</span>
+        </TitleHeader>
         <GridContainer>
           {allPostsData.map(({id, ogTitle, date, description}, idx) => {
             return (

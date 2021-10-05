@@ -81,8 +81,9 @@ body[data-theme="light"] {
   --color-text-primary: 39, 32, 26;
   --color-text-secondary: 7, 105, 99;
   
-  --color-bg-primary: 254, 235, 200;
-  --color-bg-toggle: 30, 144, 255;
+  /* --color-bg-primary: 254, 235, 200; */
+  --color-bg-primary: 255, 255, 255;
+  /* --color-bg-toggle: 30, 144, 255; */
   --color-bg-terminal: 251, 211, 141;
 
   --color-app-primary: 251, 211, 141;
@@ -139,7 +140,6 @@ body[data-theme="dark"] {
   --color-text-secondary: 255, 107, 0;
   
   --color-bg-primary: 21, 35, 45;
-  --color-bg-toggle: 169, 169, 169;
   --color-bg-terminal: 40, 42, 54;
   
   --color-app-primary: 74, 85, 104;

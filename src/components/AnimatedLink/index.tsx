@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const A = styled.a`
   position: relative;
-  padding: 0.2em 0;
+  padding: 0.1em 0;
   overflow: hidden;
   text-decoration: none;
 
