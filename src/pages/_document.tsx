@@ -1,4 +1,12 @@
-import NextDocument, {Html, Head, Main, NextScript, DocumentContext} from 'next/document';
+import NextDocument, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from 'next/document';
+
+// import TagManager from 'react-gtm-module';
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await NextDocument.getInitialProps(ctx);
@@ -27,7 +35,19 @@ export default class Document extends NextDocument {
 
       const colorMode = getInitialColorMode();
       document.body.dataset.theme = colorMode;
-  })()`;
+    })()`;
+
+    const gtmHead = `
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5BQBMWT');</script>
+    `;
+    const gtmBody = `
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BQBMWT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    `;
     return (
       <Html lang="en">
         <Head>
@@ -37,9 +57,11 @@ export default class Document extends NextDocument {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" /> */}
           {/* <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" /> */}
           {/* <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" /> */}
+          <script dangerouslySetInnerHTML={{__html: gtmHead}} />
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{__html: setInitialTheme}} />
+          <script dangerouslySetInnerHTML={{__html: gtmBody}} />
           <Main />
           <NextScript />
         </body>
