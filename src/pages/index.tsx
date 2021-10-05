@@ -39,7 +39,6 @@ import Technologies from '@app/components/Home/Technologies';
 import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
 
 export default function Home() {
-  const [isEnabled] = useFeatureToggle();
   return (
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
@@ -51,65 +50,9 @@ export default function Home() {
           <span className="text-icon-secondary">]</span>
         </TitleHeader>
         <AvatarCard />
-
-        {/* </EnterAnimation> */}
-        {isEnabled('projects') && (
-          // <EnterAnimation>
-          <>
-            <TitleHeader>
-              <span className="text-icon-secondary">[</span>
-                &nbsp;02. Projects&nbsp;
-              <span className="text-icon-secondary">]</span>
-            </TitleHeader>
-            <Background>
-
-
-              {/* <EnterAnimation> */}
-              <ProjectsCard
-                title={ZeroInbox.title}
-                description={ZeroInbox.description}
-                githubLink={ZeroInbox.githubLink}
-                liveLink={ZeroInbox.liveLink}
-                imgSrc={ZeroInbox.imgSrc}
-                imgAlt={ZeroInbox.imgAlt}
-                technologies={ZeroInbox.technologies}
-                reversed={false}
-              />
-            </Background>
-            {/* </EnterAnimation>
-
-            <EnterAnimation> */}
-            <ProjectsCard
-              title={ZeroInboxBackend.title}
-              description={ZeroInboxBackend.description}
-              githubLink={ZeroInboxBackend.githubLink}
-              liveLink={ZeroInboxBackend.liveLink}
-              imgSrc={ZeroInboxBackend.imgSrc}
-              imgAlt={ZeroInboxBackend.imgAlt}
-              technologies={ZeroInboxBackend.technologies}
-              reversed={true}
-            />
-            {/* </EnterAnimation>
-
-            <EnterAnimation> */}
-            <ProjectsCard
-              title={Spacetagram.title}
-              description={Spacetagram.description}
-              githubLink={Spacetagram.githubLink}
-              liveLink={Spacetagram.liveLink}
-              imgSrc={Spacetagram.imgSrc}
-              imgAlt={Spacetagram.imgAlt}
-              technologies={Spacetagram.technologies}
-              reversed={false}
-            />
-            {/* </EnterAnimation> */}
-
-          </>
-          // </EnterAnimation>
-        )}
         <TitleHeader>
           <span className="text-icon-secondary">[</span>
-                &nbsp;03. Technologies&nbsp;
+                &nbsp;02. Technologies&nbsp;
           <span className="text-icon-secondary">]</span>
         </TitleHeader>
         <div className="flex items-center justify-center">
@@ -118,6 +61,58 @@ export default function Home() {
         <div className="flex items-center justify-center">
           <Technologies />
         </div>
+
+        {/* </EnterAnimation> */}
+
+        <TitleHeader>
+          <span className="text-icon-secondary">[</span>
+                &nbsp;02. Projects&nbsp;
+          <span className="text-icon-secondary">]</span>
+        </TitleHeader>
+        <Background>
+
+
+          {/* <EnterAnimation> */}
+          <ProjectsCard
+            title={ZeroInbox.title}
+            description={ZeroInbox.description}
+            githubLink={ZeroInbox.githubLink}
+            liveLink={ZeroInbox.liveLink}
+            imgSrc={ZeroInbox.imgSrc}
+            imgAlt={ZeroInbox.imgAlt}
+            technologies={ZeroInbox.technologies}
+            reversed={false}
+          />
+        </Background>
+        {/* </EnterAnimation>
+
+            <EnterAnimation> */}
+        <ProjectsCard
+          title={ZeroInboxBackend.title}
+          description={ZeroInboxBackend.description}
+          githubLink={ZeroInboxBackend.githubLink}
+          liveLink={ZeroInboxBackend.liveLink}
+          imgSrc={ZeroInboxBackend.imgSrc}
+          imgAlt={ZeroInboxBackend.imgAlt}
+          technologies={ZeroInboxBackend.technologies}
+          reversed={true}
+        />
+        {/* </EnterAnimation>
+
+            <EnterAnimation> */}
+        <ProjectsCard
+          title={Spacetagram.title}
+          description={Spacetagram.description}
+          githubLink={Spacetagram.githubLink}
+          liveLink={Spacetagram.liveLink}
+          imgSrc={Spacetagram.imgSrc}
+          imgAlt={Spacetagram.imgAlt}
+          technologies={Spacetagram.technologies}
+          reversed={false}
+        />
+        {/* </EnterAnimation> */}
+
+
       </GridWrapper>
     </MaxWidthWrapper>
   );
