@@ -23,6 +23,7 @@ const Link = styled(m.a)`
 `;
 
 const PillBackground = styled.div`
+  border-radius: 0.25rem;
   background-color: rgba(var(--color-app-primary), 1);
   transition-property: transform background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
