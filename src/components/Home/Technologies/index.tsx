@@ -4,24 +4,6 @@ import {useInView} from 'react-intersection-observer';
 import {useEffect} from 'react';
 import styled from '@emotion/styled';
 
-const Link = styled(m.a)`
-  /* transition: transform 450ms; */
-  &:hover .pill-float {
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-    transform: translateY(-6px);
-    /* --tw-bg-opacity: 1; */
-  }
-
-  &:hover .pill-background-change {
-    transition-property: background-color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-`;
-
 const PillBackground = styled.div`
   border-radius: 0.25rem;
   background-color: rgba(var(--color-app-primary), 1);
@@ -45,6 +27,25 @@ const Pill = styled.div`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 `;
+
+const Link = styled(m.a)`
+  /* transition: transform 450ms; */
+  &:hover ${PillBackground} {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+    transform: translateY(-6px);
+    /* --tw-bg-opacity: 1; */
+  }
+
+  &:hover ${Pill} {
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+`;
+
 
 export default function Technologies() {
   const {ref, inView} = useInView();
@@ -91,8 +92,8 @@ export default function Technologies() {
           variants={pill}
           className="p-2 text-primary text-sm"
         >
-          <PillBackground className="pill-float">
-            <Pill className="pill-background-change">
+          <PillBackground>
+            <Pill>
               <span className="text-icon-secondary">{tech.icon}</span>
               <span className="text-primary">{tech.name}</span>
             </Pill>

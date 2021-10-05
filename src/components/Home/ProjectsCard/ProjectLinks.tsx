@@ -2,13 +2,6 @@ import {ExternalLink} from '@app/components/Icons';
 import {Github} from '@app/components/Icons/Brands';
 import styled from '@emotion/styled';
 
-const AnimationController = styled.a`
-  &:hover .animated-underline::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
 const AnimatedUnderline = styled.span`
   position: relative;
   padding: 0.1em 0;
@@ -28,11 +21,13 @@ const AnimatedUnderline = styled.span`
     transform-origin: center;
     transition: opacity 300ms, transform 300ms;
   }
+`;
 
-  /* &:hover::after {
+const AnimationController = styled.a`
+  &:hover ${AnimatedUnderline}::after {
     opacity: 1;
     transform: scale(1);
-  } */
+  }
 `;
 
 type ProjectLinksProps = {
