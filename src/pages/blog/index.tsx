@@ -29,10 +29,11 @@ const GridContainer = styled.div`
 `;
 interface BlogArticleListProps {
   allPostsData: {
-    ogTitle: string,
-    date: string,
-    description: string,
     id: string,
+    longTitle: string,
+    shortDescription: string,
+    date: string,
+    tags: string[]
     children?: ReactNode
   }[]
 }
@@ -47,10 +48,27 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
           <span className="text-icon-secondary">&nbsp;]</span>
         </TitleHeader>
         <GridContainer>
-          {allPostsData.map(({id, ogTitle, date, description}, idx) => {
+          {allPostsData.map(({
+            id,
+            longTitle,
+            date,
+            shortDescription,
+            tags,
+          }, idx) => {
             return (
               <Link href={`/blog/${id}`} scroll={false} key={id}>
-                <a><Card title={ogTitle} subTitle={date} className="md:h-64 shadow-md"><article>{description}</article></Card></a>
+                <a>
+                  <Card
+                    title={longTitle}
+                    subTitle={date}
+                    tags={tags}
+                    className="md:h-64 shadow-md"
+                  >
+                    <article>
+                      {shortDescription}
+                    </article>
+                  </Card>
+                </a>
               </Link>
             );
           })}

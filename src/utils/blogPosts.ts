@@ -6,7 +6,7 @@ const postsDirectory = path.join(process.cwd(), 'src/posts-mdx');
 
 export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map(fileName => {
+  const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, '');
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -15,9 +15,13 @@ export function getSortedPostsData() {
 
     return {
       id,
-      ...(matterResult.data as { date: string, title: string })
+      ...(matterResult.data as {
+        date: string,
+        longTitle: string,
+        shortDescription: string,
+        tags: string[],
+      }),
     };
-
   });
 
   return allPostsData.sort((a, b) => {
@@ -35,8 +39,8 @@ export function getAllPostIds() {
   return fileNames.map((fileName: string) => {
     return {
       params: {
-        id: fileName.replace(/\.mdx$/, '')
-      }
+        id: fileName.replace(/\.mdx$/, ''),
+      },
     };
   });
 };
@@ -44,10 +48,10 @@ export function getAllPostIds() {
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.mdx`);
   const rawFileSource = fs.readFileSync(fullPath);
-  const { content, data } = matter(rawFileSource);
+  const {content, data} = matter(rawFileSource);
   return {
     content: content,
     metaData: data,
-    url: `https://bensthoughts.netlify.app/blog/${id}`
+    url: `https://bensthoughts.netlify.app/blog/${id}`,
   };
 }

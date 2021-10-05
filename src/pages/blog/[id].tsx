@@ -44,7 +44,10 @@ type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
   metaData: {
-    pageTitle: string,
+    shortTitle: string,
+    longTitle: string,
+    shortDescription: string,
+    longDescription: string,
     date: string,
     modifiedDate: string,
     readTime: number,
@@ -54,8 +57,6 @@ type PostProps = {
     imgWidth: number,
     imgHeight: number,
     imgAlt: string,
-    ogTitle: string,
-    ogDescription: string,
     ogImageUrl: string,
     ogImageWidth: number,
     ogImageHeight: number,
@@ -69,7 +70,10 @@ export default function PostsPage({
   metaData,
 }: PostProps) {
   const {
-    pageTitle,
+    shortTitle,
+    longTitle,
+    shortDescription,
+    longDescription,
     date,
     modifiedDate,
     readTime,
@@ -79,8 +83,6 @@ export default function PostsPage({
     imgWidth,
     imgHeight,
     imgAlt,
-    ogTitle,
-    ogDescription,
     ogImageUrl,
     ogImageWidth,
     ogImageHeight,
@@ -89,11 +91,11 @@ export default function PostsPage({
   return (
     <>
       <NextSeo
-        title={pageTitle}
-        description={ogDescription}
+        title={shortTitle}
+        description={shortDescription}
         openGraph={{
-          title: ogTitle,
-          description: ogDescription,
+          title: longTitle,
+          description: longDescription,
           url: url,
           type: 'article',
           article: {
@@ -119,13 +121,18 @@ export default function PostsPage({
       />
       <MaxWidthWrapper>
         <GridWrapper>
-          <ArticleHeader title={ogTitle} date={date} readTime={readTime} className="mt-10" />
+          <ArticleHeader
+            title={shortTitle}
+            date={date}
+            readTime={readTime}
+            className="mt-10"
+          />
           {imgPathLarge && imgWidth && imgHeight && imgAlt ?
             (
               <HeaderImage
                 imgPathTiny={imgPathTiny}
                 imgPathLarge={imgPathLarge}
-                alt={ogImageAlt}
+                alt={imgAlt}
                 width={imgWidth}
                 height={imgHeight}
               />
