@@ -18,6 +18,7 @@ display: grid;
 grid-template-columns: repeat(12, 1fr);
 grid-template-rows: repeat(12, 1fr);
 gap: 0px;
+height: 700px;
 }
 
 
@@ -114,7 +115,7 @@ z-index: 3;
 opacity: 1;
 grid-area: 9 / 1 / -2 / -1;
 @media (min-width: 768px) {  
-  grid-area: ${({reversed}) => reversed ? '7 / 2 / -2 / 8' : '7 / 6 / -2 / -2'};
+  grid-area: ${({reversed}) => reversed ? '7 / 2 / -1 / 8' : '7 / 6 / -1 / -2'};
 }
 `;
 

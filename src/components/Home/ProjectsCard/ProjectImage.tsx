@@ -5,8 +5,8 @@ const ImageWrap = styled.div`
   /* width: 500px;
   height: 350px; */
   /* width: 576px;  */
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 `;
 
 const A = styled.a`
@@ -24,8 +24,10 @@ const Image = styled.img`
   /* filter: sepia(50%); */
   /* height: 350px; */
   object-fit: fill;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  width: 458px;
+  height: 300px;
   /* height: 350px; */
   mix-blend-mode: multiply;
   filter: grayscale(100%) contrast(1) brightness(90%);
