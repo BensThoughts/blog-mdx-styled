@@ -27,7 +27,7 @@ const Status = styled.div`
   --statusBarPaddingLarge: 16px;
   --statusBarHeight: 25px;
   background-color: var(--statusBarAccentColor);
-  color: var(--statusBarTextColorAccent);
+  color: var(--statusBarAccentColorText);
   text-transform: uppercase;
   text-align: center;
   padding: 2px 5px 0 var(--editingModeArrowWidth);
@@ -52,7 +52,7 @@ const Status = styled.div`
 
 const File = styled.div`
   /* --statusBarAccentColor: #8095ff; */
-  color: var(--statusBarAccentColor);
+  color: var(--statusBarTextColorAccent);
   padding-top: 2px;
   padding-right: 5px;
   margin: 0 0 0 5px;

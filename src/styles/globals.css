@@ -100,12 +100,18 @@ body[data-theme="light"] {
   --color-gradient-secondary: 7, 105, 99;
  
   --color-image-overlay: 251, 211, 141;
-  
-  --statusBarAccentColor: #ED8936;
-  /* --statusBarTextColor: #55718d; */
-  --statusBarBackgroundColor: rgba(7, 105, 99, 0.8);
+
+  --statusBarAccentColor: rgba(237, 137, 54, 0.8);
+  --statusBarAccentColorText: #27201A;
   --statusBarTextColorAccent: #27201A;
+  --statusBarBackgroundColor: rgb(251, 211, 141);
   --statusBarTextColor: black;
+
+  /*  Set Known OK
+  --statusBarAccentColor: #ED8936;
+  --statusBarTextColorAccent: #27201A;
+  --statusBarBackgroundColor: rgba(7, 105, 99, 0.8);
+  --statusBarTextColor: black; */
 
 
 /*  New Dark Theme
@@ -158,9 +164,9 @@ body[data-theme="dark"] {
   --color-image-overlay: 49, 130, 206;
 
   --statusBarAccentColor: #8095ff;
-  --statusBarTextColor: #55718d;
+  --statusBarAccentColorText: #06182c;
+  --statusBarTextColorAccent: #8095ff;
   --statusBarBackgroundColor: #0a2540;
-  --statusBarTextColorAccent: #06182c;
   --statusBarTextColor: #55718d;
   /* --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 255, 107, 0; */
