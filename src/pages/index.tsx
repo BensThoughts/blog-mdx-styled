@@ -4,31 +4,6 @@ import AvatarCard from '@app/components/Home/AvatarCard';
 import ProjectsCard from '@app/components/Home/ProjectsCard';
 // import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 import TitleHeader from '@app/components/Home/TitleHeader';
-import styled from '@emotion/styled';
-
-const Background = styled.div`
-  
-  &::after {
-    display: none;
-    @media (min-width: 768px) { 
-      display: block;
-      content: '';
-      z-index: -1;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633306161/blog/home/rocket_winpc9.svg);
-      opacity: 0.2;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      transform: translateX(-140px) rotate(-45deg);
-    }
-  }
-`;
-
 import {Projects} from '@app/components/Home/ProjectsCard/projects';
 import Technologies from '@app/components/Home/Technologies';
 import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
@@ -60,29 +35,52 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <Background>
-          <TitleHeader>
-            <span className="text-icon-secondary">[</span>
+        <TitleHeader>
+          <span className="text-icon-secondary">[</span>
                 &nbsp;02. Projects&nbsp;
-            <span className="text-icon-secondary">]</span>
-          </TitleHeader>
-          {Projects.map((project, idx) => (
-            <ProjectsCard
-              key={project.title}
-              title={project.title}
-              description={project.description}
-              githubLink={project.githubLink}
-              liveLink={project.liveLink}
-              imgSrcSmall={project.imgSrcSmall}
-              imgSrcLarge={project.imgSrcLarge}
-              imgAlt={project.imgAlt}
-              technologies={project.technologies}
-              reversed={idx % 2 === 0 ? true : false}
-            />
-          ))}
-        </Background>
+          <span className="text-icon-secondary">]</span>
+        </TitleHeader>
+        {Projects.map((project, idx) => (
+          <ProjectsCard
+            key={project.title}
+            title={project.title}
+            description={project.description}
+            githubLink={project.githubLink}
+            liveLink={project.liveLink}
+            imgSrcSmall={project.imgSrcSmall}
+            imgSrcLarge={project.imgSrcLarge}
+            imgAlt={project.imgAlt}
+            technologies={project.technologies}
+            reversed={idx % 2 === 0 ? true : false}
+          />
+        ))}
+
 
       </GridWrapper>
     </MaxWidthWrapper>
   );
 };
+
+
+// import styled from '@emotion/styled';
+// const Background = styled.div`
+//   &::after {
+//     display: none;
+//     @media (min-width: 768px) {
+//       display: block;
+//       content: '';
+//       z-index: -1;
+//       position: absolute;
+//       width: 100%;
+//       height: 100%;
+//       top: 0;
+//       left: 0;
+//       background-image: url(https://res.cloudinary.com/bensthoughts/image/upload/v1633306161/blog/home/rocket_winpc9.svg);
+//       opacity: 0.2;
+//       background-repeat: no-repeat;
+//       background-size: contain;
+//       background-position: center;
+//       transform: translateX(0px) rotate(-45deg);
+//     }
+//   }
+// `;
