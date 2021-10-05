@@ -144,7 +144,10 @@ export const ZeroInbox = {
   imgAlt: 'Zero Inbox Home Page',
   description: `
     Zero Inbox is a web app that lets users organize their inbox easily on the go.
-    It is a complex Angular 12 application. NgRX is used as a redux store.`,
+    It is a complex Angular 12 application. Users can view analytics about the state of their
+    inbox as well as quickly organize it. All subscriptions, the number of
+    messages, or size of messages in MB from a given sender can be viewed in a table. The tables are paginated and searchable
+    in real time. Users can quickly unsubscribe from, label, delete, or filter messages from a sender.`,
   technologies: [
     {
       name: 'Angular',
