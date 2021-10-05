@@ -23,8 +23,8 @@ export default function AboutBox({className}: AboutBoxProps) {
         </p>
         <p className="my-2">
         &nbsp;&nbsp;&nbsp;&nbsp;I currently spend 20-40 hours a week outside of my full time job studying computer science and learning to develop
-        web applications. As someone that wants to create technology that helps the everyday lives of people,
-        the next logical step for me is to parlay my software development skills into a career. I&apos;m a dreamer that wants to help to create massively scalable, human-centric, applications that enhance people&apos;s lives.
+        web applications. As someone that loves learning, programming, and helping people,
+        the next logical step for me is to parlay my software development skills into a career. I&apos;m a dreamer that wants to work on massively scalable, human-centric, applications that enhance people&apos;s lives.
         </p>
       </div>
     </Background>
