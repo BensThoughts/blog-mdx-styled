@@ -13,7 +13,7 @@ type AboutBoxProps = {
 
 export default function AboutBox({className}: AboutBoxProps) {
   return (
-    <Background className={`bg-app-bg bg-opacity-60 w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-md ${className}`}>
+    <Background className={`bg-terminal bg-opacity-50 w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-md ${className}`}>
       <div>
         <p>Hi,<br /></p>
         <p className="my-2">
@@ -23,12 +23,8 @@ export default function AboutBox({className}: AboutBoxProps) {
         </p>
         <p className="my-2">
         &nbsp;&nbsp;&nbsp;&nbsp;I currently spend 20-40 hours a week outside of my full time job studying computer science and learning to develop
-        web applications. I&apos;m a dreamer that wants to help to create massively scalable, human-centric, applications that enhance people&apos;s lives.
-        </p>
-        <p>
-        &nbsp;&nbsp;&nbsp;&nbsp;As someone that wants to help create technology with
-        the everyday lives of people, the next logical step for me is to parlay my software development skills into a career.
-
+        web applications. As someone that wants to create technology that helps the everyday lives of people,
+        the next logical step for me is to parlay my software development skills into a career. I&apos;m a dreamer that wants to help to create massively scalable, human-centric, applications that enhance people&apos;s lives.
         </p>
       </div>
     </Background>
