@@ -16,22 +16,21 @@ type NavHiderProps = {
 export default function NavHider({className, children}: NavHiderProps) {
   const {scrollDirection, y} = useScrollDirection();
   return (
-    <NavHiderWrapper className={`fixed inset-0 h-14 max-h-14 ${className}`}>
-      <Transition
-        as={Fragment}
-        show={scrollDirection === 'down' && y > 350 ? false : true}
-        enter="transform transition duration-200 ease-out"
-        enterFrom="-translate-y-full"
-        enterTo="translate-y-0"
-        leave="transform transition duration-200 ease-in"
-        leaveFrom="translate-y-0"
-        leaveTo="-translate-y-full"
-      >
-        <div>
-          {children}
-        </div>
-      </Transition>
-    </NavHiderWrapper>
+    <Transition
+      as={Fragment}
+      show={scrollDirection === 'down' && y > 350 ? false : true}
+      enter="transform transition duration-200 ease-out"
+      enterFrom="-translate-y-full"
+      enterTo="translate-y-0"
+      leave="transform transition duration-200 ease-in"
+      leaveFrom="translate-y-0"
+      leaveTo="-translate-y-full"
+    >
+      <NavHiderWrapper className={`fixed inset-0 h-14 max-h-14 ${className}`}>
+        {children}
+      </NavHiderWrapper>
+    </Transition>
+
 
   );
 }
