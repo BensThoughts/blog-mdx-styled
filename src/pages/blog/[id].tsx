@@ -44,7 +44,7 @@ type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
   metaData: {
-    title: string,
+    pageTitle: string,
     date: string,
     modifiedDate: string,
     readTime: number,
@@ -69,7 +69,7 @@ export default function PostsPage({
   metaData,
 }: PostProps) {
   const {
-    title,
+    pageTitle,
     date,
     modifiedDate,
     readTime,
@@ -89,7 +89,7 @@ export default function PostsPage({
   return (
     <>
       <NextSeo
-        title={title}
+        title={pageTitle}
         description={ogDescription}
         openGraph={{
           title: ogTitle,
