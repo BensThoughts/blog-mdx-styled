@@ -1,3 +1,4 @@
+import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 import styled from '@emotion/styled';
 
 const TransitionColor = styled.div`
@@ -63,18 +64,30 @@ const ImageBackground = styled.div`
 `;
 
 type AvatarImgProps = {
-  imgSrc: string;
   className?: string;
 }
+const bustImgSrcSmall = 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1632153114/blog/home/bust_blue_llboi6.jpg';
+const bustImgSrcLarge = 'https://res.cloudinary.com/bensthoughts/image/upload/q_100/v1632153114/blog/home/bust_blue_llboi6.jpg';
 
-export default function AvatarImg({imgSrc, className}: AvatarImgProps) {
+export default function AvatarImg({className}: AvatarImgProps) {
+  const [src, blur] = useProgressiveImage(bustImgSrcSmall, bustImgSrcLarge);
+
   return (
     <TransitionColor className={`z-20 bg-transparent mt-10 md:mt-0 ${className}`}>
       <ImageBackground>
         <ImageWrapper>
           {/* <picture>
           <source srcSet={imgSrc} /> */}
-          <img src={imgSrc} alt="Bust Image" className="relative"/>
+          <img
+            src={src}
+            alt="Bust Image"
+            className="relative"
+            style={{
+              filter: blur ? 'blur(10px)' : 'none',
+              transition: blur ? 'none' : 'filter 0.2s ease-out',
+              // margin: '-5px -10px -10px -5px'
+            }}
+          />
           {/* </picture> */}
         </ImageWrapper>
       </ImageBackground>
