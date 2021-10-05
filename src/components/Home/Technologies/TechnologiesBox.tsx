@@ -13,7 +13,7 @@ type AboutBoxProps = {
 
 export default function TechnologiesBox({className}: AboutBoxProps) {
   return (
-    <Background className={`bg-app-bg w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-sm ${className}`}>
+    <Background className={`bg-terminal bg-opacity-50 w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-sm ${className}`}>
       <div>
         <p className="my-2">
         &nbsp;&nbsp;&nbsp;&nbsp;A non-exhaustive but...pretty exhaustive list of the technologies I have been working with recently.
