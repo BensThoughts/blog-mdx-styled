@@ -54,7 +54,7 @@ export default function Technologies() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.07,
         delayChildren: 0.1,
       },
     },
