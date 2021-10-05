@@ -140,7 +140,8 @@ const TechAnimation = styled.div<{
 type ProjectCardProps = {
   title: string,
   description: string,
-  imgSrc: string,
+  imgSrcSmall: string,
+  imgSrcLarge: string,
   imgAlt: string,
   liveLink: string,
   githubLink: string,
@@ -155,7 +156,8 @@ type ProjectCardProps = {
 export default function ProjectsCard({
   title,
   description,
-  imgSrc,
+  imgSrcSmall,
+  imgSrcLarge,
   imgAlt,
   liveLink,
   githubLink,
@@ -284,7 +286,8 @@ export default function ProjectsCard({
             className="shadow-lg"
           >
             <ProjectImage
-              imgSrc={imgSrc}
+              imgSrcSmall={imgSrcSmall}
+              imgSrcLarge={imgSrcLarge}
               imgAlt={imgAlt}
               href={liveLink}
             />

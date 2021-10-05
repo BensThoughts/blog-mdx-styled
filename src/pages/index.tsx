@@ -75,7 +75,8 @@ export default function Home() {
             description={ZeroInbox.description}
             githubLink={ZeroInbox.githubLink}
             liveLink={ZeroInbox.liveLink}
-            imgSrc={ZeroInbox.imgSrc}
+            imgSrcSmall={ZeroInbox.imgSrcSmall}
+            imgSrcLarge={ZeroInbox.imgSrcLarge}
             imgAlt={ZeroInbox.imgAlt}
             technologies={ZeroInbox.technologies}
             reversed={false}
@@ -85,7 +86,8 @@ export default function Home() {
             description={ZeroInboxBackend.description}
             githubLink={ZeroInboxBackend.githubLink}
             liveLink={ZeroInboxBackend.liveLink}
-            imgSrc={ZeroInboxBackend.imgSrc}
+            imgSrcSmall={ZeroInboxBackend.imgSrcSmall}
+            imgSrcLarge={ZeroInboxBackend.imgSrcLarge}
             imgAlt={ZeroInboxBackend.imgAlt}
             technologies={ZeroInboxBackend.technologies}
             reversed={true}
@@ -95,7 +97,8 @@ export default function Home() {
             description={Spacetagram.description}
             githubLink={Spacetagram.githubLink}
             liveLink={Spacetagram.liveLink}
-            imgSrc={Spacetagram.imgSrc}
+            imgSrcSmall={Spacetagram.imgSrcSmall}
+            imgSrcLarge={Spacetagram.imgSrcLarge}
             imgAlt={Spacetagram.imgAlt}
             technologies={Spacetagram.technologies}
             reversed={false}

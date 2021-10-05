@@ -1,3 +1,4 @@
+import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 import styled from '@emotion/styled';
 
 const Image = styled.img`
@@ -34,21 +35,29 @@ const Anchor = styled.a`
 
 
 type ProjectImageProps = {
-  imgSrc: string,
+  imgSrcSmall: string,
+  imgSrcLarge: string,
   imgAlt: string,
   href: string,
 }
 
 export default function ProjectImage({
-  imgSrc,
+  imgSrcSmall,
+  imgSrcLarge,
   imgAlt,
   href,
 }: ProjectImageProps) {
+  const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
   return (
     <Anchor href={href} target="_blank" rel="noopener noreferrer" >
       <Image
         alt={imgAlt}
-        src={imgSrc}
+        src={src}
+        style={{
+          filter: blur ? 'blur(10px)' : 'none',
+          transition: blur ? 'none' : 'filter 0.2s ease-out',
+          // margin: '-5px -10px -10px -5px'
+        }}
       />
     </Anchor>
   );

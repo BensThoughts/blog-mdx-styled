@@ -26,7 +26,8 @@ export const Spacetagram = {
   title: 'Spacetagram',
   liveLink: 'https://shopify-nasa-challenge.netlify.app/',
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
-  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
+  imgSrcSmall: 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
+  imgSrcLarge: 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
   imgAlt: 'Spacetagram Home Page',
   description: `
     Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that used the NASA APOD API to display the image of the day.
@@ -76,7 +77,8 @@ export const ZeroInboxBackend = {
   title: 'Zero Inbox Backend',
   liveLink: 'https://zeroinbox.app/story',
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
-  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633402742/blog/projects/zero-inbox/zeroinbox-services-full-scaled_uqnk9p.png',
+  imgSrcSmall: 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1633402742/blog/projects/zero-inbox/zeroinbox-services-full-scaled_uqnk9p.png',
+  imgSrcLarge: 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1633402742/blog/projects/zero-inbox/zeroinbox-services-full-scaled_uqnk9p.png',
   imgAlt: 'Zero Inbox Backend',
   description: `
     The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes
@@ -140,7 +142,8 @@ export const ZeroInbox = {
   title: 'Zero Inbox Frontend',
   liveLink: 'https://zeroinbox.app',
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
-  imgSrc: 'https://res.cloudinary.com/bensthoughts/image/upload/v1633402740/blog/projects/zero-inbox/zeroinbox-home-full-scaled_nef8nu.png',
+  imgSrcSmall: 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1633402740/blog/projects/zero-inbox/zeroinbox-home-full-scaled_nef8nu.png',
+  imgSrcLarge: 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1633402740/blog/projects/zero-inbox/zeroinbox-home-full-scaled_nef8nu.png',
   imgAlt: 'Zero Inbox Home Page',
   description: `
     Zero Inbox is a web app that lets users organize their inbox easily on the go.
