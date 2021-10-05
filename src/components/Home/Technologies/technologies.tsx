@@ -1,3 +1,4 @@
+import {Auth} from '@app/components/Icons';
 import {
   Angular,
   AWS,
@@ -140,6 +141,11 @@ export const TechStack = [
     name: 'NPM',
     icon: <NPM size={size} />,
     href: 'https://www.npmjs.com/',
+  },
+  {
+    name: 'OAuth',
+    icon: <Auth size={size} />,
+    href: 'https://oauth.net/',
   },
   {
     name: 'Prettier',
