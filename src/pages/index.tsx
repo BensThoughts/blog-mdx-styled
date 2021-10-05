@@ -29,11 +29,7 @@ const Background = styled.div`
   }
 `;
 
-import {
-  ZeroInbox,
-  ZeroInboxBackend,
-  Spacetagram,
-} from '@app/components/Home/ProjectsCard/projects';
+import {Projects} from '@app/components/Home/ProjectsCard/projects';
 import Technologies from '@app/components/Home/Technologies';
 import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
 
@@ -70,39 +66,20 @@ export default function Home() {
                 &nbsp;02. Projects&nbsp;
             <span className="text-icon-secondary">]</span>
           </TitleHeader>
-          <ProjectsCard
-            title={ZeroInbox.title}
-            description={ZeroInbox.description}
-            githubLink={ZeroInbox.githubLink}
-            liveLink={ZeroInbox.liveLink}
-            imgSrcSmall={ZeroInbox.imgSrcSmall}
-            imgSrcLarge={ZeroInbox.imgSrcLarge}
-            imgAlt={ZeroInbox.imgAlt}
-            technologies={ZeroInbox.technologies}
-            reversed={false}
-          />
-          <ProjectsCard
-            title={ZeroInboxBackend.title}
-            description={ZeroInboxBackend.description}
-            githubLink={ZeroInboxBackend.githubLink}
-            liveLink={ZeroInboxBackend.liveLink}
-            imgSrcSmall={ZeroInboxBackend.imgSrcSmall}
-            imgSrcLarge={ZeroInboxBackend.imgSrcLarge}
-            imgAlt={ZeroInboxBackend.imgAlt}
-            technologies={ZeroInboxBackend.technologies}
-            reversed={true}
-          />
-          <ProjectsCard
-            title={Spacetagram.title}
-            description={Spacetagram.description}
-            githubLink={Spacetagram.githubLink}
-            liveLink={Spacetagram.liveLink}
-            imgSrcSmall={Spacetagram.imgSrcSmall}
-            imgSrcLarge={Spacetagram.imgSrcLarge}
-            imgAlt={Spacetagram.imgAlt}
-            technologies={Spacetagram.technologies}
-            reversed={false}
-          />
+          {Projects.map((project, idx) => (
+            <ProjectsCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              githubLink={project.githubLink}
+              liveLink={project.liveLink}
+              imgSrcSmall={project.imgSrcSmall}
+              imgSrcLarge={project.imgSrcLarge}
+              imgAlt={project.imgAlt}
+              technologies={project.technologies}
+              reversed={idx % 2 === 0 ? true : false}
+            />
+          ))}
         </Background>
 
       </GridWrapper>

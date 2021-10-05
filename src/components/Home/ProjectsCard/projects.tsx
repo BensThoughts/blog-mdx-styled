@@ -193,5 +193,10 @@ export const ZeroInbox = {
       href: 'https://tailwindcss.com/',
     },
   ],
-}
-;
+};
+
+export const Projects = [
+  ZeroInbox,
+  ZeroInboxBackend,
+  Spacetagram,
+];
