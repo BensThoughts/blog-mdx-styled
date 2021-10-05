@@ -3,7 +3,6 @@ import GridWrapper from '@app/components/GridWrapper';
 import AvatarCard from '@app/components/Home/AvatarCard';
 import ProjectsCard from '@app/components/Home/ProjectsCard';
 // import EnterAnimation from '@app/components/Transitions/EnterAnimation';
-import useFeatureToggle from '@app/utils/hooks/useFeatureToggle';
 import TitleHeader from '@app/components/Home/TitleHeader';
 import styled from '@emotion/styled';
 
@@ -42,14 +41,16 @@ export default function Home() {
   return (
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
-        {/* <EnterAnimation> */}
 
+        {/* About Section */}
         <TitleHeader>
           <span className="text-icon-secondary">[</span>
                 &nbsp;01. About Me&nbsp;
           <span className="text-icon-secondary">]</span>
         </TitleHeader>
         <AvatarCard />
+
+        {/* Technologies Section */}
         <TitleHeader>
           <span className="text-icon-secondary">[</span>
                 &nbsp;02. Technologies&nbsp;
@@ -62,17 +63,13 @@ export default function Home() {
           <Technologies />
         </div>
 
-        {/* </EnterAnimation> */}
-
-        <TitleHeader>
-          <span className="text-icon-secondary">[</span>
-                &nbsp;02. Projects&nbsp;
-          <span className="text-icon-secondary">]</span>
-        </TitleHeader>
+        {/* Projects Section */}
         <Background>
-
-
-          {/* <EnterAnimation> */}
+          <TitleHeader>
+            <span className="text-icon-secondary">[</span>
+                &nbsp;02. Projects&nbsp;
+            <span className="text-icon-secondary">]</span>
+          </TitleHeader>
           <ProjectsCard
             title={ZeroInbox.title}
             description={ZeroInbox.description}
@@ -83,35 +80,27 @@ export default function Home() {
             technologies={ZeroInbox.technologies}
             reversed={false}
           />
+          <ProjectsCard
+            title={ZeroInboxBackend.title}
+            description={ZeroInboxBackend.description}
+            githubLink={ZeroInboxBackend.githubLink}
+            liveLink={ZeroInboxBackend.liveLink}
+            imgSrc={ZeroInboxBackend.imgSrc}
+            imgAlt={ZeroInboxBackend.imgAlt}
+            technologies={ZeroInboxBackend.technologies}
+            reversed={true}
+          />
+          <ProjectsCard
+            title={Spacetagram.title}
+            description={Spacetagram.description}
+            githubLink={Spacetagram.githubLink}
+            liveLink={Spacetagram.liveLink}
+            imgSrc={Spacetagram.imgSrc}
+            imgAlt={Spacetagram.imgAlt}
+            technologies={Spacetagram.technologies}
+            reversed={false}
+          />
         </Background>
-        {/* </EnterAnimation>
-
-            <EnterAnimation> */}
-        <ProjectsCard
-          title={ZeroInboxBackend.title}
-          description={ZeroInboxBackend.description}
-          githubLink={ZeroInboxBackend.githubLink}
-          liveLink={ZeroInboxBackend.liveLink}
-          imgSrc={ZeroInboxBackend.imgSrc}
-          imgAlt={ZeroInboxBackend.imgAlt}
-          technologies={ZeroInboxBackend.technologies}
-          reversed={true}
-        />
-        {/* </EnterAnimation>
-
-            <EnterAnimation> */}
-        <ProjectsCard
-          title={Spacetagram.title}
-          description={Spacetagram.description}
-          githubLink={Spacetagram.githubLink}
-          liveLink={Spacetagram.liveLink}
-          imgSrc={Spacetagram.imgSrc}
-          imgAlt={Spacetagram.imgAlt}
-          technologies={Spacetagram.technologies}
-          reversed={false}
-        />
-        {/* </EnterAnimation> */}
-
 
       </GridWrapper>
     </MaxWidthWrapper>
