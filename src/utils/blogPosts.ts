@@ -18,7 +18,7 @@ export function getSortedPostsData() {
       ...(matterResult.data as {
         date: string,
         longTitle: string,
-        shortDescription: string,
+        longDescription: string,
         tags: string[],
       }),
     };

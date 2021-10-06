@@ -20,18 +20,25 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const GridContainer = styled.div`
   display: grid;
-  gap: 16px;
+  height: 100%;
+  gap: 32px;
   grid-template-columns: 1fr;
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
     gap: 32px;
+  }
+
+  *{
+    grid-column: auto;
+    grid-row: auto;
   }
 `;
 interface BlogArticleListProps {
   allPostsData: {
     id: string,
     longTitle: string,
-    shortDescription: string,
+    longDescription: string,
     date: string,
     tags: string[]
     children?: ReactNode
@@ -40,8 +47,9 @@ interface BlogArticleListProps {
 
 export default function BlogArticleListPage({allPostsData}: BlogArticleListProps) {
   return (
-    <MaxWidthWrapper>
-      <section>
+    // <MaxWidthWrapper>
+    <section>
+      <MaxWidthWrapper>
         <TitleHeader>
           <span className="text-icon-secondary">[&nbsp;</span>
           Blog
@@ -52,28 +60,28 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
             id,
             longTitle,
             date,
-            shortDescription,
+            longDescription,
             tags,
           }, idx) => {
             return (
-              <Link href={`/blog/${id}`} scroll={false} key={id}>
+              <Link href={`/blog/${id}`} scroll={false} key={id} passHref>
                 <a>
                   <Card
                     title={longTitle}
                     subTitle={date}
                     tags={tags}
-                  >
-                    <article>
-                      {shortDescription}
-                    </article>
-                  </Card>
+                    description={longDescription}
+                  />
                 </a>
               </Link>
             );
           })}
+
         </GridContainer>
-      </section>
-    </MaxWidthWrapper>
+      </MaxWidthWrapper>
+    </section>
+
+  // </MaxWidthWrapper>
   );
 };
 
