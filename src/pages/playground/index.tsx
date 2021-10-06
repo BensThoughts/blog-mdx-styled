@@ -65,7 +65,7 @@ export default function PlaygroundPage() {
       </AnimatedLinkIcon>
       <AstronautHelmet size={50} gradient />
 
-      <Folder size={200} />
+      <Folder color="red" />
     </MaxWidthWrapper>
   );
 }
