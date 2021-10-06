@@ -2,7 +2,6 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import {m, useAnimation} from 'framer-motion';
 import {useEffect, useState} from 'react';
-import {Twitter} from '../Icons/Brands';
 
 const Container = styled.div`
   border-radius: 5px;
