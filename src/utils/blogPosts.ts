@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import seoConfig from './seo.config';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts-mdx');
 
@@ -45,6 +46,10 @@ export function getAllPostIds() {
   });
 };
 
+function buildUrl(id: string) {
+  return `${seoConfig.openGraph.url}/blog/${id}`;
+}
+
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.mdx`);
   const rawFileSource = fs.readFileSync(fullPath);
@@ -52,6 +57,6 @@ export async function getPostData(id: string) {
   return {
     content: content,
     metaData: data,
-    url: `https://bensthoughts.netlify.app/blog/${id}`,
+    url: buildUrl(id),
   };
 }

@@ -125,6 +125,7 @@ export default function PostsPage({
             title={longTitle}
             date={date}
             readTime={readTime}
+            permaLink={url}
             className="mt-10"
           />
           {imgPathLarge && imgWidth && imgHeight && imgAlt ?
