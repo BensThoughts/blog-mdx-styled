@@ -25,41 +25,41 @@ const Pill = styled.div`
   transition-duration: 300ms; */
 `;
 
-const Tab = styled.div`
-  position: relative;
-  display: block;
-  width: 10rem;
-  height: 2rem;
-  margin-left: 10px;
-  border-top: 4px solid rgb(var(--color-app-secondary));
-  border-top-left-radius: 0.3rem/* 6px */;
-  border-top-right-radius: 0.3rem/* 6px */;
-  /* background-color: rgb(var(--color-app-primary)); */
-  background: linear-gradient(to bottom, rgba(var(--color-app-primary), 1) 0%, rgba(var(--color-app-primary), 1) 50%);
-  /* box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(0, 0, 0, 0.5); */
-  &::before, &::after {
-    position: absolute;
-    bottom: -1px;
-    width:6px;
-    height: 6px;
-    content: " ";
-    border: 1px solid rgba(var(--color-app-primary), 1);
-  }
+// const Tab = styled.div`
+//   position: relative;
+//   display: block;
+//   width: 10rem;
+//   height: 2rem;
+//   margin-left: 10px;
+//   border-top: 4px solid rgb(var(--color-app-secondary));
+//   border-top-left-radius: 0.3rem/* 6px */;
+//   border-top-right-radius: 0.3rem/* 6px */;
+//   /* background-color: rgb(var(--color-app-primary)); */
+//   background: linear-gradient(to bottom, rgba(var(--color-app-primary), 1) 0%, rgba(var(--color-app-primary), 1) 50%);
+//   /* box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(0, 0, 0, 0.5); */
+//   &::before, &::after {
+//     position: absolute;
+//     bottom: -1px;
+//     width:6px;
+//     height: 6px;
+//     content: " ";
+//     border: 1px solid rgba(var(--color-app-primary), 1);
+//   }
 
-  &::before {
-    left: -5px;
-    border-bottom-right-radius: 6px;
-    border-width: 0 1px 1px 0;
-    box-shadow: 2px 2px 0 rgba(var(--color-app-primary), 1);
-  }
+//   &::before {
+//     left: -5px;
+//     border-bottom-right-radius: 6px;
+//     border-width: 0 1px 1px 0;
+//     box-shadow: 2px 2px 0 rgba(var(--color-app-primary), 1);
+//   }
 
-  &::after {
-    right: -5px;
-    border-bottom-left-radius: 6px;
-    border-width: 0 0 1px 1px;
-    box-shadow: -2px 2px 0 rgba(var(--color-app-primary), 1);
-  }
-`;
+//   &::after {
+//     right: -5px;
+//     border-bottom-left-radius: 6px;
+//     border-width: 0 0 1px 1px;
+//     box-shadow: -2px 2px 0 rgba(var(--color-app-primary), 1);
+//   }
+// `;
 
 type CardProps = {
   subTitle?: string
@@ -78,7 +78,6 @@ export default function Card({
 }: CardProps) {
   return (
     <div className="h-full flex flex-col">
-      <Tab></Tab>
       <Container className={`h-full relative bg-primary px-2 py-4 md:p-4 flex flex-col justify-start gap-4 shadow-md ${className}`}>
         <div>
           {title && <div className="text-2xl text-high-emphesis">{title}</div>}
