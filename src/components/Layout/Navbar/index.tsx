@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import MenuItem from '@app/components/Layout/MenuItem';
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
-import Drawer from '@app/components/Drawer';
+import MenuDrawer from '@app/components/Layout/MenuDrawer';
 import IconButton from '@app/components/IconButton';
 import NavHider from './NavHider';
 
@@ -56,7 +56,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
 
   return (
     <>
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Try something new!">
+      <MenuDrawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Short and sweet!">
         <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full">
           <MenuItem href="/" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl mt-7">Home</MenuItem>
           <MenuItem href="/blog" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Blog</MenuItem>
@@ -64,7 +64,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <MenuItem href="/about" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">About</MenuItem>
           <MenuItem href="/contact" onClick={() => setIsOpen(false)} className="hover:bg-secondary w-full h-10 flex items-center justify-center text-xl">Contact</MenuItem> */}
         </NavLinks>
-      </Drawer>
+      </MenuDrawer>
       <NavHider>
         <Nav {...rest} className={`bg-app-bg shadow-lg bg-opacity-70 ${className}`}>
 

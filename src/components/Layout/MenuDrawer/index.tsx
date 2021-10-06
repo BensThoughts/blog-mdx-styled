@@ -1,22 +1,18 @@
 import {Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import Button from '../Button';
-
-type Direction = 'left' | 'right' | 'top' | 'bottom';
+import Button from '../../Button';
 
 type DrawerProps = {
   title?: string,
   description?: string,
-  direction?: Direction,
   children: React.ReactNode,
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Drawer({
+export default function MenuDrawer({
   title = '',
   description = '',
-  direction = 'left',
   children,
   isOpen,
   setIsOpen,
@@ -51,7 +47,7 @@ export default function Drawer({
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="flex flex-col justify-between bg-primary z-50 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-r-2xl">
+            <div className="flex flex-col justify-between bg-app-bg bg-opacity-70 backdrop-filter backdrop-blur-sm z-50 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-br-md">
               <div>
                 <Dialog.Title className="font-bold text-2xl md:text-4xl text-secondary">{title}</Dialog.Title>
                 <Dialog.Description>{description}</Dialog.Description>
