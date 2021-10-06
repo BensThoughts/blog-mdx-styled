@@ -1,10 +1,9 @@
 import {ReactNode} from 'react';
 import type {GetStaticProps} from 'next';
-import Link from 'next/link';
 import styled from '@emotion/styled';
 
 import {getSortedPostsData} from '@app/utils/blogPosts';
-import Card from '@app/components/Card';
+import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import TitleHeader from '@app/components/Home/TitleHeader';
 
@@ -64,16 +63,14 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
             tags,
           }, idx) => {
             return (
-              <Link href={`/blog/${id}`} scroll={false} key={id} passHref>
-                <a>
-                  <Card
-                    title={longTitle}
-                    subTitle={date}
-                    tags={tags}
-                    description={longDescription}
-                  />
-                </a>
-              </Link>
+              <BlogCard
+                key={id}
+                id={id}
+                title={longTitle}
+                date={date}
+                tags={tags}
+                description={longDescription}
+              />
             );
           })}
 
