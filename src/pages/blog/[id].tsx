@@ -122,7 +122,7 @@ export default function PostsPage({
       <MaxWidthWrapper>
         <GridWrapper>
           <ArticleHeader
-            title={shortTitle}
+            title={longTitle}
             date={date}
             readTime={readTime}
             className="mt-10"

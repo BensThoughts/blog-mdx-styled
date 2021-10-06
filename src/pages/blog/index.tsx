@@ -23,7 +23,7 @@ const GridContainer = styled.div`
   gap: 16px;
   grid-template-columns: 1fr;
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
   }
 `;
@@ -62,7 +62,6 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
                     title={longTitle}
                     subTitle={date}
                     tags={tags}
-                    className="md:h-64 shadow-md"
                   >
                     <article>
                       {shortDescription}

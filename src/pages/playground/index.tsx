@@ -16,6 +16,7 @@ import {
 } from '@app/components/Icons/Brands';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import AnimatedLinkIcon from '@app/components/AnimatedLinkIcon';
+import Folder from '@app/components/Icons/Folder';
 
 const Icon = styled.div`
   stroke: url('#linear');
@@ -63,6 +64,8 @@ export default function PlaygroundPage() {
         <Facebook />
       </AnimatedLinkIcon>
       <AstronautHelmet size={50} gradient />
+
+      <Folder size={200} />
     </MaxWidthWrapper>
   );
 }
