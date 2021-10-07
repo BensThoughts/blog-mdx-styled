@@ -7,8 +7,8 @@ const StatusBarContainer = styled.div`
   height: var(--statusBarHeight);
   justify-content: space-between;
   align-items: center;
-  background-color: var(--statusBarBackgroundColor);
-  color: var(--statusBarTextColor);
+  background-color: rgba(var(--statusBarBackgroundColor), 1);
+  color: rgba(var(--statusBarTextColor), 1);
   margin-top: auto;
   width: 100%;
 `;
@@ -26,8 +26,8 @@ const Status = styled.div`
   --statusBarPaddingSmall: 8px;
   --statusBarPaddingLarge: 16px;
   --statusBarHeight: 25px;
-  background-color: var(--statusBarAccentColor);
-  color: var(--statusBarAccentColorText);
+  background-color: rgba(var(--statusBarAccentColor), 0.8);
+  color: rgba(var(--statusBarAccentColorText), 1);
   text-transform: uppercase;
   text-align: center;
   padding: 2px 5px 0 var(--editingModeArrowWidth);
@@ -43,7 +43,7 @@ const Status = styled.div`
     transform: translateX(100%);
     width: 0;
     height: 0;
-    border-left: var(--editingModeArrowWidth) solid var(--statusBarAccentColor);
+    border-left: var(--editingModeArrowWidth) solid rgba(var(--statusBarAccentColor), 0.8);
     border-bottom: calc(var(--statusBarHeight) / 2) solid transparent;
     border-right: 0 solid transparent;
     border-top: calc(var(--statusBarHeight) / 2) solid transparent;
@@ -52,7 +52,7 @@ const Status = styled.div`
 
 const File = styled.div`
   /* --statusBarAccentColor: #8095ff; */
-  color: var(--statusBarTextColorAccent);
+  color: rgba(var(--statusBarTextColorAccent), 1);
   padding-top: 2px;
   padding-right: 5px;
   margin: 0 0 0 5px;

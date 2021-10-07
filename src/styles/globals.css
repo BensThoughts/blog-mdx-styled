@@ -77,13 +77,11 @@ h1 {
 }
 
 body[data-theme="light"] {
-  /* Old Light Orange Theme */
   --color-text-primary: 39, 32, 26;
   --color-text-secondary: 7, 105, 99;
   
   /* --color-bg-primary: 254, 235, 200; */
   --color-bg-primary: 255, 255, 255;
-  /* --color-bg-toggle: 30, 144, 255; */
   --color-bg-terminal: 251, 211, 141;
 
   --color-app-primary: 251, 211, 141;
@@ -92,48 +90,22 @@ body[data-theme="light"] {
   
   --color-icon-border-primary: 237, 137, 54;
 
-  --color-scroll-thumb: #ED8936;
-  --color-scroll-track: #FBD38D;
-  --color-scroll-thumb-hover: #FAF089;
-
   --color-gradient-primary: 7, 105, 99;
   --color-gradient-secondary: 7, 105, 99;
  
   --color-image-overlay: 251, 211, 141;
 
-  --statusBarAccentColor: rgba(237, 137, 54, 0.8);
-  --statusBarAccentColorText: #27201A;
-  --statusBarTextColorAccent: #27201A;
-  --statusBarBackgroundColor: rgb(251, 211, 141);
-  --statusBarTextColor: black;
-
-  /*  Set Known OK
-  --statusBarAccentColor: #ED8936;
-  --statusBarTextColorAccent: #27201A;
-  --statusBarBackgroundColor: rgba(7, 105, 99, 0.8);
-  --statusBarTextColor: black; */
-
-
-/*  New Dark Theme
-  --color-text-primary: 227, 227, 227;
-  --color-text-secondary: 120, 12, 61;
-  
-  --color-bg-primary: 18, 18, 18;
-  --color-bg-toggle: 30, 144, 255;
-  --color-bg-terminal: 251, 211, 141;
-
-  --color-app-primary: 120, 12, 61;
-  --color-app-secondary: 83, 11, 87;
-  --color-app-accent: 52, 56, 189;
-  
-  --color-icon-border-primary: 237, 137, 54;
+  --statusBarAccentColor: 237, 137, 54;
+  --statusBarAccentColorText: 39, 32, 26;
+  --statusBarTextColorAccent: 39, 32, 26;
+  --statusBarBackgroundColor: 251, 211, 141;
+  --statusBarTextColor: 0, 0, 0;
 
   --color-scroll-thumb: #ED8936;
   --color-scroll-track: #FBD38D;
   --color-scroll-thumb-hover: #FAF089;
 
-
-  --color-gradient-primary: 83, 11, 87;
+  /* --color-gradient-primary: 83, 11, 87;
   --color-gradient-secondary: 120, 12, 61; */
 
   /* Neon Purple/Pink
@@ -154,22 +126,21 @@ body[data-theme="dark"] {
   
   --color-icon-border-primary: 99, 179, 237;
 
-  --color-scroll-thumb: #3182CE;
-  --color-scroll-track: #4A5568;
-  --color-scroll-thumb-hover: #63B3ED;
-
   --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 253, 200, 48;
 
   --color-image-overlay: 49, 130, 206;
 
-  --statusBarAccentColor: #8095ff;
-  --statusBarAccentColorText: #06182c;
-  --statusBarTextColorAccent: #8095ff;
-  --statusBarBackgroundColor: #0a2540;
-  --statusBarTextColor: #55718d;
-  /* --color-gradient-primary: 255, 107, 0;
-  --color-gradient-secondary: 255, 107, 0; */
+  --statusBarAccentColor: 128, 149, 255;
+  --statusBarAccentColorText: 6, 24, 44;
+  --statusBarTextColorAccent: 128, 149, 255;
+  --statusBarBackgroundColor: 10, 37, 64;
+  --statusBarTextColor: 85, 113, 141;
+
+
+  --color-scroll-thumb: #3182CE;
+  --color-scroll-track: #4A5568;
+  --color-scroll-thumb-hover: #63B3ED;
 }
 
 @keyframes fadeIn {

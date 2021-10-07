@@ -61,7 +61,7 @@ height: 100%;
 background-color: rgba(var(--color-bg-terminal), 0.6);
 border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
 border-style: solid;
-border-color: rgb(var(--color-text-secondary));
+border-color: rgba(var(--color-text-secondary), 1);
 @media (min-width: 768px) {  
 transform: ${({expanded, reversed}) => {
     if (!expanded) {
