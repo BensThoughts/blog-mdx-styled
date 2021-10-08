@@ -84,10 +84,10 @@ export default function PostsPage({
     <>
       <NextSeo
         title={title}
-        description={shortDescription}
+        description={longDescription}
         openGraph={{
           title: title,
-          description: longDescription,
+          description: shortDescription,
           url: url,
           type: 'article',
           article: {
