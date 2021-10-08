@@ -2,7 +2,6 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 import AvatarCard from '@app/components/Home/AvatarCard';
 import ProjectsCard from '@app/components/Home/ProjectsCard';
-// import EnterAnimation from '@app/components/Transitions/EnterAnimation';
 import TitleHeader from '@app/components/Home/TitleHeader';
 import {Projects} from '@app/components/Home/ProjectsCard/projects';
 import Technologies from '@app/components/Home/Technologies';
