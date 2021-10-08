@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
-const AnimatedBorder = styled.div`
+const AnimatedBorder = styled.a`
   --app-border-opacity: 0.8;
   position: relative;
   padding: 10px;
+  display: block;
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     display: block;
@@ -22,7 +23,11 @@ const AnimatedBorder = styled.div`
     transition: transform 300ms;
   }
 
-  &:hover:after {
+  &:hover::after {
+    transform: scale(1.2);
+  }
+
+  &:focus::after {
     transform: scale(1.2);
   }
 `;
@@ -41,10 +46,8 @@ export default function AnimatedLinkIcon({
   rel = 'noreferrer noopener',
 }: AnimatedLinkIconProps) {
   return (
-    <a href={href} target={target} rel={rel}>
-      <AnimatedBorder>
-        {children}
-      </AnimatedBorder>
-    </a>
+    <AnimatedBorder href={href} target={target} rel={rel}>
+      {children}
+    </AnimatedBorder>
   );
 }
