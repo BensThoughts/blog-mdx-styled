@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import {m, useAnimation} from 'framer-motion';
+import {ForwardRefComponent, HTMLMotionProps, m, useAnimation} from 'framer-motion';
 import {useEffect, useState} from 'react';
 
 const Container = styled(m.div)<{
   activated: boolean;
+  focused: boolean;
 }>`
   border-radius: 5px;
   border: 2px solid rgb(var(--color-app-secondary));
@@ -14,7 +15,10 @@ const Container = styled(m.div)<{
   transition-timing-function: ease-in-out;
   will-change: background, color;
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
+
+  outline: ${({focused}) => focused ? 'var(--app-outline)' : 'none'};
+  outline-offset: var(--app-outline-offset);
 
   &::before {
     content: " ";
@@ -51,7 +55,8 @@ type CardProps = {
   title: string
   description: string
   tags: string[]
-} & React.HTMLAttributes<HTMLAnchorElement>
+  className?: string
+} & ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
 
 export default function BlogCard({
   id = '',
@@ -60,6 +65,7 @@ export default function BlogCard({
   description = '',
   tags = [],
   className,
+  ...rest
 }: CardProps) {
   const controls = useAnimation();
   const [hovered, setHovered] = useState(false);
@@ -110,10 +116,12 @@ export default function BlogCard({
   return (
     <Container
       activated={activated}
+      focused={focused}
       initial="notActivated"
       animate={controls}
       variants={container}
       className="shadow-md"
+      {...rest}
     >
       <Link href={`/blog/${id}`} scroll={false} passHref>
         <a

@@ -32,6 +32,11 @@ const Anchor = styled.a`
     left: 0;
     background-color: rgba(var(--color-image-overlay), 0.7);
   }
+
+  &:focus ${Image} {
+    mix-blend-mode: normal;
+    filter: grayscale(0%) brightness(100%);
+  }
 `;
 
 
