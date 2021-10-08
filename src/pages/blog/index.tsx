@@ -46,39 +46,34 @@ interface BlogArticleListProps {
 
 export default function BlogArticleListPage({allPostsData}: BlogArticleListProps) {
   return (
-    // <MaxWidthWrapper>
-    <section>
-      <MaxWidthWrapper>
-        <TitleHeader>
-          <span className="text-icon-secondary">[&nbsp;</span>
+    <MaxWidthWrapper>
+      <TitleHeader>
+        <span className="text-icon-secondary">[&nbsp;</span>
           Blog
-          <span className="text-icon-secondary">&nbsp;]</span>
-        </TitleHeader>
-        <GridContainer>
-          {allPostsData.map(({
-            id,
-            longTitle,
-            date,
-            longDescription,
-            tags,
-          }, idx) => {
-            return (
-              <BlogCard
-                key={id}
-                id={id}
-                title={longTitle}
-                date={date}
-                tags={tags}
-                description={longDescription}
-              />
-            );
-          })}
+        <span className="text-icon-secondary">&nbsp;]</span>
+      </TitleHeader>
+      <GridContainer>
+        {allPostsData.map(({
+          id,
+          longTitle,
+          date,
+          longDescription,
+          tags,
+        }, idx) => {
+          return (
+            <BlogCard
+              key={id}
+              id={id}
+              title={longTitle}
+              date={date}
+              tags={tags}
+              description={longDescription}
+            />
+          );
+        })}
 
-        </GridContainer>
-      </MaxWidthWrapper>
-    </section>
-
-  // </MaxWidthWrapper>
+      </GridContainer>
+    </MaxWidthWrapper>
   );
 };
 
