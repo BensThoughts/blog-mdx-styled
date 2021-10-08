@@ -1,8 +1,7 @@
 import {TechStack} from './technologies';
-import {m, useAnimation} from 'framer-motion';
 import {useInView} from 'react-intersection-observer';
-import {useEffect} from 'react';
 import styled from '@emotion/styled';
+import {useEffect, useState} from 'react';
 
 const PillBackground = styled.div`
   border-radius: 0.25rem;
@@ -28,14 +27,18 @@ const Pill = styled.div`
   transition-duration: 300ms;
 `;
 
-const Link = styled(m.a)`
-  /* transition: transform 450ms; */
+const Link = styled.a<{
+  transitionDelay: number;
+}>`
+  display: block;
+  transition: opacity 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: ${({transitionDelay}) => transitionDelay + 's'}; 
   &:hover ${PillBackground} {
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
     transform: translateY(-6px);
-    /* --tw-bg-opacity: 1; */
   }
 
   &:hover ${Pill} {
@@ -46,50 +49,38 @@ const Link = styled(m.a)`
   }
 `;
 
+const Container = styled.div<{
+  viewed: boolean
+}>`
+  ${Link} {
+    opacity: ${({viewed}) => viewed ? 1 : 0}
+  }
+`;
+
 
 export default function Technologies() {
   const {ref, inView} = useInView();
-  const controls = useAnimation();
-
-  const container = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.07,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const pill = {
-    hidden: {opacity: 0},
-    visible: {opacity: 1},
-  };
+  const [viewed, setViewed] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      setViewed(true);
     }
-    // if (!inView) {
-    //   controls.start('hidden');
-    // }
-  });
+  }, [inView]);
 
   return (
-    <m.div
-      variants={container}
-      initial="hidden"
-      animate={controls}
+    <Container
       className="flex flex-wrap w-full h-full max-w-4xl"
       ref={ref}
+      viewed={viewed}
     >
-      {TechStack.map((tech) => (
+      {TechStack.map((tech, idx) => (
         <Link
           key={tech.name}
           href={tech.href}
           target="_blank"
           rel="noopener noreferrer"
-          variants={pill}
+          transitionDelay={0.07 * idx}
           className="p-2 text-primary text-sm"
         >
           <PillBackground>
@@ -100,6 +91,6 @@ export default function Technologies() {
           </PillBackground>
         </Link>
       ))}
-    </m.div>
+    </Container>
   );
 }
