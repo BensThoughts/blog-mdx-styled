@@ -15,6 +15,7 @@ import {
   H1,
   H2,
   HeaderImage,
+  Img,
   InlineCode,
   P,
   Pre,
@@ -32,6 +33,7 @@ const components = {
   date: Date,
   h1: H1,
   h2: H2,
+  img: Img,
   inlinecode: InlineCode,
   p: P,
   pre: Pre,
@@ -51,7 +53,7 @@ type PostProps = {
     date: string,
     readTime: number,
     tags: string[],
-    imgPath: string,
+    cloudinaryImgPath: string,
     imgWidth: number,
     imgHeight: number,
     imgAlt: string,
@@ -70,16 +72,21 @@ export default function PostsPage({
     date,
     readTime,
     tags,
-    imgPath,
+    cloudinaryImgPath,
     imgWidth,
     imgHeight,
     imgAlt,
   } = metaData;
-  const ogImageUrl = buildImageUrl(imgPath, {
-    cloud: {
-      cloudName: 'bensthoughts',
-    },
-  });
+
+  let ogImageUrl;
+  if (cloudinaryImgPath) {
+    ogImageUrl = buildImageUrl(cloudinaryImgPath, {
+      cloud: {
+        cloudName: 'bensthoughts',
+      },
+    });
+  }
+
   return (
     <>
       <NextSeo
@@ -98,7 +105,7 @@ export default function PostsPage({
             tags: tags,
           },
           images: [{
-            url: ogImageUrl,
+            url: ogImageUrl ? ogImageUrl : '',
             width: imgWidth,
             height: imgHeight,
             alt: imgAlt,
@@ -108,7 +115,7 @@ export default function PostsPage({
         twitter={{
           handle: '@bensthoughts',
           site: '@bensthoughts',
-          cardType: 'summary_large_image',
+          cardType: ogImageUrl ? 'summary_large_image' : 'summary',
         }}
       />
       <MaxWidthWrapper>
@@ -120,10 +127,10 @@ export default function PostsPage({
             permaLink={url}
             className="mt-10"
           />
-          {imgPath && imgWidth && imgHeight && imgAlt ?
+          {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
             (
               <HeaderImage
-                imgPath={imgPath}
+                imgPath={cloudinaryImgPath}
                 alt={imgAlt}
                 width={imgWidth}
                 height={imgHeight}
