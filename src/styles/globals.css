@@ -14,6 +14,12 @@ time, mark, audio, video {
   border: 0;
   vertical-align: baseline;
 } */
+:root {
+  --app-bg-opacity: 1;
+  --app-text-opacity: 1;
+  --app-border-opacity: 1;
+  --app-backdrop-filter: blur(4px);
+}
 
 html,
 body {
@@ -28,6 +34,7 @@ body {
   transition-timing-function: ease-in-out;
   will-change: background-color;
   --app-outline: 2px dashed rgb(var(--color-text-secondary));
+  --app-outline-offset: 2px;
   /* transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
   will-change: background, color, transition; */
 }
@@ -45,16 +52,7 @@ a {
   text-decoration: none;
 }
 
-:root {
-  --app-bg-opacity: 1;
-  --app-text-opacity: 1;
-  --app-border-opacity: 1;
-  --app-backdrop-filter: blur(4px);
-  --app-outline-offset: 2px;
-}
-
-*:focus {
-
+*:focus-visible {
   outline: var(--app-outline);
   outline-offset: var(--app-outline-offset);
 }

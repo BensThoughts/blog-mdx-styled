@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 
 const Container = styled(m.div)<{
   activated: boolean;
-  focused: boolean;
+  focusedVisible: boolean;
 }>`
   border-radius: 5px;
   border: 2px solid rgb(var(--color-app-secondary));
@@ -16,9 +16,9 @@ const Container = styled(m.div)<{
   will-change: background, color;
   position: relative;
   /* z-index: 1; */
-
-  outline: ${({focused}) => focused ? 'var(--app-outline)' : 'none'};
+  outline: ${({focusedVisible}) => focusedVisible ? 'var(--app-outline)' : 'none'};
   outline-offset: var(--app-outline-offset);
+
 
   &::before {
     content: " ";
@@ -31,6 +31,15 @@ const Container = styled(m.div)<{
     background-color: ${({activated}) => activated ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0)'};
     transition: background-color 250ms;
   }
+`;
+
+const AnchorContainer = styled.a`
+  &:focus {
+    outline: var(--app-outline);
+    outline-offset: var(--app-outline-offset);
+    background-color: black;
+    transform: translateX(200px);
+  } 
 `;
 
 const Pill = styled.div`
@@ -70,6 +79,7 @@ export default function BlogCard({
   const controls = useAnimation();
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [focusedVisible, setFocusedVisible] = useState(false);
   const [activated, setActivated] = useState(false);
 
   useEffect(() => {
@@ -77,6 +87,12 @@ export default function BlogCard({
       setActivated(true);
     } else {
       setActivated(false);
+    }
+
+    if (focused && !hovered) {
+      setFocusedVisible(true);
+    } else {
+      setFocusedVisible(false);
     }
   }, [hovered, focused]);
 
@@ -116,7 +132,7 @@ export default function BlogCard({
   return (
     <Container
       activated={activated}
-      focused={focused}
+      focusedVisible={focusedVisible}
       initial="notActivated"
       animate={controls}
       variants={container}
@@ -124,7 +140,7 @@ export default function BlogCard({
       {...rest}
     >
       <Link href={`/blog/${id}`} scroll={false} passHref>
-        <a
+        <AnchorContainer
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onFocus={() => setFocused(true)}
@@ -149,7 +165,7 @@ export default function BlogCard({
               </div>
             </div>
           </div>
-        </a>
+        </AnchorContainer>
       </Link>
     </Container>
   );
