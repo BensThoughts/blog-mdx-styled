@@ -19,9 +19,9 @@ const Image = styled.img`
 `;
 
 const Anchor = styled.a`
+  display: block;
   width: 100%;
   height: 100%;
-
   &::after {
     content: "";
     position: absolute;
@@ -36,6 +36,11 @@ const Anchor = styled.a`
   &:focus ${Image} {
     mix-blend-mode: normal;
     filter: grayscale(0%) brightness(100%);
+  }
+
+  &:focus-visible ${Image} {
+    outline: var(--app-outline);
+    outline-offset: var(--app-outline-offset);
   }
 `;
 
