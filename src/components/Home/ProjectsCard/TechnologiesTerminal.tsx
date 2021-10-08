@@ -79,13 +79,13 @@ type Technologies = {
 
 type TechnologiesTerminalProps = {
   technologies: Technologies[]
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
 const TechnologiesTerminal = ({
   technologies,
-
+  ...rest
 }: TechnologiesTerminalProps) => (
-  <>
+  <div {...rest}>
     <StatusBar file="index.ts" />
     <Pre className="">
       {technologies.map((tech, i) => (
@@ -107,7 +107,7 @@ const TechnologiesTerminal = ({
         </Line>
       ))}
     </Pre>
-  </>
+  </div>
 );
 
 export default TechnologiesTerminal;

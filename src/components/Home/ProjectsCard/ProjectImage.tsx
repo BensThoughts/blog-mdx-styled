@@ -7,8 +7,8 @@ const Image = styled.img`
   object-fit: fill;
   /* width: 100%;
   height: 100%; */
-  width: 458px;
-  height: 300px;
+  /* width: 458px;
+  height: 300px; */
   z-index: 2;
   mix-blend-mode: multiply;
   filter: grayscale(100%) contrast(1) brightness(100%);
@@ -49,12 +49,16 @@ type ProjectImageProps = {
   cloudinaryImgPath: string,
   imgAlt: string,
   href: string,
+  width: number,
+  height: number,
 }
 
 export default function ProjectImage({
   cloudinaryImgPath,
   imgAlt,
   href,
+  width,
+  height,
 }: ProjectImageProps) {
   const imgSrcSmall = buildImageUrl(cloudinaryImgPath, {
     cloud: {
@@ -62,6 +66,11 @@ export default function ProjectImage({
     },
     transformations: {
       quality: 10,
+      resize: {
+        type: 'thumb',
+        width: width,
+        height: height,
+      },
     },
   });
   const imgSrcLarge = buildImageUrl(cloudinaryImgPath, {
@@ -70,6 +79,11 @@ export default function ProjectImage({
     },
     transformations: {
       quality: 'auto',
+      resize: {
+        type: 'thumb',
+        width: width,
+        height: height,
+      },
     },
   });
   const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
@@ -83,6 +97,8 @@ export default function ProjectImage({
           transition: blur ? 'none' : 'filter 0.2s ease-out',
           // margin: '-5px -10px -10px -5px'
         }}
+        width={width}
+        height={height}
       />
     </Anchor>
   );

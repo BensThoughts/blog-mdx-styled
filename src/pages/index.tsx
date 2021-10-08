@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
-
         {/* About Section */}
         <TitleHeader>
           <span className="text-icon-secondary">[</span>
@@ -52,8 +51,6 @@ export default function Home() {
             reversed={idx % 2 === 0 ? true : false}
           />
         ))}
-
-
       </GridWrapper>
     </MaxWidthWrapper>
   );
