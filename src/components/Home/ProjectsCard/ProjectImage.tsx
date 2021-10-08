@@ -1,5 +1,6 @@
-import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
+import {buildImageUrl} from 'cloudinary-build-url';
 import styled from '@emotion/styled';
+import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
 const Image = styled.img`
   position: relative;
@@ -35,18 +36,32 @@ const Anchor = styled.a`
 
 
 type ProjectImageProps = {
-  imgSrcSmall: string,
-  imgSrcLarge: string,
+  cloudinaryImgPath: string,
   imgAlt: string,
   href: string,
 }
 
 export default function ProjectImage({
-  imgSrcSmall,
-  imgSrcLarge,
+  cloudinaryImgPath,
   imgAlt,
   href,
 }: ProjectImageProps) {
+  const imgSrcSmall = buildImageUrl(cloudinaryImgPath, {
+    cloud: {
+      cloudName: 'bensthoughts',
+    },
+    transformations: {
+      quality: 10,
+    },
+  });
+  const imgSrcLarge = buildImageUrl(cloudinaryImgPath, {
+    cloud: {
+      cloudName: 'bensthoughts',
+    },
+    transformations: {
+      quality: 'auto',
+    },
+  });
   const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
   return (
     <Anchor href={href} target="_blank" rel="noopener noreferrer" >

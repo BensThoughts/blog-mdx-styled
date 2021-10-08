@@ -47,8 +47,7 @@ export default function Home() {
             description={project.description}
             githubLink={project.githubLink}
             liveLink={project.liveLink}
-            imgSrcSmall={project.imgSrcSmall}
-            imgSrcLarge={project.imgSrcLarge}
+            cloudinaryImgPath={project.cloudinaryImgPath}
             imgAlt={project.imgAlt}
             technologies={project.technologies}
             reversed={idx % 2 === 0 ? true : false}

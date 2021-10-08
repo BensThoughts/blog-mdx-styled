@@ -1,5 +1,6 @@
 // import Image from 'next/image';
 import styled from '@emotion/styled';
+import {buildImageUrl} from 'cloudinary-build-url';
 
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
@@ -7,8 +8,7 @@ const ImageContainer =styled.div`
   grid-column: 1 / -1;
 `;
 interface HeaderImageProps {
-  imgPathTiny: string,
-  imgPathLarge: string,
+  imgPath: string,
   alt: string,
   width: number,
   height: number,
@@ -16,8 +16,7 @@ interface HeaderImageProps {
 }
 
 export default function HeaderImage({
-  imgPathTiny,
-  imgPathLarge,
+  imgPath,
   alt,
   width,
   height,
@@ -25,7 +24,25 @@ export default function HeaderImage({
 }: HeaderImageProps) {
   // const tinyImage = srcBaseUrl + 'q_10' + imgPath;
   // const largeImage = srcBaseUrl + 'q_auto' + imgPath;
-  const [src, blur] = useProgressiveImage(imgPathTiny, imgPathLarge);
+  const smallUrl = buildImageUrl(imgPath, {
+    cloud: {
+      cloudName: 'bensthoughts',
+    },
+    transformations: {
+      quality: 10,
+    },
+  });
+
+  const largeUrl = buildImageUrl(imgPath, {
+    cloud: {
+      cloudName: 'bensthoughts',
+    },
+    transformations: {
+      quality: 'auto',
+    },
+  });
+
+  const [src, blur] = useProgressiveImage(smallUrl, largeUrl);
 
   return (
     <ImageContainer className={`md:w-full mx-auto overflow-hidden ${className}`}>
