@@ -139,7 +139,7 @@ export default function BlogCard({
       className="shadow-md"
       {...rest}
     >
-      <Link href={`/blog/${id}`} scroll={false} passHref>
+      <Link href={`/blog/${id}`} scroll={true} passHref>
         <AnchorContainer
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}

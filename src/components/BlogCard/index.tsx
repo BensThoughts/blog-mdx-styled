@@ -90,7 +90,7 @@ export default function BlogCard({
   ...rest
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`} scroll={false} passHref {...rest}>
+    <Link href={`/blog/${id}`} scroll={true} passHref {...rest}>
       <AnchorContainer className="shadow-md">
         <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
           <div>

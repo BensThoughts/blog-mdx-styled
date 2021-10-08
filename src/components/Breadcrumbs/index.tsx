@@ -35,7 +35,7 @@ export default function Breadcrumbs() {
     <div aria-label="breadcrumbs" className="flex">
       <div className="font-mono">
         <span className="text-secondary">$&gt;&nbsp;</span>
-        <Link href="/" scroll={false} passHref>
+        <Link href="/" scroll={true} passHref>
           <AnimatedLink href="/">HOME</AnimatedLink>
         </Link>
         &nbsp;/&nbsp;
@@ -43,7 +43,7 @@ export default function Breadcrumbs() {
       {breadcrumbs.map((breadcrumb, i) => {
         return (
           <div key={breadcrumb.href} className="font-mono">
-            <Link href={breadcrumb.href} scroll={false} passHref>
+            <Link href={breadcrumb.href} scroll={true} passHref>
               <AnimatedLink href={breadcrumb.href}>
                 {convertBreadcrumb(breadcrumb.breadcrumb)}
               </AnimatedLink>
