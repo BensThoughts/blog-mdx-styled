@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import {ForwardRefComponent, HTMLMotionProps, m, useAnimation} from 'framer-motion';
+import {m, useAnimation} from 'framer-motion';
 import {useEffect, useState} from 'react';
 
 const Container = styled(m.div)<{
@@ -65,7 +65,7 @@ type CardProps = {
   description: string
   tags: string[]
   className?: string
-} & ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
+}
 
 export default function BlogCard({
   id = '',
