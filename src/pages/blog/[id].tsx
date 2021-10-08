@@ -2,6 +2,7 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {serialize} from 'next-mdx-remote/serialize';
 import {MDXRemote, MDXRemoteSerializeResult} from 'next-mdx-remote';
 import {NextSeo} from 'next-seo';
+import {buildImageUrl} from 'cloudinary-build-url';
 
 import {
   A,
@@ -52,12 +53,11 @@ type PostProps = {
     modifiedDate: string,
     readTime: number,
     tags: string[],
-    imgPathTiny: string,
-    imgPathLarge: string,
+    imgPath: string,
     imgWidth: number,
     imgHeight: number,
     imgAlt: string,
-    ogImageUrl: string,
+    ogImagePath: string,
     ogImageWidth: number,
     ogImageHeight: number,
     ogImageAlt: string,
@@ -78,16 +78,20 @@ export default function PostsPage({
     modifiedDate,
     readTime,
     tags,
-    imgPathTiny,
-    imgPathLarge,
+    imgPath,
     imgWidth,
     imgHeight,
     imgAlt,
-    ogImageUrl,
+    ogImagePath,
     ogImageWidth,
     ogImageHeight,
     ogImageAlt,
   } = metaData;
+  const ogImageUrl = buildImageUrl(ogImagePath, {
+    cloud: {
+      cloudName: 'bensthoughts',
+    },
+  });
   return (
     <>
       <NextSeo
@@ -128,11 +132,10 @@ export default function PostsPage({
             permaLink={url}
             className="mt-10"
           />
-          {imgPathLarge && imgWidth && imgHeight && imgAlt ?
+          {imgPath && imgWidth && imgHeight && imgAlt ?
             (
               <HeaderImage
-                imgPathTiny={imgPathTiny}
-                imgPathLarge={imgPathLarge}
+                imgPath={imgPath}
                 alt={imgAlt}
                 width={imgWidth}
                 height={imgHeight}
