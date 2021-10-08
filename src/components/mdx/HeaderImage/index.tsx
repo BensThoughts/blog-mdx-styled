@@ -4,8 +4,12 @@ import {buildImageUrl} from 'cloudinary-build-url';
 
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
-const ImageContainer =styled.div`
+const ImageContainer =styled.div<{
+  // width: number,
+  height: number,
+}>`
   grid-column: 1 / -1;
+  max-height: ${({height}) => height + 'px'};
 `;
 interface HeaderImageProps {
   imgPath: string,
@@ -39,18 +43,27 @@ export default function HeaderImage({
     },
     transformations: {
       quality: 'auto',
+      resize: {
+        type: 'fit',
+        width: width,
+        height: height,
+        // aspectRatio: '1.5',
+      },
     },
   });
 
   const [src, blur] = useProgressiveImage(smallUrl, largeUrl);
 
   return (
-    <ImageContainer className={`md:w-full mx-auto overflow-hidden ${className}`}>
+    <ImageContainer
+      height={height}
+      className={`w-full flex items-center justify-center md:w-full mx-auto overflow-hidden ${className}`}
+    >
       <img
         src={src}
         alt={alt}
-        width={width}
-        height={height}
+        width={`${width}px`}
+        height={`${height}px`}
         style={{
           filter: blur ? 'blur(20px)' : 'none',
           transition: blur ? 'none' : 'filter 0.2s ease-out',
