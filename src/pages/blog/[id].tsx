@@ -45,22 +45,16 @@ type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
   metaData: {
-    shortTitle: string,
-    longTitle: string,
+    title: string,
     shortDescription: string,
     longDescription: string,
     date: string,
-    modifiedDate: string,
     readTime: number,
     tags: string[],
     imgPath: string,
     imgWidth: number,
     imgHeight: number,
     imgAlt: string,
-    ogImagePath: string,
-    ogImageWidth: number,
-    ogImageHeight: number,
-    ogImageAlt: string,
   };
 };
 
@@ -70,24 +64,18 @@ export default function PostsPage({
   metaData,
 }: PostProps) {
   const {
-    shortTitle,
-    longTitle,
+    title,
     shortDescription,
     longDescription,
     date,
-    modifiedDate,
     readTime,
     tags,
     imgPath,
     imgWidth,
     imgHeight,
     imgAlt,
-    ogImagePath,
-    ogImageWidth,
-    ogImageHeight,
-    ogImageAlt,
   } = metaData;
-  const ogImageUrl = buildImageUrl(ogImagePath, {
+  const ogImageUrl = buildImageUrl(imgPath, {
     cloud: {
       cloudName: 'bensthoughts',
     },
@@ -95,25 +83,25 @@ export default function PostsPage({
   return (
     <>
       <NextSeo
-        title={shortTitle}
+        title={title}
         description={shortDescription}
         openGraph={{
-          title: longTitle,
+          title: title,
           description: longDescription,
           url: url,
           type: 'article',
           article: {
             publishedTime: date,
-            modifiedTime: modifiedDate,
+            modifiedTime: date,
             section: 'Web Development',
             authors: ['https://twitter.com/bensthoughts'],
             tags: tags,
           },
           images: [{
             url: ogImageUrl,
-            width: ogImageWidth,
-            height: ogImageHeight,
-            alt: ogImageAlt,
+            width: imgWidth,
+            height: imgHeight,
+            alt: imgAlt,
           }],
           site_name: 'BensThoughts Developer Blog',
         }}
@@ -126,7 +114,7 @@ export default function PostsPage({
       <MaxWidthWrapper>
         <GridWrapper>
           <ArticleHeader
-            title={longTitle}
+            title={title}
             date={date}
             readTime={readTime}
             permaLink={url}

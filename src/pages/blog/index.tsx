@@ -36,7 +36,7 @@ const GridContainer = styled.div`
 interface BlogArticleListProps {
   allPostsData: {
     id: string,
-    longTitle: string,
+    title: string,
     longDescription: string,
     date: string,
     tags: string[]
@@ -55,7 +55,7 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
       <GridContainer>
         {allPostsData.map(({
           id,
-          longTitle,
+          title,
           date,
           longDescription,
           tags,
@@ -64,7 +64,7 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
             <BlogCard
               key={id}
               id={id}
-              title={longTitle}
+              title={title}
               date={date}
               tags={tags}
               description={longDescription}
