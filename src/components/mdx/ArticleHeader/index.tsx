@@ -9,6 +9,11 @@ const UnderLineController = styled.a`
     transform: scaleX(1);
     opacity: 1;
   }
+
+  &:focus ${AnimatedUnderline}::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
 `;
 
 type ArticleHeaderProps = {

@@ -24,6 +24,11 @@ const AnimatedUnderline = styled.span`
     opacity: 1;
     transform: scaleX(1);
   }
+
+  &:focus::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 `;
 
 export default AnimatedUnderline;
