@@ -3,13 +3,30 @@ import styled from '@emotion/styled';
 import {m, useAnimation} from 'framer-motion';
 import {useEffect, useState} from 'react';
 
-const Container = styled.div`
+const Container = styled(m.div)<{
+  activated: boolean;
+}>`
   border-radius: 5px;
   border: 2px solid rgb(var(--color-app-secondary));
+  background-color: rgba(var(--color-app-primary), 0.8);
   transition-property: background, color;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
   will-change: background, color;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-color: ${({activated}) => activated ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0)'};
+    transition: background-color 250ms;
+  }
 `;
 
 const Pill = styled.div`
@@ -91,10 +108,12 @@ export default function BlogCard({
   };
 
   return (
-    <m.div
+    <Container
+      activated={activated}
       initial="notActivated"
       animate={controls}
       variants={container}
+      className="shadow-md"
     >
       <Link href={`/blog/${id}`} scroll={false} passHref>
         <a
@@ -103,35 +122,28 @@ export default function BlogCard({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         >
-          <div
-            className="h-full flex flex-col"
-          >
-            <Container className={`h-full relative bg-primary px-2 py-4 md:p-4 flex flex-col justify-start gap-4 shadow-md ${className}`}>
-              <div>
-                {title && <div className="text-2xl text-high-emphesis">{title}</div>}
-                {date && <div className="italic">{date}</div>}
+          <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
+            <div>
+              {title && <div className="text-2xl text-high-emphesis">{title}</div>}
+              {date && <div className="italic">{date}</div>}
+            </div>
+            {description && <div className="text-base">{description}</div>}
+            <div className="h-full flex flex-col justify-end">
+              <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+                {tags.map((tag) => (
+                  <m.div variants={pill} key={tag}>
+                    <Pill key={tag}>
+                      <span className="text-secondary">#</span>
+                      {tag}
+                    </Pill>
+                  </m.div>
+                ))}
               </div>
-              {description && <div className="text-base">{description}</div>}
-              <div className="h-full flex flex-col justify-end">
-                <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
-                  {tags.map((tag) => (
-                    <m.div variants={pill} key={tag}>
-                      <Pill key={tag}>
-                        <span className="text-secondary">#</span>
-                        {tag}
-                      </Pill>
-                    </m.div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                {/* <span className="text-secondary">Share<Twitter /></span> */}
-              </div>
-            </Container>
+            </div>
           </div>
         </a>
       </Link>
-    </m.div>
+    </Container>
   );
 }
 
