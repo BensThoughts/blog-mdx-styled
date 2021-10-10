@@ -110,9 +110,9 @@ export default function Card({...rest}: React.HTMLAttributes<HTMLDivElement>) {
 ```
 
 Probably the most interesting piece of this is that we needed to set the z-index on the ::before to -1 to
-make sure that it doesn't cover up all of the other elements and text in the container. By tracking an
-activated state we make our component more accessible. Both focus or an inner element and hover will now
-lighten the container. The final results for my particular use of this container can be seen below.
+make sure that it doesn't cover up all of the other elements and text in the container. Focus and hover
+will now lighten the background of the container on light and dark colors. The final results for my
+particular use of this container can be seen below.
 
 ![Cards side by side, one lighter on
 hover](v1633673925/blog/blog/using-overlays-for-elevation/opacity-example-2_scgdqe.png)
