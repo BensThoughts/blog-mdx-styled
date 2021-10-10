@@ -5,8 +5,15 @@ import seoConfig from './seo.config';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts-mdx');
 
+function getFileNames() {
+  if (process.env.NODE_ENV === 'production') {
+    return fs.readdirSync(postsDirectory).filter((fileName => !fileName.startsWith('_')));
+  }
+  return fs.readdirSync(postsDirectory);
+}
+
 export function getSortedPostsData() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getFileNames();
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, '');
     const fullPath = path.join(postsDirectory, fileName);
@@ -35,7 +42,7 @@ export function getSortedPostsData() {
 }
 
 export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getFileNames();
 
   return fileNames.map((fileName: string) => {
     return {
