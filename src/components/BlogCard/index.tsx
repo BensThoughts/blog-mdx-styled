@@ -35,7 +35,7 @@ const AnchorContainer = styled.a`
   transition-property: background, color, transform;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
-  will-change: background, color;
+  will-change: background, color, transform;
   position: relative;
   transform: translateY(0px);
 

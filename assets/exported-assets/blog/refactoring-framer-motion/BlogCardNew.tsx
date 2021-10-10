@@ -21,6 +21,7 @@ const Pill = styled.div<{
   padding-left: 0.5rem/* 8px */;
   padding-right: 0.5rem/* 8px */;
   transform: translateY(0px);
+  will-change: transform;
   animation-delay: ${({delay}) => delay + 's'};
 `;
 
@@ -34,7 +35,7 @@ const AnchorContainer = styled.a`
   transition-property: background, color, transform;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
-  will-change: background, color;
+  will-change: background, color, transform;
   position: relative;
   transform: translateY(0px);
 
@@ -62,7 +63,6 @@ const AnchorContainer = styled.a`
 
   &:hover ${Pill},
   &:focus ${Pill} {
-    /* animation: hop 1s linear 2s forwards; */
     animation-name: hop;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
@@ -71,7 +71,7 @@ const AnchorContainer = styled.a`
 
 `;
 
-type CardProps = {
+type BlogCardProps = {
   id: string
   date: string
   title: string
@@ -87,9 +87,10 @@ export default function BlogCard({
   description = '',
   tags = [],
   className,
-}: CardProps) {
+  ...rest
+}: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`} scroll={true} passHref>
+    <Link href={`/blog/${id}`} scroll={true} passHref {...rest}>
       <AnchorContainer className="shadow-md">
         <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
           <div>
