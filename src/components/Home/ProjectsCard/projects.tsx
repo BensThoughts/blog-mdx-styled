@@ -29,9 +29,10 @@ export const Spacetagram = {
   cloudinaryImgPath: 'v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
   imgAlt: 'Spacetagram Home Page',
   description: `
-    Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that used the NASA APOD API to display the image of the day.
-    This is a react project that utilized redux to download the images from the API to an infinite virtual scroll component. Images can be liked and viewed
-    in a gallery. There is also a calendar component that can be used to jump to a specific date. There is a focus on accessibility and responsive design.
+    Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that uses the NASA APOD API to display the image of the day.
+    This is a react project that utilizes redux to download the images from the API to an infinite virtual scroll component. Images can be liked and viewed
+    in a gallery. There is also a calendar component that can be used to jump to a specific date. A primary goal of the project was to focus on accessibility
+    and responsive design.
   `,
   technologies: [
     {
@@ -80,7 +81,7 @@ export const ZeroInboxBackend = {
   imgAlt: 'Zero Inbox Backend',
   description: `
     The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes
-    cluster. The primary service is an API gateway that the frontend communicated with.
+    cluster. The primary service is an API gateway that the frontend communicates with.
     The services internally communicate with each other using RabbitMQ and a specialized node.js library
     that I wrote to wrap the lower level amqplib. Data is stores in a MongoDB Atlas cluster.
     O-Auth was implemented using google auth so that users can opt to authenticate to the app
