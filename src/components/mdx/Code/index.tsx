@@ -35,7 +35,10 @@ export default function CodeElement({
   className,
 }: CodeElementProps) {
   const language = className.replace('language-', '').split(':')[0] as Language;
-  const codeTitle = className.substr(className.indexOf(':') + 1);
+  let codeTitle = className.substr(className.indexOf(':') + 1);
+  if (codeTitle.startsWith('language')) {
+    codeTitle = language;
+  }
   return (
     <div className="flex flex-col w-full mx-auto">
       {codeTitle && <div

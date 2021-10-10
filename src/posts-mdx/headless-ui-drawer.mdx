@@ -54,7 +54,7 @@ modal](https://headlessui.dev/react/dialog), [tailwindcss](https://tailwindcss.c
 We start by importing Dialog from @headlessui/react and creating a simple modal that
 will appear in the upper left corner of the screen.
 
-```jsx:/Components/Drawer/index.tsx
+```tsx:/Components/Drawer/index.tsx
 import { Dialog } from '@headlessui/react';
 import Button from '@app/components/Button';
 
@@ -124,7 +124,7 @@ close the dialog as well.
 This is an outline of what setting up the parent component to the drawer looks like.
 The drawer can be open/closed with the button element of the parent component. With this implementation the drawer is closed whenever a link is clicked as well.
 
-```jsx:/components/Button/index.tsx
+```tsx:/components/Button/index.tsx
 import { useState } from 'react';
 import Drawer from '@app/components/Drawer';
 import Button from '@app/components/Button';
@@ -166,7 +166,7 @@ The state isOpen and the function that controls it are passed into the Drawer.
 The button when clicked changed the isOpen state that has been passed into the
 drawer component.
 
-```jsx:/components/Button/index.tsx
+```tsx:/components/Button/index.tsx
 type ButtonProps = {
   children: string;
   onClick: any;
@@ -193,7 +193,7 @@ component as another way to close the drawer.
 The final step is to wrap our drawer in a Transition so that our drawer smoothly
 fly's in and out of the screen.
 
-```jsx:/components/Drawer/index.tsx
+```tsx:/components/Drawer/index.tsx
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Button from '@components/Button/index.tsx';

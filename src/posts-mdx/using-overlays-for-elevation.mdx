@@ -65,23 +65,22 @@ better way and we can do it entirely with css.
 
 The solution is to utilize an overlay. A semi-transparent layer is placed over any element that we which
 to lighten and we adjust the opacity on the overlay instead. As an example I have designed a simple
-styled-component component to show how this can be done using ::before in css. As a bonus I have also
-shown one method that can be used to make sure that the background of our container element lightens up
-on both keyboard activation of an inner element and hover using react useState and useEffect hooks.
+styled-component to show how this can be done using ::before in css.
 
-```jsx
+```tsx
 import {useEffect, useState} rom 'react';
 import styled from '@emotion/styled';
 
-const Container = styled.div<{
-  activated: boolean;
-}>`
+const Container = styled.div`
+  display: block;
   position: relative;
-  height: 200px;
-  width: 200px;
-  border-radius: 5px;
-  border: 2px solid rgb(var(--color-app-secondary));
+  height: 300px;
+  width: 500px;
   background-color: rgb(var(--color-app-primary));
+  transition-property: background-color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  will-change: background, color;
 
   &::before {
     content: " ";
@@ -91,34 +90,20 @@ const Container = styled.div<{
     height: 100%;
     width: 100%;
     z-index: -1;
-    background-color: ${({activated}) => activated ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0)'};
+    background-color: rgba(255, 255, 255, 0);
     transition: background-color 250ms;
+  }
+
+  &:hover::before,
+  &:focus::before {
+    background-color:  rgba(255, 255, 255, 0.1); 
   }
 `;
 
 export default function Card({...rest}: React.HTMLAttributes<HTMLDivElement>) {
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [activated, setActivated] = useState(false);
-
-  useEffect(() => {
-    if (focused || hovered) {
-      setActivated(true);
-    } else {
-      setActivated(false);
-    }
-  }, [hovered, focused]);
-
   return (
     <Container {...rest}>
-      <a
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      >
       Some Text or Elements Here
-      </a>
     </Container>
   );
 }
