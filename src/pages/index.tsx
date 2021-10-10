@@ -48,7 +48,7 @@ export default function Home() {
             cloudinaryImgPath={project.cloudinaryImgPath}
             imgAlt={project.imgAlt}
             technologies={project.technologies}
-            reversed={idx % 2 === 0 ? true : false}
+            reversed={idx % 2 === 0 ? false : true}
           />
         ))}
       </GridWrapper>
