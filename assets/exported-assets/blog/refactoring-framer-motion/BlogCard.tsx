@@ -53,9 +53,6 @@ const Pill = styled.div`
   padding-left: 0.5rem/* 8px */;
   padding-right: 0.5rem/* 8px */;
   background-color: rgba(var(--color-app-secondary), 0.65);
-  /* transition-property: transform background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms; */
 `;
 
 type CardProps = {
