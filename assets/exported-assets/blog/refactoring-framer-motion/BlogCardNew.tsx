@@ -21,6 +21,7 @@ const Pill = styled.div<{
   padding-left: 0.5rem/* 8px */;
   padding-right: 0.5rem/* 8px */;
   transform: translateY(0px);
+  transition: transform ease-in-out 200ms;
   will-change: transform;
   animation-delay: ${({delay}) => delay + 's'};
 `;
@@ -78,7 +79,7 @@ type BlogCardProps = {
   description: string
   tags: string[]
   className?: string
-}
+} & React.HTMLAttributes<HTMLAnchorElement>
 
 export default function BlogCard({
   id = '',
@@ -90,8 +91,8 @@ export default function BlogCard({
   ...rest
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`} scroll={true} passHref {...rest}>
-      <AnchorContainer className="shadow-md">
+    <Link href={`/blog/${id}`} scroll={true} passHref>
+      <AnchorContainer className={`shadow-md ${className}`} {...rest}>
         <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
           <div>
             {title && <div className="text-2xl text-high-emphesis">{title}</div>}

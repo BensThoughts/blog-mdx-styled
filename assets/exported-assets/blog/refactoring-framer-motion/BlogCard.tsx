@@ -1,45 +1,16 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import {m, useAnimation} from 'framer-motion';
 import {useEffect, useState} from 'react';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 
-const Container = styled(m.div)<{
-  activated: boolean;
-  focusedVisible: boolean;
-}>`
+const AnchorContainer = styled(m.a)`
+  display: block;
+  position: relative;
+  height: 300px;
+  width: 600px;
   border-radius: 5px;
   border: 2px solid rgb(var(--color-app-secondary));
   background-color: rgba(var(--color-app-primary), 0.8);
-  transition-property: background, color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  will-change: background, color;
-  position: relative;
-  /* z-index: 1; */
-  outline: ${({focusedVisible}) => focusedVisible ? 'var(--app-outline)' : 'none'};
-  outline-offset: var(--app-outline-offset);
-
-
-  &::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-    background-color: ${({activated}) => activated ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0)'};
-    transition: background-color 250ms;
-  }
-`;
-
-const AnchorContainer = styled.a`
-  &:focus {
-    outline: var(--app-outline);
-    outline-offset: var(--app-outline-offset);
-    background-color: black;
-    transform: translateX(200px);
-  } 
 `;
 
 const Pill = styled.div`
@@ -61,45 +32,29 @@ type CardProps = {
   title: string
   description: string
   tags: string[]
-  className?: string
-}
+} & React.HTMLAttributes<HTMLAnchorElement>
 
 export default function BlogCard({
-  id = '',
-  title = '',
-  date = '',
-  description = '',
-  tags = [],
-  className,
+  id = 'refactoring-framer-motion',
+  title = 'Refactor Framer Motion For Smaller Bundles',
+  date = '2021-10-10',
+  description = 'How to refactor a component from using framer-motion to pure css',
+  tags = ['framer-motion', 'refactor', 'css', 'React', 'styled-components', 'Typescript'],
   ...rest
 }: CardProps) {
   const controls = useAnimation();
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [focusedVisible, setFocusedVisible] = useState(false);
-  const [activated, setActivated] = useState(false);
+
+  console.log(id);
 
   useEffect(() => {
     if (focused || hovered) {
-      setActivated(true);
-    } else {
-      setActivated(false);
-    }
-
-    if (focused && !hovered) {
-      setFocusedVisible(true);
-    } else {
-      setFocusedVisible(false);
-    }
-  }, [hovered, focused]);
-
-  useEffect(() => {
-    if (activated) {
       controls.start('activated');
     } else {
       controls.start('notActivated');
     }
-  }, [activated, controls]);
+  }, [hovered, focused]);
 
   const container = {
     notActivated: {
@@ -127,23 +82,19 @@ export default function BlogCard({
   };
 
   return (
-    <Container
-      activated={activated}
-      focusedVisible={focusedVisible}
-      initial="notActivated"
-      animate={controls}
-      variants={container}
-      className="shadow-md"
-      {...rest}
-    >
+    <LazyMotion features={domAnimation}>
       <Link href={`/blog/${id}`} scroll={true} passHref>
         <AnchorContainer
+          initial="notActivated"
+          animate={controls}
+          variants={container}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          className="shadow-md"
         >
-          <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
+          <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
             <div>
               {title && <div className="text-2xl text-high-emphesis">{title}</div>}
               {date && <div className="italic">{date}</div>}
@@ -164,9 +115,10 @@ export default function BlogCard({
           </div>
         </AnchorContainer>
       </Link>
-    </Container>
+    </LazyMotion>
   );
 }
+
 
 
 // const Tab = styled.div`

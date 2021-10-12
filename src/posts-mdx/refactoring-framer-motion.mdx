@@ -1,0 +1,416 @@
+---
+title: "Staggered Animation With Framer Motion and CSS"
+shortDescription: "An example of staggered and orchestrated animation done 2 ways"
+longDescription: "How I use Framer Motion to prototype and then refactor the code to use pure css. With
+an example of the staggered animation on this Blog Card you are reading right now."
+date: "2021-10-11"
+readTime: 30
+cloudinaryImgPath: "v1633887477/blog/blog/refactoring-framer-motion/the-creative-exchange-d2zvqp3fpro-unsplash-og-image_pj8rag.jpg"
+imgWidth: 1200
+imgHeight: 627
+imgAlt: "Flowers on a table"
+tags:
+  - 'framer-motion'
+  - 'refactor'
+  - 'css'
+  - 'prototyping'
+  - 'styled-components'
+  - 'React'
+  - 'Typescript'
+  - 'Staggered Animation'
+---
+import BlogCard from '@app/components/BlogCard';
+
+## Framer Motion Advantages
+
+I love [Framer Motion](https://www.framer.com/docs/). It is an easy to use, flexible, and very powerful
+animation library. It's performance is quite good as well. Putting together semi-complex animations in
+which multiple elements animate based on the states of each other is very easy to do with Framer Motion.
+We can use React features like **useState()** and **useEffect()** to easily orchestrate animations based
+on hover and focus events.
+
+
+## Framer Motion Disadvantages
+
+There are 2 primary downsides to using Framer Motion along with **useState()** and **useEffect()** hooks
+to orchestrate hover and focus animations. First, we are re-rendering the component every time we hover
+or focus on it. Second, there is a price to pay in bundle size. Framer Motion will add at minimum 23.4k
+to any page that imports it. The Framer Motion documentation claims that
+we can reduce our initial bundle size to under 5kb using [Lazy Motion](https://www.framer.com/docs/lazy-motion/). However in practice the bundle size of a page that
+uses even the bare minimum of features is 23.4k gzipped added on top of our pages bundle size, so if we
+want animation on our main index/home page the user is going to have to load all of that. Often in
+practice using it actually adds that 23.4k to the javascript of every page in our app if we end up
+wrapping the whole app in the Lazy Motion component and splitting our javascript code page by page.
+
+---
+
+## Using Framer for Prototyping
+
+I am going to show you how to create a staggered and orchestrated animation with Framer Motion and then
+refactor the code to use pure CSS. Using Framer motion for prototyping has the advantage of being able to
+easily tweak, play around with, and fine tune various animation styles quickly. In most cases I have
+found that my Framer Motion animations actually turn out to be very easy to refactor into plain css,
+especially when using a library that supports CSS-in-JS, such as
+[@emotion](https://emotion.sh/docs/introduction). These libraries allow us to use Javascript variables in
+our CSS right off of our component so they can really make the process of refactoring the animation much
+simpler. Let me show you what I mean with an example.
+
+---
+
+## An Example Component
+
+As an an example I will show you the process of refactoring my BlogCard component from using Framer
+Motion with useState and useEffect hooks to using the @emotion/styled CSS-in-JS API. The component is
+shown here...
+
+<BlogCard
+  id='refactoring-framer-motion'
+  title='Refactor Framer Motion For Smaller Bundles'
+  date='2021-10-10'
+  description='How to refactor a component from using framer-motion to pure css'
+  tags={['framer-motion', 'refactor', 'css', 'React', 'styled-components', 'Typescript']}
+/>
+
+---
+
+The code below is a stripped down and altered example of the Blog card that gets displayed in a grid list
+on this website. I have wrapped the component in **<LazyMotion features={domAnimation} \>** so that it
+adds as small a bundle size as possible (remember still 23.4k), although usually you would wrap a higher
+order component with this. I have also included an explicit height and width in the
+**<AnchorContainer\>** as well as reasonable defaults for the props in case you want to try and use this
+code in a playground of some kind on it's own.
+
+```tsx:/components/BlogCard.tsx
+import Link from 'next/link';
+import styled from '@emotion/styled';
+import {useEffect, useState} from 'react';
+import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+
+const AnchorContainer = styled(m.a)`
+  --color-app-primary: 74, 85, 104;
+  --color-app-secondary: 49, 130, 206;
+  display: block;
+  position: relative;
+  height: 300px;
+  width: 600px;
+  border-radius: 5px;
+  border: 2px solid rgb(var(--color-app-secondary));
+  background-color: rgba(var(--color-app-primary), 0.8);
+`;
+
+const Pill = styled.div`
+  --color-app-secondary: 49, 130, 206;
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: rgba(var(--color-app-secondary), 0.65);
+`;
+
+type CardProps = {
+  id: string
+  date: string
+  title: string
+  description: string
+  tags: string[]
+}
+
+export default function BlogCard({
+  id = 'refactoring-framer-motion',
+  title = 'Refactor Framer Motion For Smaller Bundles',
+  date = '2021-10-10',
+  description = 'How to refactor a component from using framer-motion to pure css',
+  tags = ['framer-motion', 'refactor', 'css', 'React', 'styled-components', 'Typescript'],
+  ...rest
+}: CardProps) {
+  const controls = useAnimation();
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+
+  console.log(id);
+
+  useEffect(() => {
+    if (focused || hovered) {
+      controls.start('activated');
+    } else {
+      controls.start('notActivated');
+    }
+  }, [hovered, focused]);
+
+  const container = {
+    notActivated: {
+      y: 0,
+    },
+    activated: {
+      y: -10,
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0,
+      },
+    },
+  };
+
+  const pill = {
+    notActivated: {
+      y: 0,
+    },
+    activated: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 0.4,
+      },
+    },
+  };
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <Link href={`/blog/${id}`} scroll={true} passHref>
+        <AnchorContainer
+          initial="notActivated"
+          animate={controls}
+          variants={container}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          className="shadow-md"
+        >
+          <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
+            <div>
+              {title && <div className="text-2xl text-high-emphesis">{title}</div>}
+              {date && <div className="italic">{date}</div>}
+            </div>
+            {description && <div className="text-base">{description}</div>}
+            <div className="h-full flex flex-col justify-end">
+              <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+                {tags.map((tag) => (
+                  <m.div variants={pill} key={tag}>
+                    <Pill key={tag}>
+                      <span className="text-secondary">#</span>
+                      {tag}
+                    </Pill>
+                  </m.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </AnchorContainer>
+      </Link>
+    </LazyMotion>
+  );
+}
+```
+
+Let's break this down a little. Framer motion allows us to stagger the animations of a child component
+with [variants](https://www.framer.com/docs/examples/#variants). We use **staggerChildren: 0.07** on
+the variant for our AnchorContainer component. This will cause the animation for the Pill component to be
+staggered such that each pill waits to start it's animation. The animation states are triggered by the
+**onMouseEnter()**, **onMouseLeave()**, **onFocus()**, and **onBlur()** events of the main anchor
+element. The animations are very declarative, we just tell Framer Motion what the key states of
+an animation should be, that we want all children animations of AnchorContainer to be
+staggered, and it handles the starting, stopping, and reversing for us. I say key states because for the
+AnchorContainer there are just 2 states but for the Pill to bounce there are 3 keyframe states.
+**useEffect()**, **useState()**, and **useAnimation()** are used to tell Framer Motion when to start
+animating towards a state, either **notActivated** or **activated**, and Framer Motion will handle all of
+the details about when to animate smoothly forward or backward for us. Even if the mouse or focus on a
+BlogCard is suddenly changed Framer Motion will just pickup from where it is at and smoothly start
+transitioning to the next requested state.
+
+I have also used [tailwindcss](https://tailwindcss.com/) utility classes to easily define the layout of
+the components. I have also used styled to define the look of the main anchor element to be a card and
+the pill elements. You will notice that the styled anchor element wraps the motion anchor element
+**"``const AnchorContainer = styled(m.a)``"**. This is an awesome feature but it makes the component less
+re-usable.
+
+## The Missing {...rest} Prop
+
+You may have noticed that there is a **...rest prop.** I usually like to pass **{...rest}** to the main
+wrapping base HTML element of my components because it means that I can use it somewhere else and attach
+extra props to it as needed. With Typescript we need to also define a union for our CardProps that
+include the base elements type to do this. Usually that would look like...
+
+```tsx
+type CardProps = {...} &
+React.HTMLAttributes<HTMLAnchorElement>
+
+export function CardProps() {
+  return (
+    <AnchorContainer {...rest}>
+      ...
+    </AnchorContainer>
+  );
+}
+```
+
+However that will not work on this version of AnchorContainer because it is an **m.a** component, not a
+simple **<a\>** element. The typings for **m.a** are...
+
+**"``ForwardRefComponent<HTMLAnchorElement,
+HTMLMotionProps<"a">>``"**
+
+...Yuck! not to mention the issues you will then get from missing Framer Motion
+specific props that are then required to be passed in. It is a mess.
+
+---
+
+## The Example Refactored with CSS
+
+To make this work entirely with @emotion/styled we get to use a couple of cool features. We are
+going to use the custom props feature to create staggered delays on our Pill animation. We are also going
+to use the ${Component} feature to refer to Pill from within AnchorContainer.
+
+
+```jsx:/components/BlogCard.tsx
+import Link from 'next/link';
+import styled from '@emotion/styled';
+
+const Pill = styled.div<{
+  delay: number;
+}>`
+  --color-app-secondary: 49, 130, 206;
+
+  @keyframes hop {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  display: flex;
+  background-color: rgb(var(--color-app-secondary));
+  gap: 0.1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+  transform: translateY(0px);
+  will-change: transform;
+  animation-delay: ${({delay}) => delay + 's'};
+`;
+
+const AnchorContainer = styled.a`
+  --color-app-primary: 74, 85, 104;
+  --color-app-secondary: 49, 130, 206;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid rgb(var(--color-app-secondary));
+  background-color: rgba(var(--color-app-primary), 0.8);
+  transition-property: background, color, transform;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  will-change: background, color, transform;
+  position: relative;
+  transform: translateY(0px);
+
+  &:hover,
+  &:focus {
+    transform: translateY(-10px);
+  }
+
+  &:hover ${Pill},
+  &:focus ${Pill} {
+    animation-name: hop;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+  }
+
+`;
+
+type BlogCardProps = {
+  id: string
+  date: string
+  title: string
+  description: string
+  tags: string[]
+  className?: string
+} & React.HTMLAttributes<HTMLAnchorElement>
+
+export default function BlogCard({
+  id = 'refactoring-framer-motion',
+  title = 'Refactor Framer Motion For Smaller Bundles',
+  date = '2021-10-10',
+  description = 'How to refactor a component from using framer-motion to pure css',
+  tags = ['framer-motion', 'refactor', 'css', 'React', 'styled-components', 'Typescript'],
+  className,
+  ...rest
+}: BlogCardProps) {
+  const STAGGER_DELAY = 0.07;
+  return (
+    <Link href={`/blog/${id}`} scroll={true} passHref {...rest}>
+      <AnchorContainer className={`shadow-md ${className}`} {...rest}>
+        <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
+          <div>
+            {title && <div className="text-2xl text-high-emphesis">{title}</div>}
+            {date && <div className="italic">{date}</div>}
+          </div>
+          {description && <div className="text-base">{description}</div>}
+          <div className="h-full flex flex-col justify-end">
+            <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+              {tags.map((tag, idx) => (
+                <Pill key={tag} delay={STAGGER_DELAY * idx}>
+                  <span className="text-secondary">#</span>
+                  {tag}
+                </Pill>
+              ))}
+            </div>
+          </div>
+        </div>
+      </AnchorContainer>
+    </Link>
+  );
+}
+```
+
+Only a few things have changed on the Pill component. We define a very standard CSS animation using
+keyframes in which the Pill starts at 0px, translates Y to -10px, and back to 0px. CSS infers the 0% and
+100% states so we only need to define the 50%. When we map over the tags props to create each pill we
+pass a custom prop **delay: number** to assign a staggered animation-delay to each pill. Lastly, and very
+important we give it the will-change: transform CSS property so that the GPU handles rendering to create
+a smooth animation.
+
+Animating the main AnchorContainer on hover and focus is easy, we just use a standard transition:
+translateY(-10px) on :hover and :focus pseudo-events. The exciting part is that we can assign the hop
+animation to each Pill component on :hover and :focus of the AnchorContainer using the ${Pill} syntax.
+**${Pill}** is translated into the generated class name for Pill by @emotion/styled. Referencing one
+styled component from another can be found in the official docs
+[here](https://emotion.sh/docs/styled#targeting-another-emotion-component). You will also need to install
+this [@emotion babel-plugin](https://emotion.sh/docs/babel) for it to work with SSR (i.e. Next.js). the babel plugin is well worth it for the dead code elimination and minification alone though so I highly
+recommend it for everyone.
+
+
+## What We Lost
+
+The only issue with animating in this way as compared to using Framer Motion is that if we leave the
+hover or focus state prior to the animation finishing the pills quickly snap back to their original
+position rather than smoothly and gracefully reversing the current animation. CSS (as far as I know) has
+no way to keep track of what frame it is currently on and then smoothly reverse course when the :hover or
+:focus state changes.
+
+## What We Gained
+
+We have eliminated 23k gzipped of javascript from this component alone. That may not seem like much, but
+across a larger application that could really add up. We have also regained the ability to use this
+component in other parts of our application or even other applications with correct Typescript typings
+using React.HTMLAttributes<HTMLAnchorElement\>
+
+---
+
+<!-- >It is important that we also assign animation-fill-mode: forwards for some animations, this one in
+particular it does not matter for but if we are animating such that the end style is different than the
+beginning we will want to use this. The CSS property
+[animation-fill-mode](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode) sets how a
+CSS animation applies styles to its target before and after its execution. This just ensures that the
+animation will play forward once and keep the styles of an element as defined at the 100% keyframe mark. -->
+
+
+

@@ -20,7 +20,9 @@ import {
   P,
   Pre,
   Strong,
+  Video,
 } from '@app/components/mdx/';
+import BlogCard from '@app/components/BlogCard';
 import {getAllPostIds, getPostData} from '@app/utils/blogPosts';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
@@ -38,9 +40,11 @@ const components = {
   p: P,
   pre: Pre,
   strong: Strong,
-  ArticleHeader,
+  // ArticleHeader,
+  BlogCard,
   CommandLine,
-  HeaderImage,
+  // HeaderImage,
+  // Video,
 };
 
 type PostProps = {
