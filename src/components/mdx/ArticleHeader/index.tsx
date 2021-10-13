@@ -52,7 +52,7 @@ export default function ArticleHeader({
           </div>
           <UnderLineController
             target="popup"
-            onClick={() => window.open(tweetHref, 'popup', 'left=20,top=20,width=800,height=600')}
+            onClick={() => window.open(tweetHref, 'popup', 'left=50,top=100,width=800,height=600')}
             rel="noreferrer noopener"
             href={tweetHref}
             className="md:self-end inline-block content-center"
