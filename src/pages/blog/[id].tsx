@@ -126,33 +126,35 @@ export default function PostsPage({
         }}
       />
       <MaxWidthWrapper>
-        <GridWrapper>
-          <ArticleHeader
-            title={title}
-            date={date}
-            readTime={readTime}
-            permaLink={url}
-            className="mt-10"
-          />
-          {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
-            (
-              <HeaderImage
-                imgPath={cloudinaryImgPath}
-                alt={imgAlt}
-                width={imgWidth}
-                height={imgHeight}
-              />
-            ) :
-            (
-              <></>
-            )
-          }
-          <MDXRemote {...content} components={components} />
-          <ArticleFooter
-            title={title}
-            permaLink={url}
-          />
-        </GridWrapper>
+        <article>
+          <GridWrapper>
+            <ArticleHeader
+              title={title}
+              date={date}
+              readTime={readTime}
+              permaLink={url}
+              className="mt-10"
+            />
+            {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
+              (
+                <HeaderImage
+                  imgPath={cloudinaryImgPath}
+                  alt={imgAlt}
+                  width={imgWidth}
+                  height={imgHeight}
+                />
+              ) :
+              (
+                <></>
+              )
+            }
+              <MDXRemote {...content} components={components} />
+            <ArticleFooter
+              title={title}
+              permaLink={url}
+            />
+          </GridWrapper>
+        </article>
       </MaxWidthWrapper>
     </>
   );

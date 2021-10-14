@@ -29,6 +29,7 @@ module.exports = {
         'icon-primary': generateColorClass('color-app-primary'),
         'icon-secondary': generateColorClass('color-app-secondary'),
         'icon-accent': generateColorClass('color-app-accent'),
+        'color-inline-code': generateColorClass('color-text-inline-code'),
       },
       borderColor: {
         'primary': generateColorClass('color-app-primary'),
@@ -48,5 +49,7 @@ module.exports = {
       borderOpacity: ['active'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
 };

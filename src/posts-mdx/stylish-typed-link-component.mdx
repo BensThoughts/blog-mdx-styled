@@ -31,7 +31,7 @@ show how I properly type the component to make it **HIGHLY** reusable in a numbe
 situations. Future users of the component will not have to worry about weather or not
 it will work for their situation. Need a link that opens a new tab/window to an
 external site? no problem. Need a link that gets wrapped by another component like
-Next.js **<Link\>** ? Again, no problem. This component is flexible and adaptable.
+Next.js `<Link>`? Again, no problem. This component is flexible and adaptable.
 
 ---
 
@@ -39,7 +39,7 @@ Next.js **<Link\>** ? Again, no problem. This component is flexible and adaptabl
 
 For this component I have used *@emotion/styled* but we could have just as easily
 used a css module with a className. The important bits of css as well as how and why
-the link works with the Next.js **<Link\>** element will be discussed. The article
+the link works with the Next.js `<Link>` element will be discussed. The article
 assumes you already have a Next.js application up and running. Details on how to
 start a Next.JS project can be found here [next.js](https://nextjs.org/docs). Details
 on installing @emotion/styled can be found here [@emotion/styled](https://emotion.sh/docs/install)
@@ -137,7 +137,7 @@ it. Such as `style={style}`, `rel={rel}`, or the all important `href={href}`.
 
 
 The component outlined above does work as a standard anchor element with a stylish
-css effect, but will it work with Next.js and the **<Link\>** component? Not quite!
+css effect, but will it work with Next.js and the `<Link>` component? Not quite!
 
 To use this component with the Next Link component we are going to need to do a
 little more. For starters using the component like this...
@@ -170,7 +170,7 @@ export default function({ href, name }) {
   );
 }
 ```
-The passHref prop will tell the **<Link\>** component to properly pass the href prop
+The passHref prop will tell the `<Link>` component to properly pass the href prop
 down to our stylish AnimatedLink component. But there is still one more step!
 
 ---

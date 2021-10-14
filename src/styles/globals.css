@@ -85,6 +85,7 @@ h1 {
 body[data-theme="light"] {
   --color-text-primary: 39, 32, 26;
   --color-text-secondary: 7, 105, 99;
+  --color-text-inline-code: 7, 105, 99;
   
   /* --color-bg-primary: 254, 235, 200; */
   --color-bg-primary: 255, 255, 255;
@@ -122,6 +123,7 @@ body[data-theme="light"] {
 body[data-theme="dark"] {
   --color-text-primary: 227, 227, 227;
   --color-text-secondary: 255, 107, 0;
+  --color-text-inline-code: 49, 130, 206;
   
   --color-bg-primary: 21, 35, 45;
   --color-bg-terminal: 40, 42, 54;

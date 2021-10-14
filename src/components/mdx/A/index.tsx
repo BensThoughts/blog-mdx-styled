@@ -28,7 +28,7 @@ export default function A({href, children}: AProps) {
         {children}
       </AnimatedUnderline>
 
-      <span className="inline-block align-middle pb-1 mr-2">
+      <span className="inline-block align-middle pb-1">
         <ExternalLink size={20} />
       </span>
     </Anchor>
