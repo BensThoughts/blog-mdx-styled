@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
+import React from 'react';
 
-const Strong = styled.strong`
-  color: rgb(var(--color-text-secondary));
-`;
-
-export default Strong;
+export default function Strong({children, ...rest}: React.HTMLAttributes<HTMLElement>) {
+  return (
+    <strong className="text-secondary font-bold">{children}</strong>
+  )
+}
