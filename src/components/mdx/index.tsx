@@ -1,5 +1,6 @@
 export {default as A} from './A';
 export {default as ArticleHeader} from './ArticleHeader';
+export {default as ArticleFooter} from './ArticleFooter';
 export {default as Blockquote} from './Blockquote';
 export {default as Code} from './Code';
 export {default as CommandLine} from './CommandLine';

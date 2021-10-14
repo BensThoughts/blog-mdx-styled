@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Date from '@app/components/mdx/Date';
 import H1 from '@app/components/mdx/H1';
 import AnimatedUnderline from '@app/components/AnimatedUnderline';
+import ArticleTweet from '@app/components/mdx/ArticleTweet';
 import {Twitter} from '@app/components/Icons/Brands';
 
 const UnderLineController = styled.a`
@@ -32,10 +33,6 @@ export default function ArticleHeader({
   className = '',
 }: ArticleHeaderProps) {
   const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out!\n\n`;
-  const tweetHref = `https://twitter.com/intent/tweet?${new URLSearchParams({
-    url: permaLink,
-    text: tweetMessage,
-  })}`;
 
   return (
     <div className={`w-full max-w-4xl mx-auto flex justify-center ${className}`}>
@@ -50,20 +47,11 @@ export default function ArticleHeader({
             Read time: {readTime} min.
             </p>
           </div>
-          <UnderLineController
-            target="popup"
-            onClick={() => window.open(tweetHref, 'popup', 'left=50,top=100,width=800,height=600')}
-            rel="noreferrer noopener"
-            href={tweetHref}
-            className="md:self-end inline-block content-center"
-          >
-            <AnimatedUnderline className="text-icon-secondary inline-block content-center mr-2">
-              Tweet this article
-            </AnimatedUnderline>
-            <span className="inline-block content-center pb-1 text-secondary"><Twitter size={20} /></span>
-          </UnderLineController>
+          <ArticleTweet
+            permaLink={permaLink}
+            tweetMessage={tweetMessage}
+          />
         </div>
-
       </div>
     </div>
   );

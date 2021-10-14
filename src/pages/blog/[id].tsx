@@ -7,6 +7,7 @@ import {buildImageUrl} from 'cloudinary-build-url';
 import {
   A,
   ArticleHeader,
+  ArticleFooter,
   Blockquote,
   CommandLine,
   Code,
@@ -147,6 +148,10 @@ export default function PostsPage({
             )
           }
           <MDXRemote {...content} components={components} />
+          <ArticleFooter
+            title={title}
+            permaLink={url}
+          />
         </GridWrapper>
       </MaxWidthWrapper>
     </>
