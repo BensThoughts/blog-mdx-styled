@@ -7,11 +7,12 @@ import {buildImageUrl} from 'cloudinary-build-url';
 import {
   A,
   ArticleHeader,
-  CommandLine,
   Blockquote,
-  Hr,
+  CommandLine,
   Code,
   Date,
+  Em,
+  Hr,
   H1,
   H2,
   HeaderImage,
@@ -29,10 +30,11 @@ import GridWrapper from '@app/components/GridWrapper';
 
 const components = {
   a: A,
-  code: Code,
   blockquote: Blockquote,
-  hr: Hr,
+  code: Code,
   date: Date,
+  em: Em,
+  hr: Hr,
   h1: H1,
   h2: H2,
   img: Img,
