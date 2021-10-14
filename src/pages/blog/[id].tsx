@@ -38,7 +38,7 @@ const components = {
   h1: H1,
   h2: H2,
   img: Img,
-  inlinecode: InlineCode,
+  inlineCode: InlineCode,
   p: P,
   pre: Pre,
   strong: Strong,

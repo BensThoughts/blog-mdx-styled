@@ -2,8 +2,8 @@
 import React from 'react';
 
 
-export default function InlineCode({className, ...rest}: React.HTMLAttributes<HTMLElement>) {
+export default function InlineCode({children, ...rest}: React.HTMLAttributes<HTMLElement>) {
   return (
-    <code className={`text-primary text-opacity-0 ${className}`} {...rest}></code>
+    <code className="text-icon-secondary" {...rest}>{children}</code>
   );
 }
