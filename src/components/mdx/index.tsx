@@ -1,10 +1,11 @@
 export {default as A} from './A';
 export {default as ArticleHeader} from './ArticleHeader';
+export {default as Blockquote} from './Blockquote';
 export {default as Code} from './Code';
 export {default as CommandLine} from './CommandLine';
-export {default as Blockquote} from './Blockquote';
-export {default as Hr} from './Hr';
 export {default as Date} from './Date';
+export {default as Em} from './Em';
+export {default as Hr} from './Hr';
 export {default as H1} from './H1';
 export {default as H2} from './H2';
 export {default as HeaderImage} from './HeaderImage';
