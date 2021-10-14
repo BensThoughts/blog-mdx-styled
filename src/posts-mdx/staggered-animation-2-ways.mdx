@@ -67,7 +67,7 @@ app if we end up wrapping the whole app in the Lazy Motion component and splitti
 
 I am going to show you how to create a staggered and orchestrated animation with Framer Motion and then
 refactor the code to use @emotion/styled CSS-in-JS. Using Framer motion for prototyping has the advantage
-of being able to easily tweak, play around with, and fine tune various animation styles quickly. In most
+of being able to easily play around with and fine tune various animation styles quickly. In most
 cases I have found that my Framer Motion animations actually turn out to be very easy to refactor into
 CSS, especially when using a library that supports CSS-in-JS, such as @emotion/styled. These libraries
 allow us to use Javascript variables in our CSS so they can really make the process of refactoring the
@@ -94,10 +94,11 @@ shown here...
 ## Example With Framer Motion
 
 The code below is a stripped down and altered example of the Blog card that gets displayed in a grid list
-on this website. I have wrapped the component in `<LazyMotion features={domAnimation}>` so that it
-adds as small a bundle size as possible (remember still 23.4k), although usually you would wrap a higher
-order component with this. Take not that we then use the smaller `m` instead of `motion` import for
-the `AnchorContainer`. I have also used style props so that it works in a code playground easily.
+on this website. The alterations are as follows. I have wrapped the component in `<LazyMotion
+features={domAnimation}>` so that it adds as small a bundle size as possible. You would usually wrap a
+higher order component with this. Wrapping in LazyMotion allows the code to use the smaller `m` instead
+of `motion` import for the `AnchorContainer`. I have also used style props so that it works in a code
+playground easily. Better options are tailwindcss or plain CSS modules.
 
 >Check out the Framer Motion version on codesandbox.io [here](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
 
@@ -120,7 +121,7 @@ const AnchorContainer = styled(m.a)`
   color: rgba(var(--color-text-primary));
 `;
 
-const Pill = styled.div`
+const Pill = styled(m.div)`
   --color-app-secondary: 49, 130, 206;
   display: flex;
   gap: 0.1rem;
@@ -241,29 +242,18 @@ export default function BlogCard({
           {description && <div>{description}</div>}
           <div
             style={{
-              height: "100%",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end"
+              flexWrap: "wrap",
+              rowGap: "1rem",
+              columnGap: "0.5rem"
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                rowGap: "1rem",
-                columnGap: "0.5rem"
-              }}
-            >
-              {tags.map((tag) => (
-                <m.div variants={pill} key={tag}>
-                  <Pill key={tag}>
-                    <span style={{ color: "rgb(255, 107, 0)" }}>#</span>
-                    {tag}
-                  </Pill>
-                </m.div>
-              ))}
-            </div>
+            {tags.map((tag) => (
+              <Pill key={tag} variants={pill}>
+                <span style={{ color: "rgb(255, 107, 0)" }}>#</span>
+                {tag}
+              </Pill>
+            ))}
           </div>
         </div>
       </AnchorContainer>
@@ -474,27 +464,18 @@ export default function BlogCard({
         {description && <div>{description}</div>}
         <div
           style={{
-            height: "100%",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end"
+            flexWrap: "wrap",
+            rowGap: "1rem",
+            columnGap: "0.5rem"
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              rowGap: "1rem",
-              columnGap: "0.5rem"
-            }}
-          >
-            {tags.map((tag, idx) => (
-              <Pill key={tag} delay={STAGGER_DELAY * idx}>
-                <span style={{ color: "rgb(255, 107, 0)" }}>#</span>
-                {tag}
-              </Pill>
-            ))}
-          </div>
+          {tags.map((tag, idx) => (
+            <Pill key={tag} delay={STAGGER_DELAY * idx}>
+              <span style={{ color: "rgb(255, 107, 0)" }}>#</span>
+              {tag}
+            </Pill>
+          ))}
         </div>
       </div>
     </AnchorContainer>
@@ -528,7 +509,7 @@ focus state changes.
 
 ## What We Gained
 
-We have eliminated 23k gzipped of javascript from this component alone. That may not seem like much, but
+We have eliminated 23k g-zipped of javascript from this component alone. That may not seem like much, but
 across a larger application that could really add up. We have also regained the ability to use this
 component in other parts of our application or even other applications with correct Typescript typings
 using React.HTMLAttributes<HTMLAnchorElement\>
