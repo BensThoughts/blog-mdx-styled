@@ -133,6 +133,7 @@ export default function PostsPage({
               date={date}
               readTime={readTime}
               permaLink={url}
+              tags={tags}
               className="mt-10"
             />
             {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
@@ -152,6 +153,7 @@ export default function PostsPage({
             <ArticleFooter
               title={title}
               permaLink={url}
+              tags={tags}
             />
           </GridWrapper>
         </article>

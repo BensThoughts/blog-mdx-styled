@@ -1,15 +1,21 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import {keyframes} from '@emotion/react';
 
+const hop = keyframes`
+  50% {
+    transform: translateY(-10px);
+  }
+`;
 
 const Pill = styled.div<{
   delay: number;
 }>`
-  @keyframes hop {
+  /* @keyframes hop {
     50% {
       transform: translateY(-10px);
     }
-  }
+  } */
 
   display: flex;
   background-color: rgb(var(--color-app-secondary));
@@ -67,7 +73,7 @@ const AnchorContainer = styled.a`
 
   &:hover ${Pill},
   &:focus ${Pill} {
-    animation-name: hop;
+    animation-name: ${hop};
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;

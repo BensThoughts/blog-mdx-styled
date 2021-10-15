@@ -22,6 +22,7 @@ type ArticleHeaderProps = {
   date: string;
   readTime: number;
   permaLink: string;
+  tags: string[];
   className?: string;
 }
 
@@ -30,9 +31,11 @@ export default function ArticleHeader({
   date,
   readTime,
   permaLink,
+  tags,
   className = '',
 }: ArticleHeaderProps) {
-  const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out!\n\n`;
+  const tweetTags = tags.map(tag => '#' + tag).join(' ');
+  const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out! \n\n ${tweetTags} \n\n`;
 
   return (
     <div className={`w-full max-w-4xl mx-auto flex justify-center ${className}`}>
