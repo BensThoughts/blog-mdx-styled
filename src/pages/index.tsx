@@ -6,6 +6,7 @@ import TitleHeader from '@app/components/Home/TitleHeader';
 import {Projects} from '@app/components/Home/ProjectsCard/projects';
 import Technologies from '@app/components/Home/Technologies';
 import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
+import NetlifyForm from '@app/components/NetlifyForm';
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
         {/* Projects Section */}
         <TitleHeader>
           <span className="text-icon-secondary">[</span>
-                &nbsp;02. Projects&nbsp;
+                &nbsp;03. Projects&nbsp;
           <span className="text-icon-secondary">]</span>
         </TitleHeader>
         {Projects.map((project, idx) => (
@@ -51,6 +52,13 @@ export default function Home() {
             reversed={idx % 2 === 0 ? false : true}
           />
         ))}
+
+        <TitleHeader>
+          <span className="text-icon-secondary">[</span>
+                &nbsp;04. Contact&nbsp;
+          <span className="text-icon-secondary">]</span>
+        </TitleHeader>
+        <NetlifyForm />
       </GridWrapper>
     </MaxWidthWrapper>
   );
