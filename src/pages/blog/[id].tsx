@@ -22,7 +22,6 @@ import {
   P,
   Pre,
   Strong,
-  Video,
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
 import {getAllPostIds, getPostData} from '@app/utils/blogPosts';
@@ -149,7 +148,7 @@ export default function PostsPage({
                 <></>
               )
             }
-              <MDXRemote {...content} components={components} />
+            <MDXRemote {...content} components={components} />
             <ArticleFooter
               title={title}
               permaLink={url}

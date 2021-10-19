@@ -11,7 +11,6 @@ const ImageCacheContext = React.createContext<
   {state: State, dispatch: Dispatch} | undefined
 >(undefined);
 
-
 function imageReducer(state: State, action: Action): State {
   switch (action.type) {
     case 'addImage': {

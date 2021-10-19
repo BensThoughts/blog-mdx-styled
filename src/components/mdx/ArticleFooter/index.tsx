@@ -7,7 +7,7 @@ type ArticleFooterProps = {
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function ArticleFooter({permaLink, title, tags, ...rest}: ArticleFooterProps) {
-  const tweetTags = tags.map(tag => '#' + tag).join(' ');
+  const tweetTags = tags.map((tag) => '#' + tag).join(' ');
   const tweetMessage = `I just finished reading ${title} by @bensthoughts Check it out! \n\n ${tweetTags} \n\n`;
 
   return (

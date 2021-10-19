@@ -1,21 +1,6 @@
-import styled from '@emotion/styled';
 import Date from '@app/components/mdx/Date';
 import H1 from '@app/components/mdx/H1';
-import AnimatedUnderline from '@app/components/AnimatedUnderline';
 import ArticleTweet from '@app/components/mdx/ArticleTweet';
-import {Twitter} from '@app/components/Icons/Brands';
-
-const UnderLineController = styled.a`
-  &:hover ${AnimatedUnderline}::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-
-  &:focus ${AnimatedUnderline}::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-`;
 
 type ArticleHeaderProps = {
   title: string;
@@ -34,7 +19,7 @@ export default function ArticleHeader({
   tags,
   className = '',
 }: ArticleHeaderProps) {
-  const tweetTags = tags.map(tag => '#' + tag).join(' ');
+  const tweetTags = tags.map((tag) => '#' + tag).join(' ');
   const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out! \n\n ${tweetTags} \n\n`;
 
   return (
