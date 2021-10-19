@@ -104,6 +104,12 @@ const FormTextArea = styled.textarea`
 
 `;
 
+type InputAction = UpdateInputTextAction | ResetInputTextAction;
+
+type InputState = {
+  text: string,
+  placeholderShown: boolean,
+}
 
 type UpdateInputTextAction = {
   type: 'updateText',
@@ -112,13 +118,6 @@ type UpdateInputTextAction = {
 
 type ResetInputTextAction = {
   type: 'resetText',
-}
-
-type InputAction = UpdateInputTextAction | ResetInputTextAction;
-
-type InputState = {
-  text: string,
-  placeholderShown: boolean,
 }
 
 const initialInputState = {
@@ -145,6 +144,57 @@ function inputReducer(state: InputState, action: InputAction): InputState {
   }
 }
 
+
+/* New Form State */
+
+type UpdateNameAction = {
+  type: 'updateName',
+  payload: InputField,
+}
+
+type UpdateEmailAction = {
+  type: 'updateEmail',
+  payload: InputField,
+}
+
+type UpdateMessageAction = {
+  type: 'updateMessage',
+  payload: InputField
+}
+
+type ResetFormAction = {
+  type: 'resetForm',
+}
+
+type FormAction = UpdateNameAction | UpdateEmailAction | UpdateMessageAction | ResetFormAction;
+
+type InputField = {
+  value: string,
+  touched: boolean,
+  placeholderShown: boolean,
+  hasError: boolean,
+  error: string,
+}
+
+type FormState = {
+  name: InputField,
+  email: InputField,
+  message: InputField,
+  isFormValid: boolean,
+}
+
+const initialFormState = {
+  name: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
+  email: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
+  message: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
+  isFormValid: false,
+};
+
+function formReducer(state: FormState, action: FormAction): FormState {
+  return state;
+};
+
+
 type NetlifyFormData = {
   'form-name': string,
   'name': string,
@@ -165,6 +215,8 @@ export default function NetlifyForm({className, ...rest}: React.FormHTMLAttribut
   const [nameState, nameDispatch] = useReducer(inputReducer, initialInputState);
   const [emailState, emailDispatch] = useReducer(inputReducer, initialInputState);
   const [messageState, messageDispatch] = useReducer(inputReducer, initialInputState);
+
+  const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
