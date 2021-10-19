@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useReducer, useState } from 'react';
+import React, {useReducer} from 'react';
 import Button from '@app/components/Button';
 import styled from '@emotion/styled';
 
@@ -20,7 +20,7 @@ const FormLabel = styled.label<{
   transform: ${({placeholderShown}) => placeholderShown ? 'translateY(0px)' : 'translateY(-14px)'}
 `;
 
-const FormControl = styled.div`
+const FormField = styled.div`
   background-color: rgb(var(--color-app-primary));
   border-radius: 4px;
   overflow: hidden;
@@ -28,10 +28,10 @@ const FormControl = styled.div`
   width: 100%;
 `;
 
-const FormField = styled.div`
-    display: block;
-    margin-bottom: 16px;
-`;
+// const FormField = styled.div`
+//     display: block;
+//     margin-bottom: 16px;
+// `;
 
 const FormFieldBar = styled.div`
   /* border-bottom: 4px solid rgb(var(--color-app-secondary)); */
@@ -47,7 +47,6 @@ const FormFieldBar = styled.div`
   transition: all 350ms;
   width: 1%;
 `;
-
 
 
 const FormInput = styled.input`
@@ -106,7 +105,6 @@ const FormTextArea = styled.textarea`
 `;
 
 
-
 type UpdateInputTextAction = {
   type: 'updateText',
   payload: string,
@@ -126,10 +124,10 @@ type InputState = {
 const initialInputState = {
   text: '',
   placeholderShown: true,
-}
+};
 
 function inputReducer(state: InputState, action: InputAction): InputState {
-  switch(action.type) {
+  switch (action.type) {
     case 'updateText':
       let placeholderShown = true;
       if (action.payload.length > 0) {
@@ -139,7 +137,7 @@ function inputReducer(state: InputState, action: InputAction): InputState {
         ...state,
         text: action.payload,
         placeholderShown: placeholderShown,
-      }
+      };
     case 'resetText':
       return initialInputState;
     default:
@@ -147,38 +145,56 @@ function inputReducer(state: InputState, action: InputAction): InputState {
   }
 }
 
-type NetlifyFormProps = {
-
+type NetlifyFormData = {
+  'form-name': string,
+  'name': string,
+  'email': string,
+  'message': string,
 }
+
+function encode(data: NetlifyFormData) {
+  const keys = Object.keys(data) as Array<keyof typeof data>;
+  return keys
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+}
+
+const FormName = 'bensthoughts.dev-contact';
 
 export default function NetlifyForm({className, ...rest}: React.FormHTMLAttributes<HTMLFormElement>) {
   const [nameState, nameDispatch] = useReducer(inputReducer, initialInputState);
   const [emailState, emailDispatch] = useReducer(inputReducer, initialInputState);
   const [messageState, messageDispatch] = useReducer(inputReducer, initialInputState);
-  
-  // function onChangeName(e: React.FormEvent<HTMLInputElement>) {
-  //   nameDispatch({type: 'updateText', payload: e.currentTarget.value});
-  // }
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
+    fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: encode({
+        'form-name': FormName,
+        'name': nameState.text,
+        'email': emailState.text,
+        'message': messageState.text,
+      }),
+    }).then(() => console.log('Successfully Submitted')).catch((error) => alert(error));
     nameDispatch({type: 'resetText'});
     emailDispatch({type: 'resetText'});
     messageDispatch({type: 'resetText'});
   }
-  
-  return (
-    <>
 
+  return (
     <form
-      name="contact"
+      id={FormName}
+      name={FormName}
       method="POST"
       data-netlify="true"
       className={`flex flex-col gap-4 items-center ${className}`}
       onSubmit={handleSubmit}
       {...rest}
     >
-      <FormControl>
+      <input type="hidden" name="form-name" value={FormName} />
+      <FormField>
         <FormInput
           id="name"
           type="text"
@@ -190,9 +206,9 @@ export default function NetlifyForm({className, ...rest}: React.FormHTMLAttribut
           Name
         </FormLabel>
         <FormFieldBar></FormFieldBar>
-      </FormControl>
+      </FormField>
 
-      <FormControl>
+      <FormField>
         <FormInput
           id="email"
           type="email"
@@ -204,9 +220,9 @@ export default function NetlifyForm({className, ...rest}: React.FormHTMLAttribut
           Email
         </FormLabel>
         <FormFieldBar></FormFieldBar>
-      </FormControl>
+      </FormField>
 
-      <FormControl>
+      <FormField>
         <FormTextArea
           id="message"
           name="message"
@@ -217,12 +233,11 @@ export default function NetlifyForm({className, ...rest}: React.FormHTMLAttribut
           Message
         </FormLabel>
         <FormFieldBar></FormFieldBar>
-      </FormControl>
+      </FormField>
 
       <div>
         <Button type="submit" className="mb-2">Send</Button>
       </div>
     </form>
-    </>
   );
 }
