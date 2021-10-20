@@ -32,7 +32,6 @@ const FormField = styled.div`
 const FormFieldBar = styled.div<{
   displayError: boolean
 }>`
-  /* border-bottom: 4px solid rgb(var(--color-app-secondary)); */
   border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
   bottom: 0;
   left: 0;
@@ -49,6 +48,7 @@ const FormFieldBar = styled.div<{
 
 const FormInput = styled.input<{
   displayError: boolean,
+  isTextArea: boolean,
 }>`
   appearance: none;
   background: transparent;
@@ -61,36 +61,7 @@ const FormInput = styled.input<{
   outline: 0;
   padding: 0 12px 10px 12px;
   width: 100%;
-
-  &:focus {
-    ~${FormLabel} {
-      font-size: 0.75rem;
-      transform: translateY(-14px);
-    }
-
-    ~${FormFieldBar} {
-      border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
-      transform: scaleX(150);
-    }
-  }
-
-`;
-
-const FormTextArea = styled.textarea<{
-  displayError: boolean,
-}>`
-  appearance: none;
-  background: transparent;
-  border: 0;
-  border-bottom: ${({displayError}) => displayError ? '2px solid rgb(var(--color-app-error))' : '2px solid rgb(var(--color-app-secondary))'};
-  color: rgb(var(--color-text-primary));
-  display: block;
-  font-size: 1.2rem;
-  margin-top: 24px;
-  outline: 0;
-  padding: 0 12px 10px 12px;
-  width: 100%;
-  height: 250px;
+  height: ${({isTextArea}) => isTextArea ? '250px' : '100%'};
 
   &:focus {
     ~${FormLabel} {
@@ -131,50 +102,13 @@ function NetlifyFormInput({
   const [placeholderShown, setPlaceholderShown] = useState(true);
   const errorMessage = getFieldError(value);
   const displayError = (wasSubmitted || touched) && errorMessage;
+  const isTextArea = type === 'textarea';
 
   useEffect(() => {
     if (wasSubmitted) {
       setValue('');
     }
   }, [wasSubmitted]);
-
-  let formInput = <FormInput
-    id={`${name}-input`}
-    type={type}
-    name={name}
-    value={value}
-    onChange={(e) => setValue(e.currentTarget.value)}
-    onFocus={() => setPlaceholderShown(false)}
-    onBlur={() => {
-      setTouched(true);
-      if (value === '') {
-        setPlaceholderShown(true);
-      }
-    }}
-    onSubmit={() => setValue('')}
-    required
-    aria-describedby={displayError ? `${name}-error` : undefined}
-    displayError={displayError as boolean}
-  />;
-
-  if (type === 'textarea') {
-    formInput = <FormTextArea
-      id={`${name}-input`}
-      name={name}
-      value={value}
-      onChange={(e) => setValue(e.currentTarget.value)}
-      onFocus={() => setPlaceholderShown(false)}
-      onBlur={() => {
-        setTouched(true);
-        if (value === '') {
-          setPlaceholderShown(true);
-        }
-      }}
-      required
-      aria-describedby={displayError ? `${name}-error` : undefined}
-      displayError={displayError as boolean}
-    />;
-  }
 
   return (
     <FormField key={name}>
@@ -191,7 +125,26 @@ function NetlifyFormInput({
           </span>
         ) : null}
       </FormLabel>
-      {formInput}
+      <FormInput
+        as={isTextArea ? 'textarea' : 'input'}
+        isTextArea={isTextArea}
+        id={`${name}-input`}
+        type={type}
+        name={name}
+        value={value}
+        onChange={(e) => setValue(e.currentTarget.value)}
+        onFocus={() => setPlaceholderShown(false)}
+        onBlur={() => {
+          setTouched(true);
+          if (value === '') {
+            setPlaceholderShown(true);
+          }
+        }}
+        onSubmit={() => setValue('')}
+        required
+        aria-describedby={displayError ? `${name}-error` : undefined}
+        displayError={displayError as boolean}
+      />
       <FormFieldBar displayError={displayError as boolean}></FormFieldBar>
     </FormField>
   );
