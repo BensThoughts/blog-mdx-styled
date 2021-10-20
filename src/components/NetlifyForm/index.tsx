@@ -1,9 +1,10 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@app/components/Button';
 import styled from '@emotion/styled';
 
 const FormLabel = styled.label<{
-  placeholderShown: boolean
+  placeholderShown: boolean,
+  displayError: boolean,
 }>`
   display: block;
   font-weight: normal;
@@ -12,30 +13,27 @@ const FormLabel = styled.label<{
   padding: 18px 12px 0;
   position: absolute;
   top: 0;
-  transition: all linear 250ms;
+  transition: all linear 200ms;
   width: 100%;
-  color: rgb(var(--color-text-primary));
+  color: ${({displayError}) => displayError ? 'rgb(var(--color-app-error))' : 'rgb(var(--color-text-primary))'};
   cursor: text;
   font-size: ${({placeholderShown}) => placeholderShown ? '1.2rem' : '0.75rem'};
   transform: ${({placeholderShown}) => placeholderShown ? 'translateY(0px)' : 'translateY(-14px)'}
 `;
 
 const FormField = styled.div`
-  background-color: rgb(var(--color-app-primary));
+  background-color: rgba(var(--color-app-primary), 0.5);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
   width: 100%;
 `;
 
-// const FormField = styled.div`
-//     display: block;
-//     margin-bottom: 16px;
-// `;
-
-const FormFieldBar = styled.div`
+const FormFieldBar = styled.div<{
+  displayError: boolean
+}>`
   /* border-bottom: 4px solid rgb(var(--color-app-secondary)); */
-  border-bottom: 4px solid rgb(var(--color-app-secondary));
+  border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
   bottom: 0;
   left: 0;
   right: 0;
@@ -44,16 +42,18 @@ const FormFieldBar = styled.div`
   margin: 0 auto;
   position: absolute;
   transform: scaleX(0);
-  transition: all 350ms;
+  transition: all 250ms;
   width: 1%;
 `;
 
 
-const FormInput = styled.input`
+const FormInput = styled.input<{
+  displayError: boolean,
+}>`
   appearance: none;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid rgb(var(--color-app-secondary));
+  border-bottom: ${({displayError}) => displayError ? '2px solid rgb(var(--color-app-error))' : '2px solid rgb(var(--color-app-secondary))'};
   color: rgb(var(--color-text-primary));
   display: block;
   font-size: 1.2rem;
@@ -69,18 +69,20 @@ const FormInput = styled.input`
     }
 
     ~${FormFieldBar} {
-      border-bottom: 4px solid rgb(var(--color-app-secondary));
+      border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
       transform: scaleX(150);
     }
   }
 
 `;
 
-const FormTextArea = styled.textarea`
+const FormTextArea = styled.textarea<{
+  displayError: boolean,
+}>`
   appearance: none;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid rgb(var(--color-app-secondary));
+  border-bottom: ${({displayError}) => displayError ? '2px solid rgb(var(--color-app-error))' : '2px solid rgb(var(--color-app-secondary))'};
   color: rgb(var(--color-text-primary));
   display: block;
   font-size: 1.2rem;
@@ -97,103 +99,103 @@ const FormTextArea = styled.textarea`
     }
 
     ~${FormFieldBar} {
-      border-bottom: 4px solid rgb(var(--color-app-secondary));
+      border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
       transform: scaleX(150);
     }
   }
-
 `;
 
-type InputAction = UpdateInputTextAction | ResetInputTextAction;
+const Submission = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(var(--color-text-primary));
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  height: 498px;
+`;
 
-type InputState = {
-  text: string,
-  placeholderShown: boolean,
-}
+function NetlifyFormInput({
+  name,
+  type,
+  getFieldError,
+  wasSubmitted,
+}: {
+  name: string,
+  type: string,
+  getFieldError(value: string): string | null,
+  wasSubmitted: boolean,
+}) {
+  const [value, setValue] = useState('');
+  const [touched, setTouched] = useState(false);
+  const [placeholderShown, setPlaceholderShown] = useState(true);
+  const errorMessage = getFieldError(value);
+  const displayError = (wasSubmitted || touched) && errorMessage;
 
-type UpdateInputTextAction = {
-  type: 'updateText',
-  payload: string,
-}
+  useEffect(() => {
+    if (wasSubmitted) {
+      setValue('');
+    }
+  }, [wasSubmitted]);
 
-type ResetInputTextAction = {
-  type: 'resetText',
-}
-
-const initialInputState = {
-  text: '',
-  placeholderShown: true,
-};
-
-function inputReducer(state: InputState, action: InputAction): InputState {
-  switch (action.type) {
-    case 'updateText':
-      let placeholderShown = true;
-      if (action.payload.length > 0) {
-        placeholderShown = false;
+  let formInput = <FormInput
+    id={`${name}-input`}
+    type={type}
+    name={name}
+    value={value}
+    onChange={(e) => setValue(e.currentTarget.value)}
+    onFocus={() => setPlaceholderShown(false)}
+    onBlur={() => {
+      setTouched(true);
+      if (value === '') {
+        setPlaceholderShown(true);
       }
-      return {
-        ...state,
-        text: action.payload,
-        placeholderShown: placeholderShown,
-      };
-    case 'resetText':
-      return initialInputState;
-    default:
-      return state;
+    }}
+    onSubmit={() => setValue('')}
+    required
+    aria-describedby={displayError ? `${name}-error` : undefined}
+    displayError={displayError as boolean}
+  />;
+
+  if (type === 'textarea') {
+    formInput = <FormTextArea
+      id={`${name}-input`}
+      name={name}
+      value={value}
+      onChange={(e) => setValue(e.currentTarget.value)}
+      onFocus={() => setPlaceholderShown(false)}
+      onBlur={() => {
+        setTouched(true);
+        if (value === '') {
+          setPlaceholderShown(true);
+        }
+      }}
+      required
+      aria-describedby={displayError ? `${name}-error` : undefined}
+      displayError={displayError as boolean}
+    />;
   }
-}
 
-
-/* New Form State */
-
-type UpdateNameAction = {
-  type: 'updateName',
-  payload: InputField,
-}
-
-type UpdateEmailAction = {
-  type: 'updateEmail',
-  payload: InputField,
-}
-
-type UpdateMessageAction = {
-  type: 'updateMessage',
-  payload: InputField
-}
-
-type ResetFormAction = {
-  type: 'resetForm',
-}
-
-type FormAction = UpdateNameAction | UpdateEmailAction | UpdateMessageAction | ResetFormAction;
-
-type InputField = {
-  value: string,
-  touched: boolean,
-  placeholderShown: boolean,
-  hasError: boolean,
-  error: string,
-}
-
-type FormState = {
-  name: InputField,
-  email: InputField,
-  message: InputField,
-  isFormValid: boolean,
-}
-
-const initialFormState = {
-  name: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
-  email: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
-  message: {value: '', touched: false, placeholderShown: true, hasError: true, error: ''},
-  isFormValid: false,
+  return (
+    <FormField key={name}>
+      <FormLabel
+        htmlFor={`${name}-input`}
+        className="text-primary"
+        placeholderShown={placeholderShown}
+        displayError={displayError as boolean}
+      >
+        <span className="text-primary">{name}</span>
+        {displayError ? (
+          <span role="alert" id={`${name}-error`} className="error-message">
+            &nbsp;({errorMessage})
+          </span>
+        ) : null}
+      </FormLabel>
+      {formInput}
+      <FormFieldBar displayError={displayError as boolean}></FormFieldBar>
+    </FormField>
+  );
 };
-
-function formReducer(state: FormState, action: FormAction): FormState {
-  return state;
-};
-
 
 type NetlifyFormData = {
   'form-name': string,
@@ -205,91 +207,116 @@ type NetlifyFormData = {
 function encode(data: NetlifyFormData) {
   const keys = Object.keys(data) as Array<keyof typeof data>;
   return keys
-      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key] as string))
       .join('&');
 }
 
-const FormName = 'bensthoughts.dev-contact';
+const FORM_NAME = 'bensthoughts.dev-contact';
 
-export default function NetlifyForm({className, ...rest}: React.FormHTMLAttributes<HTMLFormElement>) {
-  const [nameState, nameDispatch] = useReducer(inputReducer, initialInputState);
-  const [emailState, emailDispatch] = useReducer(inputReducer, initialInputState);
-  const [messageState, messageDispatch] = useReducer(inputReducer, initialInputState);
 
-  const [formState, formDispatch] = useReducer(formReducer, initialFormState);
+function getEmailError(value: string | undefined) {
+  if (!value) return 'field is required';
+  const valueIsLongEnough = value.length >= 5;
+  const valueIsShortEnough = value.length <= 40;
+  const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
 
-  function handleSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();
-    fetch('/', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({
-        'form-name': FormName,
-        'name': nameState.text,
-        'email': emailState.text,
-        'message': messageState.text,
-      }),
-    }).then(() => console.log('Successfully Submitted')).catch((error) => alert(error));
-    nameDispatch({type: 'resetText'});
-    emailDispatch({type: 'resetText'});
-    messageDispatch({type: 'resetText'});
+  if (!valueIsLongEnough) {
+    return 'value must be at least 5 characters long';
+  } else if (!valueIsShortEnough) {
+    return 'value must be no longer than 40 characters';
+  } else if (!validEmail) {
+    return 'value must be a valid email address';
+  }
+  return null;
+}
+
+function getNameError(value: string | undefined) {
+  if (!value) return 'field is required';
+  const valueIsLongEnough = value.length >= 3;
+  const valueIsShortEnough = value.length <= 40;
+  const valueHasNumbers = /\d/.test(value);
+
+  if (!valueIsLongEnough) {
+    return 'value must be at least 3 characters long';
+  } else if (!valueIsShortEnough) {
+    return 'value must be no longer than 40 characters';
+  } else if (valueHasNumbers) {
+    return 'value must not contain numbers';
+  }
+  return null;
+}
+
+function getMessageError(value: string | undefined) {
+  if (!value) return 'field is required';
+  const valueIsLongEnough = value.length >= 5;
+  const valueIsShortEnough = value.length <= 400;
+
+  if (!valueIsLongEnough) {
+    return 'value must be at least 5 characters long';
+  } else if (!valueIsShortEnough) {
+    return 'value must be no longer than 400 characters';
+  }
+  return null;
+}
+
+export default function NetlifyForm() {
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const fieldValues = Object.fromEntries(formData.entries()) as NetlifyFormData;
+
+    const formIsValid = !getEmailError(fieldValues.email) && !getNameError(fieldValues.name) && !getMessageError(fieldValues.message);
+
+    if (formIsValid) {
+      setWasSubmitted(true);
+      fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: encode({
+          ...fieldValues,
+        }),
+      });
+    }
   }
 
   return (
-    <form
-      id={FormName}
-      name={FormName}
-      method="POST"
-      data-netlify="true"
-      className={`flex flex-col gap-4 items-center ${className}`}
-      onSubmit={handleSubmit}
-      {...rest}
-    >
-      <input type="hidden" name="form-name" value={FormName} />
-      <FormField>
-        <FormInput
-          id="name"
-          type="text"
+    <>
+      {wasSubmitted ?
+      <Submission>Thank you for your submission. I will respond promptly</Submission> :
+      <form
+        id={FORM_NAME}
+        name={FORM_NAME}
+        data-netlify="true"
+        className={`flex flex-col gap-4 items-center`}
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <input type="hidden" name="form-name" value={FORM_NAME} />
+        <NetlifyFormInput
           name="name"
-          value={nameState.text}
-          onChange={(e) => nameDispatch({type: 'updateText', payload: e.currentTarget.value})}
+          type="text"
+          getFieldError={getNameError}
+          wasSubmitted={wasSubmitted}
         />
-        <FormLabel htmlFor="name" className="text-primary" placeholderShown={nameState.placeholderShown}>
-          Name
-        </FormLabel>
-        <FormFieldBar></FormFieldBar>
-      </FormField>
-
-      <FormField>
-        <FormInput
-          id="email"
-          type="email"
+        <NetlifyFormInput
           name="email"
-          value={emailState.text}
-          onChange={(e) => emailDispatch({type: 'updateText', payload: e.currentTarget.value})}
+          type="email"
+          getFieldError={getEmailError}
+          wasSubmitted={wasSubmitted}
         />
-        <FormLabel htmlFor="email" className="text-primary" placeholderShown={emailState.placeholderShown}>
-          Email
-        </FormLabel>
-        <FormFieldBar></FormFieldBar>
-      </FormField>
-
-      <FormField>
-        <FormTextArea
-          id="message"
+        <NetlifyFormInput
           name="message"
-          value={messageState.text}
-          onChange={(e) => messageDispatch({type: 'updateText', payload: e.currentTarget.value})}
+          type="textarea"
+          getFieldError={getMessageError}
+          wasSubmitted={wasSubmitted}
         />
-        <FormLabel htmlFor="message" className="text-primary" placeholderShown={messageState.placeholderShown}>
-          Message
-        </FormLabel>
-        <FormFieldBar></FormFieldBar>
-      </FormField>
-
-      <div>
-        <Button type="submit" className="mb-2">Send</Button>
-      </div>
-    </form>
+        <div>
+          <Button type="submit" className="mb-2">Send</Button>
+        </div>
+      </form>
+      }
+    </>
   );
 }
