@@ -244,7 +244,7 @@ export default function NetlifyForm() {
         data-netlify="true"
         className={`flex flex-col gap-4 items-center`}
         onSubmit={handleSubmit}
-        noValidate
+        // noValidate
       >
         <input type="hidden" name="form-name" value={FORM_NAME} />
         <NetlifyFormInput
