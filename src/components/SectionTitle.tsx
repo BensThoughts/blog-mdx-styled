@@ -48,62 +48,19 @@ backdrop-filter: var(--app-backdrop-filter);
 `;
 
 
-type TitleHeaderProps = {
+type SectionTitleProps = {
   reversed?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>
 
-export default function TitleHeader({
+export default function SectionTitleHeader({
   reversed = false,
   className,
   children,
   ...rest
-}: TitleHeaderProps) {
+}: SectionTitleProps) {
   return (
     <div className={`flex h-full items-center ${className}`} {...rest}>
       <Header>{children}</Header>
     </div>
   );
 }
-
-// const InverseHeader = styled.h1`
-// display: flex;
-// align-items: center;
-// justify-content: right;
-// position: relative;
-// margin: 10px 0px 40px;
-// width: 100%;
-// white-space: nowrap;
-// font-size: 1.5rem;
-// backdrop-filter: var(--app-backdrop-filter);
-
-// @media (min-width: 768px) {
-//   font-size: 2rem;
-// }
-
-// &::after {
-//   position: relative;
-//   bottom: 0px;
-//   content: "<";
-//   margin-left: 10px;
-//   color: rgb(--color-text-primary);
-//   font-weight: 400;
-//   font-family: monospace;
-//   backdrop-filter: var(--app-backdrop-filter);
-// }
-
-// &::before {
-//   content: "";
-//   display: block;
-//   position: relative;
-//   top: 0px;
-//   width: 100%;
-//   height: 2px;
-//   margin-right: 20px;
-//   background-color: rgb(var(--color-app-secondary));
-//   backdrop-filter: var(--app-backdrop-filter);
-
-//   @media (min-width: 768px) {
-//     width: 300px;
-//   }
-// }
-// `;

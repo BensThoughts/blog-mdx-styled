@@ -1,6 +1,6 @@
 import {Fragment} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import Button from '../../Button';
+import Button from '@app/components/Button';
 
 type DrawerProps = {
   title?: string,
@@ -54,7 +54,7 @@ export default function MenuDrawer({
                 {children}
               </div>
               <div className="self-center mt-10">
-                <Button onClick={() => setIsOpen(!isOpen)}>Close</Button>
+                <Button className="bg-primary" onClick={() => setIsOpen(!isOpen)}>Close</Button>
               </div>
             </div>
           </Transition.Child>

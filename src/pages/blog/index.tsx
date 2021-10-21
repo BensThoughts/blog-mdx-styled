@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import {getSortedPostsData} from '@app/utils/blogPosts';
 import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import TitleHeader from '@app/components/TitleHeader';
+import SectionTitle from '@app/components/SectionTitle';
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -47,11 +47,11 @@ interface BlogArticleListProps {
 export default function BlogArticleListPage({allPostsData}: BlogArticleListProps) {
   return (
     <MaxWidthWrapper>
-      <TitleHeader>
+      <SectionTitle>
         <span className="text-icon-secondary">[&nbsp;</span>
           Blog
         <span className="text-icon-secondary">&nbsp;]</span>
-      </TitleHeader>
+      </SectionTitle>
       <GridContainer>
         {allPostsData.map(({
           id,
@@ -76,14 +76,3 @@ export default function BlogArticleListPage({allPostsData}: BlogArticleListProps
     </MaxWidthWrapper>
   );
 };
-
-
-{/* <motion.div
-key={id}
-initial={{ opacity: 0, y: '100%' }}
-animate={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.4, delay: (idx / 2) - ((idx - 1) / 4) }}
->
-
-</motion.div> */}
-

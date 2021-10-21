@@ -6,7 +6,6 @@ import {
   Mail,
   Monitor,
   Sun,
-  AstronautHelmet,
 } from '@app/components/Icons';
 import {
   Facebook,
@@ -63,8 +62,6 @@ export default function PlaygroundPage() {
       <AnimatedLinkIcon href="https://google.com">
         <Facebook />
       </AnimatedLinkIcon>
-      <AstronautHelmet size={50} gradient />
-
       <Folder color="red" />
     </MaxWidthWrapper>
   );

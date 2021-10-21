@@ -266,7 +266,7 @@ export default function NetlifyForm() {
           wasSubmitted={wasSubmitted}
         />
         <div>
-          <Button type="submit" className="mb-2">Send</Button>
+          <Button className="bg-secondary mb-2" type="submit">Send</Button>
         </div>
       </form>
       }
