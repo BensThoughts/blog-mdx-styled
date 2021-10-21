@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import {getSortedPostsData} from '@app/utils/blogPosts';
 import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import TitleHeader from '@app/components/Home/TitleHeader';
+import TitleHeader from '@app/components/TitleHeader';
 
 
 export const getStaticProps: GetStaticProps = async () => {
