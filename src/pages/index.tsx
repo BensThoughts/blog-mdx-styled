@@ -2,7 +2,7 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 import AvatarCard from '@app/components/Home/AvatarCard';
 import ProjectsCard from '@app/components/Home/ProjectsCard';
-import TitleHeader from '@app/components/Home/TitleHeader';
+import TitleHeader from '@app/components/TitleHeader';
 import {Projects} from '@app/components/Home/ProjectsCard/projects';
 import Technologies from '@app/components/Home/Technologies';
 import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
@@ -13,7 +13,7 @@ export default function Home() {
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
         {/* About Section */}
-        <TitleHeader>
+        <TitleHeader id="about-section">
           <span className="text-icon-secondary">[</span>
                 &nbsp;01. About Me&nbsp;
           <span className="text-icon-secondary">]</span>
@@ -21,7 +21,7 @@ export default function Home() {
         <AvatarCard />
 
         {/* Technologies Section */}
-        <TitleHeader>
+        <TitleHeader id="technologies-section">
           <span className="text-icon-secondary">[</span>
                 &nbsp;02. Technologies&nbsp;
           <span className="text-icon-secondary">]</span>
@@ -34,7 +34,7 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <TitleHeader>
+        <TitleHeader id="projects-section">
           <span className="text-icon-secondary">[</span>
                 &nbsp;03. Projects&nbsp;
           <span className="text-icon-secondary">]</span>
@@ -53,7 +53,7 @@ export default function Home() {
           />
         ))}
 
-        <TitleHeader>
+        <TitleHeader id="contact-section">
           <span className="text-icon-secondary">[</span>
                 &nbsp;04. Contact&nbsp;
           <span className="text-icon-secondary">]</span>
