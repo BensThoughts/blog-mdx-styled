@@ -10,8 +10,8 @@ const TransitionColor = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  width: 15rem;
-  height: 15rem;
+  width: 240px;
+  height: 240px;
   border-radius: 0.125rem;
   overflow: hidden;
 `;
@@ -113,6 +113,8 @@ export default function AvatarImg({className}: AvatarImgProps) {
             src={src}
             alt="Bust Image"
             className="relative"
+            width="240"
+            height="240"
             style={{
               filter: blur ? 'blur(10px)' : 'none',
               transition: blur ? 'none' : 'filter 0.2s ease-out',
