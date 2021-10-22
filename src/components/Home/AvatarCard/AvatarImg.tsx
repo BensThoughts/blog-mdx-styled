@@ -1,5 +1,6 @@
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 import styled from '@emotion/styled';
+import {buildImageUrl} from 'cloudinary-build-url';
 
 const TransitionColor = styled.div`
   transition-property: background, color;
@@ -16,8 +17,8 @@ const ImageWrapper = styled.div`
 `;
 
 const ImageBackground = styled.div`
-  width: 15rem;
-  height: 15rem;
+  width: 240px;
+  height: 240px;
   position: relative;
   /* border: 2px solid rgba(var(--color-app-accent), var(--tw-border-opacity)); */
   /* outline-offset: 20px; */
@@ -66,11 +67,41 @@ const ImageBackground = styled.div`
 type AvatarImgProps = {
   className?: string;
 }
-const bustImgSrcSmall = 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1632153114/blog/home/bust_blue_llboi6.jpg';
-const bustImgSrcLarge = 'https://res.cloudinary.com/bensthoughts/image/upload/q_100/v1632153114/blog/home/bust_blue_llboi6.jpg';
+// const bustImgSrcSmall = 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1634879054/blog/home/bust_blue_small_wrjvyl.jpg';
+// const bustImgSrcLarge = 'https://res.cloudinary.com/bensthoughts/image/upload/q_100/v1632153114/blog/home/bust_blue_llboi6.jpg';
+
+const imagePath = 'v1634879054/blog/home/bust_blue_small_wrjvyl.jpg';
+
+const imgSrcSmall = buildImageUrl(imagePath, {
+  cloud: {
+    cloudName: 'bensthoughts',
+  },
+  transformations: {
+    quality: 10,
+    resize: {
+      type: 'thumb',
+      width: 240,
+      height: 240,
+    },
+  },
+});
+
+const imgSrcLarge = buildImageUrl(imagePath, {
+  cloud: {
+    cloudName: 'bensthoughts',
+  },
+  transformations: {
+    quality: 'auto',
+    resize: {
+      type: 'thumb',
+      width: 240,
+      height: 240,
+    },
+  },
+});
 
 export default function AvatarImg({className}: AvatarImgProps) {
-  const [src, blur] = useProgressiveImage(bustImgSrcSmall, bustImgSrcLarge);
+  const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
 
   return (
     <TransitionColor className={`z-20 bg-transparent mt-10 md:mt-0 ${className}`}>
