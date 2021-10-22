@@ -99,7 +99,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <div className="flex md:hidden w-full justify-between items-center mx-3">
 
             <ThemeToggle />
-            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3">
+            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3" aria-label="navigation menu">
               <Bars size={24} className="text-icon-primary" />
             </IconButton>
 

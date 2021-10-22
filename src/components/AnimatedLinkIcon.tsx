@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import React from 'react';
 
 const AnimatedBorder = styled.a`
   --app-border-opacity: 0.8;
@@ -32,21 +33,14 @@ const AnimatedBorder = styled.a`
   }
 `;
 
-type AnimatedLinkIconProps = {
-  children: React.ReactNode,
-  href: string,
-  target?: string,
-  rel?: string,
-}
-
 export default function AnimatedLinkIcon({
   children,
-  href,
   target = '_blank',
   rel = 'noreferrer noopener',
-}: AnimatedLinkIconProps) {
+  ...rest
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <AnimatedBorder href={href} target={target} rel={rel}>
+    <AnimatedBorder target={target} rel={rel} {...rest}>
       {children}
     </AnimatedBorder>
   );

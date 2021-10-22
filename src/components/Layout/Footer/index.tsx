@@ -35,28 +35,27 @@ export default function Footer({className}: FooterProps) {
   return (
     <div className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">
-        <AnimatedLinkIcon href="mailto:bensthoughts@gmail.com">
+        <AnimatedLinkIcon href="mailto:bensthoughts@gmail.com" aria-label="email me at bensthoughts@gmail.com">
           <Mail className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
-        <AnimatedLinkIcon href="https://github.com/bensthoughts">
+        <AnimatedLinkIcon href="https://github.com/bensthoughts" aria-label="Github">
           <Github className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
-        <AnimatedLinkIcon href="https://twitter.com/bensthoughts">
+        <AnimatedLinkIcon href="https://twitter.com/bensthoughts" aria-label="Twitter">
           <Twitter className="text-secondary" />
         </AnimatedLinkIcon>
-        {/* <SocialIcon iconName="twitter" url="https://twitter.com/bensthoughts" /> */}
       </div>
       <div className="mx-3">
-        <AnimatedLinkIcon href="https://www.linkedin.com/in/benjaminblumenfeldjones">
+        <AnimatedLinkIcon href="https://www.linkedin.com/in/benjaminblumenfeldjones" aria-label="LinkedIn">
           <LinkedIn className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
       <div className="mx-3">
-        <AnimatedLinkIcon href="https://www.facebook.com/benjamin.blumenfeldjones.9">
+        <AnimatedLinkIcon href="https://www.facebook.com/benjamin.blumenfeldjones.9" aria-label="Facebook">
           <Facebook className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
