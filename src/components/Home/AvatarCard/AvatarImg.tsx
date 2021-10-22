@@ -67,8 +67,6 @@ const ImageBackground = styled.div`
 type AvatarImgProps = {
   className?: string;
 }
-// const bustImgSrcSmall = 'https://res.cloudinary.com/bensthoughts/image/upload/q_10/v1634879054/blog/home/bust_blue_small_wrjvyl.jpg';
-// const bustImgSrcLarge = 'https://res.cloudinary.com/bensthoughts/image/upload/q_100/v1632153114/blog/home/bust_blue_llboi6.jpg';
 
 const imagePath = 'v1634879054/blog/home/bust_blue_small_wrjvyl.jpg';
 
