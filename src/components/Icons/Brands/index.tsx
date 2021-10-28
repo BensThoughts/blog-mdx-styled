@@ -8,6 +8,7 @@ export {default as Facebook} from './Facebook';
 export {default as Firebase} from './Firebase';
 export {default as FramerMotion} from './FramerMotion';
 export {default as FontAwesome} from './FontAwesome';
+export {default as Gatsby} from './Gatsby';
 export {default as Git} from './Git';
 export {default as Github} from './Github';
 export {default as GoogleAnalytics} from './GoogleAnalytics';
