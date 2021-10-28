@@ -1,4 +1,3 @@
-import {ReactNode} from 'react';
 import type {GetStaticProps} from 'next';
 import styled from '@emotion/styled';
 
@@ -40,7 +39,7 @@ interface BlogArticleListProps {
     longDescription: string,
     date: string,
     tags: string[]
-    children?: ReactNode
+    children?: React.ReactNode
   }[]
 }
 
