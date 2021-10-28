@@ -103,7 +103,7 @@ export default function AvatarImg({className}: AvatarImgProps) {
 
   return (
     <TransitionColor className={`z-20 bg-transparent mt-10 md:mt-0 ${className}`}>
-      <ImageBackground>
+      <ImageBackground tabIndex={0}>
         <ImageWrapper>
           {/* <picture>
           <source srcSet={imgSrc} /> */}
