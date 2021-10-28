@@ -1,6 +1,6 @@
 export const menuItems = [
   {
-    name: 'Home',
+    name: 'About',
     href: '/',
   },
   // {
@@ -9,15 +9,15 @@ export const menuItems = [
   // },
   {
     name: 'Skills',
-    href: '/#technologies-section',
+    href: '/#skills',
   },
   {
     name: 'Projects',
-    href: '/#projects-section',
+    href: '/#projects',
   },
   {
     name: 'Contact',
-    href: '/#contact-section',
+    href: '/#contact',
   },
   {
     name: 'Blog',

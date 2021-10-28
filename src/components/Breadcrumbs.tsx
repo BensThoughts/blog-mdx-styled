@@ -12,7 +12,7 @@ type BreadcrumbsType = { breadcrumb: string, href: string }[];
 
 export default function Breadcrumbs() {
   const router = useRouter();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'home', href: '/'}]);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'about', href: '/'}]);
 
   useEffect(() => {
     if (router) {
@@ -36,7 +36,7 @@ export default function Breadcrumbs() {
       <div className="font-mono">
         <span className="text-secondary">$&gt;&nbsp;</span>
         <Link href="/" scroll={true} passHref>
-          <AnimatedLink href="/">HOME</AnimatedLink>
+          <AnimatedLink href="/">ABOUT</AnimatedLink>
         </Link>
         &nbsp;/&nbsp;
       </div>
