@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ const convertBreadcrumb = (crumb: string) => {
 
 type BreadcrumbsType = { breadcrumb: string, href: string }[];
 
-export default function Breadcrumbs() {
+export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'about', href: '/'}]);
 
@@ -32,7 +32,7 @@ export default function Breadcrumbs() {
   // }
 
   return (
-    <div aria-label="breadcrumbs" className="flex">
+    <div aria-label="breadcrumbs" className={`flex ${className}`} {...rest}>
       <div className="font-mono">
         <span className="text-secondary">$&gt;&nbsp;</span>
         <Link href="/" scroll={true} passHref>
