@@ -82,16 +82,18 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                 <div className="mr-3">
                   <Monitor size={26} className="text-icon-secondary" />
                 </div>
-                <div>
-                  <Breadcrumbs />
+                <div className="flex items-center content-between pt-0 gap-4">
+                  {menuItems.map((menuItem) => (
+                    <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
+                  ))}
                 </div>
+
               </div>
             </div>
-            <div className="flex items-center justify-end content-between pt-0 gap-4">
-              {menuItems.map((menuItem) => (
-                <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
-              ))}
+            <div className="flex items-center justify-end gap-2">
+              <Breadcrumbs />
               <ThemeToggle />
+
             </div>
           </div>
 
