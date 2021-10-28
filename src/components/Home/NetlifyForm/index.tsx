@@ -51,6 +51,7 @@ const FormInput = styled.input<{
   isTextArea: boolean,
 }>`
   appearance: none;
+  outline: none;
   background: transparent;
   border: 0;
   border-bottom: ${({displayError}) => displayError ? '2px solid rgb(var(--color-app-error))' : '2px solid rgb(var(--color-app-secondary))'};
