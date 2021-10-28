@@ -53,7 +53,7 @@ const AboutWrap = styled.div<{
 height: 100%;
 z-index: 2;
 height: 100%;
-background-color: rgba(var(--color-bg-terminal), 0.6);
+background-color: rgba(var(--color-app-primary), 0.6);
 border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
 border-style: solid;
 border-color: rgba(var(--color-text-secondary), 1);
@@ -212,7 +212,7 @@ export default function ProjectsCard({
           imgAlt={imgAlt}
           href={liveLink}
           width={460}
-          height={251}
+          height={252}
         />
       </ImageWrap>
 
