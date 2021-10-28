@@ -13,7 +13,7 @@ export default function Home() {
     <MaxWidthWrapper>
       <GridWrapper charWidth={100}>
         {/* About Section */}
-        <SectionTitle id="about-section">
+        <SectionTitle id="about">
           <span className="text-icon-secondary">[</span>
                 &nbsp;01. About Me&nbsp;
           <span className="text-icon-secondary">]</span>
@@ -21,9 +21,9 @@ export default function Home() {
         <AvatarCard />
 
         {/* Technologies Section */}
-        <SectionTitle id="technologies-section">
+        <SectionTitle id="skills">
           <span className="text-icon-secondary">[</span>
-                &nbsp;02. Technologies&nbsp;
+                &nbsp;02. Skills&nbsp;
           <span className="text-icon-secondary">]</span>
         </SectionTitle>
         <div className="flex items-center justify-center">
@@ -34,7 +34,7 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <SectionTitle id="projects-section">
+        <SectionTitle id="projects">
           <span className="text-icon-secondary">[</span>
                 &nbsp;03. Projects&nbsp;
           <span className="text-icon-secondary">]</span>
@@ -53,7 +53,7 @@ export default function Home() {
           />
         ))}
 
-        <SectionTitle id="contact-section">
+        <SectionTitle id="contact">
           <span className="text-icon-secondary">[</span>
                 &nbsp;04. Contact&nbsp;
           <span className="text-icon-secondary">]</span>
