@@ -24,7 +24,7 @@ const ToggleButton = styled.button`
   border: 0;
   border-radius: calc(var(--toggle-width) / 2);
   cursor: pointer;
-  background-color: rgba(var(--color-app-accent), var(--app-bg-opacity));
+  background-color: rgba(var(--color-app-accent), 1);
   transition-property: background, color;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
