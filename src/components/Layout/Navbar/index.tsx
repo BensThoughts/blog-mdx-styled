@@ -73,7 +73,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
         </NavLinks>
       </MenuDrawer>
       <NavHider>
-        <Nav {...rest} className={`bg-app-bg shadow-lg bg-opacity-70 ${className}`}>
+        <Nav {...rest} className={`bg-app-bg bg-opacity-70 shadow-lg ${className}`}>
 
           {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mr-3">
@@ -87,7 +87,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-end content-between pt-0 bg-app-bg gap-4">
+            <div className="flex items-center justify-end content-between pt-0 gap-4">
               {menuItems.map((menuItem) => (
                 <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
               ))}
