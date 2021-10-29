@@ -89,7 +89,7 @@ body[data-theme="light"] {
   
   /* --color-bg-primary: 254, 235, 200; */
   --color-bg-primary: 255, 255, 255;
-  --color-bg-terminal: 251, 211, 141;
+  --color-bg-terminal: 253, 239, 213;
 
   --color-app-primary: 253, 233, 198;
   --color-app-secondary: 237, 137, 54;
@@ -101,7 +101,7 @@ body[data-theme="light"] {
   --color-gradient-primary: 7, 105, 99;
   --color-gradient-secondary: 7, 105, 99;
  
-  --color-image-overlay: 251, 211, 141;
+  --color-image-overlay: var(--color-app-primary);
 
   --statusBarAccentColor: 237, 137, 54;
   --statusBarAccentColorText: 39, 32, 26;
@@ -126,8 +126,9 @@ body[data-theme="dark"] {
   --color-text-secondary: 255, 107, 0;
   --color-text-inline-code: 49, 130, 206;
   
-  --color-bg-primary: 21, 35, 45;
-  --color-bg-terminal: 40, 42, 54;
+  /* --color-bg-primary: 21, 35, 45; */
+  --color-bg-primary: 20, 27, 35;
+  --color-bg-terminal: 32, 39, 50;
   
   --color-app-primary: 37, 49, 62;
   --color-app-secondary: 49, 130, 206;
@@ -139,7 +140,7 @@ body[data-theme="dark"] {
   --color-gradient-primary: 255, 107, 0;
   --color-gradient-secondary: 253, 200, 48;
 
-  --color-image-overlay: 49, 130, 206;
+  --color-image-overlay: var(--color-app-secondary);
 
   --statusBarAccentColor: 128, 149, 255;
   --statusBarAccentColorText: 6, 24, 44;

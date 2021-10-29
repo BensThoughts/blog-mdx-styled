@@ -22,7 +22,7 @@ const FormLabel = styled.label<{
 `;
 
 const FormField = styled.div`
-  background-color: rgba(var(--color-app-primary), 0.5);
+  background-color: rgba(var(--color-app-primary), 1);
   border-radius: 4px;
   overflow: hidden;
   position: relative;

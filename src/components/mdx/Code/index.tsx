@@ -48,7 +48,7 @@ export default function CodeElement({
         {codeTitle}
       </div>
       }
-      <div className={`md:max-w-full border-secondary bg-terminal bg-opacity-60 font-mono text-sm md:text-base border-2 border-solid border-opacity-30 rounded-lg ${codeTitle ? 'rounded-t-none rounded-l-lg' : ''}`}>
+      <div className={`md:max-w-full border-secondary bg-terminal font-mono text-sm md:text-base border-2 border-solid border-opacity-30 rounded-lg ${codeTitle ? 'rounded-t-none rounded-l-lg' : ''}`}>
         <Highlight
           {...defaultProps}
           theme={MyTheme as PrismTheme}

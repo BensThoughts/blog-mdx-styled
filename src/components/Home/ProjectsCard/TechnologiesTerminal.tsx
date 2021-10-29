@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import StatusBar from './StatusBar';
 
 const Pre = styled.pre`
-  background-color: rgba(var(--color-bg-terminal), 0.5);
+  background-color: rgba(var(--color-bg-terminal), 1);
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ const TechnologiesTerminal = ({
     <StatusBar file="index.ts" />
     <Pre className="">
       {technologies.map((tech, i) => (
-        <Line key={tech.name} className="hover:bg-terminal">
+        <Line key={tech.name} className="hover:bg-primary">
           <LineNo>
             {i + 1}
           </LineNo>
