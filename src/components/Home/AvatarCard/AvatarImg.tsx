@@ -46,7 +46,8 @@ const ImageBackground = styled.div`
 
     z-index: -1;
   }
-  &:hover::after {
+  &:hover::after,
+  &:focus::after {
     transform: rotate(0deg);
     /* animation-play-state: running; */
     animation: spinBorder 500ms;
