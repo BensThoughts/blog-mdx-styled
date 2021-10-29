@@ -35,8 +35,6 @@ module.exports = {
         'primary': generateColorClass('color-app-primary'),
         'secondary': generateColorClass('color-app-secondary'),
         'accent': generateColorClass('color-app-accent'),
-        'icon-primary': generateColorClass('color-icon-border-primary'),
-
       },
       borderWidth: {
         1: '1px',
@@ -50,6 +48,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography')
+    require('@tailwindcss/typography'),
   ],
 };
