@@ -7,7 +7,6 @@ height: 100%;
 width: 100%;
 z-index: -1;
 position: relative;
-margin: 30px 0px 20px;
 white-space: nowrap;
 font-family: monospace;
 font-size: 1.5rem;
@@ -15,7 +14,6 @@ backdrop-filter: var(--app-backdrop-filter);
 
 @media (min-width: 768px) {
   font-size: 2rem;
-  margin: 40px 0px 40px;
 }
 
 &::before {
@@ -59,7 +57,7 @@ export default function SectionTitleHeader({
   ...rest
 }: SectionTitleProps) {
   return (
-    <div className={`flex h-full items-center ${className}`} {...rest}>
+    <div className={`flex h-full items-center my-2 ${className}`} {...rest}>
       <Header>{children}</Header>
     </div>
   );
