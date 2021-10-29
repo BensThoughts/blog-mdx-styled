@@ -99,7 +99,7 @@ higher order component with this. Wrapping in LazyMotion allows the code to use 
 of `motion` import for the `AnchorContainer`. I have also used style props so that it works in a code
 playground easily. Better options are tailwindcss or plain CSS modules.
 
->Check out the Framer Motion version on codesandbox.io [here](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
+>Check out the Framer Motion version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
 
 ```tsx:/components/BlogCard.tsx
 import styled from "@emotion/styled";
@@ -341,8 +341,7 @@ the [@emotion babel-plugin](https://emotion.sh/docs/babel) plugin working correc
 the `${Component}` feature. Once again, I have also used the style prop for this quick demo instead of
 pure css or tailwindcss (both of which are preferable).
 
->Check out the pure @emotion/styled version on codesandbox.io
-[here](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
+>Check out the pure @emotion/styled version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
 
 >Note: You will probably need to hit refresh on the embedded browser window after the code sand box
 compiles the app.
@@ -492,8 +491,7 @@ rendering to create a smooth animation.
 Animating the main AnchorContainer on **hover** and **focus** is easy, we just use a standard
 `transition: translateY(-10px)` on `:hover` and `:focus` pseudo-events. The exciting part is that
 we can assign the hop animation to each Pill component on :hover and :focus of the AnchorContainer using
-the `${Pill}` syntax. `${Pill}` is translated into the generated class name for Pill by @emotion/styled. Referencing one styled component from another can be found in the official docs
-[here](https://emotion.sh/docs/styled#targeting-another-emotion-component). You will also need to install
+the `${Pill}` syntax. `${Pill}` is translated into the generated class name for Pill by @emotion/styled. Referencing one styled component from another can be found in the [official docs](https://emotion.sh/docs/styled#targeting-another-emotion-component). You will also need to install
 this [@emotion babel-plugin](https://emotion.sh/docs/babel) for it to work with SSR (i.e. Next.js). the
 babel plugin is well worth it for the dead code elimination and minification alone though so I highly
 recommend it for everyone.
