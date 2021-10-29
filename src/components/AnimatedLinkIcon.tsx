@@ -16,7 +16,7 @@ const AnimatedBorder = styled.a`
     top: 0;
     left: 0;
     border: 2px solid;
-    border-radius: 10px;
+    border-radius: 6px;
     /* border-image-slice: 1;
     border-image-source: linear-gradient(to right, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary))); */
     border-color: rgba(var(--color-app-secondary), var(--app-border-opacity));
