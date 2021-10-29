@@ -1,12 +1,14 @@
 import '../styles/globals.css';
 import type {AppProps} from 'next/app';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 // import {LazyMotion, domAnimation} from 'framer-motion';
 
-const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
-  ssr: false,
-});
+// const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
+//   ssr: false,
+// });
+
+import ThemeProvider from '@app/utils/context/colorMode';
 
 import FeatureToggle from '@app/components/FeatureToggle/FeatureToggle';
 
