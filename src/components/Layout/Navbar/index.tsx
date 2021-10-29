@@ -85,7 +85,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                 ))}
               </div>
             </div>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end gap-x-4">
               <Breadcrumbs className="hidden lg:flex" />
               <ThemeToggle />
             </div>

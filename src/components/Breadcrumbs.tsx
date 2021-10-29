@@ -12,7 +12,7 @@ type BreadcrumbsType = { breadcrumb: string, href: string }[];
 
 export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: 'about', href: '/'}]);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsType>([{breadcrumb: '', href: '/'}]);
 
   useEffect(() => {
     if (router) {
@@ -36,21 +36,27 @@ export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<H
       <div className="font-mono">
         <span className="text-secondary">$&gt;&nbsp;</span>
         <Link href="/" scroll={true} passHref>
-          <AnimatedLink href="/">ABOUT</AnimatedLink>
+          <AnimatedLink href="/">HOME</AnimatedLink>
         </Link>
         &nbsp;/&nbsp;
       </div>
       {breadcrumbs.map((breadcrumb, i) => {
-        return (
-          <div key={breadcrumb.href} className="font-mono">
-            <Link href={breadcrumb.href} scroll={true} passHref>
-              <AnimatedLink href={breadcrumb.href}>
-                {convertBreadcrumb(breadcrumb.breadcrumb)}
-              </AnimatedLink>
-            </Link>
-            &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
-          </div>
-        );
+        if (breadcrumb.href != '/') {
+          return (
+            <div key={breadcrumb.href} className="font-mono">
+              <Link href={breadcrumb.href} scroll={true} passHref>
+                <AnimatedLink href={breadcrumb.href}>
+                  {convertBreadcrumb(breadcrumb.breadcrumb)}
+                </AnimatedLink>
+              </Link>
+              &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
+            </div>
+          );
+        } else {
+          return (
+            <span key={breadcrumb.href} className="hidden"></span>
+          );
+        }
       })}
     </div>
   );
