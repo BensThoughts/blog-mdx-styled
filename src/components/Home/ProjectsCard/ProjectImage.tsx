@@ -2,7 +2,9 @@ import {buildImageUrl} from 'cloudinary-build-url';
 import styled from '@emotion/styled';
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
-const Image = styled.img`
+const Image = styled.img<{
+  blur: boolean
+}>`
   position: relative;
   object-fit: fill;
   /* width: 100%;
@@ -11,7 +13,15 @@ const Image = styled.img`
   height: 300px; */
   z-index: 2;
   mix-blend-mode: multiply;
-  filter: grayscale(100%) contrast(1) brightness(100%);
+  filter: ${({blur}) => {
+    if (blur) {
+      return 'blur(10px)';
+    } else {
+      return 'grayscale(100%) contrast(1) brightness(90%)';
+    }
+  }};
+  transition: filter 0.2s ease-out;
+  
   &:hover {
     mix-blend-mode: normal;
     filter: grayscale(0%) brightness(100%);
@@ -92,11 +102,12 @@ export default function ProjectImage({
       <Image
         alt={imgAlt}
         src={src}
-        style={{
-          filter: blur ? 'blur(10px)' : 'none',
-          transition: blur ? 'none' : 'filter 0.2s ease-out',
-          // margin: '-5px -10px -10px -5px'
-        }}
+        blur={blur}
+        // style={{
+        //   filter: blur ? 'blur(10px)' : 'grayscale(100%) contrast(1) brightness(90%)',
+        //   transition: blur ? 'none' : 'filter 0.2s ease-out',
+        //   // margin: '-5px -10px -10px -5px'
+        // }}
         width={width}
         height={height}
       />
