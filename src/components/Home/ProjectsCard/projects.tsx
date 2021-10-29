@@ -28,8 +28,8 @@ export const Spacetagram = {
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
   cloudinaryImgPath: 'v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
   imgAlt: 'Spacetagram Home Page',
+  descriptionFirstSentence: `Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that uses the NASA APOD API to display the image of the day.`,
   description: `
-    Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that uses the NASA APOD API to display the image of the day.
     This is a react project that utilizes redux to download the images from the API to an infinite virtual scroll component. Images can be liked and viewed
     in a gallery. There is also a calendar component that can be used to jump to a specific date. A primary goal of the project was to focus on accessibility
     and responsive design.
@@ -79,9 +79,10 @@ export const ZeroInboxBackend = {
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
   cloudinaryImgPath: 'v1633402742/blog/projects/zero-inbox/zeroinbox-services-full-scaled_uqnk9p.png',
   imgAlt: 'Zero Inbox Backend',
+  descriptionFirstSentence: `The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes
+  cluster.`,
   description: `
-    The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes
-    cluster. The primary service is an API gateway that the frontend communicates with.
+    The primary service is an API gateway that the frontend communicates with.
     The services internally communicate with each other using RabbitMQ and a specialized node.js library
     that I wrote to wrap the lower level amqplib. Data is stores in a MongoDB Atlas cluster.
     O-Auth was implemented using google auth so that users can opt to authenticate to the app
@@ -143,8 +144,8 @@ export const ZeroInbox = {
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
   cloudinaryImgPath: 'v1633402740/blog/projects/zero-inbox/zeroinbox-home-full-scaled_nef8nu.png',
   imgAlt: 'Zero Inbox Home Page',
+  descriptionFirstSentence: `Zero Inbox is a web app that lets users organize their inbox easily on the go.`,
   description: `
-    Zero Inbox is a web app that lets users organize their inbox easily on the go.
     It is a complex Angular 12 application. Users can view analytics about the state of their
     inbox as well as quickly organize it. All subscriptions, the number of
     messages, or size of messages in MB from a given sender can be viewed in a table. The tables are paginated and searchable

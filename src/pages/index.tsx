@@ -43,6 +43,7 @@ export default function Home() {
           <ProjectsCard
             key={project.title}
             title={project.title}
+            descriptionFirstSentence={project.descriptionFirstSentence}
             description={project.description}
             githubLink={project.githubLink}
             liveLink={project.liveLink}
