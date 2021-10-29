@@ -13,7 +13,7 @@ type AboutBoxProps = {
 
 export default function AboutBox({className}: AboutBoxProps) {
   return (
-    <Background className={`bg-primary w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-md ${className}`}>
+    <Background className={`w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-secondary p-4 shadow-md ${className}`}>
       <div className="leading-7">
         <p>Hi,<br /></p>
         <p className="my-4">

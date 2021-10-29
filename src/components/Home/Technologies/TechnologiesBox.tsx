@@ -14,7 +14,7 @@ type AboutBoxProps = {
 
 export default function TechnologiesBox({className}: AboutBoxProps) {
   return (
-    <Background className={`bg-primary w-full max-w-2xl z-10 rounded-sm border-2 border-solid border-opacity-30 p-4 border-secondary shadow-sm ${className}`}>
+    <Background className={`w-full max-w-2xl z-10 rounded-sm border-2 border-solid  border-secondary p-4 shadow-sm ${className}`}>
       <div>
         <p className="my-2 leading-7">
         &nbsp;&nbsp;&nbsp;&nbsp;
