@@ -42,6 +42,7 @@ will-change: transform background opacity;
 @media (min-width: 1024px) {
   height: 25px;
   grid-area: ${({reversed}) => reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
+  transform: ${({reversed}) => reversed ? 'translateX(50px)' : 'translateX(-50px)'}
 }
 `;
 
@@ -110,7 +111,7 @@ z-index: 3;
 opacity: ${({viewed}) => viewed ? 1 : 0};
 /* grid-area: 9 / 1 / -2 / -1; */
 transition-property: transform opacity;
-transition-duration: 250ms;
+transition-duration: 400ms;
 will-change: transform background opacity;
 
 @media (min-width: 1024px) {  
@@ -118,9 +119,9 @@ will-change: transform background opacity;
   transform: ${({viewed, reversed}) => {
     const flipBit = reversed ? -1 : 1;
     if (!viewed) {
-      return `translate(${256 * flipBit}px, 50px)`;
+      return `translate(${128 * flipBit}px, 500px)`;
     } else {
-      return `translate(${64 * flipBit}px, 20px)`;
+      return `translate(${128 * flipBit}px, 0px)`;
     }
   }};
 }
@@ -217,7 +218,7 @@ export default function ProjectsCard({
         // expanded={expanded}
         className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}
       >
-        <p className="text-primary text-opacity-100 font-mono">
+        <p className="text-primary text-opacity-100 font-mono leading-7">
           <strong>
             {descriptionFirstSentence}
           </strong>
