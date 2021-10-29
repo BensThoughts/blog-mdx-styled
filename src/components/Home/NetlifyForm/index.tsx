@@ -223,6 +223,8 @@ export default function NetlifyForm() {
 
     const formIsValid = !getEmailError(fieldValues.email) && !getNameError(fieldValues.name) && !getMessageError(fieldValues.message);
 
+    console.log(fieldValues);
+
     if (formIsValid) {
       setWasSubmitted(true);
       fetch('/', {
@@ -245,9 +247,14 @@ export default function NetlifyForm() {
         data-netlify="true"
         className={`flex flex-col gap-4 items-center`}
         onSubmit={handleSubmit}
+        netlify-honeypot="input-field"
         // noValidate
       >
-        <input type="hidden" name="form-name" value={FORM_NAME} />
+        <p className="hidden">
+          <label>Don&apos;t fill this out if you&apos;re human:</label>
+          <input type="hidden" name="form-name" value={FORM_NAME} />
+          <input type="hidden" name="input-field" />
+        </p>
         <NetlifyFormInput
           name="name"
           type="text"
