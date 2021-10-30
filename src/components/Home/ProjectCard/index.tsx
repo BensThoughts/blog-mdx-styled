@@ -15,9 +15,9 @@ gap: 20px;
 @media (min-width: 1024px) {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(13, 1fr);
   gap: 0px;
-  height: 600px;
+  /* height: 600px; */
   will-change: transform background opacity;
 }
 /* height: 600px; */
@@ -87,7 +87,7 @@ z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
-  grid-area: ${({reversed}) => reversed ? '1 / 1 / 6 / 7' : '1 / 7 / 6 / -1'};
+  grid-area: ${({reversed}) => reversed ? '2 / 1 / 7 / 7' : '2 / 7 / 7 / -1'};
   transform: ${({viewed, reversed}) => {
     const flipBit = reversed ? -1 : 1;
     if (!viewed) {
@@ -115,13 +115,13 @@ transition-duration: 400ms;
 will-change: transform background opacity;
 
 @media (min-width: 1024px) {  
-  grid-area: ${({reversed}) => reversed ? '7 / 2 / -1 / 8' : '7 / 6 / -1 / -2'};
+  grid-area: ${({reversed}) => reversed ? '8 / 2 / -1 / 8' : '8 / 6 / -1 / -2'};
   transform: ${({viewed, reversed}) => {
     /* const flipBit = reversed ? -1 : 1; */
     if (!viewed) {
       return `translateY(400px)`;
     } else {
-      return `translateY(30px)`;
+      return `translateY(20px)`;
     }
   }};
 }

@@ -223,8 +223,6 @@ export default function NetlifyForm() {
 
     const formIsValid = !getEmailError(fieldValues.email) && !getNameError(fieldValues.name) && !getMessageError(fieldValues.message);
 
-    console.log(fieldValues);
-
     if (formIsValid) {
       setWasSubmitted(true);
       fetch('/', {

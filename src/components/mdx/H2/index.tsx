@@ -24,7 +24,7 @@ type H2Props = {
 
 export default function H2({children, className}: H2Props) {
   return (
-    <H2Styled className={`text-xl md:text-2xl mx-auto text-secondary ${className}`}>
+    <H2Styled className={`text-xl md:text-2xl mx-auto -mb-0 text-secondary ${className}`}>
       {children}
     </H2Styled>
   );

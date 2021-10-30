@@ -57,7 +57,7 @@ function MyApp({Component, pageProps, router}: AppProps) {
           {/* <LazyMotion features={domAnimation}> */}
           <PageWrapper>
             <ContentWrap>
-              <main className="z-0 mb-16 max-h-full overflow-hidden">
+              <main className="z-0 mb-16 mt-8 max-h-full overflow-hidden">
                 <Component {...pageProps} key={router.route} />
               </main>
             </ContentWrap>

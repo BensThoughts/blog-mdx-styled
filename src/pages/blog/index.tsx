@@ -6,7 +6,6 @@ import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 
-
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
@@ -24,6 +23,7 @@ const GridContainer = styled.div`
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+    grid-auto-flow: row;
     gap: 32px;
   }
 
@@ -46,7 +46,7 @@ interface BlogArticleListProps {
 export default function BlogArticleListPage({allPostsData}: BlogArticleListProps) {
   return (
     <MaxWidthWrapper>
-      <SectionTitle>
+      <SectionTitle className="mb-12">
         <span className="text-icon-secondary">[&nbsp;</span>
           Blog
         <span className="text-icon-secondary">&nbsp;]</span>

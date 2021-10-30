@@ -1,12 +1,12 @@
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 import AvatarCard from '@app/components/Home/AvatarCard';
-import ProjectsCard from '@app/components/Home/ProjectsCard';
+import ProjectCard from '@app/components/Home/ProjectCard';
 import SectionTitle from '@app/components/SectionTitle';
-import {Projects} from '@app/components/Home/ProjectsCard/projects';
+import {Projects} from '@app/components/Home/ProjectCard/projects';
 import Technologies from '@app/components/Home/Technologies';
-import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
-import NetlifyForm from '@app/components/Home/NetlifyForm';
+// import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
+import Contact from '@app/components/Home/Contact';
 
 export default function Home() {
   return (
@@ -26,12 +26,7 @@ export default function Home() {
                 &nbsp;02. Skills&nbsp;
           <span className="text-icon-secondary">]</span>
         </SectionTitle>
-        <div className="flex items-center justify-center">
-          <TechnologiesBox />
-        </div>
-        <div className="flex items-center justify-center">
-          <Technologies />
-        </div>
+        <Technologies />
 
         {/* Projects Section */}
         <SectionTitle id="projects">
@@ -40,7 +35,7 @@ export default function Home() {
           <span className="text-icon-secondary">]</span>
         </SectionTitle>
         {Projects.map((project, idx) => (
-          <ProjectsCard
+          <ProjectCard
             key={project.title}
             title={project.title}
             descriptionFirstSentence={project.descriptionFirstSentence}
@@ -54,12 +49,13 @@ export default function Home() {
           />
         ))}
 
+        {/* Contact Section */}
         <SectionTitle id="contact">
           <span className="text-icon-secondary">[</span>
                 &nbsp;04. Contact&nbsp;
           <span className="text-icon-secondary">]</span>
         </SectionTitle>
-        <NetlifyForm />
+        <Contact/>
       </GridWrapper>
     </MaxWidthWrapper>
   );
