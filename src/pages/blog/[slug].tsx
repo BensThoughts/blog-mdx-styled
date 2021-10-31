@@ -24,7 +24,7 @@ import {
   Strong,
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
-import {getAllPostIds, getPostData} from '@app/utils/blogPosts';
+import {getAllPostSlugs, getPostData} from '@app/utils/blogPosts';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 
@@ -162,7 +162,7 @@ export default function PostsPage({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostIds();
+  const paths = getAllPostSlugs();
   return {
     paths,
     fallback: false,
@@ -170,7 +170,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-  const {content, url, metaData} = await getPostData(params!.id as string);
+  const {content, url, metaData} = await getPostData(params!.slug as string);
   const mdxSource = await serialize(content);
 
   return {

@@ -82,7 +82,7 @@ const AnchorContainer = styled.a`
 `;
 
 type BlogCardProps = {
-  id: string
+  slug: string
   date: string
   title: string
   description: string
@@ -91,7 +91,7 @@ type BlogCardProps = {
 } & React.HTMLAttributes<HTMLAnchorElement>
 
 export default function BlogCard({
-  id = '',
+  slug = '',
   title = '',
   date = '',
   description = '',
@@ -100,7 +100,7 @@ export default function BlogCard({
   ...rest
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`} scroll={true} passHref>
+    <Link href={`/blog/${slug}`} scroll={true} passHref>
       <AnchorContainer className={`shadow-md ${className}`} {...rest}>
         <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
           <div>
