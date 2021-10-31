@@ -1,14 +1,6 @@
-import styled from '@emotion/styled';
 import {ExternalLink} from '@app/components/Icons';
 import {Github} from '@app/components/Icons/Brands';
-import AnimatedUnderline from '@app/components/AnimatedUnderline';
-
-const AnimationController = styled.a`
-  &:hover ${AnimatedUnderline}::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
+import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
 
 type ProjectLinksProps = {
   liveLink: string,
@@ -20,29 +12,24 @@ export default function ProjectLinks({
   githubLink,
 }: ProjectLinksProps) {
   return (
-    <div className="pt-2 px-2">
+    <div className="pt-4">
       <div className="flex gap-4 font-mono">
-        <AnimationController
+        <AnimatedLinkWithIcon
           href={githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex gap-2"
-        >
-          <AnimatedUnderline
-            className="text-primary animated-underline"
-          >repo
-          </AnimatedUnderline>
-          <Github className="text-secondary" />
-        </AnimationController>
-        <AnimationController
+          text="repo"
+          className="text-secondary"
+          icon={<Github className="text-secondary" />}
+        />
+        <AnimatedLinkWithIcon
           href={liveLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex gap-2"
-        >
-          <AnimatedUnderline className="text-primary animated-underline">site</AnimatedUnderline>
-          <ExternalLink className="text-secondary" />
-        </AnimationController>
+          text="site"
+          className="text-secondary"
+          icon={<ExternalLink className="text-secondary" />}
+        />
       </div>
     </div>
   );
