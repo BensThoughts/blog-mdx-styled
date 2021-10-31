@@ -66,18 +66,16 @@ export default function ThemeToggle() {
   const inactiveColorMode = colorMode === 'light' ? 'dark' : 'light';
 
   return (
-    <>
-      <ToggleButton
-        aria-label={`Change to ${inactiveColorMode} mode`}
-        title={`Change to ${inactiveColorMode} mode`}
-        type="button"
-        onClick={() => setColorMode(inactiveColorMode)}
-      >
-        <ToggleThumb colorMode={colorMode} />
-        <span aria-hidden="true"><CloudMoon className="text-icon-secondary" /></span>
-        <span aria-hidden="true"><Sun className="text-icon-secondary" /></span>
-      </ToggleButton>
-    </>
+    <ToggleButton
+      aria-label={`Change to ${inactiveColorMode} mode`}
+      title={`Change to ${inactiveColorMode} mode`}
+      type="button"
+      onClick={() => setColorMode(inactiveColorMode)}
+    >
+      <ToggleThumb colorMode={colorMode} />
+      <span aria-hidden="true"><CloudMoon className="text-icon-secondary" /></span>
+      <span aria-hidden="true"><Sun className="text-icon-secondary" /></span>
+    </ToggleButton>
   );
 };
 
