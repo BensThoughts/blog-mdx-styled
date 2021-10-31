@@ -11,16 +11,16 @@ import ProjectTitle from './ProjectTitle';
 const Card = styled.div`
 display: flex;
 flex-direction: column;
-gap: 20px;
+gap: 40px;
 @media (min-width: 1024px) {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(13, 1fr);
   gap: 0px;
   /* height: 600px; */
+  height: 660px;
   will-change: transform background opacity;
 }
-/* height: 600px; */
 /* align-items: center; */
 /* height: 350px; */
 /* border-left: 8px;
@@ -201,13 +201,12 @@ export default function ProjectsCard({
         viewed={viewed}
         className="shadow-lg"
       >
-
         <ProjectImage
           cloudinaryImgPath={cloudinaryImgPath}
           imgAlt={imgAlt}
           href={liveLink}
           width={460}
-          height={252}
+          height={255}
         />
       </ImageWrap>
 
