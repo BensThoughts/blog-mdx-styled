@@ -1,5 +1,6 @@
 export {default as Auth} from './Auth';
 export {default as Bars} from './Bars';
+export {default as Clipboard} from './Clipboard';
 export {default as CloudMoon} from './CloudMoon';
 export {default as Copy} from './Copy';
 export {default as ExternalLink} from './ExternalLink';
