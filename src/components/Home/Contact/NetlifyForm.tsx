@@ -64,6 +64,10 @@ const FormInput = styled.input<{
   width: 100%;
   height: ${({isTextArea}) => isTextArea ? '250px' : '100%'};
 
+  &:focus-visible {
+    outline: none;
+  }
+
   &:focus {
     ~${FormLabel} {
       font-size: 0.75rem;
