@@ -35,7 +35,7 @@ export default function Footer({className}: FooterProps) {
   return (
     <div className={`bg-app-bg w-full flex flex-row justify-center items-center ${className}`}>
       <div className="mx-3">
-        <AnimatedLinkIcon href="mailto:bensthoughts@gmail.com" aria-label="email me at bensthoughts@gmail.com">
+        <AnimatedLinkIcon href="mailto:benjamin@bensthoughts.dev" aria-label="email me at bensthoughts@gmail.com">
           <Mail className="text-secondary" />
         </AnimatedLinkIcon>
       </div>
