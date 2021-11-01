@@ -98,7 +98,7 @@ export default function Drawer({
 }
 ```
 
-Let's go over the code line by line. <Dialog\> is the main container for the
+Let's go over the code line by line. `<Dialog>` is the main container for the
 model. We set `unmount={false}` for performance reasons. Our modal slides
 on/off screen and we do not want to mount/unmount it every time it needs to slide
 in/out. The state of our drawer (open/closed) is going to be handled in the
@@ -107,8 +107,8 @@ component. Last we give it a fixed position at inset-0, a z-30 to make sure it
 always renders above our main content, and overflow-y-auto to make sure that it
 renders scrollbars if the children take up to much space.
 
-Within the Dialog we have a <div\> to keep the width of our drawer to 3/4 of the
-screen and the height to the entire screen. The <Dialog.Overlay\> is the piece
+Within the Dialog we have a `<div>` to keep the width of our drawer to 3/4 of the
+screen and the height to the entire screen. The `<Dialog.Overlay>` is the piece
 which greys out the main content and is at z-40 to place it just above the main
 Dialog container. It is just a black background with opacity 40.
 
@@ -159,7 +159,7 @@ export default function NavBar() {
 I have not included all of the nice to haves in this example, it shows you a basic
 outline for how to connect the logic for triggering the drawer from a parent
 button/page/navbar etc. In the component that you want to trigger the modal
-from you will include the <Drawer\>.  State is maintained with a react useState
+from you will include the `<Drawer>`.  State is maintained with a react useState
 hook. The drawer is placed into the top of the component and whatever you want
 to display in it (usually links to other pages) are placed as children within it.
 The state isOpen and the function that controls it are passed into the Drawer.
@@ -257,8 +257,8 @@ export default function Drawer({
 
 Most of this is explained fairly well in [headless-ui Transition
 documentation](https://headlessui.dev/react/transition). However there is one
-part which is not explained well. You need to use the ***"Entered"*** prop on the
-Transition.Child for the Overlay or else the entire overlay will loose its opacity
+part which is not explained well. You need to use the `entered` prop on the
+`Transition.Child` for the Overlay or else the entire overlay will loose its opacity
 setting right after the transition and cover the main content in pitch black.
 
 To break this down, we are wrapping our Dialog component in a Transition element.
@@ -266,13 +266,13 @@ That element is now the one responsible for showing/hiding the Drawer
 (Dialog/Modal) so we hoise the isOpen prop to Transition. All transition does is
 add/remove className strings from the className of the main child component that it
 is wrapped in. In our case there are 2 separate transitions so we use
-Tranition.Child to define each transition separately. We create the Transition
-and its children as a React *Fragment* because it isn't an element we want to
+`Transition.Child` to define each transition separately. We create the Transition
+and its children as a React `Fragment` because it isn't an element we want to
 display, it is just an element used to alter the children that are within it.
 
 The first transition fades the opacity of the Overlay in from 0 to 30 and then back
 out again depending on the value of isOpen. The second transition slides the
 drawer component in from the left of the screen to its final resting position
-(inset-0) and then back out again (also based on the value of isOpen).
+(`inset-0`) and then back out again (also based on the value of `isOpen`).
 
 ---
