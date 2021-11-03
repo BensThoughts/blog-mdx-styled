@@ -120,7 +120,10 @@ const CurrentColumn = styled.div`
   }
 `;
 
-export default function StatusBar({file = 'zeroinbox.app'}) {
+export default function StatusBar({
+  file = 'index.ts',
+  lineNum = 0,
+}) {
   return (
     <StatusBarContainer className="font-mono text-base select-none">
       <StatusBarLeft>
@@ -134,7 +137,7 @@ export default function StatusBar({file = 'zeroinbox.app'}) {
       <StatusBarRight>
         <DownProgress>100%</DownProgress>
         <LineIcon>☰</LineIcon>
-        <LineProgress>10/50</LineProgress>
+        <LineProgress>{lineNum}/{lineNum}</LineProgress>
         <Line>ln</Line>
         <LineColon>:</LineColon>
         <CurrentColumn>4</CurrentColumn>

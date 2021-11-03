@@ -84,9 +84,12 @@ type TechnologiesTerminalProps = {
 const TechnologiesTerminal = ({
   technologies,
   ...rest
-}: TechnologiesTerminalProps) => (
-  <div {...rest}>
-    <StatusBar file="index.ts" />
+}: TechnologiesTerminalProps) => {
+  const numTechs = technologies.length;
+
+  return (
+    <div {...rest}>
+    <StatusBar file="index.ts" lineNum={numTechs} />
     <Pre className="">
       {technologies.map((tech, i) => (
         <Line key={tech.name} className="hover:bg-primary">
@@ -99,7 +102,6 @@ const TechnologiesTerminal = ({
               {/* <Plain> {tech.name} </Plain>
               <Keyword>from</Keyword> */}
               <String> &apos;{tech.name}&apos; </String>
-
               <LogoContainer>{tech.icon}</LogoContainer>
               <Punctuation>;</Punctuation>
             </a>
@@ -108,6 +110,8 @@ const TechnologiesTerminal = ({
       ))}
     </Pre>
   </div>
-);
+  );
+
+};
 
 export default TechnologiesTerminal;
