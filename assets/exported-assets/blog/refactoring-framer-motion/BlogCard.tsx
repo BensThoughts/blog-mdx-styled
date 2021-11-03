@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import {useEffect, useState} from 'react';
-import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+import {LazyMotion, domAnimation, m, useAnimation} from 'framer-motion';
 
 const AnchorContainer = styled(m.a)`
   display: block;
@@ -27,7 +27,7 @@ const Pill = styled.div`
 `;
 
 type CardProps = {
-  id: string
+  slug: string
   date: string
   title: string
   description: string
@@ -35,7 +35,7 @@ type CardProps = {
 } & React.HTMLAttributes<HTMLAnchorElement>
 
 export default function BlogCard({
-  id = 'refactoring-framer-motion',
+  slug = 'refactoring-framer-motion',
   title = 'Refactor Framer Motion For Smaller Bundles',
   date = '2021-10-10',
   description = 'How to refactor a component from using framer-motion to pure css',
@@ -45,8 +45,6 @@ export default function BlogCard({
   const controls = useAnimation();
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
-
-  console.log(id);
 
   useEffect(() => {
     if (focused || hovered) {
@@ -83,7 +81,7 @@ export default function BlogCard({
 
   return (
     <LazyMotion features={domAnimation}>
-      <Link href={`/blog/${id}`} scroll={true} passHref>
+      <Link href={`/blog/${slug}`} scroll={true} passHref>
         <AnchorContainer
           initial="notActivated"
           animate={controls}
@@ -118,7 +116,6 @@ export default function BlogCard({
     </LazyMotion>
   );
 }
-
 
 
 // const Tab = styled.div`
