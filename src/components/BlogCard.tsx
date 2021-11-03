@@ -18,7 +18,7 @@ const Pill = styled.div<{
   } */
 
   display: flex;
-  background-color: rgb(var(--color-app-secondary));
+  background-color: rgba(var(--color-app-secondary), 0.5);
   gap: 0.1rem;
   align-items: center;
   justify-content: center;
