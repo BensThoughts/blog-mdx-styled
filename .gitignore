@@ -38,3 +38,5 @@ yarn-error.log*
 
 /large-assets
 /assets/large-assets
+
+/public/sitemap.xml
