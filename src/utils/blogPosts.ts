@@ -3,46 +3,65 @@ import path from 'path';
 import matter from 'gray-matter';
 import seoConfig from './seo.config';
 
-const postsDirectory = path.join(process.cwd(), 'src/posts-mdx');
-const excludedProdRoutes: string[] = ['drafts'];
+const postsDirectory = path.join(process.cwd(), 'src', 'posts-mdx', path.sep);
+const excludedProdDirs: string[] = ['drafts'];
 
-type RoutePath = string[]
+type SlugPath = string[];
 
-function getRoutePaths(
-    dir: string,
-    pathList: RoutePath[],
-    basePath: string,
-    extPath: string | undefined
-): RoutePath[] {
-  const dirents = fs.readdirSync(dir, {withFileTypes: true});
+function getSlugPaths({
+  cwd,
+  pathList,
+  basePath,
+}: {
+  cwd: string,
+  basePath: string,
+  pathList: SlugPath[],
+}): SlugPath[] {
+  const dirents = fs.readdirSync(cwd, {withFileTypes: true});
   pathList = pathList || [];
 
-  const excludedRoutes = process.env.NODE_ENV === 'production' ? excludedProdRoutes : [];
+  const excludedRoutes = process.env.NODE_ENV === 'production' ? excludedProdDirs : [];
 
   dirents.forEach((dirent) => {
     if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
-      pathList = getRoutePaths(basePath + '/' + dirent.name + '/', pathList, basePath, dirent.name);
+      pathList = getSlugPaths({
+        cwd: path.join(cwd, dirent.name),
+        pathList,
+        basePath,
+      });
     } else if (!dirent.isDirectory()) {
-      if (extPath) {
-        pathList.push([extPath, dirent.name]);
-      } else {
-        pathList.push([dirent.name]);
-      }
+      const extendedPath = path.join(
+          cwd.replace(basePath, ''),
+          dirent.name
+      );
+      const slugPath = getSlugPath(path.parse(extendedPath));
+      pathList.push(slugPath);
     };
   });
-
   return pathList;
 };
 
+function getSlugPath(absPath: path.ParsedPath) {
+  if (absPath.dir === '') {
+    return [absPath.name];
+  } else {
+    return [...absPath.dir.split(path.sep), absPath.name];
+  }
+}
+
 export function getSortedPostsData() {
-  const routePaths = getRoutePaths(postsDirectory, [], postsDirectory, undefined);
-  const allPostsData = routePaths.map((routePath) => {
-    const slug = routePath.join('/').replace(/\.mdx$/, '');
-    const fullPath = path.join(postsDirectory, ...routePath);
-
+  const slugPaths = getSlugPaths({
+    basePath: postsDirectory,
+    cwd: postsDirectory,
+    pathList: [],
+  });
+  const allPostsData = slugPaths.map((slugPath) => {
+    const fullPath = path.join(postsDirectory, ...slugPath) + '.mdx';
     const fileContents = fs.readFileSync(fullPath, 'utf8');
-
     const matterResult = matter(fileContents);
+
+    const parsedPath = path.parse(path.join(...slugPath));
+    const slug = path.join(parsedPath.dir, parsedPath.name);
 
     return {
       slug,
@@ -65,14 +84,16 @@ export function getSortedPostsData() {
 }
 
 export function getAllPostSlugs() {
-  const routePaths = getRoutePaths(postsDirectory, [], postsDirectory, undefined);
-
-  return routePaths.map((routePath) => {
-    const endOfRoute = routePath.length - 1;
-    routePath[endOfRoute] = routePath[endOfRoute].replace(/\.mdx$/, '');
+  const slugPaths = getSlugPaths({
+    basePath: postsDirectory,
+    cwd: postsDirectory,
+    pathList: [],
+  });
+  return slugPaths.map((slugPath) => {
+    const fullPath = path.parse(path.join(...slugPath));
     return {
       params: {
-        slug: routePath,
+        slug: getSlugPath(fullPath),
       },
     };
   });
@@ -82,8 +103,8 @@ function buildUrl(slug: string) {
   return `${seoConfig.openGraph.url}/blog/${slug}`;
 }
 
-export async function getPostData(routePath: string[]) {
-  const slug = routePath.join('/');
+export async function getPostData(slugPath: string[]) {
+  const slug = path.join(...slugPath);
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   const rawFileSource = fs.readFileSync(fullPath);
   const {content, data} = matter(rawFileSource);
