@@ -89,29 +89,28 @@ const TechnologiesTerminal = ({
 
   return (
     <div {...rest}>
-    <StatusBar file="index.ts" lineNum={numTechs} />
-    <Pre className="">
-      {technologies.map((tech, i) => (
-        <Line key={tech.name} className="hover:bg-primary">
-          <LineNo>
-            {i + 1}
-          </LineNo>
-          <LineContent className="w-full">
-            <a href={tech.href} className="flex w-full">
-              <Keyword>import</Keyword>
-              {/* <Plain> {tech.name} </Plain>
+      <StatusBar file="index.ts" lineNum={numTechs} />
+      <Pre className="">
+        {technologies.map((tech, i) => (
+          <Line key={tech.name} className="hover:bg-primary">
+            <LineNo>
+              {i + 1}
+            </LineNo>
+            <LineContent className="w-full">
+              <a href={tech.href} className="flex w-full">
+                <Keyword>import</Keyword>
+                {/* <Plain> {tech.name} </Plain>
               <Keyword>from</Keyword> */}
-              <String> &apos;{tech.name}&apos; </String>
-              <LogoContainer>{tech.icon}</LogoContainer>
-              <Punctuation>;</Punctuation>
-            </a>
-          </LineContent>
-        </Line>
-      ))}
-    </Pre>
-  </div>
+                <String> &apos;{tech.name}&apos; </String>
+                <LogoContainer>{tech.icon}</LogoContainer>
+                <Punctuation>;</Punctuation>
+              </a>
+            </LineContent>
+          </Line>
+        ))}
+      </Pre>
+    </div>
   );
-
 };
 
 export default TechnologiesTerminal;
