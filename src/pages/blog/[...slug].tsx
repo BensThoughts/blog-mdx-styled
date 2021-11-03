@@ -170,7 +170,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-  const {content, url, metaData} = await getPostData(params!.slug as string);
+  const {content, url, metaData} = await getPostData(params!.slug as string[]);
   const mdxSource = await serialize(content);
 
   return {

@@ -4,19 +4,36 @@ import matter from 'gray-matter';
 import seoConfig from './seo.config';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts-mdx');
+const excludedProdRoutes: string[] = ['drafts'];
 
-function getFileNames() {
-  if (process.env.NODE_ENV === 'production') {
-    return fs.readdirSync(postsDirectory).filter(((fileName) => !fileName.startsWith('_')));
-  }
-  return fs.readdirSync(postsDirectory);
-}
+type RoutePath = string[]
+
+const getRoutePaths = (dir: string, pathList: RoutePath[], basePath: string, extPath: string | undefined): RoutePath[] => {
+  const dirents = fs.readdirSync(dir, {withFileTypes: true});
+  pathList = pathList || [];
+
+  const excludedRoutes = process.env.NODE_ENV === 'production' ? excludedProdRoutes : [];
+
+  dirents.forEach((dirent) => {
+    if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
+      pathList = getRoutePaths(basePath + '/' + dirent.name + '/', pathList, basePath, dirent.name);
+    } else if (!dirent.isDirectory()) {
+      if (extPath) {
+        pathList.push([extPath, dirent.name]);
+      } else {
+        pathList.push([dirent.name]);
+      }
+    };
+  });
+
+  return pathList;
+};
 
 export function getSortedPostsData() {
-  const fileNames = getFileNames();
-  const allPostsData = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
+  const routePaths = getRoutePaths(postsDirectory, [], postsDirectory, undefined);
+  const allPostsData = routePaths.map((routePath) => {
+    const slug = routePath.join('/').replace(/\.mdx$/, '');
+    const fullPath = path.join(postsDirectory, ...routePath);
 
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -43,22 +60,25 @@ export function getSortedPostsData() {
 }
 
 export function getAllPostSlugs() {
-  const fileNames = getFileNames();
+  const routePaths = getRoutePaths(postsDirectory, [], postsDirectory, undefined);
 
-  return fileNames.map((fileName: string) => {
+  return routePaths.map((routePath) => {
+    const endOfRoute = routePath.length - 1;
+    routePath[endOfRoute] = routePath[endOfRoute].replace(/\.mdx$/, '');
     return {
       params: {
-        slug: fileName.replace(/\.mdx$/, ''),
+        slug: routePath,
       },
     };
   });
 };
 
-function buildUrl(id: string) {
-  return `${seoConfig.openGraph.url}/blog/${id}`;
+function buildUrl(slug: string) {
+  return `${seoConfig.openGraph.url}/blog/${slug}`;
 }
 
-export async function getPostData(slug: string) {
+export async function getPostData(routePath: string[]) {
+  const slug = routePath.join('/');
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   const rawFileSource = fs.readFileSync(fullPath);
   const {content, data} = matter(rawFileSource);
