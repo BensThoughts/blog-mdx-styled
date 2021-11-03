@@ -9,6 +9,7 @@ import {
   GoogleCloud,
   Kubernetes,
   MongoDB,
+  Netlify,
   Node,
   NPM,
   Prettier,
@@ -20,7 +21,6 @@ import {
   TailwindCSS,
   Typescript,
 } from '@app/components/Icons/Brands';
-import Netlify from '@app/components/Icons/Brands/Netlify';
 
 export const Spacetagram = {
   title: 'Spacetagram',

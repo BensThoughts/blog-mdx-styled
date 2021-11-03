@@ -8,7 +8,12 @@ const excludedProdRoutes: string[] = ['drafts'];
 
 type RoutePath = string[]
 
-const getRoutePaths = (dir: string, pathList: RoutePath[], basePath: string, extPath: string | undefined): RoutePath[] => {
+function getRoutePaths(
+    dir: string,
+    pathList: RoutePath[],
+    basePath: string,
+    extPath: string | undefined
+): RoutePath[] {
   const dirents = fs.readdirSync(dir, {withFileTypes: true});
   pathList = pathList || [];
 
