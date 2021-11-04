@@ -6,22 +6,42 @@ import seoConfig from './seo.config';
 const postsDirectory = path.join(process.cwd(), 'src', 'posts-mdx', path.sep);
 const excludedProdDirs: string[] = ['drafts'];
 
+export type BlogArticleMetaData = {
+  title: string,
+  shortDescription: string,
+  longDescription: string,
+  date: string,
+  readTime: number,
+  tags: string[],
+  cloudinaryImgPath: string,
+  imgWidth: number,
+  imgHeight: number,
+  imgAlt: string,
+}
+
+export type PageData = {
+  directory: boolean,
+  url: string,
+  content?: string,
+  metaData?: BlogArticleMetaData
+}
+
 type SlugPath = string[];
 
-type BlogPage = {
+type BlogPath = {
   slugPath: SlugPath,
   directory: boolean,
 }
 
-function getBlogPages({
+function getBlogPaths({
   cwd,
   blogPages,
   basePath,
 }: {
   cwd: string,
   basePath: string,
-  blogPages: BlogPage[],
-}): BlogPage[] {
+  blogPages: BlogPath[],
+}): BlogPath[] {
   const dirents = fs.readdirSync(cwd, {withFileTypes: true});
   blogPages = blogPages || [];
 
@@ -39,7 +59,7 @@ function getBlogPages({
         slugPath: slugPath,
         directory: true,
       });
-      blogPages = getBlogPages({
+      blogPages = getBlogPaths({
         cwd: path.join(cwd, dirent.name),
         blogPages,
         basePath,
@@ -51,6 +71,7 @@ function getBlogPages({
       });
     };
   });
+
   return blogPages;
 };
 
@@ -65,15 +86,13 @@ function getSlugPath(absPath: path.ParsedPath) {
 export type SortedPostData = {
   slug: string,
   directory: boolean,
-  date?: string,
-  title?: string,
-  longDescription?: string,
-  tags?: string[]
+  blogArticleMetaData: BlogArticleMetaData
 }
+
 
 export function getSortedPostsData(searchSlug?: string[]): SortedPostData[] {
   const searchDir = searchSlug ? path.join(postsDirectory, ...searchSlug) : postsDirectory;
-  const blogPages = getBlogPages({
+  const blogPages = getBlogPaths({
     basePath: searchDir,
     cwd: searchDir,
     blogPages: [],
@@ -93,18 +112,15 @@ export function getSortedPostsData(searchSlug?: string[]): SortedPostData[] {
         return {
           slug,
           directory: directory,
-          ...(matterResult.data as {
-          date: string,
-          title: string,
-          longDescription: string,
-          tags: string[],
-        }),
+          blogArticleMetaData: {
+            ...(matterResult.data as BlogArticleMetaData),
+          },
         };
       });
 
   if (allPostsData) {
     return allPostsData.sort((a, b) => {
-      if (a.date < b.date) {
+      if (a.blogArticleMetaData.date < b.blogArticleMetaData.date) {
         return 1;
       } else {
         return -1;
@@ -115,8 +131,8 @@ export function getSortedPostsData(searchSlug?: string[]): SortedPostData[] {
   }
 }
 
-export function getAllPostSlugs() {
-  const blogPages = getBlogPages({
+export function getAllSlugs() {
+  const blogPages = getBlogPaths({
     basePath: postsDirectory,
     cwd: postsDirectory,
     blogPages: [],
@@ -135,17 +151,14 @@ function buildUrl(slug: string) {
   return `${seoConfig.openGraph.url}/blog/${slug}`;
 }
 
-export async function getPostData(slugPath: string[]) {
+
+export async function getPageData(slugPath: string[]): Promise<PageData> {
   const pathWithoutExtension = path.join(postsDirectory, ...slugPath);
   const pathExists = fs.existsSync(pathWithoutExtension);
   if (pathExists && fs.statSync(pathWithoutExtension).isDirectory()) {
     return {
       directory: true,
       url: buildUrl(pathWithoutExtension),
-      content: '',
-      metaData: {
-        dir: '',
-      },
     };
   } else {
     const fullPath = `${pathWithoutExtension}.mdx`;
@@ -154,7 +167,7 @@ export async function getPostData(slugPath: string[]) {
     return {
       directory: false,
       content: content,
-      metaData: data,
+      metaData: data as BlogArticleMetaData,
       url: buildUrl(pathWithoutExtension),
     };
   }

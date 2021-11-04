@@ -5,19 +5,14 @@ import {MDXRemoteSerializeResult} from 'next-mdx-remote';
 // import {buildImageUrl} from 'cloudinary-build-url';
 import BlogLayout from '@app/components/mdx/BlogLayout';
 import BlogListLayout from '@app/components/mdx/BlogListLayout';
-import {getAllPostSlugs, getPostData, getSortedPostsData} from '@app/utils/blogPosts';
+import {getAllSlugs, getPageData, getSortedPostsData, SortedPostData} from '@app/utils/blogPosts';
 
 type PostProps = {
   directory: boolean;
   directoryData: {
-    allPostsData: {
-      slug: string,
-      title: string,
-      longDescription: string,
-      date: string,
-      tags: string[]
-    }[]
-  };
+    sortedPostsData: SortedPostData[]
+    directorySlug: string[],
+  }
   url: string;
   content?: MDXRemoteSerializeResult;
   metaData?: {
@@ -43,31 +38,10 @@ export default function PostsPage({
 }: PostProps) {
   if (directory) {
     return <BlogListLayout
-      allPostsData={directoryData.allPostsData}
+      sortedPostsData={directoryData.sortedPostsData}
+      directorySlug={directoryData.directorySlug}
     />;
   } else if (content && url && metaData) {
-    // const {
-    //   title,
-    //   shortDescription,
-    //   longDescription,
-    //   date,
-    //   readTime,
-    //   tags,
-    //   cloudinaryImgPath,
-    //   imgWidth,
-    //   imgHeight,
-    //   imgAlt,
-    // } = metaData;
-
-    // let ogImageUrl;
-    // if (cloudinaryImgPath) {
-    //   ogImageUrl = buildImageUrl(cloudinaryImgPath, {
-    //     cloud: {
-    //       cloudName: 'bensthoughts',
-    //     },
-    //   });
-    // }
-
     return (
       <BlogLayout
         content={content}
@@ -79,7 +53,7 @@ export default function PostsPage({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = getAllPostSlugs();
+  const pages = getAllSlugs();
   // const paths = pages.map((page) => page.params.slug);
   return {
     paths: pages,
@@ -88,21 +62,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-  const {directory, content, url, metaData} = await getPostData(params?.slug as string[]);
+  const slug = params?.slug;
+  const {directory, content, url, metaData} = await getPageData(slug as string[]);
 
   if (directory) {
-    const allPostsData = getSortedPostsData(params?.slug as string[]);
+    const allPostsData = getSortedPostsData(slug as string[]);
 
     return {
       props: {
         directory,
         directoryData: {
-          allPostsData,
+          directorySlug: slug,
+          sortedPostsData: allPostsData,
         },
       },
     };
   } else {
-    const mdxSource = await serialize(content);
+    const mdxSource = await serialize(content ? content : '');
 
     return {
       props: {
