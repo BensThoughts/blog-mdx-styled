@@ -14,13 +14,18 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 interface BlogArticleListProps {
-  sortedPostsData: BlogArticleMetaData[]
+  sortedPostsData: {
+    isDirectory: boolean,
+    date: string,
+    slug: string,
+    metadata: BlogArticleMetaData
+  }[]
 }
 
 export default function BlogArticleListPage({sortedPostsData}: BlogArticleListProps) {
   return (
     <BlogListLayout
-      metadata={sortedPostsData}
+      data={sortedPostsData}
     />
   );
 };

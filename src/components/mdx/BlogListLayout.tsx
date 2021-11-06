@@ -26,11 +26,16 @@ const GridContainer = styled.div`
 
 type BlogArticleListProps = {
   directorySlug?: string[],
-  metadata: BlogArticleMetaData[]
+  data: {
+    isDirectory: boolean,
+    date: string,
+    slug: string,
+    metadata?: BlogArticleMetaData
+  }[]
 }
 
 
-export default function BlogListLayout({metadata, directorySlug}: BlogArticleListProps) {
+export default function BlogListLayout({data, directorySlug}: BlogArticleListProps) {
   let slug = '';
   if (directorySlug && directorySlug?.length > 0) {
     slug = directorySlug[directorySlug.length - 1].split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
@@ -43,17 +48,30 @@ export default function BlogListLayout({metadata, directorySlug}: BlogArticleLis
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
       <GridContainer>
-        {metadata.map((postData) => {
-          return (
-            postData.slug && <BlogCard
-              key={postData.slug}
-              slug={postData.slug}
-              title={postData.title}
-              date={postData.date}
-              tags={postData.tags}
-              description={postData.longDescription}
-            />
-          );
+        {data.map(({isDirectory, date, slug, metadata}) => {
+          if (isDirectory) {
+            return (
+              <BlogCard
+                key={date}
+                slug={slug}
+                title={slug}
+                date={date}
+                tags={[]}
+                description="A Directory"
+              />
+            );
+          } else if (metadata) {
+            return (
+              <BlogCard
+                key={slug}
+                slug={slug}
+                title={metadata.title}
+                date={metadata.date}
+                tags={metadata.tags}
+                description={metadata.longDescription}
+              />
+            );
+          }
         })}
       </GridContainer>
     </MaxWidthWrapper>

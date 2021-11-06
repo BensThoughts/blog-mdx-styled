@@ -28,37 +28,42 @@ export type BlogArticleMetaData = {
 }
 
 type PostProps = {
-  directory: boolean;
-  content?: MDXRemoteSerializeResult,
-  metadata?: BlogArticleMetaData[],
+  isDirectory: boolean;
+  directory?: {
+    data: {
+      isDirectory: boolean,
+      slug: string,
+      date: string,
+      metadata: BlogArticleMetaData
+    }[]
+  }
+  article?: {
+    content: MDXRemoteSerializeResult,
+    metadata: BlogArticleMetaData,
+  }
+
 }
 
 export default function PostsPage({
+  isDirectory,
   directory,
-  content,
-  metadata,
+  article,
 }: PostProps) {
   const router = useRouter();
   const currentRoute = router.asPath;
 
-  if (!metadata) {
-    return null;
-  }
-
-  if (directory) {
+  if (isDirectory && directory) {
     return <BlogListLayout
-      metadata={metadata}
+      data={directory.data}
       directorySlug={currentRoute.split('/')}
     />;
-  } else {
+  } else if (article) {
     return (
-      <>
-        {content && <BlogLayout
-          content={content}
-          url={`${seoConfig.openGraph.url}${currentRoute}`}
-          metadata={metadata[0]}
-        />}
-      </>
+      <BlogLayout
+        content={article.content}
+        url={`${seoConfig.openGraph.url}${currentRoute}`}
+        metadata={article.metadata as BlogArticleMetaData}
+      />
     );
   }
 };
@@ -81,24 +86,27 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   }
 
   const slug = params.slug as string[];
-  const {directory, content, metadata} = await getPageData(slug);
+  const {isDirectory, directory, article} = await getPageData<BlogArticleMetaData>(slug);
 
-  if (directory) {
+  if (isDirectory) {
     return {
       props: {
-        directory,
-        metadata,
+        isDirectory,
+        directory: {
+          data: directory?.data,
+        },
       },
     };
   } else {
-    const mdxSource = await serialize(content ? content : '');
+    const mdxSource = await serialize(article?.content ? article.content : '');
     return {
       props: {
-        directory,
-        content: mdxSource,
-        metadata,
+        isDirectory,
+        article: {
+          content: mdxSource,
+          metadata: article?.metadata,
+        },
       },
     };
   }
-}
-;
+};

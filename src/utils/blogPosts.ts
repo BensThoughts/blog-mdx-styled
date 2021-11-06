@@ -1,17 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-// import seoConfig from './seo.config';
 import config from '../../next-filesystem-reader';
-import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 const POSTS_DIR = config.postsDirectory as string;
 const EXCLUDED_DIRS = config.excludedProdDirs as string[];
 
-export type PageData = {
-  directory: boolean,
-  content?: string,
-  metadata?: BlogArticleMetaData[],
-  slug?: string,
+export type PageData<T> = {
+  isDirectory: boolean,
+  // slug?: string,
+  directory?: {
+    data: {
+      isDirectory: boolean,
+      date: string,
+      slug: string,
+      metadata?: T
+    }[]
+  },
+  article?: {
+    content: string,
+    metadata: T
+  }
 }
 
 type SlugData = {
@@ -19,14 +27,8 @@ type SlugData = {
   slug: string,
 }
 
-function getAllSlugs({
-  cwd,
-  slugData,
-}: {
-  cwd: string;
-  slugData: SlugData[];
-}): SlugData[] {
-  slugData = slugData ? slugData : [];
+function getDirectoryListing(cwd: string): SlugData[] {
+  const slugData: SlugData[] = [];
   const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
   try {
     const dirents = fs.readdirSync(cwd, {withFileTypes: true});
@@ -40,11 +42,7 @@ function getAllSlugs({
           isDirectory: true,
           slug,
         });
-        slugData = getAllSlugs({
-          cwd: path.join(cwd, dirent.name),
-          slugData,
-        });
-      } else if (!dirent.isDirectory()) {
+      } else {
         slugData.push({
           isDirectory: false,
           slug: slug.replace('.mdx', ''),
@@ -56,25 +54,58 @@ function getAllSlugs({
   }
 
   return slugData;
+}
+
+function getAllSlugs({
+  cwd,
+  slugData,
+}: {
+  cwd: string;
+  slugData: SlugData[];
+}): SlugData[] {
+  const newSlugData = getDirectoryListing(cwd);
+  slugData.push(...newSlugData);
+  newSlugData.forEach(({isDirectory, slug}) => {
+    if (isDirectory) {
+      const nextDir = path.parse(slug);
+      const nextCwd = path.join(cwd, nextDir.name);
+      slugData = getAllSlugs({
+        cwd: nextCwd,
+        slugData,
+      });
+    }
+  });
+
+  return slugData;
 };
 
 
-export function getSortedPageData(currentSlugPath?: string): BlogArticleMetaData[] {
+export function getSortedPageData<T>(currentSlugPath?: string): {isDirectory: boolean, date: string, slug: string, metadata?: T}[] {
   const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
-  const allSlugs = getAllSlugs({
-    cwd: searchDir,
-    slugData: [],
-  });
+  const allSlugs = getDirectoryListing(searchDir);
   const allPostsData = allSlugs
-      .filter(({isDirectory}) => !isDirectory)
-      .map(({slug}) => {
-        const fullPath = path.join(POSTS_DIR, slug) + '.mdx';
-        const metadata = getBlogPostMetadata(fullPath);
+      // .filter(({isDirectory}) => !isDirectory)
+      .map(({slug, isDirectory}) => {
+        if (isDirectory) {
+          const fullDirPath = path.join(POSTS_DIR, slug);
+          const date = fs.statSync(fullDirPath).mtime.toISOString();
+          return {
+            isDirectory,
+            slug,
+            date,
+          };
+        } else {
+          const fullFilePath = path.join(POSTS_DIR, slug) + '.mdx';
+          const metadata = getBlogPostMetadata<T>(fullFilePath);
+          const date = fs.statSync(fullFilePath).mtime.toISOString();
 
-        return {
-          ...metadata,
-          slug: slug,
-        };
+          return {
+            isDirectory,
+            slug,
+            date,
+            metadata: {...metadata},
+          };
+        }
       });
 
   return allPostsData.sort((a, b) => {
@@ -102,25 +133,29 @@ export function getAllPages() {
 };
 
 
-export async function getPageData(slugArray: string[]): Promise<PageData> {
+export async function getPageData<T>(slugArray: string[]): Promise<PageData<T>> {
   const slug = slugArrayToString(slugArray);
   const pathWithoutExtension = path.join(POSTS_DIR, slug);
   const pathExists = fs.existsSync(pathWithoutExtension);
   if (pathExists && fs.statSync(pathWithoutExtension).isDirectory()) {
-    const metadata = getSortedPageData(slug);
+    const data = getSortedPageData<T>(slug);
     return {
-      directory: true,
-      metadata,
+      isDirectory: true,
+      directory: {
+        data: data,
+      },
     };
   } else {
     const pathWithExtension = `${pathWithoutExtension}.mdx`;
     const mdxPathExists = fs.existsSync(pathWithExtension);
     if (mdxPathExists && fs.statSync(pathWithExtension).isFile()) {
-      const {content, data} = getBlogPost(pathWithExtension);
+      const {content, data} = getBlogPost<T>(pathWithExtension);
       return {
-        directory: false,
-        content: content,
-        metadata: [data as BlogArticleMetaData],
+        isDirectory: false,
+        article: {
+          content: content,
+          metadata: data,
+        },
       };
     } else {
       throw new Error(`Error in getPageData, slugPath gave neither a valid directory or a valid *.mdx file: ${slug}`);
@@ -129,24 +164,24 @@ export async function getPageData(slugArray: string[]): Promise<PageData> {
 }
 
 
-function getBlogPost(path: fs.PathLike): {content: string, data: BlogArticleMetaData} {
+function getBlogPost<T>(path: fs.PathLike): {content: string, data: T} {
   const rawFileSource = fs.readFileSync(path);
   const {content, data} = matter(rawFileSource);
   return {
     content,
     data: {
-      ...data as BlogArticleMetaData,
+      ...data as T,
       slug: path.toLocaleString().replace(POSTS_DIR, ''),
     },
   };
 }
 
-function getBlogPostMetadata(path: fs.PathLike): BlogArticleMetaData {
+
+function getBlogPostMetadata<T>(path: fs.PathLike): T {
   const rawFileSource = fs.readFileSync(path);
   const {data} = matter(rawFileSource);
   return {
-    ...data as BlogArticleMetaData,
-    slug: path.toLocaleString().replace(POSTS_DIR, ''),
+    ...data as T,
   };
 }
 
