@@ -49,7 +49,7 @@ const components = {
 type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
-  metaData: {
+  metadata: {
     title: string,
     shortDescription: string,
     longDescription: string,
@@ -66,7 +66,7 @@ type PostProps = {
 export default function BlogLayout({
   content,
   url,
-  metaData,
+  metadata,
 }: PostProps) {
   const {
     title,
@@ -79,7 +79,7 @@ export default function BlogLayout({
     imgWidth,
     imgHeight,
     imgAlt,
-  } = metaData;
+  } = metadata;
 
   let ogImageUrl;
   if (cloudinaryImgPath) {

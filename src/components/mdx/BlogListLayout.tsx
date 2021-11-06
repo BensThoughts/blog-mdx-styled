@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
-import {SortedPostData} from '@app/utils/blogPosts';
+import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 
 const GridContainer = styled.div`
   display: grid;
@@ -26,11 +26,11 @@ const GridContainer = styled.div`
 
 type BlogArticleListProps = {
   directorySlug?: string[],
-  sortedPostsData: SortedPostData[]
+  metadata: BlogArticleMetaData[]
 }
 
 
-export default function BlogListLayout({sortedPostsData, directorySlug}: BlogArticleListProps) {
+export default function BlogListLayout({metadata, directorySlug}: BlogArticleListProps) {
   let slug = '';
   if (directorySlug && directorySlug?.length > 0) {
     slug = directorySlug[directorySlug.length - 1].split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
@@ -43,15 +43,15 @@ export default function BlogListLayout({sortedPostsData, directorySlug}: BlogArt
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
       <GridContainer>
-        {sortedPostsData.map((postData) => {
+        {metadata.map((postData) => {
           return (
-            <BlogCard
+            postData.slug && <BlogCard
               key={postData.slug}
               slug={postData.slug}
-              title={postData.blogArticleMetaData.title}
-              date={postData.blogArticleMetaData.date}
-              tags={postData.blogArticleMetaData.tags}
-              description={postData.blogArticleMetaData.longDescription}
+              title={postData.title}
+              date={postData.date}
+              tags={postData.tags}
+              description={postData.longDescription}
             />
           );
         })}

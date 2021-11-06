@@ -1,177 +1,227 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import seoConfig from './seo.config';
-
-const postsDirectory = path.join(process.cwd(), 'src', 'posts-mdx', path.sep);
-const excludedProdDirs: string[] = ['drafts'];
-
-export type BlogArticleMetaData = {
-  title: string,
-  shortDescription: string,
-  longDescription: string,
-  date: string,
-  readTime: number,
-  tags: string[],
-  cloudinaryImgPath: string,
-  imgWidth: number,
-  imgHeight: number,
-  imgAlt: string,
-}
+// import seoConfig from './seo.config';
+import config from '../../next-filesystem-reader';
+import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
+const POSTS_DIR = config.postsDirectory as string;
+const EXCLUDED_DIRS = config.excludedProdDirs as string[];
 
 export type PageData = {
   directory: boolean,
-  url: string,
   content?: string,
-  metaData?: BlogArticleMetaData
+  metadata?: BlogArticleMetaData[],
+  slug?: string,
 }
 
-type SlugPath = string[];
-
-type BlogPath = {
-  slugPath: SlugPath,
-  directory: boolean,
+type SlugData = {
+  isDirectory: boolean,
+  slug: string,
 }
 
-function getBlogPaths({
+function getAllSlugs({
   cwd,
-  blogPages,
-  basePath,
+  slugData,
 }: {
-  cwd: string,
-  basePath: string,
-  blogPages: BlogPath[],
-}): BlogPath[] {
-  const dirents = fs.readdirSync(cwd, {withFileTypes: true});
-  blogPages = blogPages || [];
+  cwd: string;
+  slugData: SlugData[];
+}): SlugData[] {
+  slugData = slugData ? slugData : [];
+  const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
+  try {
+    const dirents = fs.readdirSync(cwd, {withFileTypes: true});
+    dirents.forEach((dirent) => {
+      const slug = path.join(
+          cwd.replace(POSTS_DIR, ''),
+          dirent.name,
+      );
+      if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
+        slugData.push({
+          isDirectory: true,
+          slug,
+        });
+        slugData = getAllSlugs({
+          cwd: path.join(cwd, dirent.name),
+          slugData,
+        });
+      } else if (!dirent.isDirectory()) {
+        slugData.push({
+          isDirectory: false,
+          slug: slug.replace('.mdx', ''),
+        });
+      };
+    });
+  } catch (e) {
+    console.error(`There was an error reading from ${cwd}: ${e}`);
+  }
 
-  const excludedRoutes = process.env.NODE_ENV === 'production' ? excludedProdDirs : [];
-
-  dirents.forEach((dirent) => {
-    // const extendedPath = extendedPath2 ? path.join(cwd.replace(basePath, ''), extendedPath2, dirent.name) : path.join(cwd.replace(basePath, ''), dirent.name);
-    const extendedPath = path.join(
-        cwd.replace(basePath, ''),
-        dirent.name
-    );
-    const slugPath = getSlugPath(path.parse(extendedPath));
-    if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
-      blogPages.push({
-        slugPath: slugPath,
-        directory: true,
-      });
-      blogPages = getBlogPaths({
-        cwd: path.join(cwd, dirent.name),
-        blogPages,
-        basePath,
-      });
-    } else if (!dirent.isDirectory()) {
-      blogPages.push({
-        slugPath: slugPath,
-        directory: false,
-      });
-    };
-  });
-
-  return blogPages;
+  return slugData;
 };
 
-function getSlugPath(absPath: path.ParsedPath) {
-  if (absPath.dir === '') {
-    return [absPath.name];
-  } else {
-    return [...absPath.dir.split(path.sep), absPath.name];
-  }
-}
 
-export type SortedPostData = {
-  slug: string,
-  directory: boolean,
-  blogArticleMetaData: BlogArticleMetaData
-}
-
-
-export function getSortedPostsData(searchSlug?: string[]): SortedPostData[] {
-  const searchDir = searchSlug ? path.join(postsDirectory, ...searchSlug) : postsDirectory;
-  const blogPages = getBlogPaths({
-    basePath: searchDir,
+export function getSortedPageData(currentSlugPath?: string): BlogArticleMetaData[] {
+  const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
+  const allSlugs = getAllSlugs({
     cwd: searchDir,
-    blogPages: [],
+    slugData: [],
   });
-  const allPostsData = blogPages
-      .filter(({directory}) => !directory)
-      .map(({slugPath, directory}) => {
-        const parsedPath = path.parse(path.join(...slugPath));
-        const slug = searchSlug ? path.join(...searchSlug, parsedPath.dir, parsedPath.name) : path.join(parsedPath.dir, parsedPath.name);
-        // const slug = path.join(parsedPath.dir, parsedPath.name);
-
-        // TODO: use of !
-        const fullPath = path.join(searchDir!, ...slugPath) + '.mdx';
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
-        const matterResult = matter(fileContents);
+  const allPostsData = allSlugs
+      .filter(({isDirectory}) => !isDirectory)
+      .map(({slug}) => {
+        const fullPath = path.join(POSTS_DIR, slug) + '.mdx';
+        const metadata = getBlogPostMetadata(fullPath);
 
         return {
-          slug,
-          directory: directory,
-          blogArticleMetaData: {
-            ...(matterResult.data as BlogArticleMetaData),
-          },
+          ...metadata,
+          slug: slug,
         };
       });
 
-  if (allPostsData) {
-    return allPostsData.sort((a, b) => {
-      if (a.blogArticleMetaData.date < b.blogArticleMetaData.date) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-  } else {
-    return [];
-  }
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }
 
-export function getAllSlugs() {
-  const blogPages = getBlogPaths({
-    basePath: postsDirectory,
-    cwd: postsDirectory,
-    blogPages: [],
+export function getAllPages() {
+  const slugData = getAllSlugs({
+    cwd: POSTS_DIR,
+    slugData: [],
   });
-  return blogPages.map(({slugPath, directory}) => {
-    const fullPath = path.parse(path.join(...slugPath));
+
+  return slugData.map(({slug}) => {
     return {
       params: {
-        slug: getSlugPath(fullPath),
+        slug: slugStringToArray(path.parse(slug)),
       },
     };
   });
 };
 
-function buildUrl(slug: string) {
-  return `${seoConfig.openGraph.url}/blog/${slug}`;
-}
 
-
-export async function getPageData(slugPath: string[]): Promise<PageData> {
-  const pathWithoutExtension = path.join(postsDirectory, ...slugPath);
+export async function getPageData(slugArray: string[]): Promise<PageData> {
+  const slug = slugArrayToString(slugArray);
+  const pathWithoutExtension = path.join(POSTS_DIR, slug);
   const pathExists = fs.existsSync(pathWithoutExtension);
   if (pathExists && fs.statSync(pathWithoutExtension).isDirectory()) {
+    const metadata = getSortedPageData(slug);
     return {
       directory: true,
-      url: buildUrl(pathWithoutExtension),
+      metadata,
     };
   } else {
-    const fullPath = `${pathWithoutExtension}.mdx`;
-    const rawFileSource = fs.readFileSync(fullPath, {});
-    const {content, data} = matter(rawFileSource);
-    return {
-      directory: false,
-      content: content,
-      metaData: data as BlogArticleMetaData,
-      url: buildUrl(pathWithoutExtension),
-    };
+    const pathWithExtension = `${pathWithoutExtension}.mdx`;
+    const mdxPathExists = fs.existsSync(pathWithExtension);
+    if (mdxPathExists && fs.statSync(pathWithExtension).isFile()) {
+      const {content, data} = getBlogPost(pathWithExtension);
+      return {
+        directory: false,
+        content: content,
+        metadata: [data as BlogArticleMetaData],
+      };
+    } else {
+      throw new Error(`Error in getPageData, slugPath gave neither a valid directory or a valid *.mdx file: ${slug}`);
+    }
   }
 }
+
+
+function getBlogPost(path: fs.PathLike): {content: string, data: BlogArticleMetaData} {
+  const rawFileSource = fs.readFileSync(path);
+  const {content, data} = matter(rawFileSource);
+  return {
+    content,
+    data: {
+      ...data as BlogArticleMetaData,
+      slug: path.toLocaleString().replace(POSTS_DIR, ''),
+    },
+  };
+}
+
+function getBlogPostMetadata(path: fs.PathLike): BlogArticleMetaData {
+  const rawFileSource = fs.readFileSync(path);
+  const {data} = matter(rawFileSource);
+  return {
+    ...data as BlogArticleMetaData,
+    slug: path.toLocaleString().replace(POSTS_DIR, ''),
+  };
+}
+
+
+function slugStringToArray(slugPath: path.ParsedPath) {
+  if (slugPath.dir === '') {
+    return [slugPath.name];
+  } else {
+    return [...slugPath.dir.split(path.sep), slugPath.name];
+  }
+}
+
+function slugArrayToString(slugPath: string[]) {
+  return path.join(...slugPath);
+}
+
+
+// function checkIfPathExists(path: fs.PathLike): {pathExists: boolean, error?: string} {
+//   try {
+//     const pathExists = fs.existsSync(path);
+//     return {pathExists};
+//   } catch (e) {
+//     return {
+//       pathExists: false,
+//       error: `Error in checkIfPathExists, at ${path}: ${e}`
+//     };
+//   }
+// }
+
+// /* Helper Functions */
+// function isDirectory(path: fs.PathLike): {isDirectory: boolean, error?: string} {
+//   try {
+//     const pathStats = fs.statSync(path);
+//     return {
+//       isDirectory: pathStats.isDirectory()
+//     };
+//   } catch (e) {
+//     return {
+//       isDirectory: false,
+//       error: `Error in isDirectory, trying to access ${path}: ${e}`
+//     };
+//   }
+// }
+
+// function isFile(path: fs.PathLike): boolean | Error {
+//   try {
+//     const pathStats = fs.statSync(path);
+//     return pathStats.isFile();
+//   } catch (e) {
+//     return new Error(`Error in isFile, trying to access ${path}: ${e}`);
+//   }
+// }
+
+// function readFile(path: fs.PathLike): {content: string, error?: string} {
+//   try {
+//     const buffer = fs.readFileSync(path, 'utf8');
+//     return {
+//       content: buffer
+//     };
+//   } catch (e) {
+//     return {
+//       content: '',
+//       error: `Error in readFile, trying to access ${path}: ${e}`
+//     };
+//   }
+// }
+
+// function readDirectory(path: fs.PathLike): fs.Dirent[] | Error {
+//   try {
+//     const dirents = fs.readdirSync(path, {withFileTypes: true});
+//     return dirents;
+//   } catch (e) {
+//     return new Error(`Error in readDirectory, trying to access ${path}: ${e}`);
+//   }
+// }
 
 
 // function getSlugPaths({
