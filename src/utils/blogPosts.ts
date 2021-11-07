@@ -44,24 +44,29 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
     directories: [],
     mdxArticles: [],
   };
-  const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
   try {
     const dirents = fs.readdirSync(cwd, {withFileTypes: true});
     dirents.forEach((dirent) => {
-      const fullPath = path.join(cwd, dirent.name);
-      const slug = fullPath.replace(POSTS_DIR, '').split(path.sep).join('/').replace('.mdx', '');
-      if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
+      const {
+        isMdx,
+        isDirectory,
+        isExcludedPath,
+        fullPath,
+        slugPath,
+      } = getPathData(cwd, dirent);
+
+      if (isDirectory && !isExcludedPath) {
         const mtimeDate = getFileModifiedDate(fullPath);
         slugData.directories.push({
           mtimeDate,
-          slug,
+          slug: slugPath,
         });
-      } else {
+      } else if (!isDirectory && isMdx) {
         // const fullFilePath = path.join(POSTS_DIR, slug) + '.mdx';
         const metadata = getBlogPostMetadata<T>(fullPath);
 
         slugData.mdxArticles.push({
-          slug: slug,
+          slug: slugPath,
           metadata,
         });
       };
@@ -174,23 +179,27 @@ type SlugData = {
   }[],
 }
 
-function getDirectorySlugs(cwd: string): SlugData {
+function getSlugs(cwd: string): SlugData {
   const slugData: SlugData = {
     directories: [],
     mdxArticles: [],
   };
-  const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
   const dirents = fs.readdirSync(cwd, {withFileTypes: true});
   dirents.forEach((dirent) => {
-    const fullPath = path.join(cwd, dirent.name);
-    const slugPath = fullPath.replace(POSTS_DIR, '').split(path.sep).join('/').replace('.mdx', '');
-    if (!dirent.isDirectory()) {
+    const {
+      isDirectory,
+      isMdx,
+      isExcludedPath,
+      slugPath,
+    } = getPathData(cwd, dirent);
+
+    if (!isDirectory && isMdx) {
       slugData.mdxArticles.push({
         params: {
           slug: slugStringToArray(slugPath),
         },
       });
-    } else if (!excludedRoutes.includes(dirent.name)) {
+    } else if (isDirectory && !isExcludedPath) {
       slugData.directories.push({
         params: {
           slug: slugStringToArray(slugPath),
@@ -209,7 +218,7 @@ function getAllSlugs({
   cwd: string;
   slugData: SlugData;
 }): SlugData {
-  const {directories, mdxArticles} = getDirectorySlugs(cwd);
+  const {directories, mdxArticles} = getSlugs(cwd);
   slugData.directories.push(...directories);
   slugData.mdxArticles.push(...mdxArticles);
   directories.forEach(({params: {slug}}) => {
@@ -253,4 +262,20 @@ function slugStringToArray(slugString: string) {
 
 function slugArrayToString(slugPath: string[]) {
   return path.join(...slugPath);
+}
+
+function getPathData(cwd: string, dirent: fs.Dirent) {
+  const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
+  const fullPath = path.join(cwd, dirent.name);
+  const isMdx = path.extname(fullPath) === '.mdx';
+  const isDirectory = dirent.isDirectory();
+  const isExcludedPath = excludedRoutes.includes(dirent.name);
+  const slugPath = fullPath.replace(POSTS_DIR, '').split(path.sep).join('/').replace('.mdx', '');
+  return {
+    isMdx,
+    isDirectory,
+    isExcludedPath,
+    fullPath,
+    slugPath,
+  };
 }
