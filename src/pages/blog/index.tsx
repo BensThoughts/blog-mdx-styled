@@ -1,31 +1,37 @@
 import type {GetStaticProps} from 'next';
 
-import {getSortedPageData} from '@app/utils/blogPosts';
+import {getSortedDirectoryData} from '@app/utils/blogPosts';
 import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import {BlogArticleMetaData} from './[...slug]';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const sortedPostsData = getSortedPageData();
+  const {directories, mdxArticles} = getSortedDirectoryData<BlogArticleMetaData>();
   return {
     props: {
-      sortedPostsData,
+      directories,
+      mdxArticles,
     },
   };
 };
 
 interface BlogArticleListProps {
-  sortedPostsData: {
-    isDirectory: boolean,
-    date: string,
+  directories: {
     slug: string,
-    metadata: BlogArticleMetaData
+    mtimeDate: string,
+  }[],
+  mdxArticles: {
+    slug: string,
+    metadata: {
+      date: string;
+    } & BlogArticleMetaData
   }[]
 }
 
-export default function BlogArticleListPage({sortedPostsData}: BlogArticleListProps) {
+export default function BlogArticleListPage({directories, mdxArticles}: BlogArticleListProps) {
   return (
     <BlogListLayout
-      data={sortedPostsData}
+      directories={directories}
+      mdxArticles={mdxArticles}
     />
   );
 };

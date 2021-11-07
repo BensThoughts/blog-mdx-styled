@@ -15,10 +15,13 @@ import seoConfig from '@app/utils/seo.config';
 
 export type BlogArticleMetaData = {
   slug: string,
+  date: string,
+
+  // slug: string,
   title: string,
   shortDescription: string,
   longDescription: string,
-  date: string,
+  // date: string,
   readTime: number,
   tags: string[],
   cloudinaryImgPath: string,
@@ -31,11 +34,21 @@ type PostProps = {
   isDirectory: boolean;
   directory?: {
     data: {
-      isDirectory: boolean,
-      slug: string,
-      date: string,
-      metadata: BlogArticleMetaData
-    }[]
+      directories: {
+        slug: string,
+        mtimeDate: string
+      }[],
+      mdxArticles: {
+        slug: string,
+        metadata: {
+          date: string
+        } & BlogArticleMetaData
+      }[]
+      // isDirectory: boolean,
+      // slug: string,
+      // date: string,
+      // metadata: BlogArticleMetaData
+    }
   }
   article?: {
     content: MDXRemoteSerializeResult,
@@ -54,7 +67,8 @@ export default function PostsPage({
 
   if (isDirectory && directory) {
     return <BlogListLayout
-      data={directory.data}
+      directories={directory.data.directories}
+      mdxArticles={directory.data.mdxArticles}
       directorySlug={currentRoute.split('/')}
     />;
   } else if (article) {
@@ -62,7 +76,7 @@ export default function PostsPage({
       <BlogLayout
         content={article.content}
         url={`${seoConfig.openGraph.url}${currentRoute}`}
-        metadata={article.metadata as BlogArticleMetaData}
+        metadata={article.metadata}
       />
     );
   }

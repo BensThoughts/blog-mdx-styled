@@ -5,47 +5,67 @@ import config from '../../next-filesystem-reader';
 const POSTS_DIR = config.postsDirectory as string;
 const EXCLUDED_DIRS = config.excludedProdDirs as string[];
 
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+
+// type SlugData = {
+//   isDirectory: boolean,
+//   slug: string,
+//   mtimeDate: string,
+// }
+
+type DirectoryData<T> = {
+  directories: {
+    slug: string,
+    mtimeDate: string,
+  }[],
+  mdxArticles: {
+    slug: string,
+    metadata: {
+      date: string
+    } & T
+  }[]
+  // metadata?: {date: string} & T
+}
+
 export type PageData<T> = {
   isDirectory: boolean,
-  // slug?: string,
   directory?: {
-    data: {
-      isDirectory: boolean,
-      date: string,
-      slug: string,
-      metadata?: T
-    }[]
+    data: DirectoryData<T>
   },
   article?: {
     content: string,
-    metadata: T
+    metadata: {date: string} & T
   }
 }
 
-type SlugData = {
-  isDirectory: boolean,
-  slug: string,
-}
+// type ExpandRecursively<T> = T extends object
+//   ? T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never
+//   : T;
 
-function getDirectoryListing(cwd: string): SlugData[] {
-  const slugData: SlugData[] = [];
+function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
+  const slugData: DirectoryData<T> = {
+    directories: [],
+    mdxArticles: [],
+  };
   const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
   try {
     const dirents = fs.readdirSync(cwd, {withFileTypes: true});
     dirents.forEach((dirent) => {
-      const slug = path.join(
-          cwd.replace(POSTS_DIR, ''),
-          dirent.name,
-      );
+      const fullPath = path.join(cwd, dirent.name);
+      const slug = fullPath.replace(POSTS_DIR, '').split(path.sep).join('/').replace('.mdx', '');
       if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
-        slugData.push({
-          isDirectory: true,
+        const mtimeDate = getFileModifiedDate(fullPath);
+        slugData.directories.push({
+          mtimeDate,
           slug,
         });
       } else {
-        slugData.push({
-          isDirectory: false,
-          slug: slug.replace('.mdx', ''),
+        // const fullFilePath = path.join(POSTS_DIR, slug) + '.mdx';
+        const metadata = getBlogPostMetadata<T>(fullPath);
+
+        slugData.mdxArticles.push({
+          slug: slug,
+          metadata,
         });
       };
     });
@@ -56,89 +76,74 @@ function getDirectoryListing(cwd: string): SlugData[] {
   return slugData;
 }
 
-function getAllSlugs({
+function getAllSlugs<T>({
   cwd,
   slugData,
 }: {
   cwd: string;
-  slugData: SlugData[];
-}): SlugData[] {
-  const newSlugData = getDirectoryListing(cwd);
-  slugData.push(...newSlugData);
-  newSlugData.forEach(({isDirectory, slug}) => {
-    if (isDirectory) {
-      const nextDir = path.parse(slug);
-      const nextCwd = path.join(cwd, nextDir.name);
-      slugData = getAllSlugs({
-        cwd: nextCwd,
-        slugData,
-      });
-    }
+  slugData: DirectoryData<T>;
+}): DirectoryData<T> {
+  const {directories, mdxArticles} = getDirectoryListing<T>(cwd);
+  slugData.directories.push(...directories);
+  slugData.mdxArticles.push(...mdxArticles);
+  directories.forEach(({slug}) => {
+    const nextDir = path.parse(slug);
+    const nextCwd = path.join(cwd, nextDir.name);
+    slugData = getAllSlugs({
+      cwd: nextCwd,
+      slugData,
+    });
   });
 
   return slugData;
 };
 
 
-export function getSortedPageData<T>(currentSlugPath?: string): {isDirectory: boolean, date: string, slug: string, metadata?: T}[] {
+export function getSortedDirectoryData<T>(currentSlugPath?: string): DirectoryData<T> {
   const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
-  const allSlugs = getDirectoryListing(searchDir);
-  const allPostsData = allSlugs
-      // .filter(({isDirectory}) => !isDirectory)
-      .map(({slug, isDirectory}) => {
-        if (isDirectory) {
-          const fullDirPath = path.join(POSTS_DIR, slug);
-          const date = fs.statSync(fullDirPath).mtime.toISOString();
-          return {
-            isDirectory,
-            slug,
-            date,
-          };
-        } else {
-          const fullFilePath = path.join(POSTS_DIR, slug) + '.mdx';
-          const metadata = getBlogPostMetadata<T>(fullFilePath);
-          const date = fs.statSync(fullFilePath).mtime.toISOString();
-
-          return {
-            isDirectory,
-            slug,
-            date,
-            metadata: {...metadata},
-          };
-        }
-      });
-
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  const allSlugs = getDirectoryListing<T>(searchDir);
+  const directories = allSlugs.directories.sort((a, b) => (a.mtimeDate < b.mtimeDate) ? 1 : -1);
+  const mdxArticles = allSlugs.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
+  return {
+    directories,
+    mdxArticles,
+  };
 }
 
-export function getAllPages() {
+export function getAllPages(): {params: {slug: string[]}}[] {
   const slugData = getAllSlugs({
     cwd: POSTS_DIR,
-    slugData: [],
+    slugData: {
+      directories: [],
+      mdxArticles: [],
+    },
   });
 
-  return slugData.map(({slug}) => {
+  const directorySlugs = slugData.directories.map(({slug}) => {
     return {
       params: {
-        slug: slugStringToArray(path.parse(slug)),
+        slug: slugStringToArray(slug),
       },
     };
   });
+  const mdxSlugs = slugData.mdxArticles.map(({slug}) => {
+    return {
+      params: {
+        slug: slugStringToArray(slug),
+      },
+    };
+  });
+
+  return [...directorySlugs, ...mdxSlugs];
 };
 
 
-export async function getPageData<T>(slugArray: string[]): Promise<PageData<T>> {
+export async function getPageData<T>(slugArray: string[]): Promise<Expand<PageData<T>>> {
   const slug = slugArrayToString(slugArray);
   const pathWithoutExtension = path.join(POSTS_DIR, slug);
   const pathExists = fs.existsSync(pathWithoutExtension);
   if (pathExists && fs.statSync(pathWithoutExtension).isDirectory()) {
-    const data = getSortedPageData<T>(slug);
+    const data = getSortedDirectoryData<T>(slug);
     return {
       isDirectory: true,
       directory: {
@@ -163,30 +168,51 @@ export async function getPageData<T>(slugArray: string[]): Promise<PageData<T>> 
   }
 }
 
+function getFileModifiedDate(path: fs.PathLike) {
+  try {
+    const fullDate = fs.statSync(path).mtime;
+    const date = `${fullDate.getUTCFullYear()}-${fullDate.getUTCMonth() + 1}-${fullDate.getUTCDate()}`;
+    return date;
+  } catch (e) {
+    throw new Error(`Error in getFileModifiedDate, failed to access ${path}: ${e}`);
+  }
+}
 
-function getBlogPost<T>(path: fs.PathLike): {content: string, data: T} {
+
+function getBlogPost<T>(path: fs.PathLike): {content: string, data: {date: string} & T} {
   const rawFileSource = fs.readFileSync(path);
   const {content, data} = matter(rawFileSource);
+  let date = data.date;
+  if (!date) {
+    date = getFileModifiedDate(path);
+  }
   return {
     content,
     data: {
       ...data as T,
       slug: path.toLocaleString().replace(POSTS_DIR, ''),
+      date,
     },
   };
 }
 
 
-function getBlogPostMetadata<T>(path: fs.PathLike): T {
+function getBlogPostMetadata<T>(path: fs.PathLike): {date: string} & T {
   const rawFileSource = fs.readFileSync(path);
   const {data} = matter(rawFileSource);
+  let date = data.date;
+  if (!date) {
+    date = getFileModifiedDate(path);
+  }
   return {
     ...data as T,
+    date,
   };
 }
 
 
-function slugStringToArray(slugPath: path.ParsedPath) {
+function slugStringToArray(slugString: string) {
+  const slugPath = path.parse(slugString);
   if (slugPath.dir === '') {
     return [slugPath.name];
   } else {

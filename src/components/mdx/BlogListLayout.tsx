@@ -25,17 +25,21 @@ const GridContainer = styled.div`
 
 
 type BlogArticleListProps = {
-  directorySlug?: string[],
-  data: {
-    isDirectory: boolean,
-    date: string,
-    slug: string,
-    metadata?: BlogArticleMetaData
+  directorySlug?: string[];
+  directories: {
+    slug: string;
+    mtimeDate: string;
+  }[],
+  mdxArticles: {
+    slug: string;
+    metadata: {
+      date: string;
+    } & BlogArticleMetaData;
   }[]
 }
 
 
-export default function BlogListLayout({data, directorySlug}: BlogArticleListProps) {
+export default function BlogListLayout({directorySlug, directories, mdxArticles}: BlogArticleListProps) {
   let slug = '';
   if (directorySlug && directorySlug?.length > 0) {
     slug = directorySlug[directorySlug.length - 1].split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
@@ -48,31 +52,26 @@ export default function BlogListLayout({data, directorySlug}: BlogArticleListPro
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
       <GridContainer>
-        {data.map(({isDirectory, date, slug, metadata}) => {
-          if (isDirectory) {
-            return (
-              <BlogCard
-                key={date}
-                slug={slug}
-                title={slug}
-                date={date}
-                tags={[]}
-                description="A Directory"
-              />
-            );
-          } else if (metadata) {
-            return (
-              <BlogCard
-                key={slug}
-                slug={slug}
-                title={metadata.title}
-                date={metadata.date}
-                tags={metadata.tags}
-                description={metadata.longDescription}
-              />
-            );
-          }
-        })}
+        {directories.map((directory) => (
+          <BlogCard
+            key={directory.slug}
+            slug={directory.slug}
+            title={directory.slug}
+            date={directory.mtimeDate}
+            tags={[]}
+            description="A Directory"
+          />
+        ))}
+        {mdxArticles.map(({slug, metadata}) => (
+          <BlogCard
+            key={slug}
+            slug={slug}
+            title={metadata.title}
+            date={metadata.date}
+            tags={metadata.tags}
+            description={metadata.longDescription}
+          />
+        ))}
       </GridContainer>
     </MaxWidthWrapper>
   );

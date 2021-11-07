@@ -24,6 +24,7 @@ import {
 import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
+import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 
 const components = {
   a: A,
@@ -49,18 +50,7 @@ const components = {
 type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
-  metadata: {
-    title: string,
-    shortDescription: string,
-    longDescription: string,
-    date: string,
-    readTime: number,
-    tags: string[],
-    cloudinaryImgPath: string,
-    imgWidth: number,
-    imgHeight: number,
-    imgAlt: string,
-  };
+  metadata: BlogArticleMetaData;
 };
 
 export default function BlogLayout({
@@ -69,10 +59,11 @@ export default function BlogLayout({
   metadata,
 }: PostProps) {
   const {
+    date,
+
     title,
     shortDescription,
     longDescription,
-    date,
     readTime,
     tags,
     cloudinaryImgPath,
