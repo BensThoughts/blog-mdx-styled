@@ -7,11 +7,9 @@ const EXCLUDED_DIRS = config.excludedProdDirs as string[];
 
 type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
-// type SlugData = {
-//   isDirectory: boolean,
-//   slug: string,
-//   mtimeDate: string,
-// }
+/**
+ * Functions to get a directory listing or a single mdx article
+ */
 
 type DirectoryData<T> = {
   directories: {
@@ -24,13 +22,12 @@ type DirectoryData<T> = {
       date: string
     } & T
   }[]
-  // metadata?: {date: string} & T
 }
 
 export type PageData<T> = {
   isDirectory: boolean,
   directory?: {
-    data: DirectoryData<T>
+    data: Expand<DirectoryData<T>>
   },
   article?: {
     content: string,
@@ -76,29 +73,6 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
   return slugData;
 }
 
-function getAllSlugs<T>({
-  cwd,
-  slugData,
-}: {
-  cwd: string;
-  slugData: DirectoryData<T>;
-}): DirectoryData<T> {
-  const {directories, mdxArticles} = getDirectoryListing<T>(cwd);
-  slugData.directories.push(...directories);
-  slugData.mdxArticles.push(...mdxArticles);
-  directories.forEach(({slug}) => {
-    const nextDir = path.parse(slug);
-    const nextCwd = path.join(cwd, nextDir.name);
-    slugData = getAllSlugs({
-      cwd: nextCwd,
-      slugData,
-    });
-  });
-
-  return slugData;
-};
-
-
 export function getSortedDirectoryData<T>(currentSlugPath?: string): DirectoryData<T> {
   const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
   const allSlugs = getDirectoryListing<T>(searchDir);
@@ -110,35 +84,7 @@ export function getSortedDirectoryData<T>(currentSlugPath?: string): DirectoryDa
   };
 }
 
-export function getAllPages(): {params: {slug: string[]}}[] {
-  const slugData = getAllSlugs({
-    cwd: POSTS_DIR,
-    slugData: {
-      directories: [],
-      mdxArticles: [],
-    },
-  });
-
-  const directorySlugs = slugData.directories.map(({slug}) => {
-    return {
-      params: {
-        slug: slugStringToArray(slug),
-      },
-    };
-  });
-  const mdxSlugs = slugData.mdxArticles.map(({slug}) => {
-    return {
-      params: {
-        slug: slugStringToArray(slug),
-      },
-    };
-  });
-
-  return [...directorySlugs, ...mdxSlugs];
-};
-
-
-export async function getPageData<T>(slugArray: string[]): Promise<Expand<PageData<T>>> {
+export async function getPageData<T>(slugArray: string[]): Promise<PageData<T>> {
   const slug = slugArrayToString(slugArray);
   const pathWithoutExtension = path.join(POSTS_DIR, slug);
   const pathExists = fs.existsSync(pathWithoutExtension);
@@ -211,6 +157,91 @@ function getBlogPostMetadata<T>(path: fs.PathLike): {date: string} & T {
 }
 
 
+/**
+ * Functions to get all slugs recursively
+ */
+
+type SlugData = {
+  directories: {
+    params: {
+      slug: string[]
+    }
+  }[],
+  mdxArticles: {
+    params: {
+      slug: string[]
+    }
+  }[],
+}
+
+function getDirectorySlugs(cwd: string): SlugData {
+  const slugData: SlugData = {
+    directories: [],
+    mdxArticles: [],
+  };
+  const excludedRoutes = process.env.NODE_ENV === 'production' ? EXCLUDED_DIRS : [];
+  const dirents = fs.readdirSync(cwd, {withFileTypes: true});
+  dirents.forEach((dirent) => {
+    const fullPath = path.join(cwd, dirent.name);
+    const slugPath = fullPath.replace(POSTS_DIR, '').split(path.sep).join('/').replace('.mdx', '');
+    if (!dirent.isDirectory()) {
+      slugData.mdxArticles.push({
+        params: {
+          slug: slugStringToArray(slugPath),
+        },
+      });
+    } else if (!excludedRoutes.includes(dirent.name)) {
+      slugData.directories.push({
+        params: {
+          slug: slugStringToArray(slugPath),
+        },
+      });
+    };
+  });
+
+  return slugData;
+}
+
+function getAllSlugs({
+  cwd,
+  slugData,
+}: {
+  cwd: string;
+  slugData: SlugData;
+}): SlugData {
+  const {directories, mdxArticles} = getDirectorySlugs(cwd);
+  slugData.directories.push(...directories);
+  slugData.mdxArticles.push(...mdxArticles);
+  directories.forEach(({params: {slug}}) => {
+    const nextDir = path.parse(slugArrayToString(slug));
+    const nextCwd = path.join(cwd, nextDir.name);
+    slugData = getAllSlugs({
+      cwd: nextCwd,
+      slugData,
+    });
+  });
+
+  return slugData;
+};
+
+export function getAllPages(): {params: {slug: string[]}}[] {
+  const {directories, mdxArticles} = getAllSlugs({
+    cwd: POSTS_DIR,
+    slugData: {
+      directories: [],
+      mdxArticles: [],
+    },
+  });
+
+  return [...directories, ...mdxArticles];
+};
+
+
+/**
+ * Helper Functions
+ *
+*/
+
 function slugStringToArray(slugString: string) {
   const slugPath = path.parse(slugString);
   if (slugPath.dir === '') {
@@ -223,173 +254,3 @@ function slugStringToArray(slugString: string) {
 function slugArrayToString(slugPath: string[]) {
   return path.join(...slugPath);
 }
-
-
-// function checkIfPathExists(path: fs.PathLike): {pathExists: boolean, error?: string} {
-//   try {
-//     const pathExists = fs.existsSync(path);
-//     return {pathExists};
-//   } catch (e) {
-//     return {
-//       pathExists: false,
-//       error: `Error in checkIfPathExists, at ${path}: ${e}`
-//     };
-//   }
-// }
-
-// /* Helper Functions */
-// function isDirectory(path: fs.PathLike): {isDirectory: boolean, error?: string} {
-//   try {
-//     const pathStats = fs.statSync(path);
-//     return {
-//       isDirectory: pathStats.isDirectory()
-//     };
-//   } catch (e) {
-//     return {
-//       isDirectory: false,
-//       error: `Error in isDirectory, trying to access ${path}: ${e}`
-//     };
-//   }
-// }
-
-// function isFile(path: fs.PathLike): boolean | Error {
-//   try {
-//     const pathStats = fs.statSync(path);
-//     return pathStats.isFile();
-//   } catch (e) {
-//     return new Error(`Error in isFile, trying to access ${path}: ${e}`);
-//   }
-// }
-
-// function readFile(path: fs.PathLike): {content: string, error?: string} {
-//   try {
-//     const buffer = fs.readFileSync(path, 'utf8');
-//     return {
-//       content: buffer
-//     };
-//   } catch (e) {
-//     return {
-//       content: '',
-//       error: `Error in readFile, trying to access ${path}: ${e}`
-//     };
-//   }
-// }
-
-// function readDirectory(path: fs.PathLike): fs.Dirent[] | Error {
-//   try {
-//     const dirents = fs.readdirSync(path, {withFileTypes: true});
-//     return dirents;
-//   } catch (e) {
-//     return new Error(`Error in readDirectory, trying to access ${path}: ${e}`);
-//   }
-// }
-
-
-// function getSlugPaths({
-//   cwd,
-//   pathList,
-//   basePath,
-// }: {
-//   cwd: string,
-//   basePath: string,
-//   pathList: SlugPath[],
-// }): SlugPath[] {
-//   const dirents = fs.readdirSync(cwd, {withFileTypes: true});
-//   pathList = pathList || [];
-
-//   const excludedRoutes = process.env.NODE_ENV === 'production' ? excludedProdDirs : [];
-
-//   dirents.forEach((dirent) => {
-//     if (dirent.isDirectory() && !excludedRoutes.includes(dirent.name)) {
-//       pathList = getSlugPaths({
-//         cwd: path.join(cwd, dirent.name),
-//         pathList,
-//         basePath,
-//       });
-//     } else if (!dirent.isDirectory()) {
-//       const extendedPath = path.join(
-//           cwd.replace(basePath, ''),
-//           dirent.name
-//       );
-//       const slugPath = getSlugPath(path.parse(extendedPath));
-//       pathList.push(slugPath);
-//     };
-//   });
-//   return pathList;
-// };
-
-// function getSlugPath(absPath: path.ParsedPath) {
-//   if (absPath.dir === '') {
-//     return [absPath.name];
-//   } else {
-//     return [...absPath.dir.split(path.sep), absPath.name];
-//   }
-// }
-
-// export function getSortedPostsData() {
-//   const slugPaths = getSlugPaths({
-//     basePath: postsDirectory,
-//     cwd: postsDirectory,
-//     pathList: [],
-//   });
-//   const allPostsData = slugPaths.map((slugPath) => {
-//     const fullPath = path.join(postsDirectory, ...slugPath) + '.mdx';
-//     const fileContents = fs.readFileSync(fullPath, 'utf8');
-//     const matterResult = matter(fileContents);
-
-//     const parsedPath = path.parse(path.join(...slugPath));
-//     const slug = path.join(parsedPath.dir, parsedPath.name);
-
-//     return {
-//       slug,
-//       ...(matterResult.data as {
-//         date: string,
-//         title: string,
-//         longDescription: string,
-//         tags: string[],
-//       }),
-//     };
-//   });
-
-//   return allPostsData.sort((a, b) => {
-//     if (a.date < b.date) {
-//       return 1;
-//     } else {
-//       return -1;
-//     }
-//   });
-// }
-
-// export function getAllPostSlugs() {
-//   const slugPaths = getSlugPaths({
-//     basePath: postsDirectory,
-//     cwd: postsDirectory,
-//     pathList: [],
-//   });
-//   return slugPaths.map((slugPath) => {
-//     const fullPath = path.parse(path.join(...slugPath));
-//     return {
-//       params: {
-//         slug: getSlugPath(fullPath),
-//       },
-//     };
-//   });
-// };
-
-// function buildUrl(slug: string) {
-//   return `${seoConfig.openGraph.url}/blog/${slug}`;
-// }
-
-// export async function getPostData(slugPath: string[]) {
-//   const slug = path.join(...slugPath);
-//   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-//   const rawFileSource = fs.readFileSync(fullPath);
-//   const {content, data} = matter(rawFileSource);
-//   return {
-//     content: content,
-//     metaData: data,
-//     url: buildUrl(slug),
-//   };
-// }
-
-
