@@ -36,10 +36,16 @@ type PostProps = {
     data: {
       directories: {
         slug: string,
-        mtimeDate: string
+        mtimeDate: string,
+        metadata: {
+          title: string,
+          date: string,
+          description: string,
+        }
       }[],
       mdxArticles: {
         slug: string,
+        mtimeDate: string,
         metadata: {
           date: string
         } & BlogArticleMetaData

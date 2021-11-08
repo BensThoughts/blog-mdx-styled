@@ -18,9 +18,15 @@ interface BlogArticleListProps {
   directories: {
     slug: string,
     mtimeDate: string,
+    metadata: {
+      title: string,
+      date: string,
+      description: string | null,
+    }
   }[],
   mdxArticles: {
     slug: string,
+    mtimeDate: string,
     metadata: {
       date: string;
     } & BlogArticleMetaData
