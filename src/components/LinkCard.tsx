@@ -1,7 +1,7 @@
 // import Link from 'next/link';
 import styled from '@emotion/styled';
 import React from 'react';
-
+import Link from 'next/link';
 
 const AnchorContainer = styled.a`
   display: block;
@@ -40,14 +40,16 @@ const AnchorContainer = styled.a`
   }
 `;
 
-// type LinkCardProps = {
-//   children: React.ReactNode
-// }
+type LinkCardProps = {
+  slug: string;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export default function LinkCard({children, ...rest}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export default function LinkCard({slug, children, ...rest}: LinkCardProps) {
   return (
-    <AnchorContainer {...rest}>
-      {children}
-    </AnchorContainer>
+    <Link href={`/blog/${slug}`} scroll={true} passHref>
+      <AnchorContainer {...rest}>
+        {children}
+      </AnchorContainer>
+    </Link>
   );
 }

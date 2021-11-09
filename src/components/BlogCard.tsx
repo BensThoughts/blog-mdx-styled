@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/react';
 import LinkCard from '@app/components/LinkCard';
@@ -66,26 +65,24 @@ export default function BlogCard({
   ...rest
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${slug}`} scroll={true} passHref>
-      <AnchorContainer className={`shadow-md ${className}`} {...rest}>
-        <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
-          <div>
-            {title && <div className="text-2xl">{title}</div>}
-            {date && <div className="italic">{date}</div>}
-          </div>
-          {description && <div className="text-base">{description}</div>}
-          <div className="h-full flex flex-col justify-end">
-            <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
-              {tags.map((tag, idx) => (
-                <Pill key={tag} delay={0.07 * idx}>
-                  <span className="text-secondary">#</span>
-                  {tag}
-                </Pill>
-              ))}
-            </div>
+    <AnchorContainer slug={slug} className={`shadow-md ${className}`} {...rest}>
+      <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
+        <div>
+          {title && <div className="text-2xl">{title}</div>}
+          {date && <div className="italic">{date}</div>}
+        </div>
+        {description && <div className="text-base">{description}</div>}
+        <div className="h-full flex flex-col justify-end">
+          <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+            {tags.map((tag, idx) => (
+              <Pill key={tag} delay={0.07 * idx}>
+                <span className="text-secondary">#</span>
+                {tag}
+              </Pill>
+            ))}
           </div>
         </div>
-      </AnchorContainer>
-    </Link>
+      </div>
+    </AnchorContainer>
   );
 }
