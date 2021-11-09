@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/react';
+import LinkCard from '@app/components/LinkCard';
 
 const hop = keyframes`
   50% {
@@ -35,42 +36,7 @@ const Pill = styled.div<{
   animation-delay: ${({delay}) => delay + 's'};
 `;
 
-const AnchorContainer = styled.a`
-  display: block;
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  border: 2px solid rgb(var(--color-app-secondary));
-  background-color: rgba(var(--color-app-primary), 0.8);
-  transition-property: background, color, transform;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  will-change: background, color, transform;
-  position: relative;
-  transform: translateY(0px);
-
-  &::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 250ms;
-  }
-
-  &:hover::before,
-  &:focus::before {
-    background-color:  rgba(255, 255, 255, 0.1); 
-  }
-
-  &:hover,
-  &:focus {
-    transform: translateY(-10px);
-  }
-
+const AnchorContainer = styled(LinkCard)`
   &:hover ${Pill},
   &:focus ${Pill} {
     animation-name: ${hop};
@@ -83,7 +49,7 @@ const AnchorContainer = styled.a`
 
 type BlogCardProps = {
   slug: string
-  date: string
+  date?: string
   title: string
   description: string
   tags: string[]
@@ -93,7 +59,7 @@ type BlogCardProps = {
 export default function BlogCard({
   slug = '',
   title = '',
-  date = '',
+  date,
   description = '',
   tags = [],
   className,
@@ -104,7 +70,7 @@ export default function BlogCard({
       <AnchorContainer className={`shadow-md ${className}`} {...rest}>
         <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
           <div>
-            {title && <div className="text-2xl text-high-emphesis">{title}</div>}
+            {title && <div className="text-2xl">{title}</div>}
             {date && <div className="italic">{date}</div>}
           </div>
           {description && <div className="text-base">{description}</div>}
