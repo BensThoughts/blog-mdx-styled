@@ -29,8 +29,8 @@ type BlogArticleListProps = {
   directorySlug?: string[];
   directories: {
     slug: string;
-    mtimeDate: string;
-    metadata: {
+    dirMtimeDate: string;
+    dirMetadata: {
       title: string;
       date: string;
       description: string | null;
@@ -63,10 +63,10 @@ export default function BlogListLayout({directorySlug, directories, mdxArticles}
           <BlogFolderCard
             key={directory.slug}
             slug={directory.slug}
-            title={directory.metadata.title}
+            title={directory.dirMetadata.title}
             // date={directory.metadata.date}
             // tags={[]}
-            description={directory.metadata.description ? directory.metadata.description : 'A folder'}
+            description={directory.dirMetadata.description ? directory.dirMetadata.description : 'A folder'}
           />
         ))}
         {mdxArticles.map(({slug, metadata}) => (

@@ -36,8 +36,8 @@ type PostProps = {
     data: {
       directories: {
         slug: string,
-        mtimeDate: string,
-        metadata: {
+        dirMtimeDate: string,
+        dirMetadata: {
           title: string,
           date: string,
           description: string,

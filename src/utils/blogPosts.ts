@@ -16,8 +16,8 @@ type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 type DirectoryData<T> = {
   directories: {
     slug: string,
-    mtimeDate: string,
-    metadata: {
+    dirMtimeDate: string,
+    dirMetadata: {
       title: string,
       date: string,
       description: string | null,
@@ -94,11 +94,11 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
           date,
           description,
         } = getDirectoryMetadata(cwd, dirent);
-        const mtimeDate = getFileModifiedDate(fullPath);
+        const dirMtimeDate = getFileModifiedDate(fullPath);
         slugData.directories.push({
           slug: slugPath,
-          mtimeDate,
-          metadata: {
+          dirMtimeDate,
+          dirMetadata: {
             title,
             date,
             description,
@@ -124,13 +124,55 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
 export function getSortedDirectoryData<T>(currentSlugPath?: string): DirectoryData<T> {
   const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
   const allSlugs = getDirectoryListing<T>(searchDir);
-  const directories = allSlugs.directories.sort((a, b) => (a.metadata.title > b.metadata.title) ? 1 : -1);
+  const directories = allSlugs.directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
   const mdxArticles = allSlugs.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
   return {
     directories,
     mdxArticles,
   };
 }
+
+function getAllDirectoryData<T>({
+  cwd,
+  directoryData,
+}:{
+  cwd: string,
+  directoryData: DirectoryData<T>
+}): DirectoryData<T> {
+  directoryData = directoryData ? directoryData : {
+    directories: [],
+    mdxArticles: [],
+  };
+  const newDirectoryData = getDirectoryListing<T>(cwd);
+  directoryData.directories.push(...newDirectoryData.directories);
+  directoryData.mdxArticles.push(...newDirectoryData.mdxArticles);
+  directoryData.directories.forEach((dir) => {
+    const nextPath = path.join(POSTS_DIR, dir.slug);
+    directoryData = getAllDirectoryData({
+      cwd: nextPath,
+      directoryData: directoryData,
+    });
+  });
+
+  return directoryData;
+}
+
+export function getAllSortedDirectoryData<T>(): DirectoryData<T> {
+  const allDirectoryData = getAllDirectoryData<T>({
+    cwd: POSTS_DIR,
+    directoryData: {
+      directories: [],
+      mdxArticles: [],
+    },
+  });
+  const directories = allDirectoryData.directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
+  const mdxArticles = allDirectoryData.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
+  return {
+    directories,
+    mdxArticles,
+  };
+}
+
 
 export async function getPageData<T>(slugArray: string[]): Promise<PageData<T>> {
   const slug = slugArrayToString(slugArray);

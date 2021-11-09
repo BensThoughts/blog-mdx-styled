@@ -17,8 +17,8 @@ export const getStaticProps: GetStaticProps = async () => {
 interface BlogArticleListProps {
   directories: {
     slug: string,
-    mtimeDate: string,
-    metadata: {
+    dirMtimeDate: string,
+    dirMetadata: {
       title: string,
       date: string,
       description: string | null,
