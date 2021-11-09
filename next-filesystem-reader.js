@@ -1,4 +1,4 @@
 module.exports = {
-  postsDirectory: '/home/bensthoughts/Programming/Blog/blog-mdx-styled/src/posts-mdx/',
+  postsDirectory: '/home/bensthoughts/Programming/Blog/blog-mdx-styled/posts-mdx/',
   excludedProdDirs: ['drafts'],
 };
