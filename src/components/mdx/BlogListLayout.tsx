@@ -4,6 +4,7 @@ import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
+import BlogFolderCard from '../BlogFolderCard';
 
 const GridContainer = styled.div`
   display: grid;
@@ -59,12 +60,12 @@ export default function BlogListLayout({directorySlug, directories, mdxArticles}
       </SectionTitle>
       <GridContainer>
         {directories.map((directory) => (
-          <BlogCard
+          <BlogFolderCard
             key={directory.slug}
             slug={directory.slug}
             title={directory.metadata.title}
-            date={directory.metadata.date}
-            tags={[]}
+            // date={directory.metadata.date}
+            // tags={[]}
             description={directory.metadata.description ? directory.metadata.description : 'A folder'}
           />
         ))}
