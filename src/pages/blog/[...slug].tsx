@@ -53,7 +53,7 @@ export default function PostsPage({
 
   if (isDirectory && directory) {
     return <BlogListLayout
-      dirData={directory.data}
+      dirTree={directory.data}
     />;
   } else if (article) {
     return (

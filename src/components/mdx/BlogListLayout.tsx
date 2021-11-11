@@ -27,7 +27,7 @@ const GridContainer = styled.div`
 
 
 type BlogArticleListProps = {
-  dirData: DirectoryTree<BlogArticleMetaData>
+  dirTree: DirectoryTree<BlogArticleMetaData>
 }
 
 function createTitle(dirName: string) {
@@ -35,8 +35,8 @@ function createTitle(dirName: string) {
 }
 
 
-export default function BlogListLayout({dirData}: BlogArticleListProps) {
-  const {dirMetadata, directories, mdxArticles} = dirData;
+export default function BlogListLayout({dirTree}: BlogArticleListProps) {
+  const {dirMetadata, directories, mdxArticles} = dirTree;
   const title = createTitle(dirMetadata.title);
   return (
     <MaxWidthWrapper>

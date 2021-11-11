@@ -19,11 +19,50 @@ export type DirectoryTree<T> = {
   dirMetadata: {
     title: string;
     date: string;
-    description: string | null;
     slug: string;
+    description: string | null;
   };
   mdxArticles: Expand<MdxArticle<T>>[]
   directories: Expand<DirectoryTree<T>>[];
+}
+
+export type DirectoryArray<T> = {
+    dirName: string;
+    dirMtimeDate: string;
+    dirMetadata: {
+      title: string;
+      date: string;
+      slug: string;
+      description: string | null;
+    }
+    mdxArticles: Expand<MdxArticle<T>>[]
+}[]
+
+function getDirectoryArray<T>(
+    dirTree: DirectoryTree<T>,
+    dirArray?: DirectoryArray<T>
+): DirectoryArray<T> {
+  const {dirName, dirMtimeDate, dirMetadata, directories, mdxArticles} = dirTree;
+  dirArray = dirArray || [];
+  dirArray.push(
+      {
+        dirName,
+        dirMtimeDate,
+        dirMetadata,
+        mdxArticles,
+      }
+  );
+  directories.forEach((nextDirTree) => {
+    getDirectoryArray(nextDirTree, dirArray);
+  });
+
+  return dirArray;
+}
+
+export function getSortedDirectoryArray<T>() {
+  const dirTree = getAllDirectoryData<T>(POSTS_DIR);
+  const dirArr = getDirectoryArray<T>(dirTree);
+  return dirArr.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
 }
 
 export type MdxArticle<T> = {
