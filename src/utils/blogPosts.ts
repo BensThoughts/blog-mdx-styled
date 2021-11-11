@@ -38,10 +38,10 @@ export type DirectoryData<T> = Expand<{
       slug: string;
       description: string | null;
     }
-    mdxArticles: Expand<MdxArticle<T>>[]
+    mdxArticles: Expand<MdxArticleData<T>>[]
 }>
 
-export type MdxArticle<T> = {
+export type MdxArticleData<T> = {
   slug: string;
   mtimeDate: string;
   metadata: {
