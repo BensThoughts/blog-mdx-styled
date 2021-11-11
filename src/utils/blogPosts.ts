@@ -14,13 +14,13 @@ type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
  */
 
 export type DirectoryTree<T> = {
-  name: string;
-  slug: string;
+  dirName: string;
   dirMtimeDate: string;
   dirMetadata: {
     title: string;
     date: string;
     description: string | null;
+    slug: string;
   };
   mdxArticles: Expand<MdxArticle<T>>[]
   directories: Expand<DirectoryTree<T>>[];
@@ -58,6 +58,7 @@ function getDirectoryMetadata(fullPath: string) {
     return {
       title: dirName,
       date: getFileModifiedDate(fullPath),
+      slug: getDirSlug(fullPath),
       description: null,
     };
   } else {
@@ -70,6 +71,7 @@ function getDirectoryMetadata(fullPath: string) {
     return {
       title: parsedYaml.title ? parsedYaml.title : dirName,
       date: parsedYaml.date ? parsedYaml.date : getFileModifiedDate(fullPath),
+      slug: getDirSlug(fullPath),
       description: parsedYaml.description ? parsedYaml.description : null,
     };
   }
@@ -77,8 +79,7 @@ function getDirectoryMetadata(fullPath: string) {
 
 function getDirectoryListing<T>(cwd: string): DirectoryTree<T> {
   const dirData: DirectoryTree<T> = {
-    name: getDirName(cwd),
-    slug: getDirSlug(cwd),
+    dirName: getDirName(cwd),
     dirMtimeDate: getFileModifiedDate(cwd),
     dirMetadata: getDirectoryMetadata(cwd),
     mdxArticles: [],
@@ -103,12 +104,12 @@ function getDirectoryListing<T>(cwd: string): DirectoryTree<T> {
         } = getDirectoryMetadata(fullPath);
         const dirMtimeDate = getFileModifiedDate(fullPath);
         dirData.directories.push({
-          name: getDirName(fullPath),
-          slug: slugPath,
+          dirName: getDirName(fullPath),
           dirMtimeDate,
           dirMetadata: {
             title,
             date,
+            slug: slugPath,
             description,
           },
           directories: [],
@@ -147,8 +148,7 @@ export function getSortedDirectoryData<T>(currentSlugPath: string = ''): Directo
   const dirMtimeDate = getFileModifiedDate(searchDir);
 
   return {
-    name: getDirName(currentSlugPath),
-    slug: currentSlugPath,
+    dirName: getDirName(currentSlugPath),
     dirMtimeDate,
     dirMetadata,
     directories,
@@ -167,8 +167,7 @@ function getDirName(fullPath: string) {
 function getAllDirectoryData<T>(
     cwd: string,
     directoryData: DirectoryTree<T> = {
-      name: getDirName(cwd),
-      slug: getDirSlug(cwd),
+      dirName: getDirName(cwd),
       dirMtimeDate: getFileModifiedDate(cwd),
       dirMetadata: getDirectoryMetadata(cwd),
       directories: [],
@@ -188,12 +187,11 @@ function getAllDirectoryData<T>(
  */
 
 export function getAllSortedDirectoryData<T>(): Expand<DirectoryTree<T>> {
-  let {name, slug, directories, mdxArticles} = getAllDirectoryData<T>(POSTS_DIR);
+  let {dirName, directories, mdxArticles} = getAllDirectoryData<T>(POSTS_DIR);
   directories = directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
   mdxArticles = mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
   return {
-    name: name,
-    slug: slug,
+    dirName,
     dirMtimeDate: getFileModifiedDate(POSTS_DIR),
     dirMetadata: getDirectoryMetadata(POSTS_DIR),
     directories,
