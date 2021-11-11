@@ -166,17 +166,22 @@ function getDirName(fullPath: string) {
 
 function getAllDirectoryData<T>(
     cwd: string,
-    directoryData: DirectoryTree<T> = {
-      dirName: getDirName(cwd),
-      dirMtimeDate: getFileModifiedDate(cwd),
-      dirMetadata: getDirectoryMetadata(cwd),
-      directories: [],
-      mdxArticles: [],
-    },
+    directoryData?: DirectoryTree<T>,
 ): DirectoryTree<T> {
+  directoryData = directoryData || {
+    dirName: getDirName(cwd),
+    dirMtimeDate: getFileModifiedDate(cwd),
+    dirMetadata: getDirectoryMetadata(cwd),
+    directories: [],
+    mdxArticles: [],
+  };
   const newDirectoryData = getDirectoryListing<T>(cwd);
   directoryData.directories.push(...newDirectoryData.directories);
   directoryData.mdxArticles.push(...newDirectoryData.mdxArticles);
+  directoryData.directories.forEach((directory) => {
+    const newCwd = path.join(POSTS_DIR, directory.dirMetadata.slug);
+    getAllDirectoryData(newCwd, directory);
+  });
   return directoryData;
 }
 
