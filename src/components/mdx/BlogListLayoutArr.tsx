@@ -4,7 +4,7 @@ import BlogCard from '@app/components/BlogCard';
 import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
-import {DirectoryArray} from '@app/utils/blogPosts';
+import {DirectoryData} from '@app/utils/blogPosts';
 
 const GridContainer = styled.div`
   display: grid;
@@ -26,7 +26,7 @@ const GridContainer = styled.div`
 
 
 type BlogArticleListProps = {
-  dirArr: DirectoryArray<BlogArticleMetaData>
+  dirArr: DirectoryData<BlogArticleMetaData>[]
 }
 
 function createTitle(dirName: string) {

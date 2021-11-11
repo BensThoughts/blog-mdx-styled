@@ -8,25 +8,28 @@ const EXCLUDED_DIRS = config.excludedProdDirs as string[];
 const DIR_INDEX_FILE = 'index.yaml';
 
 type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+// type ExpandRecursively<T> = T extends object
+//   ? T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never
+//   : T;
 
 /**
  * Functions to get a directory listing or a single mdx article
  */
 
-export type DirectoryTree<T> = {
-  dirName: string;
-  dirMtimeDate: string;
-  dirMetadata: {
-    title: string;
-    date: string;
-    slug: string;
-    description: string | null;
-  };
-  mdxArticles: Expand<MdxArticle<T>>[]
+export type DirectoryTree<T> = Expand<DirectoryData<T>> & {
+  // dirName: string;
+  // dirMtimeDate: string;
+  // dirMetadata: {
+  //   title: string;
+  //   date: string;
+  //   slug: string;
+  //   description: string | null;
+  // };
+  // mdxArticles: Expand<MdxArticle<T>>[]
   directories: Expand<DirectoryTree<T>>[];
 }
 
-export type DirectoryArray<T> = {
+export type DirectoryData<T> = Expand<{
     dirName: string;
     dirMtimeDate: string;
     dirMetadata: {
@@ -36,12 +39,36 @@ export type DirectoryArray<T> = {
       description: string | null;
     }
     mdxArticles: Expand<MdxArticle<T>>[]
-}[]
+}>
+
+export type MdxArticle<T> = {
+  slug: string;
+  mtimeDate: string;
+  metadata: {
+    date: string;
+  } & T;
+}
+
+export type PageData<T> = {
+  isDirectory: boolean,
+  directory?: {
+    data: Expand<DirectoryTree<T>>
+  },
+  article?: {
+    content: string,
+    metadata: {date: string} & T
+  }
+}
+
+
+/**
+ * Directory Array functions to turn Directory Tree into an array
+ */
 
 function getDirectoryArray<T>(
     dirTree: DirectoryTree<T>,
-    dirArray?: DirectoryArray<T>
-): DirectoryArray<T> {
+    dirArray?: DirectoryData<T>[]
+): DirectoryData<T>[] {
   const {dirName, dirMtimeDate, dirMetadata, directories, mdxArticles} = dirTree;
   dirArray = dirArray || [];
   dirArray.push(
@@ -65,28 +92,6 @@ export function getSortedDirectoryArray<T>() {
   return dirArr.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
 }
 
-export type MdxArticle<T> = {
-  slug: string;
-  mtimeDate: string;
-  metadata: {
-    date: string;
-  } & T;
-}
-
-export type PageData<T> = {
-  isDirectory: boolean,
-  directory?: {
-    data: Expand<DirectoryTree<T>>
-  },
-  article?: {
-    content: string,
-    metadata: {date: string} & T
-  }
-}
-
-// type ExpandRecursively<T> = T extends object
-//   ? T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never
-//   : T;
 
 function getDirectoryMetadata(fullPath: string) {
   // const fullPath = path.join(cwd, dirent.name);
