@@ -28,48 +28,30 @@ const GridContainer = styled.div`
 
 type BlogArticleListProps = {
   dirData: DirectoryTree<BlogArticleMetaData>
-  // directorySlug?: string[];
-  // directories: {
-  //   slug: string;
-  //   dirMtimeDate: string;
-  //   dirMetadata: {
-  //     title: string;
-  //     date: string;
-  //     description: string | null;
-  //   }
-  // }[],
-  // mdxArticles: {
-  //   slug: string;
-  //   mtimeDate: string;
-  //   metadata: {
-  //     date: string;
-  //   } & BlogArticleMetaData;
-  // }[]
+}
+
+function createTitle(dirName: string) {
+  return dirName.split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
 }
 
 
 export default function BlogListLayout({dirData}: BlogArticleListProps) {
-  const {name, directories, mdxArticles} = dirData;
-  let title = '';
-  if (name && name?.length > 0) {
-    title = name.split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
-  }
+  const {dirMetadata, directories, mdxArticles} = dirData;
+  const title = createTitle(dirMetadata.title);
   return (
     <MaxWidthWrapper>
       <SectionTitle className="mb-12">
         <span className="text-icon-secondary">[&nbsp;</span>
-          Blog {name && <span>&nbsp;-&nbsp;{title}</span>}
+          Blog <span>&nbsp;-&nbsp;{title}</span>
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
       <GridContainer>
-        {directories.map((directory) => (
+        {directories.map(({dirMetadata}) => (
           <BlogFolderCard
-            key={directory.slug}
-            slug={directory.slug}
-            title={directory.dirMetadata.title}
-            // date={directory.metadata.date}
-            // tags={[]}
-            description={directory.dirMetadata.description ? directory.dirMetadata.description : 'A folder'}
+            key={dirMetadata.slug}
+            slug={dirMetadata.slug}
+            title={createTitle(dirMetadata.title)}
+            description={dirMetadata.description ? dirMetadata.description : `Articles about ${createTitle(dirMetadata.title)}`}
           />
         ))}
         {mdxArticles.map(({slug, metadata}) => (
