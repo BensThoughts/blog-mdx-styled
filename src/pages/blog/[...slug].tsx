@@ -9,6 +9,7 @@ import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import {
   getAllPages,
   getPageData,
+  DirectoryTree,
   // SortedPostData,
 } from '@app/utils/blogPosts';
 import seoConfig from '@app/utils/seo.config';
@@ -33,28 +34,7 @@ export type BlogArticleMetaData = {
 type PostProps = {
   isDirectory: boolean;
   directory?: {
-    data: {
-      directories: {
-        slug: string,
-        dirMtimeDate: string,
-        dirMetadata: {
-          title: string,
-          date: string,
-          description: string,
-        }
-      }[],
-      mdxArticles: {
-        slug: string,
-        mtimeDate: string,
-        metadata: {
-          date: string
-        } & BlogArticleMetaData
-      }[]
-      // isDirectory: boolean,
-      // slug: string,
-      // date: string,
-      // metadata: BlogArticleMetaData
-    }
+    data: DirectoryTree<BlogArticleMetaData>
   }
   article?: {
     content: MDXRemoteSerializeResult,
@@ -73,9 +53,7 @@ export default function PostsPage({
 
   if (isDirectory && directory) {
     return <BlogListLayout
-      directories={directory.data.directories}
-      mdxArticles={directory.data.mdxArticles}
-      directorySlug={currentRoute.split('/')}
+      dirData={directory.data}
     />;
   } else if (article) {
     return (
@@ -112,9 +90,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     return {
       props: {
         isDirectory,
-        directory: {
-          data: directory?.data,
-        },
+        directory,
       },
     };
   } else {

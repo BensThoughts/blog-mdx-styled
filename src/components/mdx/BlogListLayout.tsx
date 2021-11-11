@@ -5,6 +5,7 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import BlogFolderCard from '../BlogFolderCard';
+import {DirectoryTree} from '@app/utils/blogPosts';
 
 const GridContainer = styled.div`
   display: grid;
@@ -26,36 +27,38 @@ const GridContainer = styled.div`
 
 
 type BlogArticleListProps = {
-  directorySlug?: string[];
-  directories: {
-    slug: string;
-    dirMtimeDate: string;
-    dirMetadata: {
-      title: string;
-      date: string;
-      description: string | null;
-    }
-  }[],
-  mdxArticles: {
-    slug: string;
-    mtimeDate: string;
-    metadata: {
-      date: string;
-    } & BlogArticleMetaData;
-  }[]
+  dirData: DirectoryTree<BlogArticleMetaData>
+  // directorySlug?: string[];
+  // directories: {
+  //   slug: string;
+  //   dirMtimeDate: string;
+  //   dirMetadata: {
+  //     title: string;
+  //     date: string;
+  //     description: string | null;
+  //   }
+  // }[],
+  // mdxArticles: {
+  //   slug: string;
+  //   mtimeDate: string;
+  //   metadata: {
+  //     date: string;
+  //   } & BlogArticleMetaData;
+  // }[]
 }
 
 
-export default function BlogListLayout({directorySlug, directories, mdxArticles}: BlogArticleListProps) {
-  let slug = '';
-  if (directorySlug && directorySlug?.length > 0) {
-    slug = directorySlug[directorySlug.length - 1].split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
+export default function BlogListLayout({dirData}: BlogArticleListProps) {
+  const {name, directories, mdxArticles} = dirData;
+  let title = '';
+  if (name && name?.length > 0) {
+    title = name.split('-').map((word) => `${word[0].toLocaleUpperCase()}${word.slice(1)}`).join(' ');
   }
   return (
     <MaxWidthWrapper>
       <SectionTitle className="mb-12">
         <span className="text-icon-secondary">[&nbsp;</span>
-          Blog {directorySlug && <span>&nbsp;-&nbsp;{slug}</span>}
+          Blog {name && <span>&nbsp;-&nbsp;{title}</span>}
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
       <GridContainer>

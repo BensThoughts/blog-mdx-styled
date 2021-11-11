@@ -13,29 +13,31 @@ type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
  * Functions to get a directory listing or a single mdx article
  */
 
-type DirectoryData<T> = {
-  directories: {
-    slug: string,
-    dirMtimeDate: string,
-    dirMetadata: {
-      title: string,
-      date: string,
-      description: string | null,
-    }
-  }[],
-  mdxArticles: {
-    slug: string,
-    mtimeDate: string,
-    metadata: {
-      date: string
-    } & T
-  }[]
+export type DirectoryTree<T> = {
+  name: string;
+  slug: string;
+  dirMtimeDate: string;
+  dirMetadata: {
+    title: string;
+    date: string;
+    description: string | null;
+  };
+  mdxArticles: Expand<MdxArticle<T>>[]
+  directories: Expand<DirectoryTree<T>>[];
+}
+
+export type MdxArticle<T> = {
+  slug: string;
+  mtimeDate: string;
+  metadata: {
+    date: string;
+  } & T;
 }
 
 export type PageData<T> = {
   isDirectory: boolean,
   directory?: {
-    data: Expand<DirectoryData<T>>
+    data: Expand<DirectoryTree<T>>
   },
   article?: {
     content: string,
@@ -47,13 +49,14 @@ export type PageData<T> = {
 //   ? T extends infer O ? { [K in keyof O]: ExpandRecursively<O[K]> } : never
 //   : T;
 
-function getDirectoryMetadata(cwd: string, dirent: fs.Dirent) {
-  const fullPath = path.join(cwd, dirent.name);
+function getDirectoryMetadata(fullPath: string) {
+  // const fullPath = path.join(cwd, dirent.name);
+  const dirName = path.basename(fullPath);
   const indexPath = path.join(fullPath, DIR_INDEX_FILE);
   const indexExists = fs.existsSync(indexPath);
   if (!indexExists) {
     return {
-      title: dirent.name,
+      title: dirName,
       date: getFileModifiedDate(fullPath),
       description: null,
     };
@@ -65,17 +68,21 @@ function getDirectoryMetadata(cwd: string, dirent: fs.Dirent) {
       description: string,
     };
     return {
-      title: parsedYaml.title ? parsedYaml.title : dirent.name,
+      title: parsedYaml.title ? parsedYaml.title : dirName,
       date: parsedYaml.date ? parsedYaml.date : getFileModifiedDate(fullPath),
       description: parsedYaml.description ? parsedYaml.description : null,
     };
   }
 }
 
-function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
-  const slugData: DirectoryData<T> = {
-    directories: [],
+function getDirectoryListing<T>(cwd: string): DirectoryTree<T> {
+  const dirData: DirectoryTree<T> = {
+    name: getDirName(cwd),
+    slug: getDirSlug(cwd),
+    dirMtimeDate: getFileModifiedDate(cwd),
+    dirMetadata: getDirectoryMetadata(cwd),
     mdxArticles: [],
+    directories: [],
   };
   try {
     const dirents = fs.readdirSync(cwd, {withFileTypes: true});
@@ -93,9 +100,10 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
           title,
           date,
           description,
-        } = getDirectoryMetadata(cwd, dirent);
+        } = getDirectoryMetadata(fullPath);
         const dirMtimeDate = getFileModifiedDate(fullPath);
-        slugData.directories.push({
+        dirData.directories.push({
+          name: getDirName(fullPath),
           slug: slugPath,
           dirMtimeDate,
           dirMetadata: {
@@ -103,11 +111,13 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
             date,
             description,
           },
+          directories: [],
+          mdxArticles: [],
         });
       } else if (!isDirectory && isMdx) {
         const metadata = getBlogPostMetadata<T>(fullPath);
         const mtimeDate = getFileModifiedDate(fullPath);
-        slugData.mdxArticles.push({
+        dirData.mdxArticles.push({
           slug: slugPath,
           mtimeDate,
           metadata,
@@ -118,56 +128,74 @@ function getDirectoryListing<T>(cwd: string): DirectoryData<T> {
     console.error(`There was an error reading from ${cwd}: ${e}`);
   }
 
-  return slugData;
+  return dirData;
 }
 
-export function getSortedDirectoryData<T>(currentSlugPath?: string): DirectoryData<T> {
-  const searchDir = currentSlugPath ? path.join(POSTS_DIR, currentSlugPath) : POSTS_DIR;
-  const allSlugs = getDirectoryListing<T>(searchDir);
-  const directories = allSlugs.directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
-  const mdxArticles = allSlugs.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
+
+/**
+ * get Sorted Directory/mdxArticle data from a single directory
+ * @param currentSlugPath Current Directory
+ * @returns DirectoryData<T>
+ */
+
+export function getSortedDirectoryData<T>(currentSlugPath: string = ''): DirectoryTree<T> {
+  const searchDir = path.join(POSTS_DIR, currentSlugPath);
+  const dirData = getDirectoryListing<T>(searchDir);
+  const directories = dirData.directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
+  const mdxArticles = dirData.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
+  const dirMetadata = getDirectoryMetadata(searchDir);
+  const dirMtimeDate = getFileModifiedDate(searchDir);
+
   return {
+    name: getDirName(currentSlugPath),
+    slug: currentSlugPath,
+    dirMtimeDate,
+    dirMetadata,
     directories,
     mdxArticles,
   };
 }
 
-function getAllDirectoryData<T>({
-  cwd,
-  directoryData,
-}:{
-  cwd: string,
-  directoryData: DirectoryData<T>
-}): DirectoryData<T> {
-  directoryData = directoryData ? directoryData : {
-    directories: [],
-    mdxArticles: [],
-  };
-  const newDirectoryData = getDirectoryListing<T>(cwd);
-  directoryData.directories.push(...newDirectoryData.directories);
-  directoryData.mdxArticles.push(...newDirectoryData.mdxArticles);
-  directoryData.directories.forEach((dir) => {
-    const nextPath = path.join(POSTS_DIR, dir.slug);
-    directoryData = getAllDirectoryData({
-      cwd: nextPath,
-      directoryData: directoryData,
-    });
-  });
-
-  return directoryData;
+function getDirSlug(fullPath: string) {
+  return fullPath.replace(POSTS_DIR, '');
 }
 
-export function getAllSortedDirectoryData<T>(): DirectoryData<T> {
-  const allDirectoryData = getAllDirectoryData<T>({
-    cwd: POSTS_DIR,
-    directoryData: {
+function getDirName(fullPath: string) {
+  return path.basename(fullPath);
+}
+
+function getAllDirectoryData<T>(
+    cwd: string,
+    directoryData: DirectoryTree<T> = {
+      name: getDirName(cwd),
+      slug: getDirSlug(cwd),
+      dirMtimeDate: getFileModifiedDate(cwd),
+      dirMetadata: getDirectoryMetadata(cwd),
       directories: [],
       mdxArticles: [],
     },
-  });
-  const directories = allDirectoryData.directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
-  const mdxArticles = allDirectoryData.mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
+): DirectoryTree<T> {
+  const newDirectoryData = getDirectoryListing<T>(cwd);
+  directoryData.directories.push(...newDirectoryData.directories);
+  directoryData.mdxArticles.push(...newDirectoryData.mdxArticles);
+  return directoryData;
+}
+
+/**
+ * Gets all directory/mdxArticle data all the way down the directory tree
+ * starting at POSTS_DIR
+ * @returns DirectoryDat<T>
+ */
+
+export function getAllSortedDirectoryData<T>(): Expand<DirectoryTree<T>> {
+  let {name, slug, directories, mdxArticles} = getAllDirectoryData<T>(POSTS_DIR);
+  directories = directories.sort((a, b) => (a.dirMetadata.title > b.dirMetadata.title) ? 1 : -1);
+  mdxArticles = mdxArticles.sort((a, b) => (a.metadata.date < a.metadata.date) ? 1 : -1);
   return {
+    name: name,
+    slug: slug,
+    dirMtimeDate: getFileModifiedDate(POSTS_DIR),
+    dirMetadata: getDirectoryMetadata(POSTS_DIR),
     directories,
     mdxArticles,
   };
