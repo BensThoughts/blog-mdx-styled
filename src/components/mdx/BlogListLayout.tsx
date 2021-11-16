@@ -54,10 +54,10 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
             description={dirMetadata.description ? dirMetadata.description : `Articles about ${createTitle(dirMetadata.title)}`}
           />
         ))}
-        {mdxArticles.map(({slug, metadata}) => (
+        {mdxArticles.map(({metadata}) => (
           <BlogCard
-            key={slug}
-            slug={slug}
+            key={metadata.slug}
+            slug={metadata.slug}
             title={metadata.title}
             date={metadata.date}
             tags={metadata.tags}

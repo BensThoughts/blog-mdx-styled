@@ -6,10 +6,12 @@ import {MDXRemoteSerializeResult} from 'next-mdx-remote';
 // import {buildImageUrl} from 'cloudinary-build-url';
 import BlogLayout from '@app/components/mdx/BlogLayout';
 import BlogListLayout from '@app/components/mdx/BlogListLayout';
+import BlogListLayoutArr from '@app/components/mdx/BlogListLayoutArr';
 import {
-  getAllPages,
-  getPageData,
+  getSlugs,
+  Recussion,
   DirectoryTree,
+  DirectoryData,
   // SortedPostData,
 } from '@app/utils/blogPosts';
 import seoConfig from '@app/utils/seo.config';
@@ -34,7 +36,7 @@ export type BlogArticleMetaData = {
 type PostProps = {
   isDirectory: boolean;
   directory?: {
-    data: DirectoryTree<BlogArticleMetaData>
+    data: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[],
   }
   article?: {
     content: MDXRemoteSerializeResult,
@@ -52,9 +54,20 @@ export default function PostsPage({
   const currentRoute = router.asPath;
 
   if (isDirectory && directory) {
-    return <BlogListLayout
-      dirTree={directory.data}
-    />;
+    const {data} = directory;
+    if (Array.isArray(data)) {
+      return (
+        <BlogListLayoutArr
+          dirArr={data}
+        />
+      );
+    } else {
+      return (
+        <BlogListLayout
+          dirTree={data}
+        />
+      );
+    }
   } else if (article) {
     return (
       <BlogLayout
@@ -67,9 +80,9 @@ export default function PostsPage({
 };
 
 export const getStaticPaths: GetStaticPaths = async (params) => {
-  const pages = getAllPages();
+  const slugs = getSlugs();
   return {
-    paths: pages,
+    paths: slugs,
     fallback: false,
   };
 };
@@ -83,8 +96,15 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     throw new Error(`No slug on params object: ${params.slug}`);
   }
 
-  const slug = params.slug as string[];
-  const {isDirectory, directory, article} = await getPageData<BlogArticleMetaData>(slug);
+  const slugArray = params.slug as string[];
+  const {isDirectory, directory, article} =
+    await new Recussion<BlogArticleMetaData>().getPageData({
+      slugArray: slugArray,
+      options: {
+        dirReturnType: 'tree',
+        shallow: false,
+      },
+    });
 
   if (isDirectory) {
     return {

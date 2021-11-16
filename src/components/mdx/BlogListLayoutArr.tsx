@@ -5,6 +5,7 @@ import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import {DirectoryData} from '@app/utils/blogPosts';
+// import GridWrapper from '../GridWrapper';
 
 const GridContainer = styled.div`
   display: grid;
@@ -36,11 +37,7 @@ function createTitle(dirName: string) {
 export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
   return (
     <MaxWidthWrapper>
-      <SectionTitle className="mb-12">
-        <span className="text-icon-secondary">[&nbsp;</span>
-          Blog
-        <span className="text-icon-secondary">&nbsp;]</span>
-      </SectionTitle>
+      {/* <GridWrapper charWidth={100}> */}
       {dirArr.map((dir) => {
         if (dir.mdxArticles.length > 0) {
           return (
@@ -51,10 +48,10 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
                 <span className="text-icon-secondary">&nbsp;]</span>
               </SectionTitle>
               <GridContainer>
-                {dir.mdxArticles.map(({slug, metadata}) => (
+                {dir.mdxArticles.map(({metadata}) => (
                   <BlogCard
-                    key={slug}
-                    slug={slug}
+                    key={metadata.slug}
+                    slug={metadata.slug}
                     title={metadata.title}
                     date={metadata.date}
                     tags={metadata.tags}
@@ -66,6 +63,7 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
           );
         }
       })}
+      {/* </GridWrapper> */}
     </MaxWidthWrapper>
   );
 };

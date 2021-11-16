@@ -1,34 +1,39 @@
 import type {GetStaticProps} from 'next';
 
-import {getAllSortedDirectoryData, getSortedDirectoryArray, DirectoryTree, DirectoryData} from '@app/utils/blogPosts';
-// import BlogListLayout from '@app/components/mdx/BlogListLayout';
+import {DirectoryTree, DirectoryData, Recussion} from '@app/utils/blogPosts';
+import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import {BlogArticleMetaData} from './[...slug]';
 import BlogListLayoutArr from '@app/components/mdx/BlogListLayoutArr';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dirTree = getAllSortedDirectoryData<BlogArticleMetaData>();
-  const dirArr = getSortedDirectoryArray<BlogArticleMetaData>();
+  const {directory} = await new Recussion<BlogArticleMetaData>().getPageData({options: {dirReturnType: 'array', reSortArray: true, shallow: false}});
 
   return {
     props: {
-      dirTree,
-      dirArr,
+      directory,
     },
   };
 };
 
 interface BlogArticleListProps {
-  dirTree: DirectoryTree<BlogArticleMetaData>,
-  dirArr: DirectoryData<BlogArticleMetaData>[],
+  directory: {
+    data: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[];
+  };
 }
 
-export default function BlogArticleListPage({dirTree, dirArr}: BlogArticleListProps) {
-  return (
-    // <BlogListLayout
-    //   dirTree={dirTree}
-    // />
-    <BlogListLayoutArr
-      dirArr={dirArr}
-    />
-  );
+export default function BlogArticleListPage({directory}: BlogArticleListProps) {
+  const {data} = directory;
+  if (Array.isArray(data)) {
+    return (
+      <BlogListLayoutArr
+        dirArr={data}
+      />
+    );
+  } else {
+    return (
+      <BlogListLayout
+        dirTree={data}
+      />
+    );
+  }
 };
