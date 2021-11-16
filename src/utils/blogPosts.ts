@@ -238,6 +238,7 @@ function getBlogPostData<T>(fullPath: string, includeContent: boolean): MdxArtic
         title,
         slug,
       },
+      content,
     };
   } else {
     return {
@@ -249,7 +250,6 @@ function getBlogPostData<T>(fullPath: string, includeContent: boolean): MdxArtic
         title,
         slug,
       },
-      content,
     };
   }
 }
