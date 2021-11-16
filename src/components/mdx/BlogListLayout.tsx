@@ -1,27 +1,27 @@
 import styled from '@emotion/styled';
 
 import BlogCard from '@app/components/BlogCard';
-import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
+// import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import BlogFolderCard from '../BlogFolderCard';
 import {DirectoryTree} from '@app/utils/blogPosts';
+import GridWrapper from '@app/components/GridWrapper';
 
 const GridContainer = styled.div`
   display: grid;
   height: 100%;
-  gap: 32px;
+  row-gap: 3rem;
   grid-template-columns: 1fr;
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-auto-flow: row;
-    gap: 32px;
-  }
-
-  *{
-    grid-column: auto;
-    grid-row: auto;
+    gap: 5rem;
+    * {
+      grid-column: auto;
+      grid-row: auto;
+    }
   }
 `;
 
@@ -39,8 +39,8 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
   const {dirMetadata, directories, mdxArticles} = dirTree;
   const title = createTitle(dirMetadata.title);
   return (
-    <MaxWidthWrapper>
-      <SectionTitle className="mb-12">
+    <GridWrapper charWidth={140}>
+      <SectionTitle>
         <span className="text-icon-secondary">[&nbsp;</span>
           Blog <span>&nbsp;-&nbsp;{title}</span>
         <span className="text-icon-secondary">&nbsp;]</span>
@@ -65,6 +65,6 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
           />
         ))}
       </GridContainer>
-    </MaxWidthWrapper>
+    </GridWrapper>
   );
 };

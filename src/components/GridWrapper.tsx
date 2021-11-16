@@ -5,13 +5,25 @@ const Wrapper = styled.div<{
   charWidth?: number
 }>`
   display: grid;
+  flex-direction: column;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
   row-gap: 3rem;
+  column-gap: 0;
   grid-template-columns: ${({charWidth = 90}) => `1fr min(${charWidth}ch, 100%) 1fr`};
   * {
     grid-column: 1 / -1;
   }
   @media (min-width: 768px) {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: ${({charWidth = 90}) => `1fr min(${charWidth}ch, 100%) 1fr`};
+    padding-right: 2rem;
+    padding-left: 2rem;
     row-gap: 5rem;
     * {
       grid-column: 2;
@@ -26,7 +38,7 @@ interface GridWrapperProps {
 }
 
 export default function GridWrapper({
-  charWidth = 90,
+  charWidth = 100,
   className,
   children,
 }: GridWrapperProps) {

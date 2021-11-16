@@ -22,7 +22,6 @@ import {
   Strong,
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
-import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import GridWrapper from '@app/components/GridWrapper';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 
@@ -112,18 +111,18 @@ export default function BlogLayout({
           cardType: ogImageUrl ? 'summary_large_image' : 'summary',
         }}
       />
-      <MaxWidthWrapper>
-        <article>
-          <GridWrapper>
-            <ArticleHeader
-              title={title}
-              date={date}
-              readTime={readTime}
-              permaLink={url}
-              tags={tags}
-              className="mt-10"
-            />
-            {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
+      {/* <MaxWidthWrapper> */}
+      <article>
+        <GridWrapper>
+          <ArticleHeader
+            title={title}
+            date={date}
+            readTime={readTime}
+            permaLink={url}
+            tags={tags}
+            className="mt-10"
+          />
+          {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
               (
                 <HeaderImage
                   imgPath={cloudinaryImgPath}
@@ -135,16 +134,16 @@ export default function BlogLayout({
               (
                 <></>
               )
-            }
-            <MDXRemote {...content} components={components} />
-            <ArticleFooter
-              title={title}
-              permaLink={url}
-              tags={tags}
-            />
-          </GridWrapper>
-        </article>
-      </MaxWidthWrapper>
+          }
+          <MDXRemote {...content} components={components} />
+          <ArticleFooter
+            title={title}
+            permaLink={url}
+            tags={tags}
+          />
+        </GridWrapper>
+      </article>
+      {/* </MaxWidthWrapper> */}
     </>
   );
 };
