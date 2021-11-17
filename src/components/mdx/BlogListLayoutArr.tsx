@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
 import BlogCard from '@app/components/BlogCard';
@@ -41,14 +42,13 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
       {dirArr.map((dir) => {
         if (dir.mdxArticles.length > 0) {
           return (
-            <>
-              <SectionTitle key={dir.dirMetadata.title}>
+            <React.Fragment key={dir.dirMetadata.title}>
+              <SectionTitle>
                 <span className="text-icon-secondary">[&nbsp;</span>
                 {createTitle(dir.dirMetadata.title)}
                 <span className="text-icon-secondary">&nbsp;]</span>
               </SectionTitle>
               <div>
-
                 <GridContainer>
                   {dir.mdxArticles.map(({metadata}) => (
                     <BlogCard
@@ -62,7 +62,7 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
                   ))}
                 </GridContainer>
               </div>
-            </>
+            </React.Fragment>
           );
         }
       })}
