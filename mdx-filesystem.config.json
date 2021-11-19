@@ -1,0 +1,5 @@
+{
+  "postsDir": "blog-posts",
+  "excludedProdDirs": ["drafts"],
+  "dirIndexFile": "index.yaml"
+}
