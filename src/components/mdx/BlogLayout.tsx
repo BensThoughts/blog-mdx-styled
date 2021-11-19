@@ -23,7 +23,7 @@ import {
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
 import GridWrapper from '@app/components/GridWrapper';
-import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
+import {IBlogArticleMetaData} from '@app/pages/blog/[...slug]';
 
 const components = {
   a: A,
@@ -49,7 +49,7 @@ const components = {
 type PostProps = {
   content: MDXRemoteSerializeResult;
   url: string;
-  metadata: BlogArticleMetaData;
+  metadata: IBlogArticleMetaData;
 };
 
 export default function BlogLayout({
