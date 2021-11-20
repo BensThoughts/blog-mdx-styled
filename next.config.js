@@ -6,7 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   // target: 'serverless',
-  swcMinify: true,
+  swcMinify: false,
   reactStrictMode: true,
   // productionBrowserSourceMaps: true,
   images: {
