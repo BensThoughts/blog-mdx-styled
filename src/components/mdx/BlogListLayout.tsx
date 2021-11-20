@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import BlogCard from '@app/components/BlogCard';
 // import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
-import {IBlogArticleMetaData} from '@app/pages/blog/[...slug]';
+import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import BlogFolderCard from '../BlogFolderCard';
 import {DirectoryTree} from 'next-mdx-filesystem';
 import GridWrapper from '@app/components/GridWrapper';
@@ -27,7 +27,7 @@ const GridContainer = styled.div`
 
 
 type BlogArticleListProps = {
-  dirTree: DirectoryTree<IBlogArticleMetaData>
+  dirTree: DirectoryTree<BlogArticleMetaData>
 }
 
 function createTitle(dirName: string) {
