@@ -1,12 +1,13 @@
 import type {GetStaticProps} from 'next';
-
-import {DirectoryTree, DirectoryData, Recussion} from '@app/utils/blogPosts';
 import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import {BlogArticleMetaData} from './[...slug]';
 import BlogListLayoutArr from '@app/components/mdx/BlogListLayoutArr';
 
+import {MdxFilesystem, DirectoryTree, DirectoryData} from 'next-mdx-filesystem';
+const mdxFilesystem = new MdxFilesystem<BlogArticleMetaData>();
+
 export const getStaticProps: GetStaticProps = async () => {
-  const {directory} = await new Recussion<BlogArticleMetaData>().getPageData({options: {dirReturnType: 'array', reSortArray: true, shallow: false}});
+  const {directory} = await mdxFilesystem.getPageData({dirOptions: {returnType: 'array'}});
 
   return {
     props: {
@@ -16,23 +17,20 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 interface BlogArticleListProps {
-  directory: {
-    data: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[];
-  };
+  directory: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[];
 }
 
 export default function BlogArticleListPage({directory}: BlogArticleListProps) {
-  const {data} = directory;
-  if (Array.isArray(data)) {
+  if (Array.isArray(directory)) {
     return (
       <BlogListLayoutArr
-        dirArr={data}
+        dirArr={directory}
       />
     );
   } else {
     return (
       <BlogListLayout
-        dirTree={data}
+        dirTree={directory}
       />
     );
   }

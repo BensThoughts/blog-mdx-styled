@@ -2,29 +2,25 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {useRouter} from 'next/router';
 import {serialize} from 'next-mdx-remote/serialize';
 import {MDXRemoteSerializeResult} from 'next-mdx-remote';
+import seoConfig from '@app/utils/seo.config';
 // import {NextSeo} from 'next-seo';
 // import {buildImageUrl} from 'cloudinary-build-url';
 import BlogLayout from '@app/components/mdx/BlogLayout';
 import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import BlogListLayoutArr from '@app/components/mdx/BlogListLayoutArr';
 import {
-  getSlugs,
-  Recussion,
+  MdxFilesystem,
   DirectoryTree,
   DirectoryData,
-  // SortedPostData,
-} from '@app/utils/blogPosts';
-import seoConfig from '@app/utils/seo.config';
+} from 'next-mdx-filesystem';
+const mdxFilesystem = new MdxFilesystem<BlogArticleMetaData>();
 
-export type BlogArticleMetaData = {
+export interface BlogArticleMetaData {
   slug: string,
-  date: string,
-
-  // slug: string,
   title: string,
+  date: string,
   shortDescription: string,
   longDescription: string,
-  // date: string,
   readTime: number,
   tags: string[],
   cloudinaryImgPath: string,
@@ -35,14 +31,11 @@ export type BlogArticleMetaData = {
 
 type PostProps = {
   isDirectory: boolean;
-  directory?: {
-    data: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[],
-  }
+  directory?: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[],
   article?: {
     content: MDXRemoteSerializeResult,
     metadata: BlogArticleMetaData,
   }
-
 }
 
 export default function PostsPage({
@@ -54,17 +47,16 @@ export default function PostsPage({
   const currentRoute = router.asPath;
 
   if (isDirectory && directory) {
-    const {data} = directory;
-    if (Array.isArray(data)) {
+    if (Array.isArray(directory)) {
       return (
         <BlogListLayoutArr
-          dirArr={data}
+          dirArr={directory}
         />
       );
     } else {
       return (
         <BlogListLayout
-          dirTree={data}
+          dirTree={directory}
         />
       );
     }
@@ -80,7 +72,7 @@ export default function PostsPage({
 };
 
 export const getStaticPaths: GetStaticPaths = async (params) => {
-  const slugs = getSlugs();
+  const slugs = mdxFilesystem.getSlugs();
   return {
     paths: slugs,
     fallback: false,
@@ -97,12 +89,12 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   }
 
   const slugArray = params.slug as string[];
-  const {isDirectory, directory, article} =
-    await new Recussion<BlogArticleMetaData>().getPageData({
+  const {isDirectory, directory, mdxArticle} =
+    await mdxFilesystem.getPageData({
       slugArray: slugArray,
-      options: {
-        dirReturnType: 'tree',
-        shallow: false,
+      dirOptions: {
+        returnType: 'tree',
+        shallow: true,
       },
     });
 
@@ -114,13 +106,13 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       },
     };
   } else {
-    const mdxSource = await serialize(article?.content ? article.content : '');
+    const mdxSource = await serialize(mdxArticle?.content ? mdxArticle.content : '');
     return {
       props: {
         isDirectory,
         article: {
           content: mdxSource,
-          metadata: article?.metadata,
+          metadata: mdxArticle?.metadata,
         },
       },
     };
