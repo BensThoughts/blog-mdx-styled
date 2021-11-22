@@ -19,7 +19,7 @@ const GridContainer = styled.div`
     grid-template-rows: auto;
     grid-auto-flow: row;
     gap: 5rem;
-    * {
+    a {
       grid-column: auto;
       grid-row: auto;
     }
@@ -58,6 +58,7 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
                       date={metadata.date}
                       tags={metadata.tags}
                       description={metadata.longDescription}
+                      className="grid"
                     />
                   ))}
                 </GridContainer>
