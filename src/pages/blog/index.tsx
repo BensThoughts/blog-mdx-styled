@@ -3,11 +3,18 @@ import BlogListLayout from '@app/components/mdx/BlogListLayout';
 import {BlogArticleMetaData} from './[...slug]';
 import BlogListLayoutArr from '@app/components/mdx/BlogListLayoutArr';
 
+// import MdxFilesystem from 'next-mdx-filesystem/dist/cjs/mdx-filesystem';
 import {MdxFilesystem, DirectoryTree, DirectoryData} from 'next-mdx-filesystem';
 const mdxFilesystem = new MdxFilesystem<BlogArticleMetaData>();
 
 export const getStaticProps: GetStaticProps = async () => {
-  const {directory} = await mdxFilesystem.getPageData({dirOptions: {returnType: 'array'}});
+  const {directory} = await mdxFilesystem.getPageData({
+    dirOptions: {
+      returnType: 'array',
+      shallow: false,
+      reSortArray: true,
+    },
+  });
 
   return {
     props: {

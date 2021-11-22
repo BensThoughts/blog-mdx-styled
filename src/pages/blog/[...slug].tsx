@@ -32,7 +32,7 @@ export interface BlogArticleMetaData {
 type PostProps = {
   isDirectory: boolean;
   directory?: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[],
-  article?: {
+  mdxArticle?: {
     content: MDXRemoteSerializeResult,
     metadata: BlogArticleMetaData,
   }
@@ -41,7 +41,7 @@ type PostProps = {
 export default function PostsPage({
   isDirectory,
   directory,
-  article,
+  mdxArticle,
 }: PostProps) {
   const router = useRouter();
   const currentRoute = router.asPath;
@@ -60,18 +60,18 @@ export default function PostsPage({
         />
       );
     }
-  } else if (article) {
+  } else if (mdxArticle) {
     return (
       <BlogLayout
-        content={article.content}
+        content={mdxArticle.content}
         url={`${seoConfig.openGraph.url}${currentRoute}`}
-        metadata={article.metadata}
+        metadata={mdxArticle.metadata}
       />
     );
   }
 };
 
-export const getStaticPaths: GetStaticPaths = async (params) => {
+export const getStaticPaths: GetStaticPaths = (params) => {
   const slugs = mdxFilesystem.getSlugs();
   return {
     paths: slugs,
@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   const slugArray = params.slug as string[];
   const {isDirectory, directory, mdxArticle} =
     await mdxFilesystem.getPageData({
-      slugArray: slugArray,
+      slugArray,
       dirOptions: {
         returnType: 'tree',
         shallow: true,
@@ -107,12 +107,13 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     };
   } else {
     const mdxSource = await serialize(mdxArticle?.content ? mdxArticle.content : '');
+    const metadata = mdxArticle?.metadata || null;
     return {
       props: {
         isDirectory,
-        article: {
+        mdxArticle: {
           content: mdxSource,
-          metadata: mdxArticle?.metadata,
+          metadata,
         },
       },
     };
