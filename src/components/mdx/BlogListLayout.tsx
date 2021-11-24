@@ -36,7 +36,7 @@ function createTitle(dirName: string) {
 
 
 export default function BlogListLayout({dirTree}: BlogArticleListProps) {
-  const {dirMetadata, directories, mdxArticles} = dirTree;
+  const {dirMetadata, directories, mdxFiles} = dirTree;
   const title = createTitle(dirMetadata.title);
   return (
     <GridWrapper charWidth={140}>
@@ -54,7 +54,7 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
             description={dirMetadata.description ? dirMetadata.description : `Articles about ${createTitle(dirMetadata.title)}`}
           />
         ))}
-        {mdxArticles.map(({metadata}) => (
+        {mdxFiles.map(({metadata}) => (
           <BlogCard
             key={metadata.slug}
             slug={metadata.slug}

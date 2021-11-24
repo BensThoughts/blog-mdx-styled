@@ -59,7 +59,6 @@ export default function BlogLayout({
 }: PostProps) {
   const {
     date,
-
     title,
     shortDescription,
     longDescription,

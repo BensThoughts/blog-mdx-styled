@@ -40,7 +40,7 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
     <GridWrapper charWidth={120}>
       {/* <GridWrapper charWidth={100}> */}
       {dirArr.map((dir) => {
-        if (dir.mdxArticles.length > 0) {
+        if (dir.mdxFiles.length > 0) {
           return (
             <React.Fragment key={dir.dirMetadata.title}>
               <SectionTitle>
@@ -50,7 +50,7 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
               </SectionTitle>
               <div>
                 <GridContainer>
-                  {dir.mdxArticles.map(({metadata}) => (
+                  {dir.mdxFiles.map(({metadata}) => (
                     <BlogCard
                       key={metadata.slug}
                       slug={metadata.slug}

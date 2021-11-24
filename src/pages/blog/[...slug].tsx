@@ -12,8 +12,11 @@ import {
   MdxFilesystem,
   DirectoryTree,
   DirectoryData,
+  MdxMetadata,
 } from 'next-mdx-filesystem';
 const mdxFilesystem = new MdxFilesystem<BlogArticleMetaData>();
+
+export type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
 export interface BlogArticleMetaData {
   slug: string,
@@ -32,16 +35,16 @@ export interface BlogArticleMetaData {
 type PostProps = {
   isDirectory: boolean;
   directory?: DirectoryTree<BlogArticleMetaData> | DirectoryData<BlogArticleMetaData>[],
-  mdxArticle?: {
+  mdxFile?: {
     content: MDXRemoteSerializeResult,
-    metadata: BlogArticleMetaData,
+    metadata: Expand<MdxMetadata<BlogArticleMetaData>>,
   }
 }
 
 export default function PostsPage({
   isDirectory,
   directory,
-  mdxArticle,
+  mdxFile,
 }: PostProps) {
   const router = useRouter();
   const currentRoute = router.asPath;
@@ -60,12 +63,12 @@ export default function PostsPage({
         />
       );
     }
-  } else if (mdxArticle) {
+  } else if (mdxFile) {
     return (
       <BlogLayout
-        content={mdxArticle.content}
+        content={mdxFile.content}
         url={`${seoConfig.openGraph.url}${currentRoute}`}
-        metadata={mdxArticle.metadata}
+        metadata={mdxFile.metadata}
       />
     );
   }
@@ -89,11 +92,11 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   }
 
   const slugArray = params.slug as string[];
-  const {isDirectory, directory, mdxArticle} =
+  const {isDirectory, directory, mdxFile} =
     await mdxFilesystem.getPageData({
       slugArray,
       dirOptions: {
-        returnType: 'tree',
+        returnType: 'array',
         shallow: true,
       },
     });
@@ -106,12 +109,12 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       },
     };
   } else {
-    const mdxSource = await serialize(mdxArticle?.content ? mdxArticle.content : '');
-    const metadata = mdxArticle?.metadata || null;
+    const mdxSource = await serialize(mdxFile?.content ? mdxFile.content : '');
+    const metadata = mdxFile?.metadata || null;
     return {
       props: {
         isDirectory,
-        mdxArticle: {
+        mdxFile: {
           content: mdxSource,
           metadata,
         },
