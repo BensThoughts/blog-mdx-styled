@@ -97,7 +97,8 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       slugArray,
       dirOptions: {
         returnType: 'array',
-        shallow: true,
+        shallow: false,
+        reSortArray: true,
       },
     });
 
