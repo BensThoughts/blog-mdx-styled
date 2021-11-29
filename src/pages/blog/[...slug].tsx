@@ -22,14 +22,14 @@ export interface BlogArticleMetaData {
   slug: string,
   title: string,
   date: string,
-  shortDescription: string,
-  longDescription: string,
-  readTime: number,
-  tags: string[],
-  cloudinaryImgPath: string,
-  imgWidth: number,
-  imgHeight: number,
-  imgAlt: string,
+  shortDescription?: string,
+  longDescription?: string,
+  readTime?: number,
+  tags?: string[],
+  cloudinaryImgPath?: string,
+  imgWidth?: number,
+  imgHeight?: number,
+  imgAlt?: string,
 }
 
 type PostProps = {
