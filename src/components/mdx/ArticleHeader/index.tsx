@@ -5,9 +5,9 @@ import ArticleTweet from '@app/components/mdx/ArticleTweet';
 type ArticleHeaderProps = {
   title: string;
   date: string;
-  readTime: number;
+  readTime?: number;
   permaLink: string;
-  tags: string[];
+  tags?: string[];
   className?: string;
 }
 
@@ -19,8 +19,9 @@ export default function ArticleHeader({
   tags,
   className = '',
 }: ArticleHeaderProps) {
-  const tweetTags = tags.map((tag) => '#' + tag).join(' ');
-  const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out! \n\n ${tweetTags} \n\n`;
+  const tweetTags = tags ? tags.map((tag) => '#' + tag).join(' ') : undefined;
+  const tweetTagMessage = tweetTags ? `\n\n ${tweetTags} \n\n` : '';
+  const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out! ${tweetTagMessage}`;
 
   return (
     <div className={`w-full max-w-4xl mx-auto flex justify-center ${className}`}>
@@ -31,9 +32,9 @@ export default function ArticleHeader({
         <div className="flex flex-col gap-y-2  md:flex-row md:justify-between">
           <div className="flex flex-row justify-between md:flex-col">
             <Date dateString={date} />
-            <p className="italic font-light">
+            {readTime && <p className="italic font-light">
             Read time: {readTime} min.
-            </p>
+            </p>}
           </div>
           <ArticleTweet
             permaLink={permaLink}
