@@ -50,8 +50,8 @@ type BlogCardProps = {
   slug: string
   date?: string
   title: string
-  description: string
-  tags: string[]
+  description?: string
+  tags?: string[]
   className?: string
 } & React.HTMLAttributes<HTMLAnchorElement>
 
@@ -72,7 +72,7 @@ export default function BlogCard({
           {date && <div className="italic">{date}</div>}
         </div>
         {description && <div className="text-base">{description}</div>}
-        <div className="h-full flex flex-col justify-end">
+        {tags && <div className="h-full flex flex-col justify-end">
           <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
             {tags.map((tag, idx) => (
               <Pill key={tag} delay={0.07 * idx}>
@@ -81,7 +81,7 @@ export default function BlogCard({
               </Pill>
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     </AnchorContainer>
   );
