@@ -16,6 +16,10 @@ export const menuItems = [
     href: '/#projects',
   },
   {
+    name: 'Packages',
+    href: '/#packages',
+  },
+  {
     name: 'Contact',
     href: '/#contact',
   },
