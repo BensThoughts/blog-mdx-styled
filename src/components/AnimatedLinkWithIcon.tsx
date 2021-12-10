@@ -12,7 +12,7 @@ type AnimatedLinkWithIconProps = {
   text: string,
   href: string,
   icon: React.ReactNode,
-  iconPosition: 'left' | 'right';
+  iconPosition?: 'left' | 'right';
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export default function AnimatedLinkWithIcon({

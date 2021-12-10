@@ -21,7 +21,6 @@ export default function ProjectLinks({
           text="repo"
           className="text-secondary"
           icon={<Github className="text-secondary" />}
-          iconPosition="right"
         />
         <AnimatedLinkWithIcon
           href={liveLink}
@@ -30,7 +29,6 @@ export default function ProjectLinks({
           text="site"
           className="text-secondary"
           icon={<ExternalLink className="text-secondary" />}
-          iconPosition="right"
         />
       </div>
     </div>
