@@ -98,7 +98,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                   text="Resume"
                   className="text-secondary"
                   icon={<Folder className="text-secondary mb-1" />}
-                  iconSide="left"
+                  iconPosition="left"
                 />
               </div>
             </div>

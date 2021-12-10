@@ -12,7 +12,7 @@ type AnimatedLinkWithIconProps = {
   text: string,
   href: string,
   icon: React.ReactNode,
-  iconSide: 'left' | 'right';
+  iconPosition: 'left' | 'right';
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export default function AnimatedLinkWithIcon({
@@ -20,7 +20,7 @@ export default function AnimatedLinkWithIcon({
   href,
   className,
   icon,
-  iconSide = 'right',
+  iconPosition = 'right',
   ...rest
 }: AnimatedLinkWithIconProps) {
   return (
@@ -31,13 +31,13 @@ export default function AnimatedLinkWithIcon({
       className={`flex gap-2 text-primary items-center justify-center ${className}`}
       {...rest}
     >
-      {iconSide === 'left' && <span className="inline-block">{icon}</span>}
+      {iconPosition === 'left' && <span className="inline-block">{icon}</span>}
       <AnimatedUnderline
         className="animated-underline"
       >
         {text}
       </AnimatedUnderline>
-      {iconSide === 'right' && <span className="inline-block">{icon}</span>}
+      {iconPosition === 'right' && <span className="inline-block">{icon}</span>}
     </AnimationController>
   );
 }
