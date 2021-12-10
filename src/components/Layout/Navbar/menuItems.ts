@@ -1,7 +1,7 @@
 export const menuItems = [
   {
     name: 'Home',
-    href: '/',
+    href: '/#home',
   },
   // {
   //   name: 'About',

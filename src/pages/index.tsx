@@ -1,25 +1,28 @@
 import GridWrapper from '@app/components/GridWrapper';
-import AvatarCard from '@app/components/Home/AvatarCard';
+import AvatarSection from '@app/components/Home/AvatarSection';
 import ProjectCard from '@app/components/Home/ProjectCard';
 import SectionTitle from '@app/components/SectionTitle';
 import {Projects} from '@app/components/Home/ProjectCard/projects';
-import Technologies from '@app/components/Home/Technologies';
+import Technologies from '@app/components/Home/TechnologiesSection';
 // import TechnologiesBox from '@app/components/Home/Technologies/TechnologiesBox';
-import Contact from '@app/components/Home/Contact';
+import ContactSection from '@app/components/Home/ContactSection';
+import PackageSection from '@app/components/Home/PackagesSection';
 
 export default function Home() {
   return (
     <GridWrapper charWidth={100}>
       {/* About Section */}
-      <SectionTitle id="about">
+      <div id="home"></div>
+      <SectionTitle>
         <span className="text-icon-secondary">[</span>
                 &nbsp;01. About Me&nbsp;
         <span className="text-icon-secondary">]</span>
       </SectionTitle>
-      <AvatarCard />
+      <AvatarSection />
 
       {/* Technologies Section */}
-      <SectionTitle id="skills">
+      <div id="skills"></div>
+      <SectionTitle>
         <span className="text-icon-secondary">[</span>
                 &nbsp;02. Skills&nbsp;
         <span className="text-icon-secondary">]</span>
@@ -27,7 +30,8 @@ export default function Home() {
       <Technologies />
 
       {/* Projects Section */}
-      <SectionTitle id="projects">
+      <div id="projects"></div>
+      <SectionTitle>
         <span className="text-icon-secondary">[</span>
                 &nbsp;03. Projects&nbsp;
         <span className="text-icon-secondary">]</span>
@@ -47,13 +51,23 @@ export default function Home() {
         />
       ))}
 
-      {/* Contact Section */}
-      <SectionTitle id="contact">
+      {/* Packages Section */}
+      <div id="packages"></div>
+      <SectionTitle>
         <span className="text-icon-secondary">[</span>
-                &nbsp;04. Contact&nbsp;
+                &nbsp;04. Packages&nbsp;
         <span className="text-icon-secondary">]</span>
       </SectionTitle>
-      <Contact/>
+      <PackageSection />
+
+      {/* Contact Section */}
+      <div id="contact"></div>
+      <SectionTitle>
+        <span className="text-icon-secondary">[</span>
+                &nbsp;05. Contact&nbsp;
+        <span className="text-icon-secondary">]</span>
+      </SectionTitle>
+      <ContactSection />
     </GridWrapper>
   );
 };

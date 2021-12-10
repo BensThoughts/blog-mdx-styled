@@ -12,8 +12,8 @@ import {menuItems} from './menuItems';
 
 import {
   Bars,
+  Folder,
   Monitor,
-  Package,
 } from '@app/components/Icons';
 import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
 
@@ -97,7 +97,8 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                   download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
                   text="Resume"
                   className="text-secondary"
-                  icon={<Package className="text-secondary" />}
+                  icon={<Folder className="text-secondary mb-1" />}
+                  iconSide="left"
                 />
               </div>
             </div>
