@@ -1,0 +1,239 @@
+---
+title: "Typescript Conditional Generic Types"
+shortDescription: "How to let users decide on a return type using an options argument in Typescript"
+longDescription: "In this article I show you how I created a function that lets users choose between 2 different data structures as a return type. It uses Conditional Generic Types and Union Types."
+date: "2022-01-19"
+readTime: 15
+cloudinaryImgPath: "v1642661788/blog/blog/typescript-conditional-return-types/og-joshua-sortino-LqKhnDzSF-8-unsplash_qwnxqu.jpg"
+imgWidth: 1200
+imgHeight: 801
+imgAlt: "Highway Ramps"
+tags:
+  - 'Typescript'
+  - 'nextjs'
+  - 'react'
+  - 'nodejs'
+---
+
+Photo by [Joshua Sortino](https://unsplash.com/@sortino?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/code?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  
+---
+
+In this article I am going to discuss one of the primary struggles I faced while building [next-mdx-filesystem](https://www.npmjs.com/package/next-mdx-filesystem). next-mdx-filesystem makes it super easy to do 2 things. The first is strongly type the shape of your .mdx file frontmatter. The second is that it let's you organize your .mdx files into folders that represent categories. It reads the contents of a directory and give you back the data in a format that is easy for react components to consume.
+
+---
+
+## The Problem
+
+The issue I ran into was that I wanted users to be able to choose the data structure that was returned to them from the function that reads through the folder of .mdx files.
+
+The library exposes a function that takes in a slug (the current route of the web page) and returns data from the filesystem based on that route. We don't know if the route points to an mdx file or a directory prior to calling the function. Therefore it returns a data structure that looks like the following...
+
+```ts
+{
+  isDirectory: boolean,
+  directory: data // will contain data about mdx files in a directory
+  mdxFile: data // will contain the data in an mdx file 
+}
+```
+
+In the final implementation users can choose to receive back one of 2 data structures for the directory data when the slug path points to a directory. The first option is a "DirectoryTree" data structure that is a plain javascript object representing the directory tree within a folder. The second option is an array of "DirectoryData" objects that each represent a single directory in the tree.
+
+The "DirectoryTree" is useful for creating a tree like table of contents with links to articles. The array of "DirectoryData" objects is useful for creating a large list of all articles in a given directory. The "DirectoryData" array is also easier to use directly in a react component because we can use {dirArray.map} directly in a react component to create a list with a bunch of articles and links to them.
+
+---
+
+## The Desired Outcome
+
+Given the function `getPageData({slug, dirOptions: { returnType: 'array' | 'tree' }}) => {...}` we want the user to specify the data structure that is returned from `getPageData` by choosing between `tree` or `array` for `returnType`. While it is true that we could just return both data structures all of the time, that would be highly inefficient. We only want to recursively read through the directory tree once and give back the data structure that is requested.
+
+---
+
+## An Attempt at The Solution
+
+There is a really nice feature of Typescript *Generic Types* called *Conditional Types*. They can be used to infer the return type of a function based on the type of one of the arguments given to the function. You can read more about conditional types in the Typescript [documentation](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html).
+
+Combining *Conditional Types* and a *Union* type allowed me to create a function in which the user can choose between 'array' and 'tree' for the `returnType` property of the `dirOptions` object. For a refresher you can read about [Union types here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types).
+
+The signature of a function which determines its return type based on the type of an options argument is shown in the code below.
+
+```ts
+function getPageData<R extends 'tree' | 'array' = 'tree'>(
+  args?: {
+    slug: string[],
+    dirOptions?: {
+      returnType?: R,
+    }
+  }
+) {
+  // ...Removed for brevity and sudo code used below
+  if (slug === 'a path to some mdx file') {
+    return {
+      isMdxFile: true,
+      dirData: null,
+      mdxData: readMdxFileData(slug),
+    };
+  }
+  if (slug === 'a path to a directory') {
+    const data = returnType === 'tree' ? {
+      idMdxFile: false,
+      dirData: getDirectoryTree(slug),
+      mdxData: null,
+    } : {
+      isMdxFile: false,
+      dirData: getDirectoryArray(slug),
+      mdxData: null,
+    }
+    return data // Tree Data Structure
+  }
+}
+```
+
+Now when a user explicity sets the `returnType` to be `array` they will get an array data structure back, if the user chooses `tree` they get a tree back, and if they omit `returnType` they get back the default data structure (a `tree`). As an added bonus when the user assigns the results of the function to a variable vscode (and Typescript) knows exactly how to type the variable `dirData` correctly based on what the user set `returnType` to.
+
+## The Struggles
+
+Using Condition Generic Types and Union types worked great, the function did exactly what I wanted it to.  The problem was that I also wanted the user to be able to define the shape of their frontmatter data and that required a second generic type parameter.  You would think that this would be simple enough. Just add another generic type into the functions generic type definition between the angle brackets. Below is what I thought may work, `T` is the user defined shape of their mdx frontmatter
+
+```ts
+function getPageData<T, R extends 'tree' | 'array' = 'tree'>(
+  args?: {
+    slug: string[],
+    dirOptions?: {
+      returnType?: R,
+    }
+  }
+) {
+  // ...Code removed for brevity and sudo code used below
+  if (slug === 'a path to some mdx file') {
+    return {
+      isMdxFile: true,
+      dirData: null,
+      mdxData: readMdxFileData<T>(slug),
+    };
+  }
+  if (slug === 'a path to a directory') {
+    const data = returnType === 'tree' ? {
+      idMdxFile: false,
+      dirData: getDirectoryTree(slug),
+      mdxData: null,
+    } : {
+      isMdxFile: false,
+      dirData: getDirectoryArray(slug),
+      mdxData: null,
+    }
+    return data;
+  }
+}
+```
+
+You would think that the user could then call the function like so...
+
+```ts
+const data = getPageData<MyMdxFrontMatterType>(
+  args: {
+    slug: ['slug'],
+    dirOptions: {
+      returnType: 'array'
+    }
+  }
+);
+```
+
+...well not so. Typescript would complain that the generic type definition requires 2 arguments and received only one. This despite the fact that the second one was given a default type for the situation in which `returnType` is not defined explicitly.
+
+OK, so maybe we just have the user define the return type in the angle brackets instead of with an options object when calling the function like so...
+
+```ts
+const data = getPageData<MyMdxFrontMatterType, 'array'>(
+  args: {
+    slug: ['slug']
+  }
+);
+```
+
+This didn't work well either. One, this was not great from a user ergonomics point of view. Two, the user was then forced to define the shape of their front matter data if they wanted to explicitly set the return type for the directory data. Users should be able to use the library without having any frontmatter at all and still decide on the return type of directory data when the slug points to a directory instead of an mdx file.
+
+---
+
+## The Solution
+
+The only solution that I could come up with to make this work was to wrap the function in a Class so that users who wanted to define the shape of their frontmatter could do so right after importing the class and creating a new instance of it.
+
+The final signature looks a little like this...
+
+```ts
+interface PageData<T, R extends 'tree' | 'array' = 'tree'> {
+  isDirectory: boolean;
+  directory?: R extends 'tree' ? DirectoryTree<T> : DirectoryData<T>[];
+  mdxFile?: Expand<MdxFileData<T>>;
+}
+
+export class MdxFilesystem<T = {}> {
+  async getPageData<R extends 'tree' | 'array' = 'tree'>(
+      args?: {
+        slug: string[],
+        dirOptions: {
+          returnType: R,
+        },
+      }
+  ): Promise<PageData<T, R>> {
+    // ...Code removed for brevity and sudo code used below
+    if (slug === 'a path to some mdx file') {
+      return {
+        isMdxFile: true,
+        dirData: null,
+        mdxData: readMdxFileData<T>(slug),
+      };
+    }
+    if (slug === 'a path to a directory') {
+      const data = returnType === 'tree' ? {
+        idMdxFile: false,
+        dirData: getDirectoryTree(slug),
+        mdxData: null,
+      } : {
+        isMdxFile: false,
+        dirData: getDirectoryArray(slug),
+        mdxData: null,
+      }
+      return data;
+    }
+  }
+}
+```
+
+now users can use the library and choose to be as explicit as they want, or just use the defaults that are given. Using the function looks a little like this...
+
+```ts
+interface BlogArticleMetaData {
+  slug: string,
+  title: string,
+  date: string,
+  description?: string,
+  readTime?: number,
+  tags?: string[],
+}
+
+import {MdxFilesystem} from 'next-mdx-filesystem';
+const mdxFilesystem = new MdxFilesystem<BlogArticleMetaData>();
+
+export const getStaticProps: GetStaticProps = async ({params}) => {
+
+// Code removed for brevity
+
+const slugArray = params.slug as string[];
+const {isDirectory, directory, mdxFile} =
+    await mdxFilesystem.getPageData({
+      slugArray,
+      dirOptions: {
+        returnType: 'array',
+      },
+    });
+
+// Code removed for brevity
+}
+```
+
+`BlogArticleMetadata` is now optional, it can be omitted or defined, as is the `returnType` option in the options object.
+
+---
