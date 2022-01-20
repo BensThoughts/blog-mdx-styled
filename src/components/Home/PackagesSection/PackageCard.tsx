@@ -15,7 +15,7 @@ export default function PackageCard({
 }: PackageCardProps) {
   return (
     <AnchorContainer href={href} target="_blank" rel="noreferrer noopener" {...rest}>
-      <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
+      <div className="flex flex-col justify-start h-full gap-4 px-2 py-4 md:p-4">
         <div className="flex justify-between">
           <h1 className="text-2xl text-primary">
             {title}

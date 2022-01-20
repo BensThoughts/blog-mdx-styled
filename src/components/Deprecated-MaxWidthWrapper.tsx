@@ -8,7 +8,7 @@ export default function MaxWidthWrapper({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`relative px-4 md:px-8 mx-auto w-full max-w-6xl ${className}`} {...rest}>
+    <div className={`relative w-full max-w-6xl px-4 mx-auto md:px-8 ${className}`} {...rest}>
       {children}
     </div>
   );

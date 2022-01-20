@@ -6,7 +6,7 @@ export default function IconButton({
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button className={`bg-secondary font-bold py-2 px-4 rounded inline-flex items-center ${className}`} {...rest}>
+    <button className={`inline-flex items-center px-4 py-2 font-bold rounded bg-secondary ${className}`} {...rest}>
       {children}
     </button>
   );

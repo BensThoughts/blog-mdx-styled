@@ -22,7 +22,7 @@ export default function MenuDrawer({
       <Dialog
         unmount={false}
         onClose={() => setIsOpen(false)}
-        className="fixed z-50 inset-0 overflow-y-auto"
+        className="fixed inset-0 z-50 overflow-y-auto"
       >
         <div className="flex w-3/4">
           <Transition.Child
@@ -35,7 +35,7 @@ export default function MenuDrawer({
             leaveFrom="opacity-30"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="z-40 fixed inset-0 bg-black" />
+            <Dialog.Overlay className="fixed inset-0 z-40 bg-black" />
           </Transition.Child>
 
           <Transition.Child
@@ -47,9 +47,9 @@ export default function MenuDrawer({
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="flex flex-col justify-between bg-app-bg bg-opacity-70 backdrop-filter backdrop-blur-sm z-50 w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl rounded-br-md">
+            <div className="z-50 flex flex-col justify-between w-full max-w-sm p-6 overflow-hidden text-left align-middle shadow-xl bg-app-bg bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-br-md">
               <div>
-                <Dialog.Title className="font-bold text-2xl md:text-4xl text-secondary">{title}</Dialog.Title>
+                <Dialog.Title className="text-2xl font-bold md:text-4xl text-secondary">{title}</Dialog.Title>
                 <Dialog.Description>{description}</Dialog.Description>
                 {children}
               </div>

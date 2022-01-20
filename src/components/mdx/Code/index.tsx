@@ -29,7 +29,6 @@ interface CodeElementProps {
   className: string
 }
 
-
 export default function CodeElement({
   children,
   className,
@@ -42,7 +41,7 @@ export default function CodeElement({
   return (
     <div className="flex flex-col w-full mx-auto">
       {codeTitle && <div
-        className="self-end italic text-secondary text-sm md:text-base border-l-2 border-r-2 border-t-2 border-solid border-secondary border-opacity-40 rounded-t-md max-w-max px-2 py-1 select-none"
+        className="self-end px-2 py-1 text-sm italic border-t-2 border-l-2 border-r-2 border-solid select-none text-secondary md:text-base border-secondary border-opacity-40 rounded-t-md max-w-max"
         aria-label="Command Line Title"
       >
         {codeTitle}
@@ -60,7 +59,7 @@ export default function CodeElement({
               {tokens.map((line, i) => (
                 <Line key={i} {...getLineProps({line, key: i})} className="md:table">
                   <LineNo className="hidden md:table-cell text-primary">{i < 9 ? '0' : ''}{i + 1}</LineNo>
-                  <LineContent className="text-primary md:table-cell w-full">
+                  <LineContent className="w-full text-primary md:table-cell">
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({token, key})} />
                     ))}

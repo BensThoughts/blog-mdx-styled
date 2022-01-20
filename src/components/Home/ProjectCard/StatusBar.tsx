@@ -127,7 +127,7 @@ export default function StatusBar({
   return (
     <StatusBarContainer className="font-mono text-base select-none">
       <StatusBarLeft>
-        <Status className="text-center h-full">
+        <Status className="h-full text-center">
           NORMAL
         </Status>
         <File>

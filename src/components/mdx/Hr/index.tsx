@@ -5,5 +5,5 @@ const Break = styled.hr`
 `;
 
 export default function Hr() {
-  return <Break className="border-secondary mx-auto w-full border-solid border-opacity-50" />;
+  return <Break className="w-full mx-auto border-opacity-50 border-solid border-secondary" />;
 };

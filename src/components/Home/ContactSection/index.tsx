@@ -13,7 +13,7 @@ type TechBoxProps = {
 export default function TechnologiesBox({className}: TechBoxProps) {
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <BorderedBox>
           <p className="my-2 leading-7">
             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -24,14 +24,14 @@ export default function TechnologiesBox({className}: TechBoxProps) {
             Suggestions for this website? A job opportunity? Just to connect and say hi?
             Go ahead! Fill out the form
 
-            <span>&nbsp;<Clipboard className="inline-block content-center text-icon-secondary" />&nbsp;</span>
+            <span>&nbsp;<Clipboard className="content-center inline-block text-icon-secondary" />&nbsp;</span>
 
             and I will respond promptly.
 
           </p>
         </BorderedBox>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <BorderedBox>
           <strong>
            I am actively looking for work in the web development space.&nbsp;

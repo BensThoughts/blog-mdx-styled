@@ -61,13 +61,13 @@ export default function Navbar({className, ...rest}: NavBarProps) {
   return (
     <>
       <MenuDrawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Short and sweet!">
-        <NavLinks className="flex flex-col items-center justify-end content-between pt-0 w-full mt-7">
+        <NavLinks className="flex flex-col items-center content-between justify-end w-full pt-0 mt-7">
           {menuItems.map((menuItem) => (
             <MenuItem
               key={menuItem.href}
               href={menuItem.href}
               onClick={() => setIsOpen(false)}
-              className="hover:bg-primary w-full h-10 flex items-center justify-center text-xl"
+              className="flex items-center justify-center w-full h-10 text-xl hover:bg-primary"
             >
               {menuItem.name}
             </MenuItem>
@@ -75,7 +75,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <a
             href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
             download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
-            className="over:bg-primary w-full h-10 flex items-center justify-center text-xl text-secondary"
+            className="flex items-center justify-center w-full h-10 text-xl over:bg-primary text-secondary"
           >
             Resume
           </a>
@@ -88,7 +88,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mx-3">
             <div className="flex items-center gap-x-4">
               <Monitor size={26} className="text-icon-secondary" />
-              <div className="flex items-center content-between pt-0 gap-4">
+              <div className="flex items-center content-between gap-4 pt-0">
                 {menuItems.map((menuItem) => (
                   <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
                 ))}
@@ -97,7 +97,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                   download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
                   text="Resume"
                   className="text-secondary"
-                  icon={<Folder className="text-secondary mb-1" />}
+                  icon={<Folder className="mb-1 text-secondary" />}
                   iconPosition="left"
                 />
               </div>
@@ -109,10 +109,10 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           </div>
 
           {/* Small- Screens */}
-          <div className="flex md:hidden w-full justify-between items-center mx-3">
+          <div className="flex items-center justify-between w-full mx-3 md:hidden">
 
             <ThemeToggle />
-            <IconButton onClick={() => setIsOpen(!isOpen)} className="md:hidden mr-3" aria-label="navigation menu">
+            <IconButton onClick={() => setIsOpen(!isOpen)} className="mr-3 md:hidden" aria-label="navigation menu">
               <Bars size={24} className="text-icon-primary" />
             </IconButton>
 

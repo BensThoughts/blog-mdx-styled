@@ -66,14 +66,14 @@ export default function BlogCard({
 }: BlogCardProps) {
   return (
     <AnchorContainer slug={slug} className={`shadow-md ${className}`} {...rest}>
-      <div className="h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4">
+      <div className="flex flex-col justify-start h-full gap-4 px-2 py-4 md:p-4">
         <div>
           {title && <div className="text-2xl">{title}</div>}
           {date && <div className="italic">{date}</div>}
         </div>
         {description && <div className="text-base">{description}</div>}
-        {tags && <div className="h-full flex flex-col justify-end">
-          <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+        {tags && <div className="flex flex-col justify-end h-full">
+          <div className="flex flex-wrap justify-start gap-x-2 gap-y-4">
             {tags.map((tag, idx) => (
               <Pill key={tag} delay={0.07 * idx}>
                 <span className="text-secondary">#</span>
