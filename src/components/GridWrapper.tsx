@@ -38,7 +38,7 @@ type GridWrapperProps = {
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function GridWrapper({
-  charWidth = 100,
+  charWidth = 80,
   className,
   children,
   ...rest
