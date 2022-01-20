@@ -87,7 +87,7 @@ export default function Technologies() {
       </div>
 
       <AnimationContainer
-        className="flex flex-wrap w-full h-full max-w-4xl"
+        className="flex flex-wrap w-full h-full max-w-4xl mx-auto"
         ref={ref}
         viewed={viewed}
       >
@@ -98,7 +98,7 @@ export default function Technologies() {
             target="_blank"
             rel="noopener noreferrer"
             transitionDelay={0.07 * idx}
-            className="p-2 text-primary text-sm"
+            className="p-2 text-sm text-primary"
           >
             <PillBackground>
               <Pill>
