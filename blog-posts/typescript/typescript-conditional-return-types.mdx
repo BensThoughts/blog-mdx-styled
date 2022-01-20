@@ -19,7 +19,7 @@ Photo by [Joshua Sortino](https://unsplash.com/@sortino?utm_source=unsplash&utm_
   
 ---
 
-In this article I am going to discuss one of the primary struggles I faced while building [next-mdx-filesystem](https://www.npmjs.com/package/next-mdx-filesystem). next-mdx-filesystem makes it super easy to do 2 things. The first is strongly type the shape of your .mdx file frontmatter. The second is that it let's you organize your .mdx files into folders that represent categories. It reads the contents of a directory and give you back the data in a format that is easy for react components to consume.
+In this article I am going to discuss one of the primary struggles I faced while building [next-mdx-filesystem](https://www.npmjs.com/package/next-mdx-filesystem). next-mdx-filesystem makes it super easy to do 2 things. The first is strongly type the shape of your .mdx frontmatter. The second is that it let's you organize your .mdx files into folders that represent categories. It reads the contents of a directory and gives you back the data in a format that is easy for react components to consume.
 
 ---
 
@@ -37,9 +37,9 @@ The library exposes a function that takes in a slug (the current route of the we
 }
 ```
 
-In the final implementation users can choose to receive back one of 2 data structures for the directory data when the slug path points to a directory. The first option is a "DirectoryTree" data structure that is a plain javascript object representing the directory tree within a folder. The second option is an array of "DirectoryData" objects that each represent a single directory in the tree.
+In the final implementation users can choose to receive back one of 2 data structures for the directory data when the slug path points to a directory. The first option is a `DirectoryTree` data structure. `DirectoryTree` is a plain javascript object representing the directory tree within a folder. The second option is an array of `DirectoryData` objects. Each `DirectoryData` object represents a single directory in the tree.
 
-The "DirectoryTree" is useful for creating a tree like table of contents with links to articles. The array of "DirectoryData" objects is useful for creating a large list of all articles in a given directory. The "DirectoryData" array is also easier to use directly in a react component because we can use {dirArray.map} directly in a react component to create a list with a bunch of articles and links to them.
+The `DirectoryTree` is useful for creating a tree like table of contents with links to articles. The array of `DirectoryData` objects is useful for creating a large list of all articles in a given directory. The `DirectoryData` array is also easier to use directly in a react component because we can map over it directly in a react component to create a list with a bunch of links to the articles.
 
 ---
 
