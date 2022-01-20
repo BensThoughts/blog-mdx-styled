@@ -51,15 +51,15 @@ export default function CommandLine({
   return (
     <CommandLineContainer size={size} aria-label="Command Line Element" className={`mx-auto w-full ${className}`}>
       {title && <div
-        className="px-2 italic border-t-2 border-l-2 border-r-2 border-solid select-none text-secondary border-secondary border-opacity-40 rounded-t-md max-w-max"
+        className="px-2 max-w-max italic rounded-t-md border-t-2 border-r-2 border-l-2 border-opacity-40 border-solid select-none text-secondary border-secondary"
         aria-label="Command Line Title"
       >
         {title}
       </div>
       }
-      <div className={`w-full bg-terminal border-secondary align-middle border-solid border-opacity-30 border-2 rounded-b-md rounded-r-md ${topLeftRounded}`}>
-        <pre className="px-4 py-2 overflow-x-auto bg-opacity-50 rounded-sm">
-          <div className="flex flex-row items-center justify-between">
+      <div className={`w-full align-middle rounded-r-md rounded-b-md border-2 border-opacity-30 border-solid bg-terminal border-secondary ${topLeftRounded}`}>
+        <pre className="overflow-x-auto px-4 py-2 bg-opacity-50 rounded-sm">
+          <div className="flex flex-row justify-between items-center">
             <div>
               <Prompt className="select-none">$&gt;&nbsp;</Prompt>
               <Command>{command}</Command>
@@ -72,7 +72,7 @@ export default function CommandLine({
               }}
               type="button"
               aria-label="Copy Button"
-              className="px-3 py-2 border-2 rounded bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
+              className="px-3 py-2 rounded border-2 bg-primary border-secondary text-icon-secondary hover:bg-accent hover:border-secondary active:bg-primary"
             >
               <Copy className="text-icon-secondary"/>
             </button>

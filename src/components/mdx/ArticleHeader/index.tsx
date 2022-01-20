@@ -24,7 +24,7 @@ export default function ArticleHeader({
   const tweetMessage = `I'm reading ${title} by @bensthoughts Check it out! ${tweetTagMessage}`;
 
   return (
-    <div className={`w-full max-w-4xl mx-auto flex justify-center ${className}`}>
+    <div className={`flex justify-center mx-auto w-full max-w-4xl ${className}`}>
       <div>
         <H1 className="md:my-3">
           {title}

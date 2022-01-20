@@ -103,7 +103,7 @@ export default function AvatarImg({className}: AvatarImgProps) {
   const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
 
   return (
-    <TransitionColor className={`z-20 bg-transparent mt-10 md:mt-0 ${className}`}>
+    <TransitionColor className={`z-20 mt-10 bg-transparent md:mt-0 ${className}`}>
       <ImageBackground tabIndex={0}>
         <ImageWrapper>
           {/* <picture>

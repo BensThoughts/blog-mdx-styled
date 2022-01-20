@@ -61,13 +61,13 @@ export default function Navbar({className, ...rest}: NavBarProps) {
   return (
     <>
       <MenuDrawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Short and sweet!">
-        <NavLinks className="flex flex-col items-center content-between justify-end w-full pt-0 mt-7">
+        <NavLinks className="flex flex-col justify-end content-between items-center pt-0 mt-7 w-full">
           {menuItems.map((menuItem) => (
             <MenuItem
               key={menuItem.href}
               href={menuItem.href}
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center w-full h-10 text-xl hover:bg-primary"
+              className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary"
             >
               {menuItem.name}
             </MenuItem>
@@ -75,20 +75,20 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <a
             href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
             download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
-            className="flex items-center justify-center w-full h-10 text-xl over:bg-primary text-secondary"
+            className="flex justify-center items-center w-full h-10 text-xl over:bg-primary text-secondary"
           >
             Resume
           </a>
         </NavLinks>
       </MenuDrawer>
       <NavHider>
-        <Nav {...rest} className={`bg-app-bg bg-opacity-70 shadow-lg ${className}`}>
+        <Nav {...rest} className={`bg-opacity-70 shadow-lg bg-app-bg ${className}`}>
 
           {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mx-3">
-            <div className="flex items-center gap-x-4">
+            <div className="flex gap-x-4 items-center">
               <Monitor size={26} className="text-icon-secondary" />
-              <div className="flex items-center content-between gap-4 pt-0">
+              <div className="flex gap-4 content-between items-center pt-0">
                 {menuItems.map((menuItem) => (
                   <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
                 ))}
@@ -102,14 +102,14 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-x-4">
+            <div className="flex gap-x-4 justify-end items-center">
               <Breadcrumbs className="hidden lg:flex" />
               <ThemeToggle />
             </div>
           </div>
 
           {/* Small- Screens */}
-          <div className="flex items-center justify-between w-full mx-3 md:hidden">
+          <div className="flex justify-between items-center mx-3 w-full md:hidden">
 
             <ThemeToggle />
             <IconButton onClick={() => setIsOpen(!isOpen)} className="mr-3 md:hidden" aria-label="navigation menu">

@@ -31,8 +31,8 @@ const Quote = styled.blockquote`
 
 export default function BlockQuote(props: { children: string }) {
   return (
-    <Quote className="mx-auto border-l-8 border-solid rounded-lg bg-primary border-secondary">
-      <div className="flex items-center justify-center w-full h-full">
+    <Quote className="mx-auto rounded-lg border-l-8 border-solid bg-primary border-secondary">
+      <div className="flex justify-center items-center w-full h-full">
         {props.children}
       </div>
     </Quote>

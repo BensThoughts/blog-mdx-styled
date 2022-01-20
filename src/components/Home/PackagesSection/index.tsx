@@ -17,7 +17,7 @@ const Grid = styled.div`
 export default function PackagesSection() {
   return (
     <>
-      <b className="flex items-center justify-center w-full">These are npm packages that I have created and maintain.</b>
+      <b className="flex justify-center items-center w-full">These are npm packages that I have created and maintain.</b>
       <Grid>
         <PackageCard
           className=""

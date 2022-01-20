@@ -57,7 +57,7 @@ export default function SectionTitleHeader({
   ...rest
 }: SectionTitleProps) {
   return (
-    <div className={`flex items-center h-full my-2 ${className}`} {...rest}>
+    <div className={`flex items-center my-2 h-full ${className}`} {...rest}>
       <Header>{children}</Header>
     </div>
   );

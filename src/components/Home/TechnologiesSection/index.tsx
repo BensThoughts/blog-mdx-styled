@@ -72,7 +72,7 @@ export default function Technologies() {
 
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex justify-center items-center">
         <BorderedBox>
           <p className="my-2 leading-7">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -87,7 +87,7 @@ export default function Technologies() {
       </div>
 
       <AnimationContainer
-        className="flex flex-wrap w-full h-full max-w-4xl mx-auto"
+        className="flex flex-wrap mx-auto w-full max-w-4xl h-full"
         ref={ref}
         viewed={viewed}
       >

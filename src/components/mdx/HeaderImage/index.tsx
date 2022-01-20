@@ -57,7 +57,7 @@ export default function HeaderImage({
   return (
     <ImageContainer
       height={height}
-      className={`w-full flex items-center justify-center md:w-full mx-auto overflow-hidden ${className}`}
+      className={`flex overflow-hidden justify-center items-center mx-auto w-full md:w-full ${className}`}
     >
       <img
         src={src}

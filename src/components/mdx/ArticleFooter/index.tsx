@@ -12,7 +12,7 @@ export default function ArticleFooter({permaLink, title, tags, ...rest}: Article
   const tweetMessage = `I just finished reading ${title} by @bensthoughts Check it out! ${tweetTagMessage}`;
 
   return (
-    <div className="flex items-center justify-center" {...rest}>
+    <div className="flex justify-center items-center" {...rest}>
       <ArticleTweet
         permaLink={permaLink}
         tweetMessage={tweetMessage}

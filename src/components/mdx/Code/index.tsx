@@ -39,9 +39,9 @@ export default function CodeElement({
     codeTitle = language;
   }
   return (
-    <div className="flex flex-col w-full mx-auto">
+    <div className="flex flex-col mx-auto w-full">
       {codeTitle && <div
-        className="self-end px-2 py-1 text-sm italic border-t-2 border-l-2 border-r-2 border-solid select-none text-secondary md:text-base border-secondary border-opacity-40 rounded-t-md max-w-max"
+        className="self-end px-2 py-1 max-w-max text-sm italic rounded-t-md border-t-2 border-r-2 border-l-2 border-opacity-40 border-solid select-none text-secondary md:text-base border-secondary"
         aria-label="Command Line Title"
       >
         {codeTitle}
@@ -55,7 +55,7 @@ export default function CodeElement({
           language={language}
         >
           {({className, style, tokens, getLineProps, getTokenProps}) => (
-            <Pre className={`overflow-x-auto w-full text-left mt-0 text-primary p-1 ${className}`}>
+            <Pre className={`overflow-x-auto p-1 mt-0 w-full text-left text-primary ${className}`}>
               {tokens.map((line, i) => (
                 <Line key={i} {...getLineProps({line, key: i})} className="md:table">
                   <LineNo className="hidden md:table-cell text-primary">{i < 9 ? '0' : ''}{i + 1}</LineNo>

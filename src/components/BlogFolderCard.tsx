@@ -14,7 +14,7 @@ export default function BlogFolderCard({
 }: BlogFolderCardProps) {
   return (
     <LinkCard slug={slug}>
-      <div className="flex flex-col justify-start h-full gap-4 px-2 py-4 md:p-4">
+      <div className="flex flex-col gap-4 justify-start px-2 py-4 h-full md:p-4">
         <div className="flex justify-between">
           <h1 className="text-2xl text-primary">
             {title}
