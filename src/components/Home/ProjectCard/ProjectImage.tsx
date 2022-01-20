@@ -7,10 +7,10 @@ const Image = styled.img<{
 }>`
   position: relative;
   object-fit: fill;
-  /* width: 100%;
-  height: 100%; */
-  /* width: 458px;
-  height: 300px; */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* width: 458px; */
+  /* height: 300px; */
   z-index: 2;
   mix-blend-mode: multiply;
   filter: ${({blur}) => {
@@ -30,13 +30,17 @@ const Image = styled.img<{
 
 const Anchor = styled.a`
   display: block;
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
+  width: 460px;
+  height: 255px;
   &::after {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
+    width: 460px;
+    height: 255px;
     z-index: -1;
     top: 0;
     left: 0;
