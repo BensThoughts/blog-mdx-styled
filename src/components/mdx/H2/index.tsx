@@ -1,31 +1,7 @@
-import styled from '@emotion/styled';
-
-const H2Styled = styled.h2`
-  position: relative;
-  padding: 0.2em 0;
-  overflow: hidden;
-  text-decoration: none;
-  color: rgb(var(--color-text-secondary));
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.05rem;
-    background-color: rgb(var(--color-app-secondary));
-  }
-`;
-
-type H2Props = {
-  children: string;
-} & React.HTMLAttributes<HTMLHeadingElement>;
-
-export default function H2({children, className}: H2Props) {
+export default function H2({children, className}: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <H2Styled className={`mx-auto -mb-0 text-xl md:text-2xl text-secondary ${className}`}>
+    <h2 className={`overflow-hidden relative px-1 py-1 mx-auto text-xl border-b-2 md:text-2xl text-secondary border-secondary ${className}`}>
       {children}
-    </H2Styled>
+    </h2>
   );
 };
