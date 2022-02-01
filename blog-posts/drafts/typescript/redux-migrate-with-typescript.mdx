@@ -1,0 +1,33 @@
+---
+title: "Redux Persist Migrate with Typescript"
+shortDescription: "How to use redux-persist's migrate feature with typescript"
+longDescription: "In this article I show you how to use redux-persist's migrate feature with typescript"
+date: "2022-01-31"
+readTime: 20
+cloudinaryImgPath: "v1642661788/blog/blog/typescript-conditional-return-types/og-joshua-sortino-LqKhnDzSF-8-unsplash_qwnxqu.jpg"
+imgWidth: 1200
+imgHeight: 801
+imgAlt: "Highway Ramps"
+tags:
+  - 'Typescript'
+  - 'nextjs'
+  - 'react'
+  - 'redux'
+  - 'nodejs'
+---
+
+## A Quick Intro To Redux Persist
+
+> The article is an intermediate level article. It assumes that the reader already knows how to use and it relatively fluent in redux.
+
+At some point along your journey you may have developed an app that needed a global store of state and reached for redux. Perhaps you were using it as a sort of cache so that your users didn't need to make network requests as often or maybe you just needed somewhere to store some user settings. Redux is great for these exact situations but it has a fatal flaw. Whenever a user reopens or reloads the page the redux store state is completely reset to its initial state. Those user settings and any other data in the store would be gone and you would have to either make another network request or worse force the user to redo their settings every time.
+
+Well, fear not because there are solutions to this problem. We can serialize parts of the store, keep them in the browsers local storage, and then rehydrate that saved copy when the user initially loads the page. This is not a small task, it requires creating a special reducer as well as the logic to implement when and how to serialize and rehydrate the state.
+
+The most popular library for this is [redux-persist](https://redux-persist-site.com). Redux persist will serialize and store any part of the state that you want to remain intact even when the user reloads the page. When a user loads the page redux-persist fires off some special actions right after the store is initialized to rehydrate it with any data that is already stored in local storage.
+
+
+## The Problem
+
+That we can persist data is awesome for a number of use cases but it comes with a couple of caveats. The first one is that any data stored in local storage will overwrite any and all initial state. This may be fine but it could also potentially lead to data that is requested from the server (which may be fresher/newer) being over written with data from the local storage if we do not bootstrap the app in the proper ways. The second issue is that if we change the schema of our store local storage 
+
