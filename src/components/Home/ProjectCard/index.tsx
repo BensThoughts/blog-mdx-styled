@@ -218,7 +218,7 @@ export default function ProjectsCard({
         className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}
       >
         <p className="font-mono leading-7 text-opacity-100 text-primary">
-          <strong>
+          <strong className="font-bold">
             {descriptionFirstSentence}
           </strong>
           {description}
