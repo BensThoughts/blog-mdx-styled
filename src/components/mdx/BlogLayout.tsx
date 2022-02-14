@@ -17,9 +17,11 @@ import {
   HeaderImage,
   Img,
   InlineCode,
+  Li,
   P,
   Pre,
   Strong,
+  Ul,
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
 import GridWrapper from '@app/components/GridWrapper';
@@ -36,9 +38,11 @@ const components = {
   h2: H2,
   img: Img,
   inlineCode: InlineCode,
+  li: Li,
   p: P,
   pre: Pre,
   strong: Strong,
+  ul: Ul,
   // ArticleHeader,
   BlogCard,
   CommandLine,
