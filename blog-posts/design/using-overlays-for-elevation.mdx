@@ -14,13 +14,12 @@ tags:
   - 'DarkMode'
   - 'CSS'
   - 'MaterialDesign'
-  - 'styledcomponents'
+  - 'StyledComponents'
   - 'React'
   - 'Typescript'
 ---
 
 Photo by <a href="https://unsplash.com/@martinsattler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Martin Sattler</a> on <a href="https://unsplash.com/collections/93117482/dark-mode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
 
 ## The Concept of Height
 
@@ -31,7 +30,7 @@ article](https://www.joshwcomeau.com/css/designing-shadows/) on how to design be
 mode became more ubiquitous throughout the web, designers had to figure out new methodologies to
 emphasize the height of various elements on the page. While it is true that shadows can still be utilized
 in dark themes, they are far less effective, especially as the background color comes closer and closer
-to black.  The solution that [Material Design](https://material.io/design/color/dark-theme.html) came up
+to black. The solution that [Material Design](https://material.io/design/color/dark-theme.html) came up
 with was to use various shades of a color to differentiate the height of an element. As the shade becomes
 lighter the element feels as though it is closer, higher off the page. This imitates our natural world in
 some ways. Objects that are higher off the ground and therefore closer to a light source (often the sun)
@@ -53,9 +52,9 @@ working.
 ![Card components side by side with one lowered opacity on hover](v1633673925/blog/blog/using-overlays-for-elevation/opacity-example-1_p8jrrq.png)
 
 The problem is that the background color becomes responsible for the "lightness" or "darkness"
-of an element when we use opacity as a way to lighten/darken our components.  Dark backgrounds will
-actually therefore make a color darker when we lower it's opacity.  While visually this works with light
-colors, it is not really the purpose of opacity.  Opacity should really be used for the sole reason that
+of an element when we use opacity as a way to lighten/darken our components. Dark backgrounds will
+actually therefore make a color darker when we lower it's opacity. While visually this works with light
+colors, it is not really the purpose of opacity. Opacity should really be used for the sole reason that
 we want something to become translucent and not as a way to alter the color of an element. There is a
 better way and we can do it entirely with css.
 
@@ -96,7 +95,7 @@ const Container = styled.div`
 
   &:hover::before,
   &:focus::before {
-    background-color:  rgba(255, 255, 255, 0.1); 
+    background-color:  rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -123,8 +122,3 @@ component will work as intended no matter what colors we assign as our primary c
 or a dark one. They will both become slightly lighter when the component is focused or hovered over.
 
 ---
-
-
-
-
-

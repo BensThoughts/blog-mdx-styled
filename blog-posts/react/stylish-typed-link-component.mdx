@@ -13,7 +13,7 @@ tags:
   - 'Typescript'
   - 'React'
   - 'emotionjs'
-  - 'styledcomponents'
+  - 'StyledComponents'
 ---
 
 Photo by [Fahrul Azmi](https://unsplash.com/@fahrulazmi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
@@ -37,7 +37,7 @@ Next.js `<Link>`? Again, no problem. This component is flexible and adaptable.
 
 ## Initial Setup
 
-For this component I have used *@emotion/styled* but we could have just as easily
+For this component I have used _@emotion/styled_ but we could have just as easily
 used a css module with a className. The important bits of css as well as how and why
 the link works with the Next.js `<Link>` element will be discussed. The article
 assumes you already have a Next.js application up and running. Details on how to
@@ -135,7 +135,6 @@ it. Such as `style={style}`, `rel={rel}`, or the all important `href={href}`.
 
 ## This Works, But Does It?
 
-
 The component outlined above does work as a standard anchor element with a stylish
 css effect, but will it work with Next.js and the `<Link>` component? Not quite!
 
@@ -143,10 +142,10 @@ To use this component with the Next Link component we are going to need to do a
 little more. For starters using the component like this...
 
 ```tsx
-import Link from 'next/link';
-import AnimatedLink from '@app/components/AnimatedLink';
+import Link from "next/link";
+import AnimatedLink from "@app/components/AnimatedLink";
 
-export default function({ href, name }) {
+export default function ({ href, name }) {
   return (
     <Link href={href}>
       <AnimatedLink>{children}</AnimatedLink>
@@ -154,15 +153,16 @@ export default function({ href, name }) {
   );
 }
 ```
+
 Does not properly set the href prop on the AnimatedLink. So when hovering it will not
 display the correct location that the Link is supposed to traverse to. This is very
 bad for SEO and something we need to correct. Fortunately it is easy to correct.
 
 ```tsx
-import Link from 'next/link';
-import AnimatedLink from '@app/components/AnimatedLink';
+import Link from "next/link";
+import AnimatedLink from "@app/components/AnimatedLink";
 
-export default function({ href, name }) {
+export default function ({ href, name }) {
   return (
     <Link href={href} passHref>
       <AnimatedLink>{children}</AnimatedLink>
@@ -170,6 +170,7 @@ export default function({ href, name }) {
   );
 }
 ```
+
 The passHref prop will tell the `<Link>` component to properly pass the href prop
 down to our stylish AnimatedLink component. But there is still one more step!
 
