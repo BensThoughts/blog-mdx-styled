@@ -39,8 +39,8 @@ const Anchor = styled.a`
     position: absolute;
     /* width: 100%; */
     /* height: 100%; */
-    width: 460px;
-    height: 255px;
+    /* width: 460px;
+    height: 255px; */
     z-index: -1;
     top: 0;
     left: 0;

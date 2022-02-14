@@ -85,8 +85,10 @@ display: none;
 z-index: 1;
 @media (min-width: 1024px) {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 460px;
+  height: 255px;
+  /* width: 100%;
+  height: 100%; */
   grid-area: ${({reversed}) => reversed ? '2 / 1 / 7 / 7' : '2 / 7 / 7 / -1'};
   transform: ${({viewed, reversed}) => {
     const flipBit = reversed ? -1 : 1;
