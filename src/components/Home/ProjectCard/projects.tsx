@@ -10,6 +10,7 @@ import {
   Kubernetes,
   MongoDB,
   Netlify,
+  NextJS,
   Node,
   NPM,
   Prettier,
@@ -194,8 +195,65 @@ export const ZeroInbox = {
   ],
 };
 
+const SharableLoveForms = {
+  title: 'Shareable Love Forms',
+  liveLink: 'https://shareloveforms.com/',
+  githubLink: 'https://github.com/BensThoughts/shareable-love-forms',
+  cloudinaryImgPath: 'v1644862572/blog/projects/shareable-love-forms/shareable-love-forms-screenshot_qyqcvz.jpg',
+  imgAlt: 'Shareable Love Forms Home Page',
+  descriptionFirstSentence: `Complete quizzes and fill out forms about love and relationships. Download and print the results as a PDF.`,
+  description: `
+    This is my most recent project. It currently has 1 form and can create a nice looking PDF with the forms results.
+    I'm working on possibly converting the project to remix and setting up a backend database. Eventually users will be able
+    to login, save, and share their form results with partners and friends.
+  `,
+  technologies: [
+    {
+      name: 'NextJS',
+      icon: <NextJS size={20} />,
+      href: 'https://nextjs.org/',
+    },
+    {
+      name: 'React',
+      icon: <ReactIcon />,
+      href: 'https://reactjs.org/',
+    },
+    {
+      name: 'Redux',
+      icon: <Redux />,
+      href: 'https://react-redux.js.org/',
+    },
+    {
+      name: 'Typescript',
+      icon: <Typescript size={20} />,
+      href: 'https://www.typescriptlang.org/',
+    },
+    {
+      name: 'TailwindCSS',
+      icon: <TailwindCSS />,
+      href: 'https://tailwindcss.com/',
+    },
+    {
+      name: 'Netlify',
+      icon: <Netlify />,
+      href: 'https://www.netlify.com/',
+    },
+    {
+      name: 'Github',
+      icon: <Github />,
+      href: 'https://github.com',
+    },
+    {
+      name: 'ESLint',
+      icon: <EsLint />,
+      href: 'https://eslint.org/',
+    },
+  ],
+};
+
 export const Projects = [
   ZeroInbox,
   ZeroInboxBackend,
   Spacetagram,
+  SharableLoveForms,
 ];
