@@ -1,0 +1,173 @@
+---
+title: "Using @emotion/styled with remix"
+shortDescription: "How to use @emotion/styled with remix"
+longDescription: "In this article we will look at how to setup @emotion/styled with remix"
+date: "2022-02-14"
+readTime: 15
+cloudinaryImgPath: "https://res.cloudinary.com/bensthoughts/image/upload/v1644865776/blog/blog/remix-with-emotion/og-image_vnklyg.jpg"
+imgWidth: 1200
+imgHeight: 627
+imgAlt: "DJ Turntables"
+tags:
+  - "Typescript"
+  - "remix"
+  - "react"
+  - "emotion"
+  - "StyledComponents"
+---
+
+Photo by <a href="https://unsplash.com/@deni_eliash?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Daniel Eliashevskyi</a> on <a href="https://unsplash.com/s/photos/remix?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+## The Setup
+
+Start by creating a fresh remix app. Let's call it _remix-with-emotion_.
+
+<CommandLine command="npx" options="" args="create-remix@latest" size="small" />
+
+```bash
+R E M I X
+
+💿 Welcome to Remix! Let's get you set up with a new project.
+
+? Where would you like to create your app? remix-with-emotion
+? Where do you want to deploy? Choose Remix if you're unsure, it's easy to change deployment targets. Remix App Server
+? TypeScript or JavaScript? TypeScript
+? Do you want me to run `npm install`? Yes
+```
+
+Then `cd` into the new project directory. After we have changed into the project directory we need to
+install 4 @emotion packages that will let @emotion work with the remix server.
+
+<CommandLine
+  command="npm"
+  options="i --save"
+  args="@emotion/styled @emotion/react @emotion/server @emotion/cache"
+  size="large"
+/>
+
+## The Configuration
+
+We need to start by adding a special string (`__STYLES__`) to the head of the document in **root.tsx**
+when `document` is undefined. Remix renders pages server side, before document is defined. We will use
+this fact to replace `__STYLES__` with style tags created by @emotion in **entry.server.tsx** before
+sending the final page to the browser.
+
+```tsx:app/root.tsx
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration
+} from "remix";
+import type { MetaFunction } from "remix";
+
+export const meta: MetaFunction = () => {
+  return { title: "New Remix App" };
+};
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <Meta />
+        <Links />
+        {typeof document === "undefined"
+          ? "__STYLES__"
+          : null}
+      </head>
+      <body>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
+      </body>
+    </html>
+  );
+}
+```
+
+Then in **entry.server.tsx** we create a cache and the emotion server using that cache. We wrap the
+`RemixServer` component in the cache provider so that emotion can cache some of the styles. Last we
+extract the styles, construct the style tags, and replace `__STYLES__` with those tags.
+
+```tsx:app/entry.server.tsx
+import { renderToString } from "react-dom/server";
+import { RemixServer } from "remix";
+import type { EntryContext } from "remix";
+
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+
+const key = 'custom';
+const cache = createCache({ key });
+const {
+  extractCriticalToChunks,
+  constructStyleTagsFromChunks,
+} = createEmotionServer(cache);
+
+export default function handleRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext
+) {
+  let markup = renderToString(
+    <CacheProvider value={cache}>
+      <RemixServer context={remixContext} url={request.url} />
+    </CacheProvider>
+  );
+
+  const chunks = extractCriticalToChunks(markup);
+  const styles = constructStyleTagsFromChunks(chunks);
+
+  markup = markup.replace('__STYLES__', styles);
+
+  responseHeaders.set("Content-Type", "text/html");
+
+  return new Response("<!DOCTYPE html>" + markup, {
+    status: responseStatusCode,
+    headers: responseHeaders
+  });
+}
+```
+
+## Try It Out
+
+That should do it, go ahead and try it out. Create an @emotion/styled component in your main index route
+by changing the default h1 tag to something using styled.
+
+```tsx:app/routes/index.tsx
+import styled from '@emotion/styled';
+
+const MyStyledH1 = styled.h1`
+  font-size: 5rem;
+  color: green;
+`;
+
+export default function Index() {
+  return (
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+      <MyStyledH1>Welcome to Remix</MyStyledH1>
+      <ul>
+        <li>
+          <a
+            target="_blank"
+            href="https://remix.run/tutorials/blog"
+            rel="noreferrer"
+          >
+            15m Quickstart Blog Tutorial
+          </a>
+        </li>
+...
+```
+
+## External Resources
+
+- [Remix Css-in-JS Styles](https://remix.run/docs/en/v1/guides/styling#css-in-js-libraries)
+- [@emotion/server](https://emotion.sh/docs/ssr)
+- [github for remix-with-emotion](https://github.com/BensThoughts/remix-with-emotion)
