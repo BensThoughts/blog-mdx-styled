@@ -1,8 +1,8 @@
 const generateColorClass = (variable) => {
   return ({opacityValue}) =>
-    opacityValue ?
-      `rgba(var(--${variable}), ${opacityValue})` :
-      `rgb(var(--${variable}))`;
+    opacityValue
+      ? `rgba(var(--${variable}), ${opacityValue})`
+      : `rgb(var(--${variable}))`;
 };
 
 module.exports = {
@@ -14,6 +14,7 @@ module.exports = {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive'],
         'roboto-slab': ['"Roboto Slab"', 'serif'],
+        'merriweather': ['"Merriweather"', 'serif'],
       },
       backgroundColor: {
         'app-bg': generateColorClass('color-bg-primary'),
