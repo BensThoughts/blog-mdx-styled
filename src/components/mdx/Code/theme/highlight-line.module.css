@@ -1,0 +1,4 @@
+.highlightLine {
+  background-color: rgba(var(--color-app-secondary), 0.2);
+  width: 100%;
+}

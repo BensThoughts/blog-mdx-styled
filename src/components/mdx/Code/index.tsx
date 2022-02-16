@@ -3,6 +3,25 @@ import styled from '@emotion/styled';
 
 import MyTheme from './theme/index';
 
+import rangeParser from 'parse-numeric-range';
+import {useMemo} from 'react';
+
+import styles from './theme/highlight-line.module.css';
+
+const calculateLinesToHighlight = (meta: string) => {
+  if (!meta) return false;
+  const regEx = /{([\d,-]+)}/;
+  if (regEx.test(meta)) {
+    const RE = regEx.exec(meta);
+    const strlineNumbers = RE ? RE[1] : null;
+    if (!strlineNumbers) return false;
+    const lineNumbers = rangeParser(strlineNumbers);
+    return (index: number) => (lineNumbers.includes(index + 1));
+  } else {
+    return (index: number) => false;
+  }
+};
+
 const Pre = styled.pre`
 
 `;
@@ -25,16 +44,22 @@ const LineContent = styled.span`
 `;
 
 interface CodeElementProps {
-  children: string,
-  className: string
+  children: string;
+  className: string;
+  metastring: string;
 }
 
 export default function CodeElement({
   children,
   className,
+  metastring,
 }: CodeElementProps) {
   const language = className.replace('language-', '').split(':')[0] as Language;
-  let codeTitle = className.substr(className.indexOf(':') + 1);
+  let codeTitle = className.substring(className.indexOf(':') + 1);
+  const shouldHighlightLine = useMemo(() => calculateLinesToHighlight(metastring), [metastring]);
+  // const shouldHighlightLine = calculateLinesToHighlight(metastring);
+
+
   if (codeTitle.startsWith('language')) {
     codeTitle = language;
   }
@@ -56,22 +81,32 @@ export default function CodeElement({
         >
           {({className, style, tokens, getLineProps, getTokenProps}) => (
             <Pre className={`overflow-x-auto p-1 mt-0 w-full text-left text-primary ${className}`}>
-              {tokens.map((line, i) => (
-                <Line key={i} {...getLineProps({line, key: i})} className="md:table">
-                  <LineNo className="hidden md:table-cell text-primary">{i < 9 ? '0' : ''}{i + 1}</LineNo>
-                  <LineContent className="w-full text-primary md:table-cell">
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({token, key})} />
-                    ))}
-                  </LineContent>
-                </Line>
-              ))}
+              {tokens.map((line, idx) => {
+                const lineProps = getLineProps({line, key: idx});
+                lineProps.className = `${lineProps.className} md:table`;
+                if (typeof shouldHighlightLine === 'function') {
+                  lineProps.className = shouldHighlightLine(idx)
+                    ? `${lineProps.className} ${styles.highlightLine}`
+                    : lineProps.className;
+                }
+                return (
+                  <Line key={idx} {...lineProps}>
+                    <LineNo className="hidden md:table-cell text-primary">{idx < 9 ? '0' : ''}{idx + 1}</LineNo>
+                    <LineContent className="w-full text-primary md:table-cell">
+                      {line.map((token, key) => (
+                        <span
+                          key={key}
+                          {...getTokenProps({token, key})}
+                        />
+                      ))}
+                    </LineContent>
+                  </Line>
+                );
+              })}
             </Pre>
           )}
         </Highlight>
       </div>
     </div>
-
-
   );
 };
