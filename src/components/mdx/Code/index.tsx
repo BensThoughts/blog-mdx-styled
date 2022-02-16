@@ -1,4 +1,4 @@
-import Highlight, {defaultProps, Language, PrismTheme} from 'prism-react-renderer';
+import Highlight, {defaultProps, Language, PrismTheme, Prism} from 'prism-react-renderer';
 import styled from '@emotion/styled';
 
 import MyTheme from './theme/index';
@@ -51,15 +51,15 @@ interface CodeElementProps {
 
 export default function CodeElement({
   children,
-  className,
+  className = '',
   metastring,
 }: CodeElementProps) {
+  const shouldHighlightLine = useMemo(() => calculateLinesToHighlight(metastring), [metastring]);
+
+  // Prism can be used to customize regex of languages
+  // console.log(Prism.languages.bash);
   const language = className.replace('language-', '').split(':')[0] as Language;
   let codeTitle = className.substring(className.indexOf(':') + 1);
-  const shouldHighlightLine = useMemo(() => calculateLinesToHighlight(metastring), [metastring]);
-  // const shouldHighlightLine = calculateLinesToHighlight(metastring);
-
-
   if (codeTitle.startsWith('language')) {
     codeTitle = language;
   }
@@ -78,6 +78,7 @@ export default function CodeElement({
           theme={MyTheme as PrismTheme}
           code={children}
           language={language}
+          Prism={Prism}
         >
           {({className, style, tokens, getLineProps, getTokenProps}) => (
             <Pre className={`overflow-x-auto p-1 mt-0 w-full text-left text-primary ${className}`}>
