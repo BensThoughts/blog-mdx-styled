@@ -52,7 +52,7 @@ when `document` is undefined. Remix renders pages server side, before document i
 this fact to replace `__STYLES__` with style tags created by @emotion in **entry.server.tsx** before
 sending the final page to the browser.
 
-```tsx:app/root.tsx
+```tsx:app/root.tsx {23-25}
 import {
   Links,
   LiveReload,
@@ -94,7 +94,7 @@ Then in **entry.server.tsx** we create a cache and the emotion server using that
 `RemixServer` component in the cache provider so that emotion can cache some of the styles. Last we
 extract the styles, construct the style tags, and replace `__STYLES__` with those tags.
 
-```tsx:app/entry.server.tsx
+```tsx:app/entry.server.tsx {5-14,22-31}
 import { renderToString } from "react-dom/server";
 import { RemixServer } from "remix";
 import type { EntryContext } from "remix";
@@ -141,7 +141,7 @@ export default function handleRequest(
 That should do it, go ahead and try it out. Create an @emotion/styled component in your main index route
 by changing the default h1 tag to something using styled.
 
-```tsx:app/routes/index.tsx
+```tsx:app/routes/index.tsx {3-6,11}
 import styled from '@emotion/styled';
 
 const MyStyledH1 = styled.h1`
@@ -163,7 +163,11 @@ export default function Index() {
             15m Quickstart Blog Tutorial
           </a>
         </li>
-...
+        {/* ... */}
+      </ul>
+    </div>
+  );
+}
 ```
 
 ## External Resources
