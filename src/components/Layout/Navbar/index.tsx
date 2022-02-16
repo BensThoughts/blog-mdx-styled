@@ -103,7 +103,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
               </div>
             </div>
             <div className="flex gap-x-4 justify-end items-center">
-              <Breadcrumbs className="hidden lg:flex" />
+              <Breadcrumbs className="hidden xl:flex" />
               <ThemeToggle />
             </div>
           </div>
