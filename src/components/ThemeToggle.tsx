@@ -56,9 +56,9 @@ const ToggleThumb = styled.span<{
   background: rgba(var(--color-app-secondary), var(--app-bg-opacity));
   transition: transform 0.25s ease-in-out;
   transform: ${(p) =>
-    p.colorMode === 'dark' ?
-      'translate3d(calc(var(--toggle-width) - var(--toggle-height)), 0, 0)' :
-      'none'};
+    p.colorMode === 'dark'
+      ? 'translate3d(calc(var(--toggle-width) - var(--toggle-height)), 0, 0)'
+      : 'none'};
 `;
 
 export default function ThemeToggle() {

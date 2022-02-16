@@ -125,18 +125,17 @@ export default function BlogLayout({
             tags={tags}
             className="mt-10"
           />
-          {cloudinaryImgPath && imgWidth && imgHeight && imgAlt ?
-              (
+          {cloudinaryImgPath && imgWidth && imgHeight && imgAlt
+            ? (
                 <HeaderImage
                   imgPath={cloudinaryImgPath}
                   alt={imgAlt}
                   width={imgWidth}
                   height={imgHeight}
                 />
-              ) :
-              (
-                <></>
-              )
+            ) : (
+              <></>
+            )
           }
           <MDXRemote {...content} components={components} />
           <ArticleFooter

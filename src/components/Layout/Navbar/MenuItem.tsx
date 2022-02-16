@@ -24,13 +24,16 @@ const MenuItem = ({
 }: MenuItemsProps) => {
   return (
     <Link passHref href={href} scroll={true}>
-      {animatedLink ?
-        <AnimatedLink className={className} onClick={onClick}>
-          {children}
-        </AnimatedLink> :
-        <a href={href} onClick={onClick} className={`text-primary ${className}`}>
-          {children}
-        </a>
+      {animatedLink
+        ? (
+          <AnimatedLink className={className} onClick={onClick}>
+            {children}
+          </AnimatedLink>
+        ) : (
+          <a href={href} onClick={onClick} className={`text-primary ${className}`}>
+            {children}
+          </a>
+        )
       }
     </Link>
   );

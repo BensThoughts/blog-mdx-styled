@@ -241,44 +241,46 @@ export default function NetlifyForm() {
 
   return (
     <>
-      {wasSubmitted ?
-      <Submission>Thank you for your submission. I will respond promptly</Submission> :
-      <form
-        id={FORM_NAME}
-        name={FORM_NAME}
-        data-netlify="true"
-        className={`flex flex-col gap-4 items-center`}
-        onSubmit={handleSubmit}
-        netlify-honeypot="input-field"
-        // noValidate
-      >
-        <p className="hidden">
-          <label>Don&apos;t fill this out if you&apos;re human:</label>
-          <input type="hidden" name="form-name" value={FORM_NAME} />
-          <input type="hidden" name="input-field" />
-        </p>
-        <NetlifyFormInput
-          name="name"
-          type="text"
-          getFieldError={getNameError}
-          wasSubmitted={wasSubmitted}
-        />
-        <NetlifyFormInput
-          name="email"
-          type="email"
-          getFieldError={getEmailError}
-          wasSubmitted={wasSubmitted}
-        />
-        <NetlifyFormInput
-          name="message"
-          type="textarea"
-          getFieldError={getMessageError}
-          wasSubmitted={wasSubmitted}
-        />
-        <div>
-          <Button className="mb-2 bg-secondary" type="submit">Send</Button>
-        </div>
-      </form>
+      {wasSubmitted
+        ? <Submission>Thank you for your submission. I will respond promptly</Submission>
+        : (
+          <form
+            id={FORM_NAME}
+            name={FORM_NAME}
+            data-netlify="true"
+            className={`flex flex-col gap-4 items-center`}
+            onSubmit={handleSubmit}
+            netlify-honeypot="input-field"
+            // noValidate
+          >
+            <p className="hidden">
+              <label>Don&apos;t fill this out if you&apos;re human:</label>
+              <input type="hidden" name="form-name" value={FORM_NAME} />
+              <input type="hidden" name="input-field" />
+            </p>
+            <NetlifyFormInput
+              name="name"
+              type="text"
+              getFieldError={getNameError}
+              wasSubmitted={wasSubmitted}
+            />
+            <NetlifyFormInput
+              name="email"
+              type="email"
+              getFieldError={getEmailError}
+              wasSubmitted={wasSubmitted}
+            />
+            <NetlifyFormInput
+              name="message"
+              type="textarea"
+              getFieldError={getMessageError}
+              wasSubmitted={wasSubmitted}
+            />
+            <div>
+              <Button className="mb-2 bg-secondary" type="submit">Send</Button>
+            </div>
+          </form>
+        )
       }
     </>
   );
