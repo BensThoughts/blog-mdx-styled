@@ -22,11 +22,12 @@ const Spacetagram: Project = {
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
   cloudinaryImgPath: 'v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
   imgAlt: 'Spacetagram Home Page',
-  descriptionFirstSentence: `Beautiful images from nasa infinitely scrolled. Spacetagram is an Instagram clone that uses the NASA APOD API to display the image of the day.`,
+  descriptionFirstSentence: `Beautiful images from NASA infinitely scrolled. Spacetagram is an Instagram clone that uses the NASA APOD API to display the image of the day.`,
   description: `
-    This is a react project that utilizes redux to download the images from the API to an infinite virtual scroll component. Images can be liked and viewed
-    in a gallery. There is also a calendar component that can be used to jump to a specific date. A primary goal of the project was to focus on accessibility
-    and responsive design.
+    This is a react project that utilizes redux to download the images from the API to an infinite 
+    virtual scroll component. Images can be liked and viewed in a gallery. There is also a calendar 
+    component that can be used to jump to a specific date. A primary goal of the project was to focus 
+    on accessibility and responsive design.
   `,
   technologies: [
     technologies.get('react'),
@@ -45,13 +46,12 @@ const ZeroInboxBackend: Project = {
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
   cloudinaryImgPath: 'v1633402742/blog/projects/zero-inbox/zeroinbox-services-full-scaled_uqnk9p.png',
   imgAlt: 'Zero Inbox Backend',
-  descriptionFirstSentence: `The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes
-  cluster.`,
+  descriptionFirstSentence: `The backend for Zero Inbox is composed of 4 micro-services that run in a GKE Kubernetes cluster.`,
   description: `
-    The primary service is an API gateway that the frontend communicates with.
-    The services internally communicate with each other using RabbitMQ and a specialized node.js library
-    that I wrote to wrap the lower level amqplib. Data is stores in a MongoDB Atlas cluster.
-    O-Auth was implemented using google auth so that users can opt to authenticate to the app
+    The primary service is an API gateway that the front end communicates with. The services 
+    internally communicate with each other using RabbitMQ and an npm package that I wrote 
+    called Zero Rabbit (see packages section below). Data is stored in a MongoDB Atlas cluster. 
+    O-Auth was implemented using google auth so that users can opt to authenticate to the app 
     and approve the needed permissions.
   `,
   technologies: [
@@ -78,12 +78,14 @@ const ZeroInbox: Project = {
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
   cloudinaryImgPath: 'v1633402740/blog/projects/zero-inbox/zeroinbox-home-full-scaled_nef8nu.png',
   imgAlt: 'Zero Inbox Home Page',
-  descriptionFirstSentence: `Zero Inbox is a web app that lets users organize their inbox easily on the go.`,
+  descriptionFirstSentence: `Zero Inbox is a web app that lets users organize their inboxes easily on the go.`,
   description: `
-    It is a complex Angular 12 application. Users can view analytics about the state of their
-    inbox as well as quickly organize it. All subscriptions, the number of
-    messages, or size of messages in MB from a given sender can be viewed in a table. The tables are paginated and searchable
-    in real time. Users can quickly unsubscribe from, label, delete, or filter messages from a sender.`,
+    Users can view analytics about the state of their inbox as well as quickly organize it. 
+    All subscriptions, the number of messages, or the size of messages in MB from a given sender 
+    can be viewed in a table. The tables are paginated and searchable in real-time. Users can 
+    quickly unsubscribe from, label, delete, or filter messages from a sender.  The app uses 
+    Angular 12 as a framework.
+  `,
   technologies: [
     technologies.get('angular'),
     technologies.get('redux'),
@@ -108,9 +110,8 @@ const SharableLoveForms: Project = {
   imgAlt: 'Shareable Love Forms Home Page',
   descriptionFirstSentence: `Complete quizzes and fill out forms about love and relationships. Download and print the results as a PDF.`,
   description: `
-    This is my most recent project. It currently has 1 form and can create a nice looking PDF with the forms results.
-    I'm working on possibly converting the project to remix and setting up a backend database. Eventually users will be able
-    to login, save, and share their form results with partners and friends.
+    The site currently hosts the non-escalator relationship form and can create a nice-looking PDF 
+    with the form's results.  This is a form that is widely used by relationship coaches and therapists.
   `,
   technologies: [
     {
@@ -133,16 +134,18 @@ const SharableLoveForms: Project = {
 };
 
 const SteamedApples: Project = {
-  title: 'SteamedApples',
+  title: 'Steamed Apples',
   liveLink: 'https://www.steamedapples.com',
   cloudinaryImgPath: 'v1664943160/apple-silicon-gaming-db/og-images/og-image-home_yxvlgi.png',
   imgAlt: 'Steamed Apples Homepage',
   descriptionFirstSentence: `Steamed Apples lets users read and write performance reviews about Steam games running on Apple.`,
   description: `
-    Users are able to login with their Steam credentials.  Users can then post reports for games that they own.
-    Reports detail if the game ran for them, as well as how well it ran.
-    The site is SSR using remix running on fly.io. Prisma is used as an ORM to access a postgres db that
-    runs on fly's edge network.  The site is incredibly fast and uses a minimal amount of javascript on the client side.`,
+    Users can log in with their Steam credentials. Users can then post reports for 
+    games that they own. Reports detail if the game ran for them, as well as how well it ran.
+    The site is SSR using remix running on fly.io. Prisma is used as an ORM to access a Postgres DB 
+    that runs on the fly.io edge network.  The site is incredibly fast and uses a minimal amount of 
+    javascript on the client side.
+  `,
   technologies: [
     technologies.get('remix'),
     technologies.get('prisma'),
