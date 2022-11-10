@@ -4,7 +4,7 @@ import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
 
 type ProjectLinksProps = {
   liveLink: string,
-  githubLink: string,
+  githubLink?: string,
 }
 
 export default function ProjectLinks({
@@ -14,14 +14,16 @@ export default function ProjectLinks({
   return (
     <div className="pt-4">
       <div className="flex gap-4 font-mono">
-        <AnimatedLinkWithIcon
-          href={githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          text="repo"
-          className="text-secondary"
-          icon={<Github className="text-secondary" />}
-        />
+        {githubLink &&
+          <AnimatedLinkWithIcon
+            href={githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            text="repo"
+            className="text-secondary"
+            icon={<Github className="text-secondary" />}
+          />
+        }
         <AnimatedLinkWithIcon
           href={liveLink}
           target="_blank"
