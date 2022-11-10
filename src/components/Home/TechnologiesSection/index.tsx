@@ -1,4 +1,4 @@
-import {TechStack} from './technologies';
+import {technologies} from '@app/utils/technologies';
 import {useInView} from 'react-intersection-observer';
 import styled from '@emotion/styled';
 import {useEffect, useState} from 'react';
@@ -91,7 +91,7 @@ export default function Technologies() {
         ref={ref}
         viewed={viewed}
       >
-        {TechStack.map((tech, idx) => (
+        {Array.from(technologies.values()).map((tech, idx) => (
           <Link
             key={tech.name}
             href={tech.href}
