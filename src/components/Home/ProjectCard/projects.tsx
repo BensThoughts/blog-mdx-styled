@@ -1,11 +1,22 @@
-import {technologies} from '@app/utils/technologies';
+import {technologies, Technology} from '@app/utils/technologies';
 import {
   NextJS,
   NPM,
   Typescript,
 } from '@app/components/Icons/Brands';
 
-const Spacetagram = {
+interface Project {
+  title: string;
+  liveLink: string;
+  githubLink?: string;
+  cloudinaryImgPath: string;
+  imgAlt: string;
+  descriptionFirstSentence: string;
+  description: string;
+  technologies: (Technology | undefined)[];
+}
+
+const Spacetagram: Project = {
   title: 'Spacetagram',
   liveLink: 'https://shopify-nasa-challenge.netlify.app/',
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
@@ -28,7 +39,7 @@ const Spacetagram = {
   ],
 };
 
-const ZeroInboxBackend = {
+const ZeroInboxBackend: Project = {
   title: 'Zero Inbox Backend',
   liveLink: 'https://zeroinbox.app/story',
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
@@ -61,7 +72,7 @@ const ZeroInboxBackend = {
 
 };
 
-const ZeroInbox = {
+const ZeroInbox: Project = {
   title: 'Zero Inbox Frontend',
   liveLink: 'https://zeroinbox.app',
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
@@ -89,7 +100,7 @@ const ZeroInbox = {
   ],
 };
 
-const SharableLoveForms = {
+const SharableLoveForms: Project = {
   title: 'Shareable Love Forms',
   liveLink: 'https://shareloveforms.com/',
   githubLink: 'https://github.com/BensThoughts/shareable-love-forms',
@@ -121,7 +132,7 @@ const SharableLoveForms = {
   ],
 };
 
-const SteamedApples = {
+const SteamedApples: Project = {
   title: 'SteamedApples',
   liveLink: 'https://www.steamedapples.com',
   cloudinaryImgPath: 'v1664943160/apple-silicon-gaming-db/og-images/og-image-home_yxvlgi.png',
@@ -148,7 +159,7 @@ const SteamedApples = {
   ],
 };
 
-export const Projects = [
+export const Projects: Project[] = [
   SteamedApples,
   Spacetagram,
   SharableLoveForms,
