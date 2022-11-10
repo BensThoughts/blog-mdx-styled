@@ -1,3 +1,4 @@
+import {Technology} from '@app/utils/technologies';
 import styled from '@emotion/styled';
 import StatusBar from './StatusBar';
 
@@ -70,15 +71,8 @@ const LineContent = styled.span`
   padding-bottom: 2px; */
 `;
 
-
-type Technologies = {
-  name: string,
-  icon: React.ReactNode,
-  href: string,
-}
-
 type TechnologiesTerminalProps = {
-  technologies: Technologies[]
+  technologies: Array<Technology | undefined>;
 } & React.HTMLAttributes<HTMLDivElement>
 
 const TechnologiesTerminal = ({
@@ -92,21 +86,25 @@ const TechnologiesTerminal = ({
       <StatusBar file="index.ts" lineNum={numTechs} />
       <Pre className="">
         {technologies.map((tech, i) => (
-          <Line key={tech.name} className="hover:bg-primary">
-            <LineNo>
-              {i + 1}
-            </LineNo>
-            <LineContent className="w-full">
-              <a href={tech.href} className="flex w-full">
-                <Keyword>import</Keyword>
-                {/* <Plain> {tech.name} </Plain>
-              <Keyword>from</Keyword> */}
-                <String> &apos;{tech.name}&apos; </String>
-                <LogoContainer>{tech.icon}</LogoContainer>
-                <Punctuation>;</Punctuation>
-              </a>
-            </LineContent>
-          </Line>
+          <>
+            {tech &&
+              <Line key={tech.name} className="hover:bg-primary">
+                <LineNo>
+                  {i + 1}
+                </LineNo>
+                <LineContent className="w-full">
+                  <a href={tech.href} className="flex w-full">
+                    <Keyword>import</Keyword>
+                    {/* <Plain> {tech.name} </Plain>
+                <Keyword>from</Keyword> */}
+                    <String> &apos;{tech.name}&apos; </String>
+                    <LogoContainer>{tech.icon}</LogoContainer>
+                    <Punctuation>;</Punctuation>
+                  </a>
+                </LineContent>
+              </Line>
+            }
+          </>
         ))}
       </Pre>
     </div>
