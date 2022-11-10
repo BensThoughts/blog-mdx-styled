@@ -1,29 +1,11 @@
-import {Auth} from '@app/components/Icons';
+import {technologies} from '@app/utils/technologies';
 import {
-  Angular,
-  Docker,
-  EsLint,
-  FontAwesome,
-  Github,
-  GoogleAnalytics,
-  GoogleCloud,
-  Kubernetes,
-  MongoDB,
-  Netlify,
   NextJS,
-  Node,
   NPM,
-  Prettier,
-  RabbitMQ,
-  ReactIcon,
-  Redis,
-  Redux,
-  RXJS,
-  TailwindCSS,
   Typescript,
 } from '@app/components/Icons/Brands';
 
-export const Spacetagram = {
+const Spacetagram = {
   title: 'Spacetagram',
   liveLink: 'https://shopify-nasa-challenge.netlify.app/',
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
@@ -36,45 +18,17 @@ export const Spacetagram = {
     and responsive design.
   `,
   technologies: [
-    {
-      name: 'React',
-      icon: <ReactIcon />,
-      href: 'https://reactjs.org/',
-    },
-    {
-      name: 'Redux',
-      icon: <Redux />,
-      href: 'https://react-redux.js.org/',
-    },
-    {
-      name: 'Typescript',
-      icon: <Typescript size={20} />,
-      href: 'https://www.typescriptlang.org/',
-    },
-    {
-      name: 'TailwindCSS',
-      icon: <TailwindCSS />,
-      href: 'https://tailwindcss.com/',
-    },
-    {
-      name: 'Netlify',
-      icon: <Netlify />,
-      href: 'https://www.netlify.com/',
-    },
-    {
-      name: 'Github',
-      icon: <Github />,
-      href: 'https://github.com',
-    },
-    {
-      name: 'ESLint',
-      icon: <EsLint />,
-      href: 'https://eslint.org/',
-    },
+    technologies.get('react'),
+    technologies.get('redux'),
+    technologies.get('typescript'),
+    technologies.get('tailwindcss'),
+    technologies.get('netlify'),
+    technologies.get('github'),
+    technologies.get('eslint'),
   ],
 };
 
-export const ZeroInboxBackend = {
+const ZeroInboxBackend = {
   title: 'Zero Inbox Backend',
   liveLink: 'https://zeroinbox.app/story',
   githubLink: 'https://github.com/BensThoughts?tab=repositories',
@@ -90,56 +44,24 @@ export const ZeroInboxBackend = {
     and approve the needed permissions.
   `,
   technologies: [
-    {
-      name: 'Node',
-      icon: <Node />,
-      href: 'https://nodejs.org/en/',
-    },
+    technologies.get('node'),
     {
       name: 'NPM',
       icon: <NPM size={20} />,
       href: 'https://www.npmjs.com/',
     },
-    {
-      name: 'Docker',
-      icon: <Docker />,
-      href: 'https://www.docker.com/',
-    },
-    {
-      name: 'Kubernetes',
-      icon: <Kubernetes />,
-      href: 'https://kubernetes.io/',
-    },
-    {
-      name: 'Google Cloud',
-      icon: <GoogleCloud />,
-      href: 'https://cloud.google.com/',
-    },
-    {
-      name: 'MongoDB',
-      icon: <MongoDB />,
-      href: 'https://www.mongodb.com/',
-    },
-    {
-      name: 'RabbitMQ',
-      icon: <RabbitMQ size={20} />,
-      href: 'https://www.rabbitmq.com/',
-    },
-    {
-      name: 'Redis',
-      icon: <Redis />,
-      href: 'https://redis.io/',
-    },
-    {
-      name: 'OAuth',
-      icon: <Auth />,
-      href: 'https://oauth.net/',
-    },
+    technologies.get('docker'),
+    technologies.get('kubernetes'),
+    technologies.get('googleCloud'),
+    technologies.get('mongodb'),
+    technologies.get('rabbitmq'),
+    technologies.get('redis'),
+    technologies.get('oauth'),
   ],
 
 };
 
-export const ZeroInbox = {
+const ZeroInbox = {
   title: 'Zero Inbox Frontend',
   liveLink: 'https://zeroinbox.app',
   githubLink: 'https://github.com/bensthoughts/zeroinbox-web',
@@ -152,46 +74,18 @@ export const ZeroInbox = {
     messages, or size of messages in MB from a given sender can be viewed in a table. The tables are paginated and searchable
     in real time. Users can quickly unsubscribe from, label, delete, or filter messages from a sender.`,
   technologies: [
-    {
-      name: 'Angular',
-      icon: <Angular />,
-      href: 'https://angular.io',
-    },
-    {
-      name: 'Redux',
-      icon: <Redux />,
-      href: 'https://react-redux.js.org/',
-    },
-    {
-      name: 'RXJS',
-      icon: <RXJS />,
-      href: 'https://rxjs.dev/',
-    },
-    {
-      name: 'FontAwesome',
-      icon: <FontAwesome size={20} />,
-      href: 'https://fontawesome.com/',
-    },
+    technologies.get('angular'),
+    technologies.get('redux'),
+    technologies.get('rxjs'),
+    technologies.get('fontawesome'),
     {
       name: 'Typescript',
       icon: <Typescript size={20} />,
       href: 'https://www.typescriptlang.org/',
     },
-    {
-      name: 'Google Analytics',
-      icon: <GoogleAnalytics />,
-      href: 'https://analytics.google.com/',
-    },
-    {
-      name: 'Prettier',
-      icon: <Prettier size={20} />,
-      href: 'https://prettier.io/',
-    },
-    {
-      name: 'TailwindCSS',
-      icon: <TailwindCSS />,
-      href: 'https://tailwindcss.com/',
-    },
+    technologies.get('googleAnalytics'),
+    technologies.get('prettier'),
+    technologies.get('tailwindcss'),
   ],
 };
 
@@ -213,47 +107,51 @@ const SharableLoveForms = {
       icon: <NextJS size={20} />,
       href: 'https://nextjs.org/',
     },
-    {
-      name: 'React',
-      icon: <ReactIcon />,
-      href: 'https://reactjs.org/',
-    },
-    {
-      name: 'Redux',
-      icon: <Redux />,
-      href: 'https://react-redux.js.org/',
-    },
+    technologies.get('react'),
+    technologies.get('redux'),
     {
       name: 'Typescript',
       icon: <Typescript size={20} />,
       href: 'https://www.typescriptlang.org/',
     },
+    technologies.get('tailwindcss'),
+    technologies.get('netlify'),
+    technologies.get('github'),
+    technologies.get('eslint'),
+  ],
+};
+
+const SteamedApples = {
+  title: 'SteamedApples',
+  liveLink: 'https://www.steamedapples.com',
+  cloudinaryImgPath: 'v1664943160/apple-silicon-gaming-db/og-images/og-image-home_yxvlgi.png',
+  imgAlt: 'Steamed Apples Homepage',
+  descriptionFirstSentence: `Steamed Apples lets users read and write performance reviews about Steam games running on Apple.`,
+  description: `
+    Users are able to login with their Steam credentials.  Users can then post reports for games that they own.
+    Reports detail if the game ran for them, as well as how well it ran.
+    The site is SSR using remix running on fly.io. Prisma is used as an ORM to access a postgres db that
+    runs on fly's edge network.  The site is incredibly fast and uses a minimal amount of javascript on the client side.`,
+  technologies: [
+    technologies.get('remix'),
+    technologies.get('prisma'),
+    technologies.get('postgres'),
     {
-      name: 'TailwindCSS',
-      icon: <TailwindCSS />,
-      href: 'https://tailwindcss.com/',
+      name: 'Typescript',
+      icon: <Typescript size={20} />,
+      href: 'https://www.typescriptlang.org/',
     },
-    {
-      name: 'Netlify',
-      icon: <Netlify />,
-      href: 'https://www.netlify.com/',
-    },
-    {
-      name: 'Github',
-      icon: <Github />,
-      href: 'https://github.com',
-    },
-    {
-      name: 'ESLint',
-      icon: <EsLint />,
-      href: 'https://eslint.org/',
-    },
+    technologies.get('tailwindcss'),
+    technologies.get('turborepo'),
+    technologies.get('node'),
+    technologies.get('fly'),
   ],
 };
 
 export const Projects = [
-  ZeroInbox,
-  ZeroInboxBackend,
+  SteamedApples,
   Spacetagram,
   SharableLoveForms,
+  ZeroInbox,
+  ZeroInboxBackend,
 ];
