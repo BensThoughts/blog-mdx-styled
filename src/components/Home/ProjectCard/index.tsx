@@ -7,6 +7,7 @@ import ProjectImage from './ProjectImage';
 import TechnologiesTerminal from './TechnologiesTerminal';
 import ProjectLinks from './ProjectLinks';
 import ProjectTitle from './ProjectTitle';
+import {Technology} from '@app/utils/technologies';
 
 const Card = styled.div`
 display: flex;
@@ -136,12 +137,8 @@ type ProjectCardProps = {
   cloudinaryImgPath: string,
   imgAlt: string,
   liveLink: string,
-  githubLink: string,
-  technologies: {
-    name: string,
-    icon: React.ReactElement,
-    href: string,
-  }[],
+  githubLink: string | undefined,
+  technologies: Array<Technology | undefined>,
   reversed?: boolean
 }
 
