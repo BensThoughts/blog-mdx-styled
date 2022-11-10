@@ -75,11 +75,10 @@ export default function Technologies() {
       <div className="flex justify-center items-center">
         <BorderedBox>
           <p className="my-2 leading-7">
-        &nbsp;&nbsp;&nbsp;&nbsp;
             <strong>
-            A list of the technologies I have been excited about&nbsp;
+              A list of the technologies I have been excited about&nbsp;
               <ExcitedSmiley size={30} className="inline-block pb-1 text-icon-secondary" />
-            &nbsp;and working with recently.
+              &nbsp;and working with recently.
             </strong>
           &nbsp;&nbsp;Click on the links to go to the home page and learn more about a given technology.
           </p>

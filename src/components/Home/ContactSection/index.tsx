@@ -16,7 +16,6 @@ export default function TechnologiesBox({className}: TechBoxProps) {
       <div className="flex justify-center items-center">
         <BorderedBox>
           <p className="my-2 leading-7">
-            &nbsp;&nbsp;&nbsp;&nbsp;
             <strong>
             I would love to here from you.&nbsp;
             </strong>
@@ -34,10 +33,16 @@ export default function TechnologiesBox({className}: TechBoxProps) {
       <div className="flex justify-center items-center">
         <BorderedBox>
           <strong>
-           I am actively looking for work in the web development space.&nbsp;
+            If you have an interesting job opportunity, tell me all about it!
           </strong>
-          I have extensive knowledge of Javascript &amp; Typescript, as well as numerous frontend and backend
-          frameworks as listed in the
+          {` `}I am currently working on my passion project,{` `}
+          <AnimatedLink
+            href='https://www.steamedapples.com'
+            className="text-secondary"
+          >
+            Steamed Apples
+          </AnimatedLink>
+         .{` `}I love video games, creating websites, and working with the technologies listed in my{` `}
           <span className="inline-block">
             <Link
               href="/#skills"
@@ -47,11 +52,11 @@ export default function TechnologiesBox({className}: TechBoxProps) {
                 href="/#skills"
                 className="text-secondary"
               >
-                  &nbsp;Skills&nbsp;
+                  Skills
               </AnimatedLink>
             </Link>
           </span>
-          section.
+          {` `}section.
         </BorderedBox>
       </div>
       <NetlifyForm />
