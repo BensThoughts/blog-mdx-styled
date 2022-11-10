@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import {Technology} from '@app/utils/technologies';
 import styled from '@emotion/styled';
 import StatusBar from './StatusBar';
@@ -86,7 +87,7 @@ const TechnologiesTerminal = ({
       <StatusBar file="index.ts" lineNum={numTechs} />
       <Pre className="">
         {technologies.map((tech, i) => (
-          <>
+          <Fragment key={tech ? `${tech.name}_${i}` : `technology_${i}`}>
             {tech &&
               <Line key={tech.name} className="hover:bg-primary">
                 <LineNo>
@@ -104,7 +105,7 @@ const TechnologiesTerminal = ({
                 </LineContent>
               </Line>
             }
-          </>
+          </Fragment>
         ))}
       </Pre>
     </div>
