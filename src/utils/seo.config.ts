@@ -10,7 +10,7 @@ const seoConfig = {
         url: 'https://res.cloudinary.com/bensthoughts/image/upload/q_auto/v1630560422/blog/og-image/og-header-image_l1kxju.png',
         width: 1200,
         height: 627,
-        alt: 'Blog Header Image',
+        alt: 'Bensthoughts.dev Blog',
       },
     ],
     site_name: 'BensThoughts Blog',
