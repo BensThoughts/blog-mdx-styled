@@ -52,6 +52,7 @@ function App({Component, pageProps}: AppProps) {
 
   useEffect(() => {
     Fathom.load('MUTUGNOW', {
+      url: 'https://descriptive-welcome.bensthoughts.dev/script.js',
       includedDomains: ['bensthoughts.dev', 'www.bensthoughts.dev'],
     });
 
