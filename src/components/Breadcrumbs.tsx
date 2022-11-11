@@ -16,7 +16,8 @@ export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<H
 
   useEffect(() => {
     if (router) {
-      const linkPath = router.asPath.split('/');
+      const cleanPath = router.asPath.split(/[?#]/)[0];
+      const linkPath = cleanPath.split('/');
       linkPath.shift();
 
       const pathArray = linkPath.map((path, i) => {
