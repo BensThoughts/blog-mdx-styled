@@ -21,6 +21,9 @@ import seoConfig from '@app/utils/seo.config';
 import Navbar from '@app/components/Layout/Navbar';
 import Footer from '@app/components/Layout/Footer';
 import {ImageCacheProvider} from '@app/utils/hooks/useProgressiveImg';
+import * as Fathom from 'fathom-client';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
 
 const PageWrapper = styled.div`
   padding-top: 3.5rem;
@@ -42,8 +45,27 @@ const FooterWrap = styled.div`
   grid-row: 2 / 3;
 `;
 
-function MyApp({Component, pageProps, router}: AppProps) {
+function App({Component, pageProps}: AppProps) {
   const enabledFeatures = ['home', 'blog', 'projects'];
+
+  const router = useRouter();
+
+  useEffect(() => {
+    Fathom.load('MUTUGNOW', {
+      includedDomains: ['bensthoughts.dev', 'www.bensthoughts.dev'],
+    });
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, []);
+
   return (
     <>
       <DefaultSeo {...seoConfig} />
@@ -72,4 +94,4 @@ function MyApp({Component, pageProps, router}: AppProps) {
     </>
   );
 }
-export default MyApp;
+export default App;
