@@ -23,7 +23,7 @@ import Footer from '@app/components/Layout/Footer';
 import {ImageCacheProvider} from '@app/utils/hooks/useProgressiveImg';
 import * as Fathom from 'fathom-client';
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 
 const PageWrapper = styled.div`
   padding-top: 3.5rem;
@@ -49,6 +49,7 @@ function App({Component, pageProps}: AppProps) {
   const enabledFeatures = ['home', 'blog', 'projects'];
 
   const router = useRouter();
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     Fathom.load('MUTUGNOW', {
@@ -56,7 +57,11 @@ function App({Component, pageProps}: AppProps) {
     });
 
     function onRouteChangeComplete() {
-      Fathom.trackPageview();
+      if (firstLoad.current) {
+        firstLoad.current = false;
+      } else {
+        Fathom.trackPageview();
+      }
     }
 
     router.events.on('routeChangeComplete', onRouteChangeComplete);
