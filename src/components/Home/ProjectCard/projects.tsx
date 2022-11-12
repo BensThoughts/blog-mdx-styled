@@ -18,7 +18,7 @@ interface Project {
 
 const Spacetagram: Project = {
   title: 'Spacetagram',
-  liveLink: 'https://shopify-nasa-challenge.netlify.app/',
+  liveLink: 'https://shopify-nasa-challenge.netlify.app/?utm_campaign=Self+Referral&utm_source=bensthoughts.dev&utm_medium=site+link',
   githubLink: 'https://github.com/BensThoughts/shopify-nasa-challenge',
   cloudinaryImgPath: 'v1633402766/blog/projects/spacetagram/spacetegram-home-full-scaled_oev1uf.png',
   imgAlt: 'Spacetagram Home Page',
@@ -104,7 +104,7 @@ const ZeroInbox: Project = {
 
 const SharableLoveForms: Project = {
   title: 'Shareable Love Forms',
-  liveLink: 'https://shareloveforms.com/',
+  liveLink: 'https://www.shareloveforms.com/?utm_campaign=Self+Referral&utm_source=bensthoughts.dev&utm_medium=site+link',
   githubLink: 'https://github.com/BensThoughts/shareable-love-forms',
   cloudinaryImgPath: 'v1644862572/blog/projects/shareable-love-forms/shareable-love-forms-screenshot_qyqcvz.jpg',
   imgAlt: 'Shareable Love Forms Home Page',
@@ -135,7 +135,7 @@ const SharableLoveForms: Project = {
 
 const SteamedApples: Project = {
   title: 'Steamed Apples',
-  liveLink: 'https://www.steamedapples.com',
+  liveLink: 'https://www.steamedapples.com/?utm_campaign=Self+Referral&utm_source=bensthoughts.dev&utm_medium=site+link',
   cloudinaryImgPath: 'v1664943160/apple-silicon-gaming-db/og-images/og-image-home_yxvlgi.png',
   imgAlt: 'Steamed Apples Homepage',
   descriptionFirstSentence: `Steamed Apples lets users read and write performance reviews about Steam games running on Apple.`,
