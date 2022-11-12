@@ -37,8 +37,10 @@ export default function TechnologiesBox({className}: TechBoxProps) {
           </strong>
           {` `}I am currently working on my passion project,{` `}
           <AnimatedLink
-            href='https://www.steamedapples.com'
+            href='https://www.steamedapples.com/?ref=bensthoughts.dev'
             className="text-secondary"
+            rel="noreferrer noopener"
+            target="_self"
           >
             Steamed Apples
           </AnimatedLink>
