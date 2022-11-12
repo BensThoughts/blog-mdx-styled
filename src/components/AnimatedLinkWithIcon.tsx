@@ -1,12 +1,12 @@
-import styled from '@emotion/styled';
-import AnimatedUnderline from '@app/components/AnimatedUnderline';
+// import styled from '@emotion/styled';
+// import AnimatedUnderline from '@app/components/AnimatedUnderline';
 
-const AnimationController = styled.a`
-  &:hover ${AnimatedUnderline}::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
+// const AnimationController = styled.a`
+//   &:hover ${AnimatedUnderline}::after {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+// `;
 
 type AnimatedLinkWithIconProps = {
   text: string,
@@ -24,7 +24,7 @@ export default function AnimatedLinkWithIcon({
   ...rest
 }: AnimatedLinkWithIconProps) {
   return (
-    <AnimationController
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -32,12 +32,8 @@ export default function AnimatedLinkWithIcon({
       {...rest}
     >
       {iconPosition === 'left' && <span className="inline-block">{icon}</span>}
-      <AnimatedUnderline
-        className="animated-underline"
-      >
-        {text}
-      </AnimatedUnderline>
+      <span className="underline underline-offset-4 decoration-secondary">{text}</span>
       {iconPosition === 'right' && <span className="inline-block">{icon}</span>}
-    </AnimationController>
+    </a>
   );
 }

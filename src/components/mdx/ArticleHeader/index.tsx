@@ -29,7 +29,7 @@ export default function ArticleHeader({
         <H1 className="md:my-3">
           {title}
         </H1>
-        <div className="flex flex-col gap-y-2 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-y-6 md:flex-row md:justify-between">
           <div className="flex flex-row justify-between md:flex-col">
             <Date dateString={date} />
             {readTime && <p className="italic font-light">
