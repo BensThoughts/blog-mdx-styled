@@ -10,6 +10,13 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    colors: {
+      'app-bg': generateColorClass('color-bg-primary'),
+      'primary': generateColorClass('color-app-primary'),
+      'secondary': generateColorClass('color-app-secondary'),
+      'accent': generateColorClass('color-app-accent'),
+      'terminal': generateColorClass('color-bg-terminal'),
+    },
     extend: {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive'],
