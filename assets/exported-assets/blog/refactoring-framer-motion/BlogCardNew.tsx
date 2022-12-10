@@ -26,7 +26,7 @@ const Pill = styled.div<{
   animation-delay: ${({delay}) => delay + 's'};
 `;
 
-const AnchorContainer = styled.span`
+const AnchorContainer = styled.a`
   display: block;
   height: 100%;
   width: 100%;
@@ -91,7 +91,7 @@ export default function BlogCard({
   ...rest
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`} scroll={true} passHref>
+    <Link href={`/blog/${id}`} scroll={true} passHref legacyBehavior>
       <AnchorContainer className={`shadow-md ${className}`} {...rest}>
         <div className={`h-full px-2 py-4 md:p-4 flex flex-col justify-start gap-4 ${className}`}>
           <div>

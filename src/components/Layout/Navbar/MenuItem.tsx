@@ -23,7 +23,7 @@ const MenuItem = ({
   ...rest
 }: MenuItemsProps) => {
   return (
-    <Link passHref href={href} scroll={true}>
+    <Link passHref href={href} scroll={true} legacyBehavior>
       {animatedLink
         ? (
           <AnimatedLink className={className} onClick={onClick}>

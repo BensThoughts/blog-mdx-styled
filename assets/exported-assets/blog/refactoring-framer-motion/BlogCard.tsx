@@ -81,7 +81,7 @@ export default function BlogCard({
 
   return (
     <LazyMotion features={domAnimation}>
-      <Link href={`/blog/${slug}`} scroll={true} passHref>
+      <Link href={`/blog/${slug}`} scroll={true} passHref legacyBehavior>
         <AnchorContainer
           initial="notActivated"
           animate={controls}

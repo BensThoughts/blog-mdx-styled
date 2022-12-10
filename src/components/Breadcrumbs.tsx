@@ -36,7 +36,7 @@ export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<H
     <div aria-label="breadcrumbs" className={`flex ${className}`} {...rest}>
       <div className="font-mono">
         <span className="text-secondary">$&gt;&nbsp;</span>
-        <Link href="/" scroll={true} passHref>
+        <Link href="/" scroll={true} passHref legacyBehavior>
           <AnimatedLink href="/">HOME</AnimatedLink>
         </Link>
         &nbsp;/&nbsp;
@@ -45,7 +45,7 @@ export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<H
         if (breadcrumb.href != '/') {
           return (
             <div key={breadcrumb.href} className="font-mono">
-              <Link href={breadcrumb.href} scroll={true} passHref>
+              <Link href={breadcrumb.href} scroll={true} passHref legacyBehavior>
                 <AnimatedLink href={breadcrumb.href}>
                   {convertBreadcrumb(breadcrumb.breadcrumb)}
                 </AnimatedLink>

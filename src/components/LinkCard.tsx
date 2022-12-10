@@ -10,7 +10,7 @@ type LinkCardProps = {
 
 export default function LinkCard({slug, children, ...rest}: LinkCardProps) {
   return (
-    <Link href={`/blog/${slug}`} scroll={true} passHref>
+    <Link href={`/blog/${slug}`} scroll={true} passHref legacyBehavior>
       <AnchorContainer {...rest}>
         {children}
       </AnchorContainer>

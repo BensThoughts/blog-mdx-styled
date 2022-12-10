@@ -63,17 +63,15 @@ const NextLink: FC<FLinkProps> = ({
       passHref={passHref}
       prefetch={prefetch}
       locale={locale}
+      tabIndex={0}
+      target={target}
+      role="link"
+      onClick={handleClick}
+      legacyBehavior
+      // onKeyDown={handleClick}
+      {...anchorProps}
     >
-      <a
-        tabIndex={0}
-        target={target}
-        role="link"
-        onClick={handleClick}
-        // onKeyDown={handleClick}
-        {...anchorProps}
-      >
-        {children}
-      </a>
+      {children}
     </Link>
   );
 };
