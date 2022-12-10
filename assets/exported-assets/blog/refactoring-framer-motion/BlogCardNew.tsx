@@ -26,7 +26,7 @@ const Pill = styled.div<{
   animation-delay: ${({delay}) => delay + 's'};
 `;
 
-const AnchorContainer = styled.a`
+const AnchorContainer = styled.span`
   display: block;
   height: 100%;
   width: 100%;
