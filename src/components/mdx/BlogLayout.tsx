@@ -1,9 +1,6 @@
 import {MDXRemote, MDXRemoteSerializeResult} from 'next-mdx-remote';
 import {NextSeo} from 'next-seo';
 import {buildImageUrl} from 'cloudinary-build-url';
-import {Inter} from '@next/font/google';
-// eslint-disable-next-line new-cap
-const inter = Inter({subsets: ['latin']});
 import {
   A,
   ArticleHeader,
@@ -117,7 +114,7 @@ export default function BlogLayout({
         }}
       />
       {/* <MaxWidthWrapper> */}
-      <article className={inter.className}>
+      <article>
         <GridWrapper>
           <ArticleHeader
             title={title}
