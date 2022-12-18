@@ -40,7 +40,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <a
             href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
             download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
-            className="flex justify-center items-center w-full h-10 text-xl over:bg-primary text-secondary"
+            className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
           >
             Resume
           </a>
