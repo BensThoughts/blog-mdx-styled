@@ -86,15 +86,20 @@
       );
   }
 
+  .link-underline-control:hover .link-underline {
+    background-size: 100% 3px;
+    background-position: 0 100%;
+  }
+
   .link-underline:hover {
     background-size: 100% 3px;
     background-position: 0 100%;
   }
 
-  .link-underline-no-effect {
+  /* .link-underline-no-effect {
     background-size: 0 3px;
     background-position: 0 100%;
-  }
+  } */
 
   /* .link-underline:focus-within {
     background-size: 100% 3px;
