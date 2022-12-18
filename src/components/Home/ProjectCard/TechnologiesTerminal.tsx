@@ -93,10 +93,8 @@ const TechnologiesTerminal = ({
                   {i + 1}
                 </span>
                 <span className="flex items-center w-full">
-                  <a href={tech.href} className="flex w-full">
+                  <a href={tech.href} className="flex w-full" rel="noopener noreferrer" target="_blank">
                     <span className="text-[#0c969b]">import</span>
-                    {/* <Plain> {tech.name} </Plain>
-                <Keyword>from</Keyword> */}
                     <span className="text-[#4876d6]"> &apos;{tech.name}&apos; </span>
                     <div className="flex items-center justify-center text-[#0c969b]">{tech.icon}</div>
                     <div className="text-[#994cc3]">;</div>
