@@ -40,3 +40,4 @@ yarn-error.log*
 /assets/large-assets
 
 public/sitemap.xml
+public/sitemap-0.xml
