@@ -1,5 +1,4 @@
 import {forwardRef, MouseEventHandler} from 'react';
-import AnimatedUnderline from '@app/components/AnimatedUnderline';
 
 type AProps = {
   children: React.ReactNode;
@@ -14,17 +13,14 @@ const AnimatedLink = forwardRef<HTMLAnchorElement, AProps>(({
   ...rest
 }, ref) => {
   return (
-    <AnimatedUnderline>
-      <a
-        ref={ref}
-        onClick={onClick}
-        className={className}
-        {...rest}
-      >
-        {children}
-      </a>
-    </AnimatedUnderline>
-
+    <a
+      ref={ref}
+      onClick={onClick}
+      className={`link-underline link-underline-secondary ${className}`}
+      {...rest}
+    >
+      {children}
+    </a>
   );
 });
 

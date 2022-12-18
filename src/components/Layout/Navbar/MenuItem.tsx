@@ -2,7 +2,6 @@ import React, {MouseEventHandler, ReactNode} from 'react';
 import Link from 'next/link';
 // import Link from '@app/components/Link';
 import AnimatedLink from '@app/components/AnimatedLink';
-// import AnimatedUnderline from '@app/components/AnimatedUnderline';
 // import AnimatedLink from '@app/components/AnimatedLink';
 
 type MenuItemsProps = {
