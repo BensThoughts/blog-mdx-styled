@@ -1,12 +1,7 @@
 import {Fragment} from 'react';
-import styled from '@emotion/styled';
 import {Transition} from '@headlessui/react';
 
 import useScrollDirection from '@app/utils/hooks/useScrollDirection';
-
-const NavHiderWrapper = styled.div`
-  z-index: 49;
-`;
 
 type NavHiderProps = {
   className?: string;
@@ -26,9 +21,9 @@ export default function NavHider({className, children}: NavHiderProps) {
       leaveFrom="translate-y-0"
       leaveTo="-translate-y-full"
     >
-      <NavHiderWrapper className={`fixed inset-0 h-14 max-h-14 ${className}`}>
+      <div className={`fixed inset-0 h-14 max-h-14 z-[49] ${className}`}>
         {children}
-      </NavHiderWrapper>
+      </div>
     </Transition>
 
 

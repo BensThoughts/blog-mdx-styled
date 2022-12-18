@@ -11,7 +11,6 @@ export {default as H1} from './H1';
 export {default as H2} from './H2';
 export {default as HeaderImage} from './HeaderImage';
 export {default as Img} from './Img';
-export {default as InlineCode} from './InlineCode';
 export {default as Li} from './Li';
 export {default as P} from './P';
 export {default as Pre} from './Pre';

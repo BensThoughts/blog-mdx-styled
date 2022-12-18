@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 // import {useWindowSize} from 'react-use';
 import {useInView} from 'react-intersection-observer';
 
@@ -8,127 +7,6 @@ import TechnologiesTerminal from './TechnologiesTerminal';
 import ProjectLinks from './ProjectLinks';
 import ProjectTitle from './ProjectTitle';
 import {Technology} from '@app/utils/technologies';
-
-const Card = styled.div`
-display: flex;
-flex-direction: column;
-gap: 40px;
-@media (min-width: 1024px) {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(13, 1fr);
-  gap: 0px;
-  /* height: 600px; */
-  height: 660px;
-  will-change: transform background opacity;
-}
-/* align-items: center; */
-/* height: 350px; */
-/* border-left: 8px;
-border-color: rgba(var(--color-app-secondary), 1);
-border-style: solid; */
-`;
-
-const TitleWrap = styled.div<{
-  reversed: boolean,
-  viewed: boolean
-}>`
-
-height: 50px;
-opacity: ${({viewed}) => viewed ? 1 : 0};
-transition-property: opacity;
-transition-duration: 250ms;
-will-change: transform background opacity;
-
-@media (min-width: 1024px) {
-  height: 25px;
-  grid-area: ${({reversed}) => reversed ? '1 / 8 / 2 / -1' : '1 / 1 / 2 / 6'};
-  transform: ${({reversed}) => reversed ? 'translateX(50px)' : 'translateX(-50px)'}
-}
-`;
-
-const AboutWrap = styled.div<{
-  reversed: boolean,
-  viewed: boolean,
-}>`
-height: 100%;
-z-index: 2;
-height: 100%;
-background-color: rgba(var(--color-app-primary), 1);
-border-width: ${({reversed}) => reversed ? '0 3px 0 0' : '0 0 0 3px'}; /* top right bottom left */
-border-style: solid;
-border-color: rgba(var(--color-text-secondary), 1);
-grid-area: 5 / 1 / 9 / -1;
-will-change: transform background opacity;
-opacity: ${({viewed}) => viewed ? 1 : 0};
-transition-property: transform opacity;
-transition-duration: 250ms;
-
-@media (min-width: 1024px) { 
-  grid-area: ${({reversed}) => reversed ? '2 / 6 / 9 / -1' : '2 / 1 / 9 / 8'};
-  transform: ${({viewed, reversed}) => {
-    const flipBit = reversed ? -1 : 1;
-    if (!viewed) {
-      return `translateX(${-200 * flipBit}px)`;
-    } else {
-      return `translateX(${-50 * flipBit}px)`;
-    }
-  }};
-}
-`;
-
-const ImageWrap = styled.div<{
-  reversed: boolean,
-  viewed: boolean,
-}>`
-/* grid-area: 2 / 1 / 5 / -1; */
-display: none;
-z-index: 1;
-@media (min-width: 1024px) {
-  display: block;
-  width: 460px;
-  height: 255px;
-  /* width: 100%;
-  height: 100%; */
-  grid-area: ${({reversed}) => reversed ? '2 / 1 / 7 / 7' : '2 / 7 / 7 / -1'};
-  transform: ${({viewed, reversed}) => {
-    const flipBit = reversed ? -1 : 1;
-    if (!viewed) {
-      return `translateX(${200 * flipBit}px)`;
-    } else {
-      return `translateX(${50 * flipBit}px)`;
-    }
-  }};
-  transition-property: transform opacity;
-  transition-duration: 250ms;
-  will-change: transform background opacity;
-}
-`;
-
-const TechWrap = styled.div<{
-  reversed: boolean,
-  viewed: boolean,
-}>`
-/* height: 100%; */
-z-index: 3;
-opacity: ${({viewed}) => viewed ? 1 : 0};
-/* grid-area: 9 / 1 / -2 / -1; */
-transition-property: transform opacity;
-transition-duration: 400ms;
-will-change: transform background opacity;
-
-@media (min-width: 1024px) {  
-  grid-area: ${({reversed}) => reversed ? '8 / 2 / -1 / 8' : '8 / 6 / -1 / -2'};
-  transform: ${({viewed, reversed}) => {
-    /* const flipBit = reversed ? -1 : 1; */
-    if (!viewed) {
-      return `translateY(400px)`;
-    } else {
-      return `translateY(20px)`;
-    }
-  }};
-}
-`;
 
 type ProjectCardProps = {
   title: string,
@@ -139,7 +17,7 @@ type ProjectCardProps = {
   liveLink: string,
   githubLink: string | undefined,
   technologies: Array<Technology | undefined>,
-  reversed?: boolean
+  // reversed?: boolean
 }
 
 export default function ProjectsCard({
@@ -151,27 +29,11 @@ export default function ProjectsCard({
   liveLink,
   githubLink,
   technologies,
-  reversed = false,
+  // reversed = false,
 }: ProjectCardProps) {
   const {ref, inView} = useInView();
-  // const [hovered, setHovered] = useState(false);
-  // const [focused, setFocused] = useState(false);
-  // const [expanded, setExpanded] = useState(false);
-  // const {width} = useWindowSize();
 
   const [viewed, setViewed] = useState(false);
-
-  // useEffect(() => {
-  //   if (width < 1080) {
-  //     setExpanded(false);
-  //   } else if (focused) {
-  //     setExpanded(true);
-  //   } else if (hovered) {
-  //     setExpanded(true);
-  //   } else {
-  //     setExpanded(false);
-  //   }
-  // }, [width, hovered, focused]);
 
   useEffect(() => {
     if (inView) {
@@ -180,25 +42,25 @@ export default function ProjectsCard({
   }, [inView]);
 
   return (
-    <Card
-      // onMouseEnter={() => setHovered(true)}
-      // onMouseLeave={() => setHovered(false)}
-      // onFocus={() => setFocused(true)}
-      // onBlur={() => setFocused(false)}
+    <div
+      className="flex flex-col gap-10 xl:grid xl:grid-cols-[repeat(12,1fr)]
+                 xl:grid-rows-[repeat(13,1fr)] xl:gap-0 xl:h-[660px]"
       ref={ref}
     >
-      <TitleWrap
-        reversed={reversed}
-        viewed={viewed}
+      <div
+        className={`h-[50px] transition-opacity duration-[250ms]
+                    xl:h-[25px] xl:[grid-area:1_/_1_/_2_/_6] xl:-translate-x-[50px]
+                    ${viewed ? 'opacity-100' : 'opacity-0'}
+        `}
       >
-        <ProjectTitle title={title} reversed={reversed} />
-      </TitleWrap>
+        <ProjectTitle title={title} />
+      </div>
 
-      <ImageWrap
-        reversed={reversed}
-        // expanded={expanded}
-        viewed={viewed}
-        className="shadow-lg"
+      <div
+        className={`hidden z-[1] shadow-lg xl:block xl:w-[460px] xl:h-[255px]
+                    xl:[grid-area:2_/_7_/_7_/_-1] xl:transition-all xl:duration-[250ms]
+                    ${viewed ? 'xl:translate-x-[50px]' : 'xl:translate-x-[200px]'}
+        `}
       >
         <ProjectImage
           cloudinaryImgPath={cloudinaryImgPath}
@@ -207,14 +69,17 @@ export default function ProjectsCard({
           width={460}
           height={255}
         />
-      </ImageWrap>
+      </div>
 
 
-      <AboutWrap
-        reversed={reversed}
-        viewed={viewed}
+      <div
         // expanded={expanded}
-        className={`p-4 flex flex-col justify-between h-full shadow-lg ${reversed ? 'items-end text-right' : 'items-start text-left'}`}
+        className={`h-full z-[2] bg-primary border-l-[3px] border-l-text-color-secondary
+        [grid-area:5_/_1_/_9_/_-1] xl:[grid-area:2_/_1_/_9_/_8]
+        p-4 flex flex-col justify-between items-start text-left shadow-lg
+        transition-all duration-300
+        ${viewed ? 'xl:-translate-x-[50px]' : 'xl:-translate-x-[200px]'}
+        `}
       >
         <p className="font-mono leading-7 text-opacity-100 text-primary">
           <strong className="font-bold">
@@ -225,15 +90,16 @@ export default function ProjectsCard({
         <div>
           <ProjectLinks liveLink={liveLink} githubLink={githubLink} />
         </div>
-      </AboutWrap>
+      </div>
 
-      <TechWrap
-        reversed={reversed}
-        // expanded={expanded}
-        viewed={viewed}
+      <div
+        className={`z-[3] transition-all duration-[400ms] xl:[grid-area:8_/_6_/_-1_/_-2]
+          ${viewed ? 'opacity-100 xl:translate-y-[20px]' : 'opacity-0 xl:translate-y-[400px]'}
+
+        `}
       >
         <TechnologiesTerminal technologies={technologies} className="shadow-lg" />
-      </TechWrap>
-    </Card>
+      </div>
+    </div>
   );
 }

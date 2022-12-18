@@ -1,30 +1,8 @@
-import styled from '@emotion/styled';
-
 import BlogCard from '@app/components/BlogCard';
-// import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import BlogFolderCard from '../BlogFolderCard';
 import {DirectoryTree} from 'next-mdx-filesystem';
-import GridWrapper from '@app/components/GridWrapper';
-
-const GridContainer = styled.div`
-  display: grid;
-  height: 100%;
-  row-gap: 3rem;
-  grid-template-columns: 1fr;
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-auto-flow: row;
-    gap: 5rem;
-    * {
-      grid-column: auto;
-      grid-row: auto;
-    }
-  }
-`;
-
 
 type BlogArticleListProps = {
   dirTree: DirectoryTree<BlogArticleMetaData>
@@ -39,13 +17,17 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
   const {dirMetadata, directories, mdxFiles} = dirTree;
   const title = createTitle(dirMetadata.title);
   return (
-    <GridWrapper charWidth={140}>
-      <SectionTitle>
+    <div
+      // charWidth={charWidth}
+      className={`grid flex-col px-4 md:px-8 mx-auto items-center
+                  gap-y-12 md:gap-y-20 gap-x-0 grid-cols-[1fr,min(140ch,100%),1fr]`}
+    >
+      <SectionTitle className="col-span-full md:[grid-column:2]">
         <span className="text-icon-secondary">[&nbsp;</span>
           Blog <span>&nbsp;-&nbsp;{title}</span>
         <span className="text-icon-secondary">&nbsp;]</span>
       </SectionTitle>
-      <GridContainer>
+      <div className="grid h-full gap-y-12 grid-cols-[1fr] col-span-full md:[grid-column:2] md:grid-cols-[1fr,1fr] md:grid-rows-[auto] md:grid-flow-row md:gap-20">
         {directories.map(({dirMetadata}) => (
           <BlogFolderCard
             key={dirMetadata.slug}
@@ -64,7 +46,7 @@ export default function BlogListLayout({dirTree}: BlogArticleListProps) {
             description={metadata.longDescription}
           />
         ))}
-      </GridContainer>
-    </GridWrapper>
+      </div>
+    </div>
   );
 };

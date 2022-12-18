@@ -1,6 +1,6 @@
 import {ExternalLink} from '@app/components/Icons';
 import {Github} from '@app/components/Icons/Brands';
-import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
+import UnderlineLinkWithIcon from '@app/components/UnderlineLinkWithIcon';
 
 type ProjectLinksProps = {
   liveLink: string,
@@ -15,7 +15,7 @@ export default function ProjectLinks({
     <div className="pt-4">
       <div className="flex gap-4 font-mono">
         {githubLink &&
-          <AnimatedLinkWithIcon
+          <UnderlineLinkWithIcon
             href={githubLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -24,7 +24,7 @@ export default function ProjectLinks({
             icon={<Github className="text-secondary" />}
           />
         }
-        <AnimatedLinkWithIcon
+        <UnderlineLinkWithIcon
           href={liveLink}
           target="_blank"
           rel="noopener noreferrer"

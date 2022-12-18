@@ -1,6 +1,5 @@
 import {Twitter} from '@app/components/Icons/Brands';
-import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
-
+import UnderlineLinkWithIcon from '@app/components/UnderlineLinkWithIcon';
 
 type ArticleTweetProps = {
   permaLink: string,
@@ -13,7 +12,7 @@ export default function ArticleTweet({permaLink, tweetMessage}: ArticleTweetProp
     text: tweetMessage,
   })}`;
   return (
-    <AnimatedLinkWithIcon
+    <UnderlineLinkWithIcon
       target="popup"
       onClick={() => window.open(tweetHref, 'popup', 'left=50,top=100,width=800,height=600')}
       rel="noreferrer noopener"

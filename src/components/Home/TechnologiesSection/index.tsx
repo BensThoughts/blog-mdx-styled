@@ -1,74 +1,37 @@
 import {technologies} from '@app/utils/technologies';
 import {useInView} from 'react-intersection-observer';
-import styled from '@emotion/styled';
-import {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import BorderedBox from '@app/components/BorderedBox';
 import {ExcitedSmiley} from '@app/components/Icons';
+import {useAnimation, m} from 'framer-motion';
 
-const PillBackground = styled.div`
-  border-radius: 0.25rem;
-  background-color: rgba(var(--color-app-primary), 1);
-  transition-property: transform background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-`;
+const PillBackground = ({children}:{children: React.ReactNode}) => (
+  <div className="rounded bg-primary/100 transition-all ease-in-out duration-300
+                  group-hover:-translate-y-[6px] group-hover:transition-transform
+                  group-hover:duration-200">
+    {children}
+  </div>
+);
 
-const Pill = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 0.25rem;
-  padding-top: 0.25rem/* 4px */;
-  padding-bottom: 0.25rem/* 4px */;
-  padding-left: 0.5rem/* 8px */;
-  padding-right: 0.5rem/* 8px */;
-  background-color: rgba(255, 255, 255, 0.0);
-  transition-property: transform background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-`;
-
-const Link = styled.a<{
-  transitionDelay: number;
-}>`
-  display: block;
-  transition: opacity 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: ${({transitionDelay}) => transitionDelay + 's'}; 
-  &:hover ${PillBackground} {
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-    transform: translateY(-6px);
-  }
-
-  &:hover ${Pill} {
-    transition-property: background-color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-`;
-
-const AnimationContainer = styled.div<{
-  viewed: boolean
-}>`
-  ${Link} {
-    opacity: ${({viewed}) => viewed ? 1 : 0}
-  }
-`;
+const Pill = ({children}:{children: React.ReactNode}) => (
+  <div className="flex gap-2 items-center justify-around rounded py-1 px-2 bg-white/0
+                  duration-300 transition-all ease-in-out group-hover:bg-white/20">
+    {children}
+  </div>
+);
 
 
 export default function Technologies() {
   const {ref, inView} = useInView();
-  const [viewed, setViewed] = useState(false);
+  // const [viewed, setViewed] = useState(false);
+  const controls = useAnimation();
 
   useEffect(() => {
     if (inView) {
-      setViewed(true);
+      // setViewed(true);
+      controls.start('inView');
     }
-  }, [inView]);
+  }, [inView, controls]);
 
   return (
     <>
@@ -85,19 +48,39 @@ export default function Technologies() {
         </BorderedBox>
       </div>
 
-      <AnimationContainer
+      <m.div
         className="flex flex-wrap mx-auto w-full max-w-4xl h-full"
         ref={ref}
-        viewed={viewed}
+        initial="hidden"
+        animate={controls}
+        variants={{
+          hidden: {
+
+          },
+          inView: {
+            transition: {
+              staggerChildren: 0.04,
+              delayChildren: 0,
+            },
+          },
+        }}
+        // viewed={viewed}
       >
         {Array.from(technologies.values()).map((tech, idx) => (
-          <Link
+          <m.a
             key={tech.name}
             href={tech.href}
             target="_blank"
             rel="noopener noreferrer"
-            transitionDelay={0.07 * idx}
-            className="p-2 text-sm text-primary"
+            className="block transition-opacity ease-in-out p-2 text-sm text-primary group"
+            variants={{
+              hidden: {
+                opacity: 0,
+              },
+              inView: {
+                opacity: 1,
+              },
+            }}
           >
             <PillBackground>
               <Pill>
@@ -105,9 +88,9 @@ export default function Technologies() {
                 <span className="text-primary">{tech.name}</span>
               </Pill>
             </PillBackground>
-          </Link>
+          </m.a>
         ))}
-      </AnimationContainer>
+      </m.div>
     </>
   );
 }

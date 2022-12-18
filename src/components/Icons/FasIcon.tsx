@@ -1,14 +1,5 @@
 import {forwardRef} from 'react';
-import styled from '@emotion/styled';
 import {useUID} from 'react-uid';
-
-const Stop1 = styled.stop`
-  stop-color: rgb(var(--color-gradient-primary));
-`;
-
-const Stop2 = styled.stop`
-  stop-color: rgb(var(--color-gradient-secondary));
-`;
 
 type IconProps = {
   size?: number,
@@ -42,8 +33,8 @@ const FasIcon = forwardRef<SVGSVGElement, IconProps>(({
     >
       {gradient && <defs>
         <linearGradient id={UUID} x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(45)">
-          <Stop1 offset="0" />
-          <Stop2 offset="1" />
+          <stop className="[stop-color:rgb(var(--color-gradient-primary))]" offset="0" />
+          <stop className='[stop-color:rgb(var(--color-gradient-secondary))]' offset="1" />
         </linearGradient>
       </defs>}
 

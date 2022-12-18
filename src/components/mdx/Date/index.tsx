@@ -1,18 +1,17 @@
 import {parseISO, format} from 'date-fns';
-import styled from '@emotion/styled';
 
 interface DateProps {
   dateString: string
 }
 
-const Time = styled.time`
-  font-style: italic;
-  font-weight: 100;
-`;
-
-export default function Date(props: DateProps) {
-  const date = parseISO(props.dateString);
+export default function Date({dateString}: DateProps) {
+  const date = parseISO(dateString);
   return (
-    <Time dateTime={props.dateString}>{format(date, 'LLLL d, yyyy')}</Time>
+    <time
+      dateTime={dateString}
+      className="italic font-thin"
+    >
+      {format(date, 'LLLL d, yyyy')}
+    </time>
   );
 };

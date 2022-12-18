@@ -1,5 +1,4 @@
-import {useState} from 'react';
-import styled from '@emotion/styled';
+import React, {useState} from 'react';
 
 import ThemeToggle from '@app/components/ThemeToggle';
 import Breadcrumbs from '@app/components/Breadcrumbs';
@@ -15,41 +14,7 @@ import {
   Folder,
   Monitor,
 } from '@app/components/Icons';
-import AnimatedLinkWithIcon from '@app/components/AnimatedLinkWithIcon';
-
-const Nav = styled.nav`
-  /* background-color: rgba(0, 0, 0, 0); */
-  /* background-image: radial-gradient(rgba(0,0,0,0) 1px,rgba(var(--color-bg-primary), 0.5) 1px );
-  background-size: 4px 4px;
-  backdrop-filter: brightness(100%) blur(2px); */
-  display: flex;
-  z-index: 49;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  /* margin-bottom: 2rem; */
-  padding: 0px;
-  /* position: fixed; */
-  /* top: 0px; */
-  transition-property: background, color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  will-change: background, color;
-  backdrop-filter: var(--app-backdrop-filter);
-`;
-
-const NavLinks = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  align-content: space-between;
-  padding-top: 0px;
-  background: var(--color-app-primary);
-  /* transition: background 0.25s ease-in-out;
-  will-change: background; */
-`;
-
-// bg-app-bg shadow-lg backdrop-filter bg-opacity-70 backdrop-blur-sm
+import UnderlineLinkWithIcon from '@app/components/UnderlineLinkWithIcon';
 
 type NavBarProps = {
   className?: string;
@@ -61,7 +26,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
   return (
     <>
       <MenuDrawer isOpen={isOpen} setIsOpen={setIsOpen} title="Menu" description="Short and sweet!">
-        <NavLinks className="flex flex-col justify-end content-between items-center pt-0 mt-7 w-full">
+        <div className="flex flex-col items-center justify-end content-between pt-0 mt-7 w-full">
           {menuItems.map((menuItem) => (
             <MenuItem
               key={menuItem.href}
@@ -79,10 +44,15 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           >
             Resume
           </a>
-        </NavLinks>
+        </div>
       </MenuDrawer>
       <NavHider>
-        <Nav {...rest} className={`bg-opacity-70 shadow-lg bg-app-bg ${className}`}>
+        <nav
+          className={`flex z-[49] items-center justify-between w-full p-0 transition-colors
+                      duration-300 ease-in-out backdrop-blur-sm bg-opacity-70 shadow-lg
+                      bg-app-bg ${className}`}
+          {...rest}
+        >
 
           {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mx-3">
@@ -92,7 +62,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                 {menuItems.map((menuItem) => (
                   <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
                 ))}
-                <AnimatedLinkWithIcon
+                <UnderlineLinkWithIcon
                   href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
                   download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
                   text="Resume"
@@ -117,7 +87,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             </IconButton>
 
           </div>
-        </Nav>
+        </nav>
       </NavHider>
 
     </>

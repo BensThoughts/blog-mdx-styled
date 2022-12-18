@@ -1,4 +1,3 @@
-import GridWrapper from '@app/components/GridWrapper';
 import AvatarSection from '@app/components/Home/AvatarSection';
 import ProjectCard from '@app/components/Home/ProjectCard';
 import SectionTitle from '@app/components/SectionTitle';
@@ -8,9 +7,10 @@ import Technologies from '@app/components/Home/TechnologiesSection';
 import ContactSection from '@app/components/Home/ContactSection';
 import PackageSection from '@app/components/Home/PackagesSection';
 
+
 export default function Home() {
   return (
-    <GridWrapper charWidth={100}>
+    <div className="flex flex-col px-4 mx-auto gap-y-12 md:gap-y-20 md:px-8 max-w-6xl">
       {/* About Section */}
       <div id="home"></div>
       <SectionTitle>
@@ -20,14 +20,16 @@ export default function Home() {
       </SectionTitle>
       <AvatarSection />
 
+
       {/* Technologies Section */}
       <div id="skills"></div>
-      <SectionTitle>
+      <SectionTitle id="skills">
         <span className="text-icon-secondary">[</span>
                 &nbsp;02. Skills&nbsp;
         <span className="text-icon-secondary">]</span>
       </SectionTitle>
       <Technologies />
+
 
       {/* Projects Section */}
       <div id="projects"></div>
@@ -68,6 +70,6 @@ export default function Home() {
         <span className="text-icon-secondary">]</span>
       </SectionTitle>
       <ContactSection />
-    </GridWrapper>
+    </div>
   );
 };

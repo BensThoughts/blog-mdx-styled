@@ -15,39 +15,14 @@ import {
   H2,
   HeaderImage,
   Img,
-  InlineCode,
   Li,
   P,
-  Pre,
+  // Pre,
   Strong,
   Ul,
 } from '@app/components/mdx/';
 import BlogCard from '@app/components/BlogCard';
-import GridWrapper from '@app/components/GridWrapper';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
-
-const components = {
-  a: A,
-  blockquote: Blockquote,
-  code: Code,
-  date: Date,
-  em: Em,
-  hr: Hr,
-  h1: H1,
-  h2: H2,
-  img: Img,
-  inlineCode: InlineCode,
-  li: Li,
-  p: P,
-  pre: Pre,
-  strong: Strong,
-  ul: Ul,
-  // ArticleHeader,
-  BlogCard,
-  CommandLine,
-  // HeaderImage,
-  // Video,
-};
 
 type PostProps = {
   content: MDXRemoteSerializeResult;
@@ -115,14 +90,14 @@ export default function BlogLayout({
       />
       {/* <MaxWidthWrapper> */}
       <article>
-        <GridWrapper>
+        <div className="grid-wrapper">
           <ArticleHeader
             title={title}
             date={date}
             readTime={readTime}
             permaLink={url}
             tags={tags}
-            className="mt-10"
+            className="mt-10 col-span-full md:[grid-column:2]"
           />
           {cloudinaryImgPath && imgWidth && imgHeight && imgAlt
             ? (
@@ -136,13 +111,37 @@ export default function BlogLayout({
               <></>
             )
           }
-          <MDXRemote {...content} components={components} />
+          <MDXRemote
+            components={{
+              a: A,
+              blockquote: Blockquote,
+              code: Code,
+              date: Date,
+              em: Em,
+              hr: Hr,
+              h1: H1,
+              h2: H2,
+              img: Img,
+              li: Li,
+              p: P,
+              // pre: Pre,
+              strong: Strong,
+              ul: Ul,
+              ArticleHeader,
+              BlogCard,
+              CommandLine,
+              HeaderImage,
+              // Video,
+            }}
+            {...content}
+            // compiledSource={}
+          />
           <ArticleFooter
             title={title}
             permaLink={url}
             tags={tags}
           />
-        </GridWrapper>
+        </div>
       </article>
       {/* </MaxWidthWrapper> */}
     </>

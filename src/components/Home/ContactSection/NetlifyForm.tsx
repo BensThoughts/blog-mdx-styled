@@ -1,95 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Button from '@app/components/Button';
-import styled from '@emotion/styled';
-
-const FormLabel = styled.label<{
-  placeholderShown: boolean,
-  displayError: boolean,
-}>`
-  display: block;
-  font-weight: normal;
-  left: 0;
-  margin: 0;
-  padding: 18px 12px 0;
-  position: absolute;
-  top: 0;
-  transition: all linear 200ms;
-  width: 100%;
-  color: ${({displayError}) => displayError ? 'rgb(var(--color-app-error))' : 'rgb(var(--color-text-primary))'};
-  cursor: text;
-  font-size: ${({placeholderShown}) => placeholderShown ? '1.2rem' : '0.75rem'};
-  transform: ${({placeholderShown}) => placeholderShown ? 'translateY(0px)' : 'translateY(-14px)'}
-`;
-
-const FormField = styled.div`
-  background-color: rgba(var(--color-app-primary), 1);
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-`;
-
-const FormFieldBar = styled.div<{
-  displayError: boolean
-}>`
-  border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
-  bottom: 0;
-  left: 0;
-  right: 0;
-  content: " ";
-  display: block;
-  margin: 0 auto;
-  position: absolute;
-  transform: scaleX(0);
-  transition: all 250ms;
-  width: 1%;
-`;
-
-
-const FormInput = styled.input<{
-  displayError: boolean,
-  isTextArea: boolean,
-}>`
-  appearance: none;
-  outline: none;
-  background: transparent;
-  border: 0;
-  border-bottom: ${({displayError}) => displayError ? '2px solid rgb(var(--color-app-error))' : '2px solid rgb(var(--color-app-secondary))'};
-  color: rgb(var(--color-text-primary));
-  display: block;
-  font-size: 1.2rem;
-  margin-top: 24px;
-  outline: 0;
-  padding: 0 12px 10px 12px;
-  width: 100%;
-  height: ${({isTextArea}) => isTextArea ? '250px' : '100%'};
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  &:focus {
-    ~${FormLabel} {
-      font-size: 0.75rem;
-      transform: translateY(-14px);
-    }
-
-    ~${FormFieldBar} {
-      border-bottom: ${({displayError}) => displayError ? '4px solid rgb(var(--color-app-error))' : '4px solid rgb(var(--color-app-secondary))'};
-      transform: scaleX(150);
-    }
-  }
-`;
-
-const Submission = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(var(--color-text-primary));
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  height: 498px;
-`;
 
 function NetlifyFormInput({
   name,
@@ -116,12 +26,14 @@ function NetlifyFormInput({
   }, [wasSubmitted]);
 
   return (
-    <FormField key={name}>
-      <FormLabel
+    <div className="bg-primary rounded overflow-hidden relative w-full" key={name}>
+      <label
         htmlFor={`${name}-input`}
-        className="text-primary"
-        placeholderShown={placeholderShown}
-        displayError={displayError as boolean}
+        className={`text-primary block w-full font-normal left-0 top-0 m-0 cursor-text
+                    pt-[18px] px-[12px] pb-0 absolute transition-all ease-linear duration-200
+                    ${displayError ? 'text-error' : 'text-primary'}
+                    ${placeholderShown ? 'text-[1.2rem] translate-y-0' : 'text-[0.75rem] -translate-y-[14px]'}
+        `}
       >
         <span className="text-primary">{name}</span>
         {displayError ? (
@@ -129,29 +41,70 @@ function NetlifyFormInput({
             &nbsp;({errorMessage})
           </span>
         ) : null}
-      </FormLabel>
-      <FormInput
-        as={isTextArea ? 'textarea' : 'input'}
-        isTextArea={isTextArea}
-        id={`${name}-input`}
-        type={type}
-        name={name}
-        value={value}
-        onChange={(e) => setValue(e.currentTarget.value)}
-        onFocus={() => setPlaceholderShown(false)}
-        onBlur={() => {
-          setTouched(true);
-          if (value === '') {
-            setPlaceholderShown(true);
-          }
-        }}
-        onSubmit={() => setValue('')}
-        required
-        aria-describedby={displayError ? `${name}-error` : undefined}
-        displayError={displayError as boolean}
-      />
-      <FormFieldBar displayError={displayError as boolean}></FormFieldBar>
-    </FormField>
+      </label>
+      {isTextArea ? (
+        <textarea
+          // as={isTextArea ? 'textarea' : 'input'}
+          // isTextArea={isTextArea}
+          id={`${name}-input`}
+          name={name}
+          value={value}
+          onChange={(e) => setValue(e.currentTarget.value)}
+          onFocus={() => setPlaceholderShown(false)}
+          onBlur={() => {
+            setTouched(true);
+            if (value === '') {
+              setPlaceholderShown(true);
+            }
+          }}
+          onSubmit={() => setValue('')}
+          required
+          aria-describedby={displayError ? `${name}-error` : undefined}
+          // displayError={displayError as boolean}
+          className={`peer outline-none bg-transparent appearance-none border-0
+                      text-primary block text-[1.2rem] mt-[24px] pt-0 px-[12px] pb-[10px] w-full
+                      focus-visible:outline-none
+                      border-b-2 h-[250px]
+                      ${displayError ? 'border-b-error' : 'border-b-secondary'}
+          `}
+        />
+      ) : (
+        <input
+          // as={isTextArea ? 'textarea' : 'input'}
+          // isTextArea={isTextArea}
+          id={`${name}-input`}
+          type={type}
+          name={name}
+          value={value}
+          onChange={(e) => setValue(e.currentTarget.value)}
+          onFocus={() => setPlaceholderShown(false)}
+          onBlur={() => {
+            setTouched(true);
+            if (value === '') {
+              setPlaceholderShown(true);
+            }
+          }}
+          onSubmit={() => setValue('')}
+          required
+          aria-describedby={displayError ? `${name}-error` : undefined}
+          // displayError={displayError as boolean}
+          className={`peer outline-none bg-transparent appearance-none border-0
+                      text-primary block text-[1.2rem] mt-[24px] pt-0 px-[12px] pb-[10px] w-full
+                      focus-visible:outline-none
+                      border-b-2 h-full
+                      ${displayError ? 'border-b-error' : 'border-b-secondary'}
+          `}
+        />
+      )}
+
+      <div
+        className={`bottom-0 left-0 right-0 content-[''] block my-0 mx-auto
+                    absolute transition-all duration-300 border-b-4
+                    peer-focus:scale-150 w-full scale-0
+          ${displayError ? 'border-b-error' : 'border-b-secondary'}
+        `}
+      ></div>
+    </div>
   );
 };
 
@@ -242,7 +195,7 @@ export default function NetlifyForm() {
   return (
     <>
       {wasSubmitted
-        ? <Submission>Thank you for your submission. I will respond promptly</Submission>
+        ? <div className="flex items-center justify-center text-primary text-lg h-[498px]">Thank you for your submission. I will respond promptly</div>
         : (
           <form
             id={FORM_NAME}

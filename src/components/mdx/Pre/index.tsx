@@ -1,20 +1,9 @@
-import styled from '@emotion/styled';
+import type {DetailedHTMLProps, HTMLAttributes} from 'react';
 
-const PreWrapper = styled.pre`
-  /* grid-column: 1 / -1;
-  @media (min-width: 768px) {
-    grid-column: 2 / 3;
-  } */
-`;
-
-type PreProps = {
-  children: React.ReactNode;
-}
-
-export default function Pre({children}: PreProps) {
+export default function Pre({children, ...rest}: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) {
   return (
-    <PreWrapper>
-      {children}
-    </PreWrapper>
+    <span className="px-2 py-1 rounded-md bg-terminal">
+      <pre className="text-color-inline-code" {...rest}>{children}</pre>
+    </span>
   );
 }

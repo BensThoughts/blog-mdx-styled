@@ -1,16 +1,8 @@
 // import Image from 'next/image';
-import styled from '@emotion/styled';
 import {buildImageUrl} from 'cloudinary-build-url';
 
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 
-const ImageContainer =styled.div<{
-  // width: number,
-  height: number,
-}>`
-  grid-column: 1 / -1;
-  max-height: ${({height}) => height + 'px'};
-`;
 interface HeaderImageProps {
   imgPath: string,
   alt: string,
@@ -55,9 +47,13 @@ export default function HeaderImage({
   const [src, blur] = useProgressiveImage(smallUrl, largeUrl);
 
   return (
-    <ImageContainer
-      height={height}
-      className={`flex overflow-hidden justify-center items-center mx-auto w-full md:w-full ${className}`}
+    <div
+      className={`flex overflow-hidden justify-center items-center
+      mx-auto w-full md:w-full
+      ${className}`}
+      // className={`flex overflow-hidden justify-center items-center
+      //             mx-auto w-full md:w-full !col-span-full max-h-[${height}]
+      //             ${className}`}
     >
       <img
         src={src}
@@ -71,6 +67,6 @@ export default function HeaderImage({
         }}
         className="object-contain"
       />
-    </ImageContainer>
+    </div>
   );
 }

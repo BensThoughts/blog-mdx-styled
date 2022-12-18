@@ -1,51 +1,3 @@
-import styled from '@emotion/styled';
-
-const Header = styled.h1`
-display: flex;
-align-items: center;
-height: 100%;
-width: 100%;
-z-index: -1;
-position: relative;
-white-space: nowrap;
-font-family: monospace;
-font-size: 1.5rem;
-backdrop-filter: var(--app-backdrop-filter);
-
-@media (min-width: 768px) {
-  font-size: 2rem;
-}
-
-&::before {
-  content: "";
-  position: relative;
-  top: 0px;
-  width: 100%;
-  height: 2px;
-  margin-right: 20px;
-  background-color: rgb(var(--color-app-secondary));
-  z-index: -1;
-  backdrop-filter: var(--app-backdrop-filter);
-}
-
-&::after {
-  content: "";
-  position: relative;
-  top: 0px;
-  width: 100%;
-  height: 2px;
-  margin-left: 20px;
-  background-color: rgb(var(--color-app-secondary));
-  z-index: -1;
-  backdrop-filter: var(--app-backdrop-filter);
-
-  /* @media (min-width: 768px) {
-    width: 300px;
-  } */
-}
-`;
-
-
 type SectionTitleProps = {
   reversed?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>
@@ -58,7 +10,15 @@ export default function SectionTitleHeader({
 }: SectionTitleProps) {
   return (
     <div className={`flex items-center my-2 h-full ${className}`} {...rest}>
-      <Header>{children}</Header>
+      <h2
+        className="relative flex items-center h-full w-full -z-[1] text-secondary
+                   whitespace-nowrap font-mono text-2xl md:text-4xl
+                   before:content-[''] before:relative before:top-0 before:w-full before:h-[2px] before:mr-5 before:bg-secondary before:-z-[1]
+                   after:content-[''] after:relative after:top-0 after:w-full after:h-[2px] after:ml-5 after:bg-secondary after:-z-[1]"
+
+      >
+        {children}
+      </h2>
     </div>
   );
 }

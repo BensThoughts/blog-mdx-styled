@@ -102,6 +102,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       },
     });
 
+
   if (isDirectory) {
     return {
       props: {

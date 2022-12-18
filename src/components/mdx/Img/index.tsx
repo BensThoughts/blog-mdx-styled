@@ -1,13 +1,10 @@
+import type {DetailedHTMLProps, ImgHTMLAttributes} from 'react';
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
 import {buildImageUrl} from 'cloudinary-build-url';
 
-type ImgProps = {
-  src: string,
-  alt: string,
-}
-
-export default function Img({src, alt}: ImgProps) {
-  const lowQualityImgUrl = buildImageUrl(src, {
+export default function Img({src, alt}: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) {
+  const srcRaw = src ? src : '';
+  const lowQualityImgUrl = buildImageUrl(srcRaw, {
     cloud: {
       cloudName: 'bensthoughts',
     },
@@ -16,7 +13,7 @@ export default function Img({src, alt}: ImgProps) {
     },
   });
 
-  const highQualityImgurl = buildImageUrl(src, {
+  const highQualityImgurl = buildImageUrl(srcRaw, {
     cloud: {
       cloudName: 'bensthoughts',
     },

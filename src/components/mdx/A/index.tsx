@@ -1,36 +1,20 @@
-import styled from '@emotion/styled';
 import {ExternalLink} from '@app/components/Icons';
-import AnimatedUnderline from '@app/components/AnimatedUnderline';
+import type {DetailedHTMLProps, AnchorHTMLAttributes} from 'react';
 
-const Anchor = styled.a`
-  &:hover ${AnimatedUnderline}::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-`;
-
-type AProps = {
-  children: string;
-  href: string;
-}
-
-export default function A({href, children}: AProps) {
+export default function A({href, children, ...rest}: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
   return (
-    <Anchor
+    <a
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="inline-block text-secondary"
+      className="text-secondary link-underline link-underline-secondary rounded-lg"
+      {...rest}
     >
-      <AnimatedUnderline
-        className="mr-2 text-icon-secondary"
-      >
-        {children}
-      </AnimatedUnderline>
-      <span className="inline-block pb-1 align-middle">
+      {children}
+      <span className="ml-1 inline-block pb-1 align-middle text-icon-secondary link-underline-no-effect">
         <ExternalLink size={20} />
       </span>
-    </Anchor>
+    </a>
 
   );
 }

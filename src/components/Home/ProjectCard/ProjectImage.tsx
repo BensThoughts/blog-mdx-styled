@@ -1,63 +1,5 @@
 import {buildImageUrl} from 'cloudinary-build-url';
-import styled from '@emotion/styled';
 import {useProgressiveImage} from '@app/utils/hooks/useProgressiveImg';
-
-const Image = styled.img<{
-  blur: boolean
-}>`
-  position: relative;
-  object-fit: fill;
-  /* width: 100%; */
-  /* height: 100%; */
-  /* width: 458px; */
-  /* height: 300px; */
-  z-index: 2;
-  mix-blend-mode: multiply;
-  filter: ${({blur}) => {
-    if (blur) {
-      return 'blur(10px)';
-    } else {
-      return 'grayscale(100%) contrast(1) brightness(90%)';
-    }
-  }};
-  transition: filter 0.2s ease-out;
-  
-  &:hover {
-    mix-blend-mode: normal;
-    filter: grayscale(0%) brightness(100%);
-  }
-`;
-
-const Anchor = styled.a`
-  display: block;
-  /* width: 100%; */
-  /* height: 100%; */
-  width: 460px;
-  height: 255px;
-  &::after {
-    content: "";
-    position: absolute;
-    /* width: 100%; */
-    /* height: 100%; */
-    /* width: 460px;
-    height: 255px; */
-    z-index: -1;
-    top: 0;
-    left: 0;
-    background-color: rgba(var(--color-image-overlay), 0.7);
-  }
-
-  &:focus ${Image} {
-    mix-blend-mode: normal;
-    filter: grayscale(0%) brightness(100%);
-  }
-
-  &:focus-visible ${Image} {
-    outline: var(--app-outline);
-    outline-offset: var(--app-outline-offset);
-  }
-`;
-
 
 type ProjectImageProps = {
   cloudinaryImgPath: string,
@@ -74,7 +16,7 @@ export default function ProjectImage({
   width,
   height,
 }: ProjectImageProps) {
-  const imgSrcSmall = buildImageUrl(cloudinaryImgPath, {
+  const imgSrcLowRes = buildImageUrl(cloudinaryImgPath, {
     cloud: {
       cloudName: 'bensthoughts',
     },
@@ -87,7 +29,7 @@ export default function ProjectImage({
       },
     },
   });
-  const imgSrcLarge = buildImageUrl(cloudinaryImgPath, {
+  const imgSrcHighRes = buildImageUrl(cloudinaryImgPath, {
     cloud: {
       cloudName: 'bensthoughts',
     },
@@ -100,13 +42,19 @@ export default function ProjectImage({
       },
     },
   });
-  const [src, blur] = useProgressiveImage(imgSrcSmall, imgSrcLarge);
+  const [src, blur] = useProgressiveImage(imgSrcLowRes, imgSrcHighRes);
   return (
-    <Anchor href={href} target="_blank" rel="noopener noreferrer" >
-      <Image
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-[460px] h-[255px] after:content-[''] after:absolute
+                 after:-z-[1] after:top-0 after:left-0 bg-image-overlay/70 group"
+    >
+      <img
         alt={imgAlt}
         src={src}
-        blur={blur}
+        // blur={blur}
         // style={{
         //   filter: blur ? 'blur(10px)' : 'grayscale(100%) contrast(1) brightness(90%)',
         //   transition: blur ? 'none' : 'filter 0.2s ease-out',
@@ -114,7 +62,13 @@ export default function ProjectImage({
         // }}
         width={width}
         height={height}
+        className={`relative object-fill z-[2] mix-blend-multiply transition-all
+                   duration-200 ease-out hover:mix-blend-normal hover:grayscale-0
+                   hover:brightness-100 group-focus:mix-blend-normal group-focus:grayscale-0
+                   group-focus:brightness-100
+                    ${blur ? 'blur-[10px]' : 'grayscale contrast-100 brightness-90'}
+        `}
       />
-    </Anchor>
+    </a>
   );
 }

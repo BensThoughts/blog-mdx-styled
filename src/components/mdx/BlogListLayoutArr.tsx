@@ -1,30 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
-
 import BlogCard from '@app/components/BlogCard';
-// import MaxWidthWrapper from '@app/components/MaxWidthWrapper';
-import GridWrapper from '@app/components/GridWrapper';
 import SectionTitle from '@app/components/SectionTitle';
 import {BlogArticleMetaData} from '@app/pages/blog/[...slug]';
 import {DirectoryData} from 'next-mdx-filesystem';
-// import GridWrapper from '../GridWrapper';
-
-const GridContainer = styled.div`
-  display: grid;
-  height: 100%;
-  row-gap: 3rem;
-  grid-template-columns: 1fr;
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-auto-flow: row;
-    gap: 5rem;
-    a {
-      grid-column: auto;
-      grid-row: auto;
-    }
-  }
-`;
 
 
 type BlogArticleListProps = {
@@ -37,19 +15,21 @@ function createTitle(dirName: string) {
 
 export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
   return (
-    <GridWrapper charWidth={120}>
-      {/* <GridWrapper charWidth={100}> */}
+    <div
+      className={`grid px-4 md:px-8 mx-auto justify-center items-center
+                  gap-y-12 md:gap-y-20 gap-x-0 grid-cols-[1fr,min(140ch,100%),1fr]`}
+    >
       {dirArr.map((dir) => {
         if (dir.mdxFiles.length > 0) {
           return (
             <React.Fragment key={dir.dirMetadata.title}>
-              <SectionTitle>
+              <SectionTitle className="col-span-full md:[grid-column:2]">
                 <span className="text-icon-secondary">[&nbsp;</span>
                 {createTitle(dir.dirMetadata.title)}
                 <span className="text-icon-secondary">&nbsp;]</span>
               </SectionTitle>
-              <div>
-                <GridContainer>
+              <div className="col-span-full md:[grid-column:2]">
+                <div className="grid h-full gap-y-12 grid-cols-[1fr] md:grid-cols-[1fr,1fr] md:grid-rows-[auto] md:grid-flow-row md:gap-20">
                   {dir.mdxFiles.map(({metadata}) => (
                     <BlogCard
                       key={metadata.slug}
@@ -61,13 +41,12 @@ export default function BlogListLayoutArr({dirArr}: BlogArticleListProps) {
                       className="grid"
                     />
                   ))}
-                </GridContainer>
+                </div>
               </div>
             </React.Fragment>
           );
         }
       })}
-      {/* </GridWrapper> */}
-    </GridWrapper>
+    </div>
   );
 };
