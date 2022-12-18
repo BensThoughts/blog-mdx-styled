@@ -1,10 +1,14 @@
 import Link, {LinkProps} from 'next/link';
-import {FC, HTMLProps, useCallback} from 'react';
+import {
+  FC,
+  // HTMLProps,
+  useCallback,
+} from 'react';
 import {useRouter} from 'next/router';
 
-interface FLinkProps extends Omit<HTMLProps<HTMLAnchorElement>, 'href' | 'as'>, LinkProps {}
+// interface FLinkProps extends Omit<HTMLProps<HTMLAnchorElement>, 'href' | 'as'>, LinkProps {}
 
-const NextLink: FC<FLinkProps> = ({
+const NextLink: FC<LinkProps> = ({
   children,
   href,
   as,
@@ -14,7 +18,6 @@ const NextLink: FC<FLinkProps> = ({
   passHref,
   prefetch,
   locale,
-  target,
   ...anchorProps
 }) => {
   const router = useRouter();
@@ -64,7 +67,7 @@ const NextLink: FC<FLinkProps> = ({
       prefetch={prefetch}
       locale={locale}
       tabIndex={0}
-      target={target}
+      // target={target}
       role="link"
       onClick={handleClick}
       legacyBehavior
