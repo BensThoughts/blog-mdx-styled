@@ -14,20 +14,25 @@
     row-gap: 3rem;
     column-gap: 0;
     grid-template-columns: 1fr min(90ch, 100%) 1fr;
-    @media (min-width: 768px) {
+  }
+
+  .grid-wrapper > pre {
+    width: 100%;
+  }
+
+  .grid-wrapper > * {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .grid-wrapper {
       padding-right: 2rem;
       padding-left: 2rem;
       row-gap: 5rem;
     }
-  }
-  .grid-wrapper > * {
-    grid-column: 1 / -1;
-    @media (min-width: 768px) {
+    .grid-wrapper > * {
       grid-column: 2;
     }
-  }
-  .grid-wrapper > pre {
-    width: 100%;
   }
 }
 
