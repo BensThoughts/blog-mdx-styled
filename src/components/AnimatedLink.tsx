@@ -14,16 +14,17 @@ const AnimatedLink = forwardRef<HTMLAnchorElement, AProps>(({
   ...rest
 }, ref) => {
   return (
-    <a
-      ref={ref}
-      onClick={onClick}
-      className={className}
-      {...rest}
-    >
-      <AnimatedUnderline>
+    <AnimatedUnderline>
+      <a
+        ref={ref}
+        onClick={onClick}
+        className={className}
+        {...rest}
+      >
         {children}
-      </AnimatedUnderline>
-    </a>
+      </a>
+    </AnimatedUnderline>
+
   );
 });
 
