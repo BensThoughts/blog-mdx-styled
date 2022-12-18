@@ -1,28 +1,18 @@
-// import styled from '@emotion/styled';
-// import AnimatedUnderline from '@app/components/AnimatedUnderline';
-
-// const AnimationController = styled.a`
-//   &:hover ${AnimatedUnderline}::after {
-//     opacity: 1;
-//     transform: scale(1);
-//   }
-// `;
-
-type AnimatedLinkWithIconProps = {
+type UnderlineLinkWithIconProps = {
   text: string,
   href: string,
   icon: React.ReactNode,
   iconPosition?: 'left' | 'right';
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export default function AnimatedLinkWithIcon({
+export default function UnderlineLinkWithIcon({
   text,
   href,
   className,
   icon,
   iconPosition = 'right',
   ...rest
-}: AnimatedLinkWithIconProps) {
+}: UnderlineLinkWithIconProps) {
   return (
     <a
       href={href}
