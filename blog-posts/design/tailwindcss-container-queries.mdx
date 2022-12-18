@@ -15,7 +15,7 @@ tags:
   - "containerQuery"
 ---
 
-Photo by <a href="https://unsplash.com/@ventiviews?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Venti Views</a> on <a href="https://unsplash.com/s/photos/container?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Photo by [Venti Views](https://unsplash.com/@ventiviews?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/container?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 ## Container Queries Are Coming!
 
@@ -41,7 +41,10 @@ update, and I already use it across multiple frameworks and sites that I run.
 
 Fortunately tailwindcss already has a plugin/experimental feature to support container-queries. The
 challenge is going to be coming up with a fallback that is dead simple, easy to maintain, and works for
-most users. The solution is going to be to implement container queries and use media queries as a fallback.
+most users. The solution is going to be to implement container queries and use media queries as a
+fallback.
+
+---
 
 ## Why Change At All?
 
@@ -52,6 +55,8 @@ new breakpoint just to accommodate that one component, but that isn't what media
 are not designed to shift the layout of the **content** inside of a single component. There are lots of other
 [reasons](https://ethanmarcotte.com/wrote/on-container-queries/) to switch but this article is
 about how to make the switch as easy and simple as possible.
+
+---
 
 ## Initial Setup
 
@@ -84,6 +89,8 @@ module.exports = {
 }
 ```
 
+---
+
 ## Using Tailwindcss Container Queries
 
 This is pretty simple and explained well on the tailwind container queries plugin page. After installing
@@ -104,13 +111,15 @@ video](https://youtu.be/NoP9oY7kdy8) is quite good as well.
 </div>
 ```
 
+---
+
 ## Mixing Container and Media Queries
 
 OK, we know how to create components to use container queries using tailwind. All we have to do now is
 throw in our media queries and voila, browsers without support have media queries and those with support
 will use container queries....maybe something like this...
 
-```html
+```html:test
 <div class="@container">
   <div class="flex flex-col md:flex-row @[600px]:flex-row">
     <!-- Some more divs here -->
@@ -125,6 +134,8 @@ work I did to make my elements flow in a row based on the container size is undo
 
 I tried using the `!important` keyword as well as changing the order of the classnames, but neither fixed
 the issue.
+
+---
 
 ## The Solution
 
@@ -197,6 +208,8 @@ ignore this. The `supports-[not(container-type:inline-size)]:md:flex-row` tells 
 support container queries to use the `md:` medium screen size media query. While that supports-\[not..\]
 line may look a little ugly it is actually quite maintainable and scalable compared to the css above.
 
+---
+
 ## Caveats/Issues
 
 While this is a pretty good solution, there are some caveats and issues you may run into.
@@ -213,3 +226,5 @@ The caveats are of course that you may still end up with some funky stuff in the
 whose browser doesn't support container queries. There is also the fact that simply testing if the
 browser supports `container-type: inline-size` may not be a completely fool proof solution to determine
 if a browser fully supports container queries correctly.
+
+---

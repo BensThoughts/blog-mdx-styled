@@ -126,7 +126,7 @@ component to add additional classNames.
 
 I have joined the base typings of the component with `AnchorHTMLAttributes` using a
 Typescript intersection (the &). This is what allows any user of the component to
-pass any valid anchor props to the component. I use {..rest} to spread those props
+pass any valid anchor props to the component. I use \{..rest\} to spread those props
 out within the styled anchor element itself. In total this makes the component highly
 reusable because any user of the component can pass any valid anchor element props to
 it. Such as `style={style}`, `rel={rel}`, or the all important `href={href}`.

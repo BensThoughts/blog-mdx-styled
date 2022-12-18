@@ -19,6 +19,7 @@ tags:
   - 'Typescript'
   - 'StaggeredAnimation'
 ---
+
 In this article I am going to show you how I created a staggered animation first with [Framer
 Motion](https://www.framer.com/docs/) and then refactored the code to use
 [@emotion](https://emotion.sh/docs/introduction) CSS-in-JS. The first section describes the
@@ -41,14 +42,13 @@ the animation in reverse back to the original state. With CSS animations our com
 snap back to their original states as defined at the first keyframe. This is a consideration you must
 take into account when deciding if a refactor is going to be possible.
 
->Note: Try hovering over and out on the 2 codesandbox.io examples to see the difference in how the
-animation reverses when it is interrupted mid animation. [With Framer
-Motion](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
-[With
-@emotion/Styled](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
+> Note: Try hovering over and out on the 2 codesandbox.io examples to see the difference in how the
+> animation reverses when it is interrupted mid animation. [With Framer
+> Motion](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx) > [With
+> @emotion/Styled](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
 
->Note: You will probably need to hit refresh on the embedded browser window after the code sand box
-compiles the app for the @emotion/styled example.
+> Note: You will probably need to hit refresh on the embedded browser window after the code sand box
+> compiles the app for the @emotion/styled example.
 
 ## Framer Motion Disadvantages
 
@@ -81,11 +81,18 @@ Motion with useState and useEffect hooks to using the @emotion/styled CSS-in-JS 
 shown here...
 
 <BlogCard
-  id='staggered-animation-2-ways'
-  title='Refactor Framer Motion For Smaller Bundles'
-  date='2021-10-10'
-  description='How to refactor a component from using framer-motion to pure css'
-  tags={['framer-motion', 'refactor', 'css', 'React', 'styled-components', 'Typescript']}
+  id="staggered-animation-2-ways"
+  title="Refactor Framer Motion For Smaller Bundles"
+  date="2021-10-10"
+  description="How to refactor a component from using framer-motion to pure css"
+  tags={[
+    "framer-motion",
+    "refactor",
+    "css",
+    "React",
+    "styled-components",
+    "Typescript",
+  ]}
 />
 
 ---
@@ -99,7 +106,7 @@ higher order component with this. Wrapping in LazyMotion allows the code to use 
 of `motion` import for the `AnchorContainer`. I have also used style props so that it works in a code
 playground easily. Better options are tailwindcss or plain CSS modules.
 
->Check out the Framer Motion version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
+> Check out the Framer Motion version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-framer-motion-8clmm?file=/src/components/BlogCard.tsx)
 
 ```tsx:/components/BlogCard.tsx
 import styled from "@emotion/styled";
@@ -264,7 +271,7 @@ export default function BlogCard({
 Let's break this down a little. Framer motion allows us to stagger the animations of a child component
 with [variants](https://www.framer.com/docs/examples/#variants). We use `staggerChildren: 0.07` on
 the variant for our AnchorContainer component. This will cause the animation for the Pill component to be
-staggered such that each pill waits to start it's animation.  The animations are very declarative, we
+staggered such that each pill waits to start it's animation. The animations are very declarative, we
 just tell Framer Motion what the key states of an animation should be, that we want all children
 animations of AnchorContainer to be staggered, and it handles the starting, stopping, and reversing for
 us. We tell Framer Motion when to start animating towards a state, either `notActivated` or
@@ -277,18 +284,17 @@ The animation states are triggered by the `onMouseEnter()`, `onMouseLeave()`, `o
 reverse themselves. We had to define the activated state because if we tried to do the following...
 
 ```tsx
-  const controls = useAnimation();
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
+const controls = useAnimation();
+const [hovered, setHovered] = useState(false);
+const [focused, setFocused] = useState(false);
 
-
-  useEffect(() => {
-    if (focused || hovered) {
-      controls.start('activated');
-    } else {
-      controls.start('notActivated');
-    }
-  }, [hovered, focused, controls]);
+useEffect(() => {
+  if (focused || hovered) {
+    controls.start("activated");
+  } else {
+    controls.start("notActivated");
+  }
+}, [hovered, focused, controls]);
 ```
 
 ...we would have ended up triggering the staggered animation over and over again every time the mouse
@@ -341,11 +347,10 @@ the [@emotion babel-plugin](https://emotion.sh/docs/babel) plugin working correc
 the `${Component}` feature. Once again, I have also used the style prop for this quick demo instead of
 pure css or tailwindcss (both of which are preferable).
 
->Check out the pure @emotion/styled version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
+> Check out the pure @emotion/styled version on [codesandbox.io](https://codesandbox.io/s/staggered-animation-w-emotion-styled-p9uki?file=/pages/index.tsx)
 
->Note: You will probably need to hit refresh on the embedded browser window after the code sand box
-compiles the app.
-
+> Note: You will probably need to hit refresh on the embedded browser window after the code sand box
+> compiles the app.
 
 ```jsx:/components/BlogCard.tsx
 import styled from "@emotion/styled";
@@ -508,17 +513,4 @@ focus state changes.
 
 We have eliminated 23k g-zipped of javascript from this component alone. That may not seem like much, but
 across a larger application that could really add up. We have also regained the ability to use this
-component in other parts of our application or even other applications with correct Typescript typings
-using React.HTMLAttributes<HTMLAnchorElement\>
-
----
-
-<!-- >It is important that we also assign animation-fill-mode: forwards for some animations, this one in
-particular it does not matter for but if we are animating such that the end style is different than the
-beginning we will want to use this. The CSS property
-[animation-fill-mode](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode) sets how a
-CSS animation applies styles to its target before and after its execution. This just ensures that the
-animation will play forward once and keep the styles of an element as defined at the 100% keyframe mark. -->
-
-
-
+component in other parts of our application or even other applications with correct Typescript typings.
