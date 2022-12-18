@@ -1,50 +1,8 @@
-import styled from '@emotion/styled';
-import {keyframes} from '@emotion/react';
-import LinkCard from '@app/components/LinkCard';
-
-const hop = keyframes`
-  50% {
-    transform: translateY(-10px);
-  }
-`;
-
-const Pill = styled.div<{
-  delay: number;
-}>`
-  /* @keyframes hop {
-    50% {
-      transform: translateY(-10px);
-    }
-  } */
-
-  display: flex;
-  background-color: rgba(var(--color-app-secondary), 0.5);
-  gap: 0.1rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  padding-top: 0.25rem/* 4px */;
-  padding-bottom: 0.25rem/* 4px */;
-  padding-left: 0.5rem/* 8px */;
-  padding-right: 0.5rem/* 8px */;
-  transform: translateY(0px);
-  transition-property: transform;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
-  will-change: transform;
-  animation-delay: ${({delay}) => delay + 's'};
-`;
-
-const AnchorContainer = styled(LinkCard)`
-  &:hover ${Pill},
-  &:focus ${Pill} {
-    animation-name: ${hop};
-    animation-duration: 0.4s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-  }
-
-`;
+// import {keyframes} from '@emotion/react';
+import Pill from '@app/components/Pill';
+import {useAnimation, m} from 'framer-motion';
+import Link from 'next/link';
+import {useEffect, useState} from 'react';
 
 type BlogCardProps = {
   slug: string
@@ -53,7 +11,7 @@ type BlogCardProps = {
   description?: string
   tags?: string[]
   className?: string
-} & React.HTMLAttributes<HTMLAnchorElement>
+} & React.HTMLAttributes<HTMLDivElement>
 
 export default function BlogCard({
   slug = '',
@@ -64,25 +22,90 @@ export default function BlogCard({
   className,
   ...rest
 }: BlogCardProps) {
+  const controls = useAnimation();
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [activated, setActivated] = useState(false);
+
+  useEffect(() => {
+    if (focused || hovered) {
+      setActivated(true);
+    } else {
+      setActivated(false);
+    }
+  }, [hovered, focused]);
+
+  useEffect(() => {
+    if (activated) {
+      controls.start('activated');
+    } else {
+      controls.start('notActivated');
+    }
+  }, [activated, controls]);
+
+  const container = {
+    notActivated: {
+      // y: 0,
+    },
+    activated: {
+      // y: -10,
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0,
+      },
+    },
+  };
+
+  const pill = {
+    notActivated: {
+      y: 0,
+    },
+    activated: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 0.4,
+      },
+    },
+  };
+
   return (
-    <AnchorContainer slug={slug} className={`shadow-md ${className}`} {...rest}>
-      <div className="flex flex-col gap-4 justify-start px-2 py-4 h-full md:p-4">
-        <div>
-          {title && <div className="text-2xl">{title}</div>}
-          {date && <div className="italic">{date}</div>}
-        </div>
-        {description && <div className="text-base">{description}</div>}
-        {tags && <div className="flex flex-col justify-end h-full">
-          <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
-            {tags.map((tag, idx) => (
-              <Pill key={tag} delay={0.07 * idx}>
-                <span className="text-secondary">#</span>
-                {tag}
-              </Pill>
-            ))}
+    <Link
+      href={`/blog/${slug}`}
+      scroll={true}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      className="relative block no-underline w-full h-full rounded-md
+      border-2 border-secondary bg-primary/80 transition-transform ease-in-out
+      duration-300 hover:-translate-y-3"
+    >
+      <m.div
+      // slug={slug}
+        initial="notActivated"
+        animate={controls}
+        variants={container}
+      >
+        <div className="flex flex-col gap-4 justify-start px-2 py-4 h-full md:p-4">
+          <div>
+            {title && <div className="text-2xl">{title}</div>}
+            {date && <div className="italic">{date}</div>}
           </div>
-        </div>}
-      </div>
-    </AnchorContainer>
+          {description && <div className="text-base">{description}</div>}
+          {tags && <div className="flex flex-col justify-end h-full">
+            <div className="flex flex-wrap gap-x-2 gap-y-4 justify-start">
+              {tags.map((tag, idx) => (
+                <m.div variants={pill} key={tag}>
+                  <Pill>
+                    <span className="text-secondary">#</span>
+                    {tag}
+                  </Pill>
+                </m.div>
+              ))}
+            </div>
+          </div>}
+        </div>
+      </m.div>
+    </Link>
   );
 }
