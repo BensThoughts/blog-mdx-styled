@@ -38,8 +38,8 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             </MenuItem>
           ))}
           <a
-            href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
-            download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
+            href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
+            download="Benjamin Blumenfeld-Jones Resume - 2023.pdf"
             className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
           >
             Resume
@@ -63,8 +63,8 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                   <MenuItem animatedLink key={menuItem.href} href={menuItem.href}>{menuItem.name}</MenuItem>
                 ))}
                 <UnderlineLinkWithIcon
-                  href="assets/Benjamin-Blumenfeld-Jones-Resume-2021.pdf"
-                  download="Benjamin Blumenfeld-Jones Resume 2021.pdf"
+                  href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
+                  download="Benjamin Blumenfeld-Jones Resume - 2023.pdf"
                   text="Resume"
                   className="text-secondary"
                   icon={<Folder className="mb-1 text-secondary" />}
