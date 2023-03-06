@@ -27,4 +27,8 @@ export const menuItems = [
     name: 'Blog',
     href: '/blog',
   },
+  {
+    name: 'Status',
+    href: 'https://status.bensthoughts.dev',
+  },
 ];
