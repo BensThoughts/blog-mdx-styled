@@ -12,6 +12,7 @@ on the settings page of betteruptime.com */
   bottom: 0;
   background-color: rgba(var(--color-app-secondary));
 }
+
 .betteruptime-announcement__message {
   width: 100%;
   max-width: 970px;
@@ -20,4 +21,11 @@ on the settings page of betteruptime.com */
   padding-left: 32px;
   padding-right: 32px;
   color: #ffffff;
+}
+
+/* important, the height seems to get set to 52px in production mode only
+no matter what, so display: none; is important */
+.betteruptime-announcement__placeholder {
+  height: 0px;
+  display: none;
 }
