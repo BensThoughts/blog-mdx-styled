@@ -12,8 +12,9 @@ export default function Home() {
   return (
     <div className="flex flex-col px-4 mx-auto gap-y-12 md:gap-y-20 md:px-8 max-w-6xl">
       {/* About Section */}
-      <div id="home"></div>
       <SectionTitle>
+        {/* this is a tricky bit to avoid the first flex gap and scroll to top */}
+        <div id="home" className="h-0 -mt-96"></div>
         <span className="text-icon-secondary">[</span>
                 &nbsp;01. About Me&nbsp;
         <span className="text-icon-secondary">]</span>
