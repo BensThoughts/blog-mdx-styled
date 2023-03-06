@@ -8,8 +8,6 @@ const ThemeProvider = dynamic(() => import('@app/utils/context/colorMode'), {
 
 // import ThemeProvider from '@app/utils/context/colorMode';
 
-import FeatureToggle from '@app/components/FeatureToggle/FeatureToggle';
-
 import {DefaultSeo} from 'next-seo';
 import seoConfig from '@app/utils/seo.config';
 
@@ -22,8 +20,6 @@ import React, {useEffect, useRef} from 'react';
 import {domAnimation, LazyMotion} from 'framer-motion';
 
 function App({Component, pageProps}: AppProps) {
-  const enabledFeatures = ['home', 'blog', 'projects'];
-
   const router = useRouter();
   const firstLoad = useRef(true);
 
@@ -51,26 +47,24 @@ function App({Component, pageProps}: AppProps) {
   return (
     <>
       <DefaultSeo {...seoConfig} />
-      <FeatureToggle enabledFeatures={enabledFeatures}>
-        <ImageCacheProvider>
-          <ThemeProvider>
-            <Navbar className="h-14" />
-          </ThemeProvider>
+      <ImageCacheProvider>
+        <ThemeProvider>
+          <Navbar className="h-14" />
+        </ThemeProvider>
 
-          <LazyMotion features={domAnimation}>
-            <div className="mt-0 grid grid-rows-[1fr,4rem]">
-              <div className="row-start-1 row-end-2">
-                <main className="z-0 max-h-full mt-8 mb-16 overflow-hidden">
-                  <Component {...pageProps} key={router.route} />
-                </main>
-              </div>
-              <div className="row-start-2 row-end-3 place-items-center">
-                <Footer className="h-16" />
-              </div>
+        <LazyMotion features={domAnimation}>
+          <div className="mt-0 grid grid-rows-[1fr,4rem]">
+            <div className="row-start-1 row-end-2">
+              <main className="z-0 max-h-full mt-8 mb-16 overflow-hidden">
+                <Component {...pageProps} key={router.route} />
+              </main>
             </div>
-          </LazyMotion>
-        </ImageCacheProvider>
-      </FeatureToggle>
+            <div className="row-start-2 row-end-3 place-items-center">
+              <Footer className="h-16" />
+            </div>
+          </div>
+        </LazyMotion>
+      </ImageCacheProvider>
     </>
   );
 }
