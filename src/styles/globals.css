@@ -86,7 +86,7 @@
       );
   }
 
-  .link-underline-control:hover .link-underline {
+  .link-underline-controller:hover .link-underline {
     background-size: 100% 3px;
     background-position: 0 100%;
   }

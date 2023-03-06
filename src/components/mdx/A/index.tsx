@@ -7,7 +7,7 @@ export default function A({href, children, ...rest}: DetailedHTMLProps<AnchorHTM
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="rounded link-underline-control"
+      className="rounded link-underline-controller"
       {...rest}
     >
       <span className="text-secondary link-underline link-underline-secondary">
