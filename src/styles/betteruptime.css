@@ -1,0 +1,23 @@
+/* this css is directly uploaded to betteruptime.com via a form
+on the settings page of betteruptime.com */
+
+.betteruptime-announcement {
+  position: fixed;
+  width: 100%;
+  z-index: 999999;
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  top: unset;
+  bottom: 0;
+  background-color: rgba(var(--color-app-secondary));
+}
+.betteruptime-announcement__message {
+  width: 100%;
+  max-width: 970px;
+  margin: 0 auto;
+  text-align: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  color: #ffffff;
+}
