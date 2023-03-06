@@ -53,7 +53,7 @@ function App({Component, pageProps}: AppProps) {
         </ThemeProvider>
 
         <LazyMotion features={domAnimation}>
-          <div className="mt-0 grid grid-rows-[1fr,4rem]">
+          <div className="mt-14 grid grid-rows-[1fr,4rem]">
             <div className="row-start-1 row-end-2">
               <main className="z-0 max-h-full mt-8 mb-16 overflow-hidden">
                 <Component {...pageProps} key={router.route} />
