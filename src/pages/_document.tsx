@@ -63,6 +63,7 @@ export default class Document extends NextDocument {
           {/* <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" /> */}
 
           {/* <script dangerouslySetInnerHTML={{__html: gtmHead}} /> */}
+          <script src="https://betteruptime.com/widgets/announcement.js" data-id="157823" async type="text/javascript"></script>
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{__html: setInitialTheme}} />
