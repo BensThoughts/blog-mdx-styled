@@ -26,7 +26,7 @@ function NetlifyFormInput({
   }, [wasSubmitted]);
 
   return (
-    <div className="bg-primary rounded overflow-hidden relative w-full" key={name}>
+    <div className="bg-primary rounded overflow-hidden relative w-full max-w-xl" key={name}>
       <label
         htmlFor={`${name}-input`}
         className={`text-primary block w-full font-normal left-0 top-0 m-0 cursor-text
