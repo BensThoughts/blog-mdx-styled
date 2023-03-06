@@ -13,7 +13,6 @@ import {
   Folder,
   Monitor,
 } from '@app/components/Icons';
-import UnderlineLinkWithIcon from '@app/components/UnderlineLinkWithIcon';
 
 type NavBarProps = {
   className?: string;
@@ -36,12 +35,29 @@ export default function Navbar({className, ...rest}: NavBarProps) {
               {menuItem.name}
             </Link>
           ))}
-          <a
-            href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
-            download="Benjamin Blumenfeld-Jones Resume - 2023.pdf"
+          <Link
+            href="/blog"
             className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
           >
-            Resume
+            Blog
+          </Link>
+          <a
+            href="https://status.bensthoughts.dev"
+            className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+              Status
+          </a>
+          <a
+            href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
+            download="Benjamin Blumenfeld-Jones Resume - Resume.pdf"
+            className="flex gap-2 justify-center items-center w-full h-10 text-xl hover:bg-primary"
+          >
+            <Folder className="mb-1 text-secondary" />
+            <span className="text-primary">
+              Resume
+            </span>
           </a>
         </div>
       </MenuDrawer>
@@ -56,7 +72,9 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           {/* Medium+ Screens */}
           <div className="hidden md:flex md:justify-between md:items-center md:w-full md:pt-0 md:mx-3">
             <div className="flex gap-x-4 items-center">
-              <Monitor size={26} className="text-icon-secondary" />
+              <div>
+                <Monitor size={26} className="text-icon-secondary" />
+              </div>
               <div className="flex gap-4 content-between items-center pt-0">
                 {menuItems.map((menuItem) => (
                   <Link
@@ -67,18 +85,37 @@ export default function Navbar({className, ...rest}: NavBarProps) {
                     {menuItem.name}
                   </Link>
                 ))}
-                <UnderlineLinkWithIcon
-                  href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
-                  download="Benjamin Blumenfeld-Jones Resume - 2023.pdf"
-                  text="Resume"
-                  className="text-secondary"
-                  icon={<Folder className="mb-1 text-secondary" />}
-                  iconPosition="left"
-                />
+                <Link
+                  href="/blog"
+                  className="link-underline link-underline-secondary text-secondary"
+                >
+                  Blog
+                </Link>
+                <a
+                  href="https://status.bensthoughts.dev"
+                  className="link-underline link-underline-secondary text-secondary"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Status
+                </a>
               </div>
             </div>
+
             <div className="flex gap-x-4 justify-end items-center">
               <Breadcrumbs className="hidden xl:flex" />
+              {/* <div className="w-full flex justify-center"> */}
+              <a
+                href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
+                download="Benjamin Blumenfeld-Jones - Resume.pdf"
+                className="flex items-center gap-2 text-primary link-underline-controller"
+              >
+                <Folder className="mb-1 text-secondary" />
+                <span className="link-underline link-underline-secondary text-primary">
+                    Resume
+                </span>
+              </a>
+              {/* </div> */}
               <ThemeToggle />
             </div>
           </div>

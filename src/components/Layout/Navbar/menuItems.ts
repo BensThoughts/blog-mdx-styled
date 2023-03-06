@@ -3,10 +3,6 @@ export const menuItems = [
     name: 'Home',
     href: '/#home',
   },
-  // {
-  //   name: 'About',
-  //   href: '/#about-section',
-  // },
   {
     name: 'Skills',
     href: '/#skills',
@@ -23,12 +19,12 @@ export const menuItems = [
     name: 'Contact',
     href: '/#contact',
   },
-  {
-    name: 'Blog',
-    href: '/blog',
-  },
-  {
-    name: 'Status',
-    href: 'https://status.bensthoughts.dev',
-  },
+  // {
+  //   name: 'Blog',
+  //   href: '/blog',
+  // },
+  // {
+  //   name: 'Status',
+  //   href: 'https://status.bensthoughts.dev',
+  // },
 ];
