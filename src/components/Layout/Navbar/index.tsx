@@ -38,6 +38,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
           <Link
             href="/blog"
             className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
+            onClick={() => setIsOpen(false)}
           >
             Blog
           </Link>
@@ -46,6 +47,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             className="flex justify-center items-center w-full h-10 text-xl hover:bg-primary text-secondary"
             rel="noopener noreferrer"
             target="_blank"
+            onClick={() => setIsOpen(false)}
           >
               Status
           </a>
@@ -53,6 +55,7 @@ export default function Navbar({className, ...rest}: NavBarProps) {
             href="assets/Benjamin-Blumenfeld-Jones-Resume-2023.pdf"
             download="Benjamin Blumenfeld-Jones Resume - Resume.pdf"
             className="flex gap-2 justify-center items-center w-full h-10 text-xl hover:bg-primary"
+            onClick={() => setIsOpen(false)}
           >
             <Folder className="mb-1 text-secondary" />
             <span className="text-primary">
