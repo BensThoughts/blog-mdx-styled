@@ -28,37 +28,38 @@ export default function Breadcrumbs({className, ...rest}: React.HTMLAttributes<H
     }
   }, [router]);
 
-  // if (!breadcrumbs) {
-  //   return null;
-  // }
+  if (
+    !breadcrumbs ||
+    breadcrumbs.length < 1 ||
+    breadcrumbs[0].breadcrumb === '' ||
+    breadcrumbs[0].href === '/'
+  ) {
+    return null;
+  }
 
+  console.log(breadcrumbs);
   return (
     <div aria-label="breadcrumbs" className={`flex ${className}`} {...rest}>
       <div className="font-mono">
-        <span className="text-secondary">$&gt;&nbsp;</span>
-        <Link href="/" scroll={true} passHref legacyBehavior>
+        {/* <span className="text-secondary">$&gt;&nbsp;</span> */}
+        <span className="text-secondary">{`$>`}&nbsp;</span>
+
+        {/* <Link href="/" scroll={true} passHref legacyBehavior>
           <AnimatedLink href="/">HOME</AnimatedLink>
         </Link>
-        &nbsp;/&nbsp;
+        &nbsp;/&nbsp; */}
       </div>
-      {breadcrumbs.map((breadcrumb, i) => {
-        if (breadcrumb.href != '/') {
-          return (
-            <div key={breadcrumb.href} className="font-mono">
-              <Link href={breadcrumb.href} scroll={true} passHref legacyBehavior>
-                <AnimatedLink href={breadcrumb.href}>
-                  {convertBreadcrumb(breadcrumb.breadcrumb)}
-                </AnimatedLink>
-              </Link>
-              &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp;
-            </div>
-          );
-        } else {
-          return (
-            <span key={breadcrumb.href} className="hidden"></span>
-          );
-        }
-      })}
+      {breadcrumbs.map((breadcrumb, i) => (
+        <div key={breadcrumb.href} className="font-mono">
+          <Link href={breadcrumb.href} scroll={true} passHref legacyBehavior>
+            <AnimatedLink href={breadcrumb.href}>
+              {convertBreadcrumb(breadcrumb.breadcrumb)}
+            </AnimatedLink>
+          </Link>
+          &nbsp;{`/`}&nbsp;
+          {/* &nbsp;{breadcrumb.breadcrumb === '' ? '' : '/'}&nbsp; */}
+        </div>
+      ))}
     </div>
   );
 }
