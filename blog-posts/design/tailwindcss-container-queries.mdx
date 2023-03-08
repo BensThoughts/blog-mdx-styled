@@ -28,16 +28,23 @@ docs](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) or
 
 Currently in 2022 [caniuse.com](https://caniuse.com/?search=container%20queries) reports that only
 65% of browsers support container queries. That means roughly 35% of users will not see your page
-correctly. That is **A LOT** of users that are going to get a horrible experience if you try to use
-container queries without a fallback.
+correctly if you use container queries without a fallback. That is **A LOT** of users that are going
+to get a horrible experience.
 
-So clearly a fallback is needed. I looked into using a polyfill such as
-[container-query-polyfill](https://github.com/GoogleChromeLabs/container-query-polyfill) but it was
-becoming to complicated to setup correctly, had too many caveats, and would add more JS \(bloat\). Also
-I don't need my sites to be perfectly identical for all users. I'm ok with showing a very good layout to
-some users and a pitch perfect amazing layout to others. I just need my fallback to work for **most**
-users. I would also like to be able to use tailwindcss because tailwind is highly scalable, easy to
-update, and I already use it across multiple frameworks and sites that I run.
+---
+
+## Considerations
+
+If I want most users to have a great experience on my sites and I want to use container queries, a
+fallback is going to be needed for each component that uses container queries.
+
+I looked into using a polyfill such as
+[container-query-polyfill](https://github.com/GoogleChromeLabs/container-query-polyfill), but it was
+becoming to complicated, had too many caveats, and would add more JS \(bloat\). Another consideration was
+that my personal websites don't need to be perfectly identical for all users. I'm ok with showing a very
+good layout to some users and a pitch perfect amazing layout to others. I just need my fallback to work
+for **most** users. I would also like to be able to use tailwindcss because tailwind is highly scalable,
+easy to update, and I already use it across multiple frameworks and sites that I run.
 
 Fortunately tailwindcss already has a plugin/experimental feature to support container-queries. The
 challenge is going to be coming up with a fallback that is dead simple, easy to maintain, and works for
@@ -95,7 +102,7 @@ module.exports = {
 
 This is pretty simple and explained well on the tailwind container queries plugin page. After installing
 and setting everything up you can declare the parent container that you want to act as the container for
-your media query with `@container`. You can then conditionally style any children elements of that
+your query with `@container`. You can then conditionally style any children elements of that
 parent using classes like `@lg:underline` or `@md:underline`. For more specific breakpoints you can use
 square bracket notation such as `@[12.5rem]:text-purple` or `@[600px]:font-bold`. This last one will
 give the text a bold color style if the parent container with the `@container` class is wider than 600px.
@@ -127,10 +134,10 @@ will use container queries....maybe something like this...
 </div>
 ```
 
-But wait, not so fas, this doesn't work! The problem is that the media queries take precedent over the
+Actually, **this doesn't work!** The problem is that the media queries take precedent over the
 container queries. Trying to implement both of them at the same time just ends up with all browsers
 displaying the styles based on media queries and pretty much ignoring the container query. So all of that
-work I did to make my elements flow in a row based on the container size is undone.
+work to make the elements flow in a row based on the container size is undone.
 
 I tried using the `!important` keyword as well as changing the order of the classnames, but neither fixed
 the issue.
@@ -141,7 +148,7 @@ the issue.
 
 The solution is to use [@supports](https://developer.mozilla.org/en-US/docs/Web/CSS/@supports) logic so
 that media query based styles only apply when the browser doesn't support container queries. The logic
-is, if the browser doesn't support container queries use media queries, else use container queries.
+is...if the browser doesn't support container queries use media queries, else use container queries.
 
 The good news is that tailwindcss has supported the @supports query since at least version 3.2. The bad
 news is that the
@@ -214,17 +221,9 @@ line may look a little ugly it is actually quite maintainable and scalable compa
 
 While this is a pretty good solution, there are some caveats and issues you may run into.
 
-The biggest issue I ran into while developing was that my code would not take effect until I re-compiled
-(ran the build step) on my code. This was especially evident with with [remix](https://remix.run/). I
-thought it was not working because the changing anything about the `supports-[]` or `@[600px]:` classes
-would causes styling to be lost. For example if I
-had to change `@[600px]:flex-row` to `@[500px]:flex-row` the live reload wouldn't show any change and in
-fact would loose all of the container breakpoint styling. The App needed to be re-built to trigger
-re-building the tailwindcss files.
-
-The caveats are of course that you may still end up with some funky stuff in the edge cases with users
-whose browser doesn't support container queries. There is also the fact that simply testing if the
-browser supports `container-type: inline-size` may not be a completely fool proof solution to determine
-if a browser fully supports container queries correctly.
+The big caveat is that you may still end up with some funky stuff in the edge cases with users
+who are using a browser that doesn't support container queries. There is also the fact that simply
+testing if the browser supports `container-type: inline-size` may not be a completely fool proof solution
+to determine if a browser fully supports container queries correctly.
 
 ---
