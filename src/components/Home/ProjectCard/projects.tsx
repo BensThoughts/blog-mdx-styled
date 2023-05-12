@@ -136,6 +136,7 @@ const SharableLoveForms: Project = {
 const SteamedApples: Project = {
   title: 'Steamed Apples',
   liveLink: 'https://www.steamedapples.com/?ref=bensthoughts.dev',
+  githubLink: 'https://github.com/BensThoughts/apple-si-gaming-db/',
   cloudinaryImgPath: 'v1664943160/apple-silicon-gaming-db/og-images/og-image-home_yxvlgi.png',
   imgAlt: 'Steamed Apples Homepage',
   descriptionFirstSentence: `Steamed Apples lets users read and write performance reviews about Steam games running on Apple.`,
